@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Higiene Ocupacional</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="ambient_fragment_label">Ambientes</string>
+    <string name="ambient_detail_fragment_label">Detalhes do Ambiente</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string-array name="piso_array">
+        <item>Concreto armado</item>
+        <item>Cerâmico</item>
+        <item>Porcelanato</item>
+        <item>Granitina</item>
+    </string-array>
+    <string-array name="parede_array">
+        <item>Alvenaria</item>
+        <item>Telha de zinco</item>
+        <item>Telha isotérmica</item>
+        <item>Madeira</item>
+    </string-array>
+    <string-array name="cobertura_array">
+        <item>Metálica</item>
+        <item>Madeira</item>
+        <item>Pré-moldado</item>
+    </string-array>
+    <string-array name="iluminacao_natural_array">
+        <item>Através de portas</item>
+        <item>Através de janelas</item>
+        <item>Através de portões</item>
+        <item>Através de telhas translúcidas</item>
+    </string-array>
+    <string-array name="iluminacao_artificial_array">
+        <item>Através de lâmpadas de led</item>
+        <item>Através de Janelas</item>
+        <item>Através de lâmpadas halógenas</item>
+        <item>Através de refletores de led</item>
+    </string-array>
+    <string-array name="ventilacao_natural_array">
+        <item>Através de portas</item>
+        <item>Através de janelas</item>
+        <item>Através de portões</item>
+        <item>Através de aberturas laterais</item>
+    </string-array>
+    <string-array name="ventilacao_artificial_array">
+        <item>Através de ventilador</item>
+        <item>Através de ar condicionado</item>
+        <item>Através de exaustor</item>
+        <item>Através de climatizador</item>
+    </string-array>
+</resources>
