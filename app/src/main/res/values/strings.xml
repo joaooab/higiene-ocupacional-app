@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Higiene Ocupacional</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_editar">Editar</string>
+    <string name="action_excluir">Excluir</string>
     <!-- Strings used for fragments for navigation -->
     <string name="ambient_fragment_label">Ambientes</string>
     <string name="ambient_detail_fragment_label">Detalhes do Ambiente</string>

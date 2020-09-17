@@ -12,8 +12,12 @@
         tools:layout="@layout/fragment_ambient">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/LevantamentoDetailsFragment" />
+            android:id="@+id/action_LevantamentoFragment_to_ambientDetailFragment"
+            app:destination="@id/LevantamentoDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_LevantamentoFragment_to_ambientCreateFragment"
             app:destination="@id/ambientCreateFragment"
@@ -26,11 +30,14 @@
         android:id="@+id/LevantamentoDetailsFragment"
         android:name="br.com.joaoov.ui.AmbientDetailFragment"
         android:label="@string/ambient_detail_fragment_label"
-        tools:layout="@layout/fragment_ambient_create">
+        tools:layout="@layout/fragment_ambient_detail">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_AmbientDetailFragment_to_ambientListFragment"
             app:destination="@id/AmbientListFragment" />
+        <argument
+            android:name="ambient"
+            app:argType="br.com.joaoov.data.Ambient" />
     </fragment>
     <fragment
         android:id="@+id/ambientCreateFragment"

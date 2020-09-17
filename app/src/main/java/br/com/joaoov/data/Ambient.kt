@@ -1,9 +1,12 @@
 package br.com.joaoov.data
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 @Entity
+@Parcelize
 data class Ambient(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
@@ -21,7 +24,7 @@ data class Ambient(
     val iluminacaoArtificial: String,
     val ventilacaoNatural: String,
     val ventilacaoArtificial: String
-) {
+) : Parcelable {
     fun getArea() = "${areaLargura}m x ${areaComprimento}m"
 
     fun getPeDireito() = "${peDireitoLargura}m x ${peDireitoComprimento}m"

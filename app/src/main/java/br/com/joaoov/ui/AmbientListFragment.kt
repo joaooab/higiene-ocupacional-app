@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.joaoov.ComponentesVisuais
 import br.com.joaoov.EstadoAppViewModel
 import br.com.joaoov.R
+import br.com.joaoov.data.Ambient
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -35,20 +36,30 @@ class AmbientListFragment : Fragment() {
 
     private fun configurarFab() {
         fab.setOnClickListener {
-            val direction =
-                AmbientListFragmentDirections.actionLevantamentoFragmentToAmbientCreateFragment()
-            findNavController().navigate(direction)
+            navigateToCreateFragment()
         }
+    }
+
+    private fun navigateToCreateFragment() {
+        val direction =
+            AmbientListFragmentDirections.actionLevantamentoFragmentToAmbientCreateFragment()
+        findNavController().navigate(direction)
     }
 
     private fun observarLevantamentos() {
         viewModel.getLevantamentos().observe(viewLifecycleOwner, Observer {
-            recyclerView.adapter = AmbientListAdapter(it) {
-                val direction =
-                    AmbientListFragmentDirections.actionLevantamentoFragmentToAmbientCreateFragment()
-                findNavController().navigate(direction)
+            recyclerView.adapter = AmbientListAdapter(it) { ambient ->
+                navigateToAmbientFragment(ambient)
             }
         })
+    }
+
+    private fun navigateToAmbientFragment(ambient: Ambient) {
+        val direction =
+            AmbientListFragmentDirections.actionLevantamentoFragmentToAmbientDetailFragment(
+                ambient
+            )
+        findNavController().navigate(direction)
     }
 
 }

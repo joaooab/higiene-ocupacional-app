@@ -1,0 +1,18 @@
+package br.com.joaoov.ui
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import br.com.joaoov.data.Ambient
+import br.com.joaoov.data.AmbientDAO
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+class AmbientDetailViewModel(private val ambientDAO: AmbientDAO) : ViewModel() {
+
+    fun delete(ambient: Ambient) {
+        viewModelScope.launch(Dispatchers.IO) {
+            ambientDAO.delete(ambient)
+        }
+    }
+
+}

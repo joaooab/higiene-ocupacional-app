@@ -8,7 +8,7 @@ import br.com.joaoov.R
 import br.com.joaoov.data.Ambient
 import kotlinx.android.synthetic.main.item_ambient.view.*
 
-class AmbientListAdapter(private val list: List<Ambient>, private val onClick: () -> Unit) :
+class AmbientListAdapter(private val list: List<Ambient>, private val onClick: (Ambient) -> Unit) :
     RecyclerView.Adapter<AmbientListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -19,7 +19,7 @@ class AmbientListAdapter(private val list: List<Ambient>, private val onClick: (
                 textViewArea.text = item.getArea()
                 textViewData.text = item.data
                 setOnClickListener {
-                    onClick()
+                    onClick(item)
                 }
             }
         }
