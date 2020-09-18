@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import br.com.joaoov.ComponentesVisuais
 import br.com.joaoov.EstadoAppViewModel
 import br.com.joaoov.R
@@ -50,8 +52,7 @@ class AmbientCreateFragment : Fragment() {
                 data = Date().format(),
                 areaLargura = editTextAreaLargura.getDouble(),
                 areaComprimento = editTextAreaComprimento.getDouble(),
-                peDireitoLargura = editTextPeDireitoLargura.getDouble(),
-                peDireitoComprimento = editTextPeDireitoComprimento.getDouble(),
+                peDireito = editTextPeDireito.getDouble(),
                 piso = textViewSpinerPiso.getString(),
                 parede = textViewSpinerParede.getString(),
                 cobertura = textViewSpinerCobertura.getString(),
@@ -62,6 +63,7 @@ class AmbientCreateFragment : Fragment() {
             )
             viewModel.salvar(ambient)
             showToast("Criado com sucesso")
+            findNavController().popBackStack()
         }
     }
 

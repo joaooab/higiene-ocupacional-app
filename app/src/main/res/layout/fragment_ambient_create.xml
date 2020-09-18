@@ -75,7 +75,7 @@
                     android:id="@+id/editTextAreaLargura"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Área largura"
+                    android:hint="Área largura (m)"
                     android:inputType="number|numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,47 +95,27 @@
                     android:id="@+id/editTextAreaComprimento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Área comp."
+                    android:hint="Área comp. (m)"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutPeDLargura"
+                android:id="@+id/textInputLayoutPeDireito"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/textInputLayoutPeDComprimento"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAreaLargura">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPeDireitoLargura"
+                    android:id="@+id/editTextPeDireito"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Pé d. largura"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutPeDComprimento"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayoutPeDLargura"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAreaLargura">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPeDireitoComprimento"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Pé d. comp."
+                    android:hint="Pé direito (m)"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,7 +129,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPeDLargura">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPeDireito">
 
                 <AutoCompleteTextView
                     android:id="@+id/textViewSpinerPiso"

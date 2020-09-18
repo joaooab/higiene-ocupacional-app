@@ -15,8 +15,7 @@ data class Ambient(
     val local: String,
     val areaLargura: Double,
     val areaComprimento: Double,
-    val peDireitoLargura: Double,
-    val peDireitoComprimento: Double,
+    val peDireito: Double,
     val piso: String,
     val parede: String,
     val cobertura: String,
@@ -25,7 +24,7 @@ data class Ambient(
     val ventilacaoNatural: String,
     val ventilacaoArtificial: String
 ) : Parcelable {
-    fun getArea() = "${areaLargura}m x ${areaComprimento}m"
+    fun getAreaFormat() = "${areaLargura}m x ${areaComprimento}m"
 
-    fun getPeDireito() = "${peDireitoLargura}m x ${peDireitoComprimento}m"
+    fun getPeDireitoFormat() = "${peDireito}m"
 }

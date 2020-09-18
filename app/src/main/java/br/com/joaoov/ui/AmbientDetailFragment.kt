@@ -64,16 +64,14 @@ class AmbientDetailFragment : Fragment() {
     }
 
     private fun navigateToListAmbient() {
-        val direction =
-            AmbientDetailFragmentDirections.actionAmbientDetailFragmentToAmbientListFragment()
-        findNavController().navigate(direction)
+        findNavController().popBackStack()
     }
 
     private fun bindView(ambient: Ambient) {
         textViewEmpresa.text = ambient.empresa
         textViewLocal.text = ambient.local
-        textViewArea.text = ambient.getArea()
-        textViewPeDireito.text = ambient.getPeDireito()
+        textViewArea.text = ambient.getAreaFormat()
+        textViewPeDireito.text = ambient.getPeDireitoFormat()
         textViewPiso.text = ambient.piso
         textViewParede.text = ambient.parede
         textViewCobertura.text = ambient.cobertura

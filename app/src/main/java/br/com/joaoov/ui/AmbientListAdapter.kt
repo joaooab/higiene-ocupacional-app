@@ -16,7 +16,7 @@ class AmbientListAdapter(private val list: List<Ambient>, private val onClick: (
             with(itemView) {
                 textViewEmpresa.text = item.empresa
                 textViewLocal.text = item.local
-                textViewArea.text = item.getArea()
+                textViewArea.text = item.getAreaFormat()
                 textViewData.text = item.data
                 setOnClickListener {
                     onClick(item)

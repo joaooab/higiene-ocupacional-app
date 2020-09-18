@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="@id/textViewArea"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="@+id/textView4"
-            tools:text="5m x 5m" />
+            tools:text="5m" />
 
         <TextView
             android:id="@+id/textViewPiso"
