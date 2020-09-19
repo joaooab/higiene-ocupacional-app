@@ -126,7 +126,7 @@
             android:layout_marginTop="8dp"
             android:text="Área:"
             app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/detalhes_eleitor_cabo_eleitoral_label" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLocal" />
 
         <TextView
             android:id="@+id/textView4"
@@ -179,10 +179,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Local:"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewEmpresa" />
 
         <TextView
             android:id="@+id/textViewLocal"
@@ -190,11 +188,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:textStyle="bold"
-            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/detalhes_eleitor_cabo_eleitoral_label"
             app:layout_constraintTop_toTopOf="@+id/detalhes_eleitor_cabo_eleitoral_label"
-            tools:text="Local"
-            tools:visibility="visible" />
+            tools:text="Local" />
 
         <TextView
             android:id="@+id/textView"
