@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/AmbientListFragment">
+    app:startDestination="@id/companyListFragment">
 
     <fragment
         android:id="@+id/AmbientListFragment"
-        android:name="br.com.joaoov.ui.AmbientListFragment"
+        android:name="br.com.joaoov.ui.ambient.AmbientListFragment"
         android:label="@string/ambient_fragment_label"
         tools:layout="@layout/fragment_ambient">
 
@@ -25,27 +25,47 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="company"
+            app:argType="br.com.joaoov.data.Company" />
     </fragment>
     <fragment
         android:id="@+id/LevantamentoDetailsFragment"
-        android:name="br.com.joaoov.ui.AmbientDetailFragment"
+        android:name="br.com.joaoov.ui.ambient.AmbientDetailFragment"
         android:label="@string/ambient_detail_fragment_label"
         tools:layout="@layout/fragment_ambient_detail">
 
-        <action
-            android:id="@+id/action_AmbientDetailFragment_to_ambientListFragment"
-            app:destination="@id/AmbientListFragment" />
         <argument
             android:name="ambient"
             app:argType="br.com.joaoov.data.Ambient" />
+        <argument
+            android:name="company"
+            app:argType="br.com.joaoov.data.Company" />
     </fragment>
     <fragment
         android:id="@+id/ambientCreateFragment"
-        android:name="br.com.joaoov.ui.AmbientCreateFragment"
+        android:name="br.com.joaoov.ui.ambient.AmbientCreateFragment"
         android:label="Criar Ambiente"
         tools:layout="@layout/fragment_ambient_create">
-        <action
-            android:id="@+id/action_ambientCreateFragment_to_LevantamentoFragment"
-            app:destination="@id/AmbientListFragment" />
+        <argument
+            android:name="company"
+            app:argType="br.com.joaoov.data.Company" />
     </fragment>
+    <fragment
+        android:id="@+id/companyListFragment"
+        android:name="br.com.joaoov.ui.company.CompanyListFragment"
+        android:label="@string/compay_fragment_label"
+        tools:layout="@layout/fragment_company">
+        <action
+            android:id="@+id/action_companyListFragment_to_AmbientListFragment"
+            app:destination="@id/AmbientListFragment" />
+        <action
+            android:id="@+id/action_companyListFragment_to_companyCreateFragment"
+            app:destination="@id/companyCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/companyCreateFragment"
+        android:name="br.com.joaoov.ui.company.CompanyCreateFragment"
+        android:label="@string/create_compay_fragment_label"
+        tools:layout="@layout/fragment_company_create"/>
 </navigation>

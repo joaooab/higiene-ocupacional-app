@@ -1,38 +1,31 @@
-package br.com.joaoov.ui
+package br.com.joaoov.ui.ambient
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import br.com.joaoov.ComponentesVisuais
 import br.com.joaoov.EstadoAppViewModel
 import br.com.joaoov.R
 import br.com.joaoov.data.Ambient
 import br.com.joaoov.ext.*
+import br.com.joaoov.ui.NoFilterAdapter
 import kotlinx.android.synthetic.main.fragment_ambient_create.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
-class AmbientCreateFragment : Fragment() {
+class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
 
+    private val arguments by navArgs<AmbientCreateFragmentArgs>()
     private val viewModel: AmbientCreateViewModel by viewModel()
     private val estadoViewModel: EstadoAppViewModel by sharedViewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_ambient_create, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        estadoViewModel.temComponentes = ComponentesVisuais(false)
+        estadoViewModel.temComponentes = ComponentesVisuais(true)
         configurarSpinnerPiso()
         configurarSpinnerParede()
         configurarSpinnerCobertura()
@@ -47,7 +40,7 @@ class AmbientCreateFragment : Fragment() {
         hideKeyboard()
         buttonSalvar.setOnClickListener {
             val ambient = Ambient(
-                empresa = editTextEmpresa.getString(),
+                companyID = arguments.company.id,
                 local = editTextLocal.getString(),
                 data = Date().format(),
                 areaLargura = editTextAreaLargura.getDouble(),

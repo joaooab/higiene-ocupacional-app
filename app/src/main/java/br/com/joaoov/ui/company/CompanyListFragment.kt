@@ -1,37 +1,43 @@
-package br.com.joaoov.ui
+package br.com.joaoov.ui.company
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.joaoov.ComponentesVisuais
 import br.com.joaoov.EstadoAppViewModel
 import br.com.joaoov.R
-import br.com.joaoov.data.Ambient
+import br.com.joaoov.data.Company
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AmbientListFragment : Fragment() {
+class CompanyListFragment : Fragment(R.layout.fragment_company) {
 
-    private val viewModel: AmbientViewModel by viewModel()
+    private val viewModel: CompanyViewModel by viewModel()
     private val estadoViewModel: EstadoAppViewModel by sharedViewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_ambient, container, false)
-    }
+    private lateinit var adapter: CompanyListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         estadoViewModel.temComponentes = ComponentesVisuais(true)
-        observarLevantamentos()
+        observeCompanies()
+        setupAdapter()
         configurarFab()
+    }
+
+    private fun setupAdapter() {
+        val divisor = DividerItemDecoration(context, LinearLayout.VERTICAL)
+        recyclerView.addItemDecoration(divisor)
+        adapter = CompanyListAdapter { company ->
+            navigateToAmbientFragment(company)
+        }
+        recyclerView.adapter = adapter
     }
 
     private fun configurarFab() {
@@ -42,23 +48,19 @@ class AmbientListFragment : Fragment() {
 
     private fun navigateToCreateFragment() {
         val direction =
-            AmbientListFragmentDirections.actionLevantamentoFragmentToAmbientCreateFragment()
+            CompanyListFragmentDirections.actionCompanyListFragmentToCompanyCreateFragment()
         findNavController().navigate(direction)
     }
 
-    private fun observarLevantamentos() {
-        viewModel.getLevantamentos().observe(viewLifecycleOwner, Observer {
-            recyclerView.adapter = AmbientListAdapter(it) { ambient ->
-                navigateToAmbientFragment(ambient)
-            }
+    private fun observeCompanies() {
+        viewModel.getCompanies().observe(viewLifecycleOwner, Observer {
+            adapter.refresh(it)
         })
     }
 
-    private fun navigateToAmbientFragment(ambient: Ambient) {
+    private fun navigateToAmbientFragment(company: Company) {
         val direction =
-            AmbientListFragmentDirections.actionLevantamentoFragmentToAmbientDetailFragment(
-                ambient
-            )
+            CompanyListFragmentDirections.actionCompanyListFragmentToAmbientListFragment(company)
         findNavController().navigate(direction)
     }
 

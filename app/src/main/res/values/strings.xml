@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Higiene Ocupacional</string>
-    <string name="action_editar">Editar</string>
-    <string name="action_excluir">Excluir</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_delete">Excluir</string>
+    <string name="action_export">Exportar</string>
     <!-- Strings used for fragments for navigation -->
     <string name="ambient_fragment_label">Ambientes</string>
+    <string name="compay_fragment_label">Empresas</string>
+    <string name="create_compay_fragment_label">Criar empresa</string>
     <string name="ambient_detail_fragment_label">Detalhes do Ambiente</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>

@@ -6,15 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import br.com.joaoov.data.Ambient
 import br.com.joaoov.data.AmbientDAO
+import br.com.joaoov.data.Company
+import br.com.joaoov.data.CompanyDAO
 
 @Database(
-    version = 3,
-    entities = [Ambient::class],
+    version = 4,
+    entities = [Company::class, Ambient::class],
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun LevantamentoDAO(): AmbientDAO
+    abstract fun ambientDAO(): AmbientDAO
+    abstract fun companyDAO(): CompanyDAO
 
     companion object {
         private const val NOME_BANCO_DE_DADOS = "higieneocupacional.db"

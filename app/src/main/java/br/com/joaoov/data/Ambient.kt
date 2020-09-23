@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 data class Ambient(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val empresa: String,
+    val companyID: Long,
     val data: String,
     val local: String,
     val areaLargura: Double,

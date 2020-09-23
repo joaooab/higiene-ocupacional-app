@@ -1,4 +1,4 @@
-package br.com.joaoov.ui
+package br.com.joaoov.ui.ambient
 
 import android.os.Bundle
 import android.view.*
@@ -17,6 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class AmbientDetailFragment : Fragment() {
 
+    private val arguments by navArgs<AmbientDetailFragmentArgs>()
     private val argumentos by navArgs<AmbientDetailFragmentArgs>()
     private val estadoViewModel: EstadoAppViewModel by sharedViewModel()
     private val viewModel: AmbientDetailViewModel by viewModel()
@@ -68,7 +69,7 @@ class AmbientDetailFragment : Fragment() {
     }
 
     private fun bindView(ambient: Ambient) {
-        textViewEmpresa.text = ambient.empresa
+        textViewEmpresa.text = arguments.company.name
         textViewLocal.text = ambient.local
         textViewArea.text = ambient.getAreaFormat()
         textViewPeDireito.text = ambient.getPeDireitoFormat()

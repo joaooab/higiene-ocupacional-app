@@ -1,4 +1,4 @@
-package br.com.joaoov.ui
+package br.com.joaoov.ui.ambient
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +8,15 @@ import br.com.joaoov.R
 import br.com.joaoov.data.Ambient
 import kotlinx.android.synthetic.main.item_ambient.view.*
 
-class AmbientListAdapter(private val list: List<Ambient>, private val onClick: (Ambient) -> Unit) :
+class AmbientListAdapter(
+    private val list: MutableList<Ambient> = mutableListOf(),
+    private val onClick: (Ambient) -> Unit
+) :
     RecyclerView.Adapter<AmbientListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Ambient) {
             with(itemView) {
-                textViewEmpresa.text = item.empresa
                 textViewLocal.text = item.local
                 textViewArea.text = item.getAreaFormat()
                 textViewData.text = item.data
@@ -23,6 +25,13 @@ class AmbientListAdapter(private val list: List<Ambient>, private val onClick: (
                 }
             }
         }
+    }
+
+    fun refresh(ambients: List<Ambient>) {
+        notifyItemRangeRemoved(0, list.size)
+        list.clear()
+        list.addAll(ambients)
+        notifyItemRangeInserted(0, list.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
