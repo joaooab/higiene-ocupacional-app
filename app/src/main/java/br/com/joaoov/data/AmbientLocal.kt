@@ -1,10 +1,22 @@
 package br.com.joaoov.data
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
-@Parcelize
-data class Ambient(
+@Entity(
+    tableName = "Ambient",
+    foreignKeys = [
+        ForeignKey(
+            entity = DepartamentLocal::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("departamentId"),
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
+data class AmbientLocal(
+    @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val departamentId: Long,
     val data: String,
@@ -19,14 +31,10 @@ data class Ambient(
     val iluminacaoArtificial: String,
     val ventilacaoNatural: String,
     val ventilacaoArtificial: String
-) : Parcelable {
-    fun getAreaFormat() = "${areaLargura}m x ${areaComprimento}m"
+)
 
-    fun getPeDireitoFormat() = "${peDireito}m"
-}
-
-fun Ambient.toLocal() =
-    AmbientLocal(
+fun AmbientLocal.toModel() =
+    Ambient(
         id,
         departamentId,
         data,
@@ -43,4 +51,4 @@ fun Ambient.toLocal() =
         ventilacaoArtificial
     )
 
-fun List<Ambient>.toLocal() = map { it.toLocal() }
+fun List<AmbientLocal>.toModel() = map { it.toModel() }

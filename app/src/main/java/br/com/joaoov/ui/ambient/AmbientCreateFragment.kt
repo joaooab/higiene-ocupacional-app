@@ -6,26 +6,21 @@ import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import br.com.joaoov.ComponentesVisuais
-import br.com.joaoov.EstadoAppViewModel
 import br.com.joaoov.R
 import br.com.joaoov.data.Ambient
 import br.com.joaoov.ext.*
 import br.com.joaoov.ui.NoFilterAdapter
 import kotlinx.android.synthetic.main.fragment_ambient_create.*
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
 
     private val arguments by navArgs<AmbientCreateFragmentArgs>()
-    private val viewModel: AmbientCreateViewModel by viewModel()
-    private val estadoViewModel: EstadoAppViewModel by sharedViewModel()
+    private val viewModel: AmbientViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        estadoViewModel.temComponentes = ComponentesVisuais(true)
         configurarSpinnerPiso()
         configurarSpinnerParede()
         configurarSpinnerCobertura()
@@ -38,9 +33,9 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
 
     private fun configurarBotaoSalvar() {
         hideKeyboard()
-        buttonSalvar.setOnClickListener {
+        buttonSave.setOnClickListener {
             val ambient = Ambient(
-                companyID = arguments.company.id,
+                departamentId = arguments.departament.id,
                 local = editTextLocal.getString(),
                 data = Date().format(),
                 areaLargura = editTextAreaLargura.getDouble(),

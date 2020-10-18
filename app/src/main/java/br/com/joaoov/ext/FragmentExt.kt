@@ -18,6 +18,11 @@ fun Fragment.showToast(message: String) {
     Toast.makeText(this.context, message, Toast.LENGTH_LONG).show()
 }
 
+fun Fragment.showToast(message: Int) {
+    val message = getString(message)
+    showToast(message)
+}
+
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboardFrom(it) }
 }

@@ -3,23 +3,31 @@ package br.com.joaoov.ui.ambient
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.Ambient
 import br.com.joaoov.data.AmbientDAO
 import br.com.joaoov.data.Company
+import br.com.joaoov.data.Departament
+import br.com.joaoov.repository.AmbientRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class AmbientViewModel(private val ambientDAO: AmbientDAO) : ViewModel() {
+class AmbientViewModel(private val repository: AmbientRepository) : ViewModel() {
 
-    private var _ambients = MutableLiveData<List<Ambient>>()
+    fun getAmbients(departament: Departament): LiveData<List<Ambient>> =
+        repository.getAmbients(departament)
 
-    fun getAmbients(company: Company): LiveData<List<Ambient>> {
-        val ambients = ambientDAO.getAllByCompanyID(company.id)
-        _ambients.value = ambients.value
-        return ambients
+
+    fun salvar(ambient: Ambient) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.save(ambient)
+        }
     }
 
-    fun exportReport(company: Company) {
-        val ambients = _ambients.value ?: listOf()
-
+    fun delete(ambient: Ambient) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delete(ambient)
+        }
     }
 
 }

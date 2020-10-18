@@ -4,19 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import br.com.joaoov.data.Ambient
-import br.com.joaoov.data.AmbientDAO
-import br.com.joaoov.data.Company
-import br.com.joaoov.data.CompanyDAO
+import br.com.joaoov.data.*
 
 @Database(
-    version = 4,
-    entities = [Company::class, Ambient::class],
+    version = 7,
+    entities = [Company::class, DepartamentLocal::class, AmbientLocal::class],
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun ambientDAO(): AmbientDAO
+    abstract fun departamentDAO(): DepartamentDAO
     abstract fun companyDAO(): CompanyDAO
 
     companion object {

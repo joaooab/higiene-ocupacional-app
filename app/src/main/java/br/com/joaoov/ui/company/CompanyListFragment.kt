@@ -1,31 +1,28 @@
 package br.com.joaoov.ui.company
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import br.com.joaoov.ComponentesVisuais
-import br.com.joaoov.EstadoAppViewModel
 import br.com.joaoov.R
 import br.com.joaoov.data.Company
 import kotlinx.android.synthetic.main.fragment_ambient.*
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CompanyListFragment : Fragment(R.layout.fragment_company) {
 
     private val viewModel: CompanyViewModel by viewModel()
-    private val estadoViewModel: EstadoAppViewModel by sharedViewModel()
-    private lateinit var adapter: CompanyListAdapter
+    private val adapter: CompanyListAdapter by lazy {
+        CompanyListAdapter { company ->
+            navigateToDepartamentFragment(company)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        estadoViewModel.temComponentes = ComponentesVisuais(true)
         observeCompanies()
         setupAdapter()
         configurarFab()
@@ -34,9 +31,6 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
     private fun setupAdapter() {
         val divisor = DividerItemDecoration(context, LinearLayout.VERTICAL)
         recyclerView.addItemDecoration(divisor)
-        adapter = CompanyListAdapter { company ->
-            navigateToAmbientFragment(company)
-        }
         recyclerView.adapter = adapter
     }
 
@@ -58,9 +52,9 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
         })
     }
 
-    private fun navigateToAmbientFragment(company: Company) {
+    private fun navigateToDepartamentFragment(company: Company) {
         val direction =
-            CompanyListFragmentDirections.actionCompanyListFragmentToAmbientListFragment(company)
+            CompanyListFragmentDirections.actionCompanyListFragmentToDepartamentListFragment(company)
         findNavController().navigate(direction)
     }
 

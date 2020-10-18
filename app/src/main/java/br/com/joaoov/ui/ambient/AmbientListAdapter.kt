@@ -28,10 +28,9 @@ class AmbientListAdapter(
     }
 
     fun refresh(ambients: List<Ambient>) {
-        notifyItemRangeRemoved(0, list.size)
         list.clear()
         list.addAll(ambients)
-        notifyItemRangeInserted(0, list.size)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

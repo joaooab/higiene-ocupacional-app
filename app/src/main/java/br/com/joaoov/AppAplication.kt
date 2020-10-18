@@ -2,6 +2,7 @@ package br.com.joaoov
 
 import android.app.Application
 import br.com.joaoov.di.daoModule
+import br.com.joaoov.di.repositoryModule
 import br.com.joaoov.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -15,7 +16,8 @@ class AppAplication : Application() {
             modules(
                 listOf(
                     viewModelModule,
-                    daoModule
+                    daoModule,
+                    repositoryModule
                 )
             )
         }

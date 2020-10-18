@@ -7,21 +7,21 @@ import androidx.room.*
 interface AmbientDAO {
 
     @Query("SELECT * FROM Ambient ORDER BY LOCAL")
-    fun getAll(): LiveData<List<Ambient>>
+    fun getAll(): LiveData<List<AmbientLocal>>
 
-    @Query("SELECT * FROM Ambient WHERE companyID = :companyID ORDER BY LOCAL")
-    fun getAllByCompanyID(companyID: Long): LiveData<List<Ambient>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(ambient: Ambient): Long
+    @Query("SELECT * FROM Ambient WHERE departamentId = :departamentId ORDER BY LOCAL")
+    fun getAllByDepartamentId(departamentId: Long): LiveData<List<AmbientLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(Ambient: List<Ambient>)
+    suspend fun save(ambient: AmbientLocal): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun save(Ambient: List<AmbientLocal>)
 
     @Delete
-    fun delete(ambient: Ambient)
+    suspend fun delete(ambient: AmbientLocal)
 
     @Update
-    fun update(ambient: Ambient)
+    suspend fun update(ambient: AmbientLocal)
 
 }

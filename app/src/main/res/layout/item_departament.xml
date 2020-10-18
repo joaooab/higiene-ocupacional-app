@@ -19,7 +19,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_circle"
         android:scaleType="center"
-        android:src="@drawable/ic_company"
+        android:src="@drawable/ic_departament"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,21 +31,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
+
         android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="@+id/textViewFirstChar"
         app:layout_constraintEnd_toStartOf="@+id/textViewData"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textViewFirstChar"
         app:layout_constraintTop_toTopOf="@+id/textViewFirstChar"
-        tools:text="Prodap" />
+        tools:text="Administração" />
 
     <TextView
         android:id="@+id/textViewData"
+        style="@style/TextItemSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        style="@style/TextItemSubTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="19/08/2020" />

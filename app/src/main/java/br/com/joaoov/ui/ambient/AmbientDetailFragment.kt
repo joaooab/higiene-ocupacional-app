@@ -5,22 +5,17 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import br.com.joaoov.ComponentesVisuais
-import br.com.joaoov.EstadoAppViewModel
 import br.com.joaoov.R
 import br.com.joaoov.data.Ambient
 import br.com.joaoov.ext.showToast
 import kotlinx.android.synthetic.main.fragment_ambient_detail.*
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class AmbientDetailFragment : Fragment() {
 
     private val arguments by navArgs<AmbientDetailFragmentArgs>()
-    private val argumentos by navArgs<AmbientDetailFragmentArgs>()
-    private val estadoViewModel: EstadoAppViewModel by sharedViewModel()
-    private val viewModel: AmbientDetailViewModel by viewModel()
+    private val viewModel: AmbientViewModel by viewModel()
     private lateinit var ambient: Ambient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +32,7 @@ class AmbientDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        estadoViewModel.temComponentes = ComponentesVisuais(true)
-        ambient = argumentos.ambient
+        ambient = arguments.ambient
         bindView(ambient)
     }
 
@@ -69,7 +63,6 @@ class AmbientDetailFragment : Fragment() {
     }
 
     private fun bindView(ambient: Ambient) {
-        textViewEmpresa.text = arguments.company.name
         textViewLocal.text = ambient.local
         textViewArea.text = ambient.getAreaFormat()
         textViewPeDireito.text = ambient.getPeDireitoFormat()

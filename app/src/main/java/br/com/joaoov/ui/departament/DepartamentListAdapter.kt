@@ -1,20 +1,20 @@
-package br.com.joaoov.ui.company
+package br.com.joaoov.ui.departament
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
-import br.com.joaoov.data.Company
+import br.com.joaoov.data.Departament
 import kotlinx.android.synthetic.main.item_company.view.*
 
-class CompanyListAdapter(
-    private val list: MutableList<Company> = mutableListOf(),
-    private val onClick: (Company) -> Unit
-) : RecyclerView.Adapter<CompanyListAdapter.ViewHolder>() {
+class DepartamentListAdapter(
+    private val list: MutableList<Departament> = mutableListOf(),
+    private val onClick: (Departament) -> Unit
+) : RecyclerView.Adapter<DepartamentListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Company) {
+        fun bind(item: Departament) {
             with(itemView) {
                 textViewEmpresa.text = item.name
                 textViewData.text = item.date
@@ -25,15 +25,15 @@ class CompanyListAdapter(
         }
     }
 
-    fun refresh(companies: List<Company>) {
+    fun refresh(departaments: List<Departament>) {
         list.clear()
-        list.addAll(companies)
+        list.addAll(departaments)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_company,
+            R.layout.item_departament,
             parent,
             false
         )
