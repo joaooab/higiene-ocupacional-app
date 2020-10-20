@@ -18,12 +18,11 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/background_circle"
         android:scaleType="center"
-        android:src="@drawable/ic_ambient"
+        android:src="@drawable/ic_function"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -36,12 +35,12 @@
         app:layout_constraintTop_toTopOf="@+id/imageViewIcon">
 
         <TextView
-            android:id="@+id/textViewLocal"
+            android:id="@+id/textViewFunction"
             style="@style/TextItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAllCaps="true"
-            tools:text="Sala de compressores" />
+            tools:text="Engenheiro" />
 
         <TextView
             android:id="@+id/textViewDate"
@@ -85,113 +84,52 @@
         tools:visibility="visible">
 
         <TextView
-            android:id="@+id/textViewArea"
+            android:id="@+id/textViewLabelFunctions"
             style="@style/TextItemDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+            android:text="Atividades desenvolvidas:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Área: 5m x 5m" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewHeight"
+            android:id="@+id/textViewDescription"
+            style="@style/TextItemDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textViewLabelFunctions"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelFunctions"
+            tools:text="Gerenciar atividades de departamentos ou serviços de pessoal, recrutamento e seleção, cargos e salários, benefícios, treinamento e desenvolvimento, liderando e facilitando o desenvolvimento do trabalho das equipes. Assessorar a diretoria e setores da empresa em atividades como planejamento, contratações, negociações de relações humanas e do trabalho atuar em eventos corporativos e da comunidade, representando a empresa." />
+
+        <TextView
+            android:id="@+id/textViewLabelWorkday"
             style="@style/TextItemDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@+id/textViewArea"
-            app:layout_constraintTop_toBottomOf="@id/textViewArea"
-            tools:text="Pé direito: 3m" />
+            android:layout_marginTop="8dp"
+            android:text="@string/label_work_day"
+            app:layout_constraintStart_toStartOf="@id/textViewDescription"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescription" />
 
         <TextView
-            android:id="@+id/textViewFloor"
+            android:id="@+id/textViewtextViewWorkday"
             style="@style/TextItemDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@id/textViewHeight"
-            app:layout_constraintTop_toBottomOf="@id/textViewHeight"
-            tools:text="Piso: Concreto armado" />
-
-        <TextView
-            android:id="@+id/textViewWall"
-            style="@style/TextItemDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@id/textViewFloor"
-            app:layout_constraintTop_toBottomOf="@id/textViewFloor"
-            tools:text="Parede: Alvenaria" />
-
-        <TextView
-            android:id="@+id/textViewCoverage"
-            style="@style/TextItemDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@id/textViewWall"
-            app:layout_constraintTop_toBottomOf="@id/textViewWall"
-            tools:text="Cobertura: Metálica" />
-
-        <TextView
-            android:id="@+id/textViewNaturalLighting"
-            style="@style/TextItemDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@id/textViewCoverage"
-            app:layout_constraintTop_toBottomOf="@id/textViewCoverage"
-            tools:text="Iluminação Natural: Através de portas" />
-
-        <TextView
-            android:id="@+id/textViewArtificialLighting"
-            style="@style/TextItemDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@id/textViewNaturalLighting"
-            app:layout_constraintTop_toBottomOf="@id/textViewNaturalLighting"
-            tools:text="Iluminação Artificial: Através de lâmpadas de led" />
-
-        <TextView
-            android:id="@+id/textViewNaturalVentilation"
-            style="@style/TextItemDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@id/textViewArtificialLighting"
-            app:layout_constraintTop_toBottomOf="@id/textViewArtificialLighting"
-            tools:text="Ventilação Natural:" />
-
-        <TextView
-            android:id="@+id/textViewArtificialVentilation"
-            style="@style/TextItemDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/textViewNaturalVentilation"
-            app:layout_constraintTop_toBottomOf="@id/textViewNaturalVentilation"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="Ventilação Artificial: " />
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textViewLabelWorkday"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelWorkday"
+            tools:text="Segunda a Sexta das 07h10min às 18h00min com 02h de intervalo intrajornada." />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView14"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="8dp"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/textView13"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/textView13"-->
-    <!--        tools:text="Iluminação Artificial: Através de lâmpadas de led" />-->
-
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
 

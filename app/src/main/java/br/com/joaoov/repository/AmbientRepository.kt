@@ -2,7 +2,11 @@ package br.com.joaoov.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import br.com.joaoov.data.*
+import br.com.joaoov.data.ambient.Ambient
+import br.com.joaoov.data.ambient.AmbientDAO
+import br.com.joaoov.data.ambient.toLocal
+import br.com.joaoov.data.ambient.toModel
+import br.com.joaoov.data.departament.Departament
 
 interface AmbientRepository {
 

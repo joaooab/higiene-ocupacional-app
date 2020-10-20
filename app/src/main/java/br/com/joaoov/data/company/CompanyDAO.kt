@@ -1,4 +1,4 @@
-package br.com.joaoov.data
+package br.com.joaoov.data.company
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -10,15 +10,15 @@ interface CompanyDAO {
     fun getAll(): LiveData<List<Company>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(ambient: Company): Long
+    suspend fun save(company: Company): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(Ambient: List<Company>)
+    fun save(companies: List<Company>)
 
     @Delete
-    fun delete(ambient: Company)
+    fun delete(company: Company)
 
     @Update
-    fun update(ambient: Company)
+    fun update(company: Company)
 
 }

@@ -56,5 +56,7 @@ data class Path(
         const val COMPANY_ICON = R.drawable.ic_company
         const val DEPARTAMENT_TYPE = "DEPARTAMENT"
         const val DEPARTAMENT_ICON = R.drawable.ic_departament
+        const val AMBIENT_TYPE = "AMBIENT_TYPE"
+        const val AMBIENT_TYPE_ICON = R.drawable.ic_ambient
     }
 }

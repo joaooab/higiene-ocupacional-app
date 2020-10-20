@@ -9,7 +9,7 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
-import br.com.joaoov.data.Ambient
+import br.com.joaoov.data.ambient.Ambient
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.show
 import kotlinx.android.synthetic.main.item_ambient.view.*
@@ -23,8 +23,8 @@ class AmbientListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Ambient) {
             with(itemView) {
-                textViewData.text = item.date
-                textViewLocal.text = item.local
+                textViewDate.text = item.date
+                textViewLocal.text = item.name
                 textViewArea.text = getString(
                     context,
                     R.string.label_area,
@@ -74,8 +74,8 @@ class AmbientListAdapter(
                     onClick(item)
                 }
                 imageViewArrowDetail.setOnClickListener {
-                    item.showDetaill = !item.showDetaill
-                    if (item.showDetaill) {
+                    item.showDetail = !item.showDetail
+                    if (item.showDetail) {
                         rotate(it, 180f, 0f)
                         constraintLayoutDetail.show()
                     } else {

@@ -1,4 +1,4 @@
-package br.com.joaoov.data
+package br.com.joaoov.data.ambient
 
 import android.os.Parcelable
 import kotlinx.android.parcel.IgnoredOnParcel
@@ -9,7 +9,7 @@ data class Ambient(
     val id: Long = 0,
     val departamentId: Long,
     val date: String,
-    val local: String,
+    val name: String,
     val width: Double,
     val length: Double,
     val height: Double,
@@ -26,7 +26,7 @@ data class Ambient(
     fun getHeightFormat() = "${height}m"
 
     @IgnoredOnParcel
-    var showDetaill: Boolean = false
+    var showDetail: Boolean = false
 }
 
 fun Ambient.toLocal() =
@@ -34,7 +34,7 @@ fun Ambient.toLocal() =
         id,
         departamentId,
         date,
-        local,
+        name,
         width,
         length,
         height,

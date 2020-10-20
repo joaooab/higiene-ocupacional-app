@@ -1,4 +1,4 @@
-package br.com.joaoov.ui.ambient
+package br.com.joaoov.ui.function
 
 import android.os.Bundle
 import android.view.View
@@ -12,54 +12,42 @@ import br.com.joaoov.MainActivity
 import br.com.joaoov.Path
 import br.com.joaoov.R
 import br.com.joaoov.data.ambient.Ambient
-import br.com.joaoov.data.departament.Departament
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
+class FunctionListFragment : Fragment(R.layout.fragment_company) {
 
-class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
-
-    private val arguments by navArgs<AmbientListFragmentArgs>()
-    private val viewModel: AmbientViewModel by viewModel()
-    private val adapter: AmbientListAdapter by lazy {
-        AmbientListAdapter { company ->
-            navigateToFunctionFragment(company)
+    private val arguments by navArgs<FunctionListFragmentArgs>()
+    private val viewModel: FunctionViewModel by viewModel()
+    private val adapter: FunctionListAdapter by lazy {
+        FunctionListAdapter { ambient ->
+//            navigateToFunctionCreateFragment(ambient)
         }
     }
-    private lateinit var departament: Departament
+    private lateinit var ambient: Ambient
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        departament = arguments.departament
+        ambient = arguments.ambient
         (activity as MainActivity).addPath(
             Path(
-                Path.DEPARTAMENT_TYPE,
-                Path.DEPARTAMENT_ICON,
-                departament.name
+                Path.AMBIENT_TYPE,
+                Path.AMBIENT_TYPE_ICON,
+                ambient.name
             )
         )
         handleObserve()
         setupView()
     }
 
-    private fun handleObserve() {
-        observeAmbients()
-    }
-
     private fun setupView() {
-        setupFab()
         setupAdapter()
+        setupFab()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         (activity as MainActivity).removePath()
-    }
-
-    private fun setupFab() {
-        fab.setOnClickListener {
-            navigateToCreateFragment()
-        }
     }
 
     private fun setupAdapter() {
@@ -68,25 +56,30 @@ class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
         recyclerView.adapter = adapter
     }
 
+    private fun setupFab() {
+        fab.setOnClickListener {
+            navigateToCreateFragment()
+        }
+    }
 
     private fun navigateToCreateFragment() {
         val direction =
-            AmbientListFragmentDirections.actionAmbientListFragmentToAmbientCreateFragment(
-                departament
+            FunctionListFragmentDirections.actionFunctionListFragmentToFunctionCreateFragment(
+                ambient
             )
         findNavController().navigate(direction)
     }
 
-    private fun observeAmbients() {
-        viewModel.getAmbients(departament).observe(viewLifecycleOwner, Observer {
+    private fun handleObserve() {
+        viewModel.getFunctions(ambient).observe(viewLifecycleOwner, Observer {
             adapter.refresh(it)
         })
     }
 
-    private fun navigateToFunctionFragment(ambient: Ambient) {
-        val direction =
-            AmbientListFragmentDirections.actionAmbientListFragmentToFunctionListFragment(ambient)
-        findNavController().navigate(direction)
-    }
+//    private fun navigateToFunctionCreateFragment(ambient: Ambient) {
+//        val direction =
+//            FunctionListFragmentDirections.actionFunctionListFragmentToFunctionCreateFragment(ambient)
+//        findNavController().navigate(direction)
+//    }
 
 }

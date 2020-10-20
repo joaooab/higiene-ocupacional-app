@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.joaoov.R
-import br.com.joaoov.data.Ambient
+import br.com.joaoov.data.ambient.Ambient
 import br.com.joaoov.ext.*
 import br.com.joaoov.ui.NoFilterAdapter
 import kotlinx.android.synthetic.main.fragment_ambient_create.*
@@ -32,7 +32,6 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
     }
 
     private fun setupSaveButton() {
-        hideKeyboard()
         buttonSave.setOnClickListener {
             val localName = textInputLayoutLocal.getString()
             if (localName.isEmpty()) {
@@ -41,7 +40,7 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
             }
             val ambient = Ambient(
                 departamentId = arguments.departament.id,
-                local = localName,
+                name = localName,
                 date = Date().format(),
                 width = textInputLayoutAreaWidth.getDouble(),
                 length = textInputLayoutAreaLenght.getDouble(),
@@ -58,6 +57,11 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
             showToast("Criado com sucesso")
             findNavController().popBackStack()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard()
     }
 
     private fun setupArtificialVentilation() {

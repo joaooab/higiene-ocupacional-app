@@ -2,7 +2,11 @@ package br.com.joaoov.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import br.com.joaoov.data.*
+import br.com.joaoov.data.company.Company
+import br.com.joaoov.data.departament.Departament
+import br.com.joaoov.data.departament.DepartamentDAO
+import br.com.joaoov.data.departament.toLocal
+import br.com.joaoov.data.departament.toModel
 
 interface DepartamentRepository {
 

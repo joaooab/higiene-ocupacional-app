@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.com.joaoov.R
-import br.com.joaoov.data.Company
+import br.com.joaoov.data.company.Company
 import br.com.joaoov.ext.format
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.hideKeyboard

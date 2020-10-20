@@ -2,8 +2,8 @@ package br.com.joaoov.ui.company
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.joaoov.data.Company
-import br.com.joaoov.data.CompanyDAO
+import br.com.joaoov.data.company.Company
+import br.com.joaoov.data.company.CompanyDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

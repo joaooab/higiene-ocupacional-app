@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.joaoov.R
-import br.com.joaoov.data.Company
+import br.com.joaoov.data.company.Company
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -23,9 +23,13 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeCompanies()
+        setupView()
+        handleObserve()
+    }
+
+    private fun setupView() {
         setupAdapter()
-        configurarFab()
+        setupFAb()
     }
 
     private fun setupAdapter() {
@@ -34,7 +38,7 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
         recyclerView.adapter = adapter
     }
 
-    private fun configurarFab() {
+    private fun setupFAb() {
         fab.setOnClickListener {
             navigateToCreateFragment()
         }
@@ -46,7 +50,7 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
         findNavController().navigate(direction)
     }
 
-    private fun observeCompanies() {
+    private fun handleObserve() {
         viewModel.getCompanies().observe(viewLifecycleOwner, Observer {
             adapter.refresh(it)
         })

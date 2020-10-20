@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
-import br.com.joaoov.data.Company
+import br.com.joaoov.data.company.Company
 import kotlinx.android.synthetic.main.item_company.view.*
 
 class CompanyListAdapter(
@@ -16,8 +16,8 @@ class CompanyListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Company) {
             with(itemView) {
-                textViewEmpresa.text = item.name
-                textViewData.text = item.date
+                textViewCompany.text = item.name
+                textViewDate.text = item.date
                 setOnClickListener {
                     onClick(item)
                 }

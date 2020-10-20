@@ -8,6 +8,8 @@
     <string name="fragment_ambient_create_label">Criar Ambiente</string>
     <string name="fragment_departament_label">Setores</string>
     <string name="fragment_departament_create_label">Criar Setor</string>
+    <string name="fragment_function_label">Funções</string>
+    <string name="fragment_function_create_label">Criar Função</string>
 
     <string name="action_edit">Editar</string>
     <string name="action_delete">Excluir</string>
@@ -20,10 +22,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="company">Empresa</string>
     <string name="departament">Departamento</string>
+    <string name="function">Função</string>
+    <string name="description">Descrição</string>
+    <string name="workday">Jornada de trabalho</string>
     <string name="add_ambient">Adicionar ambient</string>
 
     <string name="local">Local</string>
@@ -48,6 +51,7 @@
     <string name="label_artificial_lighting">Iluminacao Artificial: %s</string>
     <string name="label_natural_ventilation">Ventilação Natural: %s</string>
     <string name="label_artificial_ventilation">Ventilação Artificial: %s</string>
+    <string name="label_work_day">Jornada de trablho:</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>

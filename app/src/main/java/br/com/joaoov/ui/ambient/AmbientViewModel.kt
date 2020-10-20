@@ -1,13 +1,10 @@
 package br.com.joaoov.ui.ambient
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.joaoov.data.Ambient
-import br.com.joaoov.data.AmbientDAO
-import br.com.joaoov.data.Company
-import br.com.joaoov.data.Departament
+import br.com.joaoov.data.ambient.Ambient
+import br.com.joaoov.data.departament.Departament
 import br.com.joaoov.repository.AmbientRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

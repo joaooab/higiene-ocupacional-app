@@ -4,21 +4,29 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import br.com.joaoov.data.*
+import br.com.joaoov.data.ambient.AmbientDAO
+import br.com.joaoov.data.ambient.AmbientLocal
+import br.com.joaoov.data.company.Company
+import br.com.joaoov.data.company.CompanyDAO
+import br.com.joaoov.data.departament.DepartamentDAO
+import br.com.joaoov.data.departament.DepartamentLocal
+import br.com.joaoov.data.function.FunctionDAO
+import br.com.joaoov.data.function.FunctionLocal
 
 @Database(
-    version = 8,
-    entities = [Company::class, DepartamentLocal::class, AmbientLocal::class],
+    version = 9,
+    entities = [Company::class, DepartamentLocal::class, AmbientLocal::class, FunctionLocal::class],
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun ambientDAO(): AmbientDAO
-    abstract fun departamentDAO(): DepartamentDAO
     abstract fun companyDAO(): CompanyDAO
+    abstract fun departamentDAO(): DepartamentDAO
+    abstract fun ambientDAO(): AmbientDAO
+    abstract fun functionDAO(): FunctionDAO
 
     companion object {
-        private const val NOME_BANCO_DE_DADOS = "higieneocupacional.db"
+        private const val DATABASE_NAME = "higieneocupacional.db"
 
         @Volatile
         private var instance: AppDatabase? = null
@@ -30,7 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, NOME_BANCO_DE_DADOS)
+            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
                 .build()
         }

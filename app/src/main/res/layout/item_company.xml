@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageViewIcon">
 
         <TextView
-            android:id="@+id/textViewEmpresa"
+            android:id="@+id/textViewCompany"
             style="@style/TextItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             tools:text="Prodap" />
 
         <TextView
-            android:id="@+id/textViewData"
+            android:id="@+id/textViewDate"
             style="@style/TextItemDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

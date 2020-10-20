@@ -10,7 +10,6 @@
         android:name="br.com.joaoov.ui.ambient.AmbientListFragment"
         android:label="@string/fragment_ambient_label"
         tools:layout="@layout/fragment_ambient">
-
         <action
             android:id="@+id/action_AmbientListFragment_to_ambientCreateFragment"
             app:destination="@id/ambientCreateFragment"
@@ -18,9 +17,12 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_AmbientListFragment_to_functionListFragment"
+            app:destination="@id/functionListFragment" />
         <argument
             android:name="departament"
-            app:argType="br.com.joaoov.data.Departament" />
+            app:argType="br.com.joaoov.data.departament.Departament" />
     </fragment>
     <fragment
         android:id="@+id/ambientCreateFragment"
@@ -29,7 +31,7 @@
         tools:layout="@layout/fragment_ambient_create">
         <argument
             android:name="departament"
-            app:argType="br.com.joaoov.data.Departament" />
+            app:argType="br.com.joaoov.data.departament.Departament" />
     </fragment>
     <fragment
         android:id="@+id/companyListFragment"
@@ -55,7 +57,7 @@
         tools:layout="@layout/fragment_departament">
         <argument
             android:name="company"
-            app:argType="br.com.joaoov.data.Company" />
+            app:argType="br.com.joaoov.data.company.Company" />
         <action
             android:id="@+id/action_departamentListFragment_to_departamentCreateFragment"
             app:destination="@id/departamentCreateFragment" />
@@ -67,9 +69,30 @@
         android:id="@+id/departamentCreateFragment"
         android:name="br.com.joaoov.ui.departament.DepartamentCreateFragment"
         android:label="@string/fragment_departament_create_label"
-        tools:layout="@layout/fragment_departament_create" >
+        tools:layout="@layout/fragment_departament_create">
         <argument
             android:name="company"
-            app:argType="br.com.joaoov.data.Company" />
+            app:argType="br.com.joaoov.data.company.Company" />
+    </fragment>
+    <fragment
+        android:id="@+id/functionListFragment"
+        android:name="br.com.joaoov.ui.function.FunctionListFragment"
+        android:label="@string/fragment_function_label"
+        tools:layout="@layout/fragment_function">
+        <argument
+            android:name="ambient"
+            app:argType="br.com.joaoov.data.ambient.Ambient" />
+        <action
+            android:id="@+id/action_functionListFragment_to_functionCreateFragment"
+            app:destination="@id/functionCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/functionCreateFragment"
+        android:name="br.com.joaoov.ui.function.FunctionCreateFragment"
+        android:label="@string/fragment_function_create_label"
+        tools:layout="@layout/fragment_funciton_create">
+        <argument
+            android:name="ambient"
+            app:argType="br.com.joaoov.data.ambient.Ambient" />
     </fragment>
 </navigation>
