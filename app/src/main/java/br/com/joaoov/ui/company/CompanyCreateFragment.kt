@@ -25,8 +25,13 @@ class CompanyCreateFragment : Fragment(R.layout.fragment_company_create) {
 
     private fun setupSaveButton() {
         buttonSave.setOnClickListener {
+            val companyName = textInputLayoutCompany.getString()
+            if (companyName.isEmpty()) {
+                textInputLayoutCompany.error = getString(R.string.message_error_required)
+                return@setOnClickListener
+            }
             val company = Company(
-                name = editTextEmpresa.getString(),
+                name = companyName,
                 date = Date().format()
             )
             viewModel.salvar(company)

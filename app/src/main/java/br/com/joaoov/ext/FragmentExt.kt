@@ -19,8 +19,7 @@ fun Fragment.showToast(message: String) {
 }
 
 fun Fragment.showToast(message: Int) {
-    val message = getString(message)
-    showToast(message)
+    showToast(getString(message))
 }
 
 fun Fragment.hideKeyboard() {

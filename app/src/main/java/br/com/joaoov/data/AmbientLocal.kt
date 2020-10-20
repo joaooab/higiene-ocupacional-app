@@ -19,36 +19,36 @@ data class AmbientLocal(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val departamentId: Long,
-    val data: String,
+    val date: String,
     val local: String,
-    val areaLargura: Double,
-    val areaComprimento: Double,
-    val peDireito: Double,
-    val piso: String,
-    val parede: String,
-    val cobertura: String,
-    val iluminacaoNatural: String,
-    val iluminacaoArtificial: String,
-    val ventilacaoNatural: String,
-    val ventilacaoArtificial: String
+    val width: Double,
+    val lenght: Double,
+    val height: Double,
+    val floor: String,
+    val wall: String,
+    val coverage: String,
+    val naturalLighting: String,
+    val artificialLighting: String,
+    val naturalVentilation: String,
+    val artificialVentilation: String
 )
 
 fun AmbientLocal.toModel() =
     Ambient(
         id,
         departamentId,
-        data,
+        date,
         local,
-        areaLargura,
-        areaComprimento,
-        peDireito,
-        piso,
-        parede,
-        cobertura,
-        iluminacaoNatural,
-        iluminacaoArtificial,
-        ventilacaoNatural,
-        ventilacaoArtificial
+        width,
+        lenght,
+        height,
+        floor,
+        wall,
+        coverage,
+        naturalLighting,
+        artificialLighting,
+        naturalVentilation,
+        artificialVentilation
     )
 
 fun List<AmbientLocal>.toModel() = map { it.toModel() }

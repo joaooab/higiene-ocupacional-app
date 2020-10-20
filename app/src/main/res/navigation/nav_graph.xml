@@ -12,13 +12,6 @@
         tools:layout="@layout/fragment_ambient">
 
         <action
-            android:id="@+id/action_AmbientListFragment_to_ambientDetailFragment"
-            app:destination="@id/LevantamentoDetailsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <action
             android:id="@+id/action_AmbientListFragment_to_ambientCreateFragment"
             app:destination="@id/ambientCreateFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -28,15 +21,6 @@
         <argument
             android:name="departament"
             app:argType="br.com.joaoov.data.Departament" />
-    </fragment>
-    <fragment
-        android:id="@+id/LevantamentoDetailsFragment"
-        android:name="br.com.joaoov.ui.ambient.AmbientDetailFragment"
-        android:label="@string/fragment_ambient_detail_label"
-        tools:layout="@layout/fragment_ambient_detail">
-        <argument
-            android:name="ambient"
-            app:argType="br.com.joaoov.data.Ambient" />
     </fragment>
     <fragment
         android:id="@+id/ambientCreateFragment"

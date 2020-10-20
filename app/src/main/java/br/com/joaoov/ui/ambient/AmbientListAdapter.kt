@@ -1,11 +1,17 @@
 package br.com.joaoov.ui.ambient
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.RotateAnimation
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.Ambient
+import br.com.joaoov.ext.gone
+import br.com.joaoov.ext.show
 import kotlinx.android.synthetic.main.item_ambient.view.*
 
 class AmbientListAdapter(
@@ -17,13 +23,89 @@ class AmbientListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Ambient) {
             with(itemView) {
+                textViewData.text = item.date
                 textViewLocal.text = item.local
-                textViewArea.text = item.getAreaFormat()
-                textViewData.text = item.data
+                textViewArea.text = getString(
+                    context,
+                    R.string.label_area,
+                    item.getAreaFormat()
+                )
+                textViewHeight.text = getString(
+                    context,
+                    R.string.label_height,
+                    item.getHeightFormat()
+                )
+                textViewFloor.text = getString(
+                    context,
+                    R.string.label_floor,
+                    item.floor
+                )
+                textViewWall.text = getString(
+                    context,
+                    R.string.label_wall,
+                    item.wall
+                )
+                textViewCoverage.text = getString(
+                    context,
+                    R.string.label_coverage,
+                    item.wall
+                )
+                textViewNaturalLighting.text = getString(
+                    context,
+                    R.string.label_natural_lighting,
+                    item.naturalLighting
+                )
+                textViewArtificialLighting.text = getString(
+                    context,
+                    R.string.label_artificial_lighting,
+                    item.artificialLighting
+                )
+                textViewNaturalVentilation.text = getString(
+                    context,
+                    R.string.label_natural_ventilation,
+                    item.naturalVentilation
+                )
+                textViewArtificialVentilation.text = getString(
+                    context,
+                    R.string.label_artificial_ventilation,
+                    item.artificialVentilation
+                )
                 setOnClickListener {
                     onClick(item)
                 }
+                imageViewArrowDetail.setOnClickListener {
+                    item.showDetaill = !item.showDetaill
+                    if (item.showDetaill) {
+                        rotate(it, 180f, 0f)
+                        constraintLayoutDetail.show()
+                    } else {
+                        rotate(it, 0f, 180f)
+                        constraintLayoutDetail.gone()
+                    }
+                }
             }
+        }
+
+        private fun getString(context: Context, resource: Int, field: String): String {
+            val value = if (field.isEmpty()) "-" else field
+            return String.format(context.getString(resource), value)
+        }
+
+        private fun rotate(view: View, fromDegrees: Float, toDegress: Float) {
+            val rotateAnimation = RotateAnimation(
+                fromDegrees,
+                toDegress,
+                Animation.RELATIVE_TO_SELF,
+                0.5f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f
+            ).apply {
+                interpolator = DecelerateInterpolator()
+                repeatCount = 0
+                duration = android.R.attr.animationDuration.toLong()
+                fillAfter = true
+            }
+            view.startAnimation(rotateAnimation)
         }
     }
 

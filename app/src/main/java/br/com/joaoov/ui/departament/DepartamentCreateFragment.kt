@@ -27,9 +27,14 @@ class DepartamentCreateFragment : Fragment(R.layout.fragment_departament_create)
 
     private fun setupSaveButton() {
         buttonSave.setOnClickListener {
+            val departamentName = textInputLayoutDepartament.getString()
+            if (departamentName.isEmpty()) {
+                textInputLayoutDepartament.error = getString(R.string.message_error_required)
+                return@setOnClickListener
+            }
             val departament = Departament(
                 companyId = arguments.company.id,
-                name = editTextDepartament.getString(),
+                name = departamentName,
                 date = Date().format()
             )
             viewModel.salvar(departament)

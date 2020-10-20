@@ -16,6 +16,7 @@ import br.com.joaoov.data.Departament
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
+
 class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
 
     private val arguments by navArgs<AmbientListFragmentArgs>()
@@ -83,9 +84,9 @@ class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
     }
 
     private fun navigateToAmbientFragment(ambient: Ambient) {
-        val direction =
-            AmbientListFragmentDirections.actionAmbientListFragmentToAmbientDetailFragment(ambient)
-        findNavController().navigate(direction)
+//        val direction =
+//            AmbientListFragmentDirections.actionAmbientListFragmentToAmbientDetailFragment(ambient)
+//        findNavController().navigate(direction)
     }
 
 }

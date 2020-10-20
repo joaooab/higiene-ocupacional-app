@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import br.com.joaoov.data.*
 
 @Database(
-    version = 7,
+    version = 8,
     entities = [Company::class, DepartamentLocal::class, AmbientLocal::class],
     exportSchema = false
 )

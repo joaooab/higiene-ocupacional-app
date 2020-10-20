@@ -11,7 +11,7 @@
     tools:ignore="UnusedAttribute">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/textViewFirstChar"
+        android:id="@+id/imageViewIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -24,31 +24,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewEmpresa"
-        style="@style/TextItemTitle"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
-        android:textAllCaps="true"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFirstChar"
-        app:layout_constraintEnd_toStartOf="@+id/textViewData"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewIcon"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewMore"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirstChar"
-        app:layout_constraintTop_toTopOf="@+id/textViewFirstChar"
-        tools:text="Prodap" />
+        app:layout_constraintStart_toEndOf="@+id/imageViewIcon"
+        app:layout_constraintTop_toTopOf="@+id/imageViewIcon">
 
-    <TextView
-        android:id="@+id/textViewData"
+        <TextView
+            android:id="@+id/textViewEmpresa"
+            style="@style/TextItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            tools:text="Prodap" />
+
+        <TextView
+            android:id="@+id/textViewData"
+            style="@style/TextItemDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="19/08/2020" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        style="@style/TextItemSubTitle"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="19/08/2020" />
+        app:srcCompat="@drawable/ic_more" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

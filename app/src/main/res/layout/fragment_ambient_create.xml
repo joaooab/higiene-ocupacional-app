@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ambient.AmbientDetailFragment">
+    tools:context=".ui.ambient.AmbientCreateFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout2"
+                android:id="@+id/textInputLayoutLocal"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,19 +43,18 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAreaLargura"
+                android:id="@+id/textInputLayoutAreaWidth"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/textInputLayoutAreaComprimento"
+                app:layout_constraintEnd_toStartOf="@id/textInputLayoutAreaLenght"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutLocal">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextAreaLargura"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/width_area"
@@ -64,7 +63,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAreaComprimento"
+                android:id="@+id/textInputLayoutAreaLenght"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -72,20 +71,20 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayoutAreaLargura"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+                app:layout_constraintStart_toEndOf="@id/textInputLayoutAreaWidth"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutLocal">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextAreaComprimento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/height_area"
+                    android:hint="@string/length_area"
                     android:imeOptions="actionNext"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutPeDireito"
+                android:id="@+id/textInputLayoutHeight"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -94,19 +93,18 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAreaLargura">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutAreaWidth">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPeDireito"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/right_foot"
+                    android:hint="@string/height"
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinnerPiso"
+                android:id="@+id/textInputLayoutFloor"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -115,10 +113,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPeDireito">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutHeight">
 
                 <AutoCompleteTextView
-                    android:id="@+id/textViewSpinerPiso"
+                    android:id="@+id/autoCompleteTextViewFloor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -130,7 +128,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinnerParede"
+                android:id="@+id/textInputLayoutWall"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -140,10 +138,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerPiso">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutFloor">
 
                 <AutoCompleteTextView
-                    android:id="@+id/textViewSpinerParede"
+                    android:id="@+id/autoCompleteTextViewWall"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -155,7 +153,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinnerCobertura"
+                android:id="@+id/textInputLayoutCoverage"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -165,10 +163,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerParede">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutWall">
 
                 <AutoCompleteTextView
-                    android:id="@+id/textViewSpinerCobertura"
+                    android:id="@+id/autoCompleteTextViewCoverage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -180,7 +178,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinnerIluminacaoNatural"
+                android:id="@+id/textInputLayoutNaturalLighting"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -190,10 +188,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerCobertura">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutCoverage">
 
                 <AutoCompleteTextView
-                    android:id="@+id/textViewSpinerIluminacaoNatural"
+                    android:id="@+id/autoCompleteTextViewNaturalLighting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -205,7 +203,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinnerIluminacaoArtificial"
+                android:id="@+id/textInputLayoutArtificialLighting"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -215,10 +213,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerIluminacaoNatural">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNaturalLighting">
 
                 <AutoCompleteTextView
-                    android:id="@+id/textViewSpinerIluminacaoArtificial"
+                    android:id="@+id/autoCompleteTextViewArtificialLighting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -230,7 +228,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinnerVentilacaoNatural"
+                android:id="@+id/textInputLayoutNaturalVentilation"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -240,10 +238,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerIluminacaoArtificial">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutArtificialLighting">
 
                 <AutoCompleteTextView
-                    android:id="@+id/textViewSpinerVentilacaoNatural"
+                    android:id="@+id/autoCompleteTextViewNaturalVentilation"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -255,7 +253,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinnerVentilacaoArtificial"
+                android:id="@+id/textInputLayoutArtificialVentilation"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -265,10 +263,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerVentilacaoNatural">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutNaturalVentilation">
 
                 <AutoCompleteTextView
-                    android:id="@+id/textViewSpinerVentilacaoArtificial"
+                    android:id="@+id/autoCompleteTextViewArtificialVentilation"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -288,7 +286,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Salvar"
+        android:text="@string/action_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

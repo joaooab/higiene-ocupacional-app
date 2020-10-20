@@ -21,33 +21,38 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configurarSpinnerPiso()
-        configurarSpinnerParede()
-        configurarSpinnerCobertura()
-        configurarSpinnerIlumnicaoNatural()
-        configurarSpinnerIlumnicaoArtificial()
-        configurarSpinnerVentilacaoNatural()
-        configurarSpinnerVentilacaoArtificial()
-        configurarBotaoSalvar()
+        setupFloor()
+        setupWall()
+        setupCoverage()
+        setupNaturalLighting()
+        setupArtificialLighting()
+        setupNaturalVentilation()
+        setupArtificialVentilation()
+        setupSaveButton()
     }
 
-    private fun configurarBotaoSalvar() {
+    private fun setupSaveButton() {
         hideKeyboard()
         buttonSave.setOnClickListener {
+            val localName = textInputLayoutLocal.getString()
+            if (localName.isEmpty()) {
+                textInputLayoutLocal.error = getString(R.string.message_error_required)
+                return@setOnClickListener
+            }
             val ambient = Ambient(
                 departamentId = arguments.departament.id,
-                local = editTextLocal.getString(),
-                data = Date().format(),
-                areaLargura = editTextAreaLargura.getDouble(),
-                areaComprimento = editTextAreaComprimento.getDouble(),
-                peDireito = editTextPeDireito.getDouble(),
-                piso = textViewSpinerPiso.getString(),
-                parede = textViewSpinerParede.getString(),
-                cobertura = textViewSpinerCobertura.getString(),
-                iluminacaoNatural = textViewSpinerIluminacaoNatural.getString(),
-                iluminacaoArtificial = textViewSpinerIluminacaoArtificial.getString(),
-                ventilacaoNatural = textViewSpinerVentilacaoNatural.getString(),
-                ventilacaoArtificial = textViewSpinerVentilacaoArtificial.getString()
+                local = localName,
+                date = Date().format(),
+                width = textInputLayoutAreaWidth.getDouble(),
+                length = textInputLayoutAreaLenght.getDouble(),
+                height = textInputLayoutHeight.getDouble(),
+                floor = textInputLayoutFloor.getString(),
+                wall = textInputLayoutWall.getString(),
+                coverage = textInputLayoutCoverage.getString(),
+                naturalLighting = textInputLayoutNaturalLighting.getString(),
+                artificialLighting = textInputLayoutArtificialLighting.getString(),
+                naturalVentilation = textInputLayoutNaturalVentilation.getString(),
+                artificialVentilation = textInputLayoutArtificialVentilation.getString()
             )
             viewModel.salvar(ambient)
             showToast("Criado com sucesso")
@@ -55,33 +60,39 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
         }
     }
 
-    private fun configurarSpinnerVentilacaoArtificial() {
-        configurarSpinner(textViewSpinerVentilacaoArtificial, R.array.ventilacao_artificial_array)
+    private fun setupArtificialVentilation() {
+        configurarSpinner(
+            autoCompleteTextViewArtificialVentilation,
+            R.array.ventilacao_artificial_array
+        )
     }
 
-    private fun configurarSpinnerVentilacaoNatural() {
-        configurarSpinner(textViewSpinerVentilacaoNatural, R.array.ventilacao_natural_array)
+    private fun setupNaturalVentilation() {
+        configurarSpinner(autoCompleteTextViewNaturalVentilation, R.array.ventilacao_natural_array)
     }
 
-    private fun configurarSpinnerIlumnicaoArtificial() {
-        configurarSpinner(textViewSpinerIluminacaoArtificial, R.array.iluminacao_artificial_array)
+    private fun setupArtificialLighting() {
+        configurarSpinner(
+            autoCompleteTextViewArtificialLighting,
+            R.array.iluminacao_artificial_array
+        )
 
     }
 
-    private fun configurarSpinnerIlumnicaoNatural() {
-        configurarSpinner(textViewSpinerIluminacaoNatural, R.array.iluminacao_natural_array)
+    private fun setupNaturalLighting() {
+        configurarSpinner(autoCompleteTextViewNaturalLighting, R.array.iluminacao_natural_array)
     }
 
-    private fun configurarSpinnerPiso() {
-        configurarSpinner(textViewSpinerPiso, R.array.piso_array)
+    private fun setupFloor() {
+        configurarSpinner(autoCompleteTextViewFloor, R.array.piso_array)
     }
 
-    private fun configurarSpinnerParede() {
-        configurarSpinner(textViewSpinerParede, R.array.parede_array)
+    private fun setupWall() {
+        configurarSpinner(autoCompleteTextViewWall, R.array.parede_array)
     }
 
-    private fun configurarSpinnerCobertura() {
-        configurarSpinner(textViewSpinerCobertura, R.array.cobertura_array)
+    private fun setupCoverage() {
+        configurarSpinner(autoCompleteTextViewCoverage, R.array.cobertura_array)
     }
 
     private fun configurarSpinner(textView: AutoCompleteTextView, array: Int) {
