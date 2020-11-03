@@ -1,17 +1,17 @@
-package br.com.joaoov
+package br.com.joaoov.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import br.com.joaoov.data.ambient.AmbientDAO
-import br.com.joaoov.data.ambient.AmbientLocal
-import br.com.joaoov.data.company.Company
-import br.com.joaoov.data.company.CompanyDAO
-import br.com.joaoov.data.departament.DepartamentDAO
-import br.com.joaoov.data.departament.DepartamentLocal
-import br.com.joaoov.data.function.FunctionDAO
-import br.com.joaoov.data.function.FunctionLocal
+import br.com.joaoov.data.local.ambient.AmbientDAO
+import br.com.joaoov.data.local.ambient.AmbientLocal
+import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.data.local.company.CompanyDAO
+import br.com.joaoov.data.local.departament.DepartamentDAO
+import br.com.joaoov.data.local.departament.DepartamentLocal
+import br.com.joaoov.data.local.function.FunctionDAO
+import br.com.joaoov.data.local.function.FunctionLocal
 
 @Database(
     version = 9,

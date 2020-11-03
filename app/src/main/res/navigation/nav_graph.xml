@@ -22,7 +22,7 @@
             app:destination="@id/functionListFragment" />
         <argument
             android:name="departament"
-            app:argType="br.com.joaoov.data.departament.Departament" />
+            app:argType="br.com.joaoov.data.local.departament.Departament" />
     </fragment>
     <fragment
         android:id="@+id/ambientCreateFragment"
@@ -31,7 +31,7 @@
         tools:layout="@layout/fragment_ambient_create">
         <argument
             android:name="departament"
-            app:argType="br.com.joaoov.data.departament.Departament" />
+            app:argType="br.com.joaoov.data.local.departament.Departament" />
     </fragment>
     <fragment
         android:id="@+id/companyListFragment"
@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_companyListFragment_to_departamentListFragment"
             app:destination="@id/departamentListFragment" />
+        <action
+            android:id="@+id/action_companyListFragment_to_companyEditFragment"
+            app:destination="@id/companyEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyCreateFragment"
@@ -57,7 +60,7 @@
         tools:layout="@layout/fragment_departament">
         <argument
             android:name="company"
-            app:argType="br.com.joaoov.data.company.Company" />
+            app:argType="br.com.joaoov.data.local.company.Company" />
         <action
             android:id="@+id/action_departamentListFragment_to_departamentCreateFragment"
             app:destination="@id/departamentCreateFragment" />
@@ -72,7 +75,7 @@
         tools:layout="@layout/fragment_departament_create">
         <argument
             android:name="company"
-            app:argType="br.com.joaoov.data.company.Company" />
+            app:argType="br.com.joaoov.data.local.company.Company" />
     </fragment>
     <fragment
         android:id="@+id/functionListFragment"
@@ -81,7 +84,7 @@
         tools:layout="@layout/fragment_function">
         <argument
             android:name="ambient"
-            app:argType="br.com.joaoov.data.ambient.Ambient" />
+            app:argType="br.com.joaoov.data.local.ambient.Ambient" />
         <action
             android:id="@+id/action_functionListFragment_to_functionCreateFragment"
             app:destination="@id/functionCreateFragment" />
@@ -93,6 +96,15 @@
         tools:layout="@layout/fragment_funciton_create">
         <argument
             android:name="ambient"
-            app:argType="br.com.joaoov.data.ambient.Ambient" />
+            app:argType="br.com.joaoov.data.local.ambient.Ambient" />
+    </fragment>
+    <fragment
+        android:id="@+id/companyEditFragment"
+        android:name="br.com.joaoov.ui.company.CompanyEditFragment"
+        android:label="CompanyEditFragment"
+        tools:layout="@layout/fragment_company_create">
+        <argument
+            android:name="company"
+            app:argType="br.com.joaoov.data.local.company.Company" />
     </fragment>
 </navigation>

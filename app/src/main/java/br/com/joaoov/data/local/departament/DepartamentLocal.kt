@@ -1,9 +1,9 @@
-package br.com.joaoov.data.departament
+package br.com.joaoov.data.local.departament
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import br.com.joaoov.data.company.Company
+import br.com.joaoov.data.local.company.Company
 
 @Entity(
     tableName = "Departament",

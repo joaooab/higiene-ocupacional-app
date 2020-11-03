@@ -3,8 +3,8 @@ package br.com.joaoov.ui.departament
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.joaoov.repository.DepartamentRepository
-import br.com.joaoov.data.company.Company
-import br.com.joaoov.data.departament.Departament
+import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.data.local.departament.Departament
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

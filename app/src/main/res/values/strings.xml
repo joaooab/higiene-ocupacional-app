@@ -17,6 +17,7 @@
     <string name="action_save">Salvar</string>
 
     <string name="message_success_created">Criado com sucesso</string>
+    <string name="message_edit_created">Editado com sucesso</string>
     <string name="message_error_required">Campo obrigatório</string>
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>

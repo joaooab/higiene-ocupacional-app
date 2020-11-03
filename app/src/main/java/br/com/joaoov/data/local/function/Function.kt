@@ -1,4 +1,4 @@
-package br.com.joaoov.data.function
+package br.com.joaoov.data.local.function
 
 import android.os.Parcelable
 import kotlinx.android.parcel.IgnoredOnParcel

@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.joaoov.R
-import br.com.joaoov.data.company.Company
+import br.com.joaoov.data.local.company.Company
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -16,9 +16,11 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
 
     private val viewModel: CompanyViewModel by viewModel()
     private val adapter: CompanyListAdapter by lazy {
-        CompanyListAdapter { company ->
-            navigateToDepartamentFragment(company)
-        }
+        CompanyListAdapter(
+            onClick = { navigateToDepartamentFragment(it) },
+            onEditClick = { navigateToEditCompanyFragment(it) },
+            onDeleteClick = { viewModel.delete(it) }
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +61,12 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
     private fun navigateToDepartamentFragment(company: Company) {
         val direction =
             CompanyListFragmentDirections.actionCompanyListFragmentToDepartamentListFragment(company)
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToEditCompanyFragment(company: Company) {
+        val direction =
+            CompanyListFragmentDirections.actionCompanyListFragmentToCompanyEditFragment(company)
         findNavController().navigate(direction)
     }
 

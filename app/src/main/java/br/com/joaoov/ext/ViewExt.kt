@@ -23,6 +23,8 @@ fun TextInputLayout.getString(): String {
     }
 }
 
+fun TextInputLayout.setString(text: String) = this.editText?.setText(text)
+
 fun TextInputLayout.getDouble(): Double {
     return try {
         this.editText?.text.toString().toDouble()

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
-import br.com.joaoov.data.departament.Departament
+import br.com.joaoov.data.local.departament.Departament
 import kotlinx.android.synthetic.main.item_company.view.*
 
 class DepartamentListAdapter(

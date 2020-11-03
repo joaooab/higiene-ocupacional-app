@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.joaoov.MainActivity
 import br.com.joaoov.Path
 import br.com.joaoov.R
-import br.com.joaoov.data.ambient.Ambient
+import br.com.joaoov.data.local.ambient.Ambient
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

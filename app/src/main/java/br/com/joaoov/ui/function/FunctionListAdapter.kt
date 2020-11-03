@@ -8,7 +8,7 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
-import br.com.joaoov.data.function.Function
+import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.show
 import kotlinx.android.synthetic.main.item_ambient.view.constraintLayoutDetail

@@ -1,4 +1,4 @@
-package br.com.joaoov.data.departament
+package br.com.joaoov.data.local.departament
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

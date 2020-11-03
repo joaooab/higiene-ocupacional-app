@@ -2,11 +2,11 @@ package br.com.joaoov.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import br.com.joaoov.data.ambient.Ambient
-import br.com.joaoov.data.function.Function
-import br.com.joaoov.data.function.FunctionDAO
-import br.com.joaoov.data.function.toLocal
-import br.com.joaoov.data.function.toModel
+import br.com.joaoov.data.local.ambient.Ambient
+import br.com.joaoov.data.local.function.Function
+import br.com.joaoov.data.local.function.FunctionDAO
+import br.com.joaoov.data.local.function.toLocal
+import br.com.joaoov.data.local.function.toModel
 
 interface FunctionRepository {
 

@@ -3,8 +3,8 @@ package br.com.joaoov.ui.ambient
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.joaoov.data.ambient.Ambient
-import br.com.joaoov.data.departament.Departament
+import br.com.joaoov.data.local.ambient.Ambient
+import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.repository.AmbientRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

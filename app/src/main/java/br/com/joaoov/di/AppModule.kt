@@ -1,6 +1,7 @@
 package br.com.joaoov.di
 
-import br.com.joaoov.AppDatabase
+import br.com.joaoov.data.local.AppDatabase
+import br.com.joaoov.data.remote.AppRemote
 import br.com.joaoov.repository.*
 import br.com.joaoov.ui.ambient.AmbientViewModel
 import br.com.joaoov.ui.company.CompanyViewModel
@@ -29,3 +30,8 @@ val repositoryModule = module {
     single<AmbientRepository> { AmbientRepositoryImpl(get()) }
     single<FunctionRepository> { FunctionRepositoryImpl(get()) }
 }
+
+val servciceModule = module {
+//    single { AppRemote.create<>() }
+}
+

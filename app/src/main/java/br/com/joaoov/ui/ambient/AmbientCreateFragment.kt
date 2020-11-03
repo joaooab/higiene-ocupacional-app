@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.joaoov.R
-import br.com.joaoov.data.ambient.Ambient
+import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.ext.*
 import br.com.joaoov.ui.NoFilterAdapter
 import kotlinx.android.synthetic.main.fragment_ambient_create.*

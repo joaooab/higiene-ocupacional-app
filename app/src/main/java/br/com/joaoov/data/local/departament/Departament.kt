@@ -1,4 +1,4 @@
-package br.com.joaoov.data.departament
+package br.com.joaoov.data.local.departament
 
 import android.os.Parcelable
 import androidx.room.PrimaryKey

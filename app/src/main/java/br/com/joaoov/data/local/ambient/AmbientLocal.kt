@@ -1,9 +1,9 @@
-package br.com.joaoov.data.ambient
+package br.com.joaoov.data.local.ambient
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import br.com.joaoov.data.departament.DepartamentLocal
+import br.com.joaoov.data.local.departament.DepartamentLocal
 
 @Entity(
     tableName = "Ambient",

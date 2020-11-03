@@ -1,9 +1,9 @@
-package br.com.joaoov.data.function
+package br.com.joaoov.data.local.function
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import br.com.joaoov.data.ambient.AmbientLocal
+import br.com.joaoov.data.local.ambient.AmbientLocal
 
 @Entity(
     tableName = "Function",

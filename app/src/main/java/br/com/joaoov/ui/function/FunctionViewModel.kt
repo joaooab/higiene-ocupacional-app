@@ -2,8 +2,8 @@ package br.com.joaoov.ui.function
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.joaoov.data.ambient.Ambient
-import br.com.joaoov.data.function.Function
+import br.com.joaoov.data.local.ambient.Ambient
+import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.repository.FunctionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package br.com.joaoov.data.ambient
+package br.com.joaoov.data.local.ambient
 
 import android.os.Parcelable
 import kotlinx.android.parcel.IgnoredOnParcel
