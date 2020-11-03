@@ -23,6 +23,9 @@
         <argument
             android:name="departament"
             app:argType="br.com.joaoov.data.local.departament.Departament" />
+        <action
+            android:id="@+id/action_AmbientListFragment_to_ambientEditFragment"
+            app:destination="@id/ambientEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/ambientCreateFragment"
@@ -67,6 +70,9 @@
         <action
             android:id="@+id/action_departamentListFragment_to_AmbientListFragment"
             app:destination="@id/AmbientListFragment" />
+        <action
+            android:id="@+id/action_departamentListFragment_to_departamentEditFragment"
+            app:destination="@id/departamentEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/departamentCreateFragment"
@@ -106,5 +112,23 @@
         <argument
             android:name="company"
             app:argType="br.com.joaoov.data.local.company.Company" />
+    </fragment>
+    <fragment
+        android:id="@+id/departamentEditFragment"
+        android:name="br.com.joaoov.ui.departament.DepartamentEditFragment"
+        android:label="DepartamentEditFragment"
+        tools:layout="@layout/fragment_departament_edit" >
+        <argument
+            android:name="departament"
+            app:argType="br.com.joaoov.data.local.departament.Departament" />
+    </fragment>
+    <fragment
+        android:id="@+id/ambientEditFragment"
+        android:name="br.com.joaoov.ui.ambient.AmbientEditFragment"
+        android:label="AmbientEditFragment"
+        tools:layout="@layout/fragment_ambient_edit">
+        <argument
+            android:name="ambient"
+            app:argType="br.com.joaoov.data.local.ambient.Ambient" />
     </fragment>
 </navigation>

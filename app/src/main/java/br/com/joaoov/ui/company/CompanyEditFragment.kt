@@ -33,7 +33,7 @@ class CompanyEditFragment : Fragment(R.layout.fragment_company_edit) {
             }
             val company = arguemnts.company.copy(name = companyName)
             viewModel.salvar(company)
-            showToast(R.string.message_edit_created)
+            showToast(R.string.message_success_edited)
             findNavController().popBackStack()
         }
     }

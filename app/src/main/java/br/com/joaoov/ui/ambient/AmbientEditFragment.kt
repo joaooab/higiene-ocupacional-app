@@ -7,20 +7,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.joaoov.R
-import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.ext.*
 import br.com.joaoov.ui.NoFilterAdapter
 import kotlinx.android.synthetic.main.fragment_ambient_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
-class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
+class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
 
-    private val arguments by navArgs<AmbientCreateFragmentArgs>()
+    private val arguments by navArgs<AmbientEditFragmentArgs>()
     private val viewModel: AmbientViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView()
         setupFloor()
         setupWall()
         setupCoverage()
@@ -31,6 +31,21 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
         setupSaveButton()
     }
 
+    private fun setupView() {
+        arguments.ambient.let {
+            textInputLayoutLocal.setString(it.name)
+            textInputLayoutAreaWidth.setString(it.width.toString())
+            textInputLayoutAreaLenght.setString(it.length.toString())
+            textInputLayoutFloor.setString(it.floor)
+            textInputLayoutWall.setString(it.wall)
+            textInputLayoutCoverage.setString(it.coverage)
+            textInputLayoutNaturalLighting.setString(it.naturalLighting)
+            textInputLayoutArtificialLighting.setString(it.artificialLighting)
+            textInputLayoutNaturalVentilation.setString(it.naturalVentilation)
+            textInputLayoutArtificialVentilation.setString(it.artificialVentilation)
+        }
+    }
+
     private fun setupSaveButton() {
         buttonSave.setOnClickListener {
             val localName = textInputLayoutLocal.getString()
@@ -38,8 +53,7 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
                 textInputLayoutLocal.error = getString(R.string.message_error_required)
                 return@setOnClickListener
             }
-            val ambient = Ambient(
-                departamentId = arguments.departament.id,
+            val ambient =  arguments.ambient.copy(
                 name = localName,
                 date = Date().format(),
                 width = textInputLayoutAreaWidth.getDouble(),
@@ -54,7 +68,7 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
                 artificialVentilation = textInputLayoutArtificialVentilation.getString()
             )
             viewModel.salvar(ambient)
-            showToast(R.string.message_success_created)
+            showToast(R.string.message_success_edited)
             findNavController().popBackStack()
         }
     }

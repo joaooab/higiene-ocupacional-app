@@ -22,10 +22,13 @@ class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
     private val arguments by navArgs<AmbientListFragmentArgs>()
     private val viewModel: AmbientViewModel by viewModel()
     private val adapter: AmbientListAdapter by lazy {
-        AmbientListAdapter { company ->
-            navigateToFunctionFragment(company)
-        }
+        AmbientListAdapter(
+            onClick = { navigateToFunctionFragment(it) },
+            onEditClick = { navigateToEditFragment(it) },
+            onDeleteClick = { viewModel.delete(it) }
+        )
     }
+
     private lateinit var departament: Departament
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,6 +89,12 @@ class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
     private fun navigateToFunctionFragment(ambient: Ambient) {
         val direction =
             AmbientListFragmentDirections.actionAmbientListFragmentToFunctionListFragment(ambient)
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToEditFragment(ambient: Ambient) {
+        val direction =
+            AmbientListFragmentDirections.actionAmbientListFragmentToAmbientEditFragment(ambient)
         findNavController().navigate(direction)
     }
 

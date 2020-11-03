@@ -18,4 +18,10 @@ class DepartamentViewModel(private val repository: DepartamentRepository) : View
         }
     }
 
+    fun delete(departament: Departament) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delete(departament)
+        }
+    }
+
 }

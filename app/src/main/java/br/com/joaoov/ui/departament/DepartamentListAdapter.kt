@@ -1,8 +1,10 @@
 package br.com.joaoov.ui.departament
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.departament.Departament
@@ -10,7 +12,9 @@ import kotlinx.android.synthetic.main.item_company.view.*
 
 class DepartamentListAdapter(
     private val list: MutableList<Departament> = mutableListOf(),
-    private val onClick: (Departament) -> Unit
+    private val onClick: (Departament) -> Unit,
+    private val onEditClick: (Departament) -> Unit,
+    private val onDeleteClick: (Departament) -> Unit
 ) : RecyclerView.Adapter<DepartamentListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,7 +25,24 @@ class DepartamentListAdapter(
                 setOnClickListener {
                     onClick(item)
                 }
+                imageViewMore.setOnClickListener {
+                    showMenu(context, imageViewMore, item)
+                }
             }
+        }
+    }
+
+    private fun showMenu(context: Context, anchor: View, item: Departament) {
+        PopupMenu(context, anchor).apply {
+            menuInflater.inflate(R.menu.menu_generic_item, menu)
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.actionEdit -> onEditClick(item)
+                    R.id.actionDelete -> onDeleteClick(item)
+                }
+                true
+            }
+            show()
         }
     }
 

@@ -21,9 +21,11 @@ class DepartamentListFragment : Fragment(R.layout.fragment_departament) {
     private val arguments by navArgs<DepartamentListFragmentArgs>()
     private val viewModel: DepartamentViewModel by viewModel()
     private val adapter: DepartamentListAdapter by lazy {
-        DepartamentListAdapter { departament ->
-            navigateToAmbientFragment(departament)
-        }
+        DepartamentListAdapter(
+            onClick = { navigateToAmbientFragment(it) },
+            onEditClick = { navigateToEditFragment(it) },
+            onDeleteClick = { viewModel.delete(it) }
+        )
     }
     private lateinit var company: Company
 
@@ -78,6 +80,14 @@ class DepartamentListFragment : Fragment(R.layout.fragment_departament) {
     private fun navigateToAmbientFragment(departament: Departament) {
         val direction =
             DepartamentListFragmentDirections.actionDepartamentListFragmentToAmbientListFragment(
+                departament
+            )
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToEditFragment(departament: Departament) {
+        val direction =
+            DepartamentListFragmentDirections.actionDepartamentListFragmentToDepartamentEditFragment(
                 departament
             )
         findNavController().navigate(direction)

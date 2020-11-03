@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
@@ -16,9 +17,10 @@ import kotlinx.android.synthetic.main.item_ambient.view.*
 
 class AmbientListAdapter(
     private val list: MutableList<Ambient> = mutableListOf(),
-    private val onClick: (Ambient) -> Unit
-) :
-    RecyclerView.Adapter<AmbientListAdapter.ViewHolder>() {
+    private val onClick: (Ambient) -> Unit,
+    private val onEditClick: (Ambient) -> Unit,
+    private val onDeleteClick: (Ambient) -> Unit
+) : RecyclerView.Adapter<AmbientListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Ambient) {
@@ -83,6 +85,23 @@ class AmbientListAdapter(
                         constraintLayoutDetail.gone()
                     }
                 }
+                imageViewMore.setOnClickListener {
+                    showMenu(context, imageViewMore, item)
+                }
+            }
+        }
+
+        private fun showMenu(context: Context, anchor: View, item: Ambient) {
+            PopupMenu(context, anchor).apply {
+                menuInflater.inflate(R.menu.menu_generic_item, menu)
+                setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.actionEdit -> onEditClick(item)
+                        R.id.actionDelete -> onDeleteClick(item)
+                    }
+                    true
+                }
+                show()
             }
         }
 

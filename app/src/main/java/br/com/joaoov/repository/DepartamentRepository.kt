@@ -14,6 +14,8 @@ interface DepartamentRepository {
 
     suspend fun save(departament: Departament): Long
 
+    suspend fun delete(departament: Departament)
+
 }
 
 class DepartamentRepositoryImpl(private val dao: DepartamentDAO) :
@@ -22,8 +24,10 @@ class DepartamentRepositoryImpl(private val dao: DepartamentDAO) :
     override fun getDepartaments(company: Company): LiveData<List<Departament>> =
         Transformations.map(dao.getAllByCompanyId(company.id)) { it.toModel() }
 
-
     override suspend fun save(departament: Departament) =
         dao.save(departament.toLocal())
+
+    override suspend fun delete(departament: Departament) =
+        dao.delete(departament.toLocal())
 
 }
