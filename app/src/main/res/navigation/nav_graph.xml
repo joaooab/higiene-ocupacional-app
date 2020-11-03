@@ -94,6 +94,9 @@
         <action
             android:id="@+id/action_functionListFragment_to_functionCreateFragment"
             app:destination="@id/functionCreateFragment" />
+        <action
+            android:id="@+id/action_functionListFragment_to_functionEditFragment"
+            app:destination="@id/functionEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/functionCreateFragment"
@@ -130,5 +133,14 @@
         <argument
             android:name="ambient"
             app:argType="br.com.joaoov.data.local.ambient.Ambient" />
+    </fragment>
+    <fragment
+        android:id="@+id/functionEditFragment"
+        android:name="br.com.joaoov.ui.function.FunctionEditFragment"
+        android:label="FunctionEditFragment"
+        tools:layout="@layout/fragment_funciton_edit">
+        <argument
+            android:name="function"
+            app:argType="br.com.joaoov.data.local.function.Function" />
     </fragment>
 </navigation>

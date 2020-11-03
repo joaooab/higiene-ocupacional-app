@@ -12,6 +12,7 @@ import br.com.joaoov.MainActivity
 import br.com.joaoov.Path
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
+import br.com.joaoov.data.local.function.Function
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -20,9 +21,11 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
     private val arguments by navArgs<FunctionListFragmentArgs>()
     private val viewModel: FunctionViewModel by viewModel()
     private val adapter: FunctionListAdapter by lazy {
-        FunctionListAdapter { ambient ->
-//            navigateToFunctionCreateFragment(ambient)
-        }
+        FunctionListAdapter(
+            onClick = { },
+            onEditClick = { navigateToEditFragment(it) },
+            onDeleteClick = { viewModel.delete(it) }
+        )
     }
     private lateinit var ambient: Ambient
 
@@ -76,10 +79,19 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
         })
     }
 
+
 //    private fun navigateToFunctionCreateFragment(ambient: Ambient) {
 //        val direction =
 //            FunctionListFragmentDirections.actionFunctionListFragmentToFunctionCreateFragment(ambient)
 //        findNavController().navigate(direction)
 //    }
+
+    private fun navigateToEditFragment(function: Function) {
+        val direction =
+            FunctionListFragmentDirections.actionFunctionListFragmentToFunctionEditFragment(
+                function
+            )
+        findNavController().navigate(direction)
+    }
 
 }

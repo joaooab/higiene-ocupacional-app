@@ -55,7 +55,6 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
             }
             val ambient =  arguments.ambient.copy(
                 name = localName,
-                date = Date().format(),
                 width = textInputLayoutAreaWidth.getDouble(),
                 length = textInputLayoutAreaLenght.getDouble(),
                 height = textInputLayoutHeight.getDouble(),

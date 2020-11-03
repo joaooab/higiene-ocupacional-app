@@ -18,4 +18,10 @@ class FunctionViewModel(private val repository: FunctionRepository) : ViewModel(
         }
     }
 
+    fun delete(function: Function) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delete(function)
+        }
+    }
+
 }

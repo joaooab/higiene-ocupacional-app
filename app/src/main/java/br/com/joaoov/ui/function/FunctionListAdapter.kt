@@ -1,24 +1,30 @@
 package br.com.joaoov.ui.function
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.show
+import kotlinx.android.synthetic.main.item_ambient.view.*
 import kotlinx.android.synthetic.main.item_ambient.view.constraintLayoutDetail
 import kotlinx.android.synthetic.main.item_ambient.view.imageViewArrowDetail
 import kotlinx.android.synthetic.main.item_company.view.textViewDate
 import kotlinx.android.synthetic.main.item_function.view.*
+import kotlinx.android.synthetic.main.item_function.view.imageViewMore
 
 class FunctionListAdapter(
     private val list: MutableList<Function> = mutableListOf(),
-    private val onClick: (Function) -> Unit
+    private val onClick: (Function) -> Unit,
+    private val onEditClick: (Function) -> Unit,
+    private val onDeleteClick: (Function) -> Unit
 ) : RecyclerView.Adapter<FunctionListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,7 +47,24 @@ class FunctionListAdapter(
                         constraintLayoutDetail.gone()
                     }
                 }
+                imageViewMore.setOnClickListener {
+                    showMenu(context, imageViewMore, item)
+                }
             }
+        }
+    }
+
+    private fun showMenu(context: Context, anchor: View, item: Function) {
+        PopupMenu(context, anchor).apply {
+            menuInflater.inflate(R.menu.menu_generic_item, menu)
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.actionEdit -> onEditClick(item)
+                    R.id.actionDelete -> onDeleteClick(item)
+                }
+                true
+            }
+            show()
         }
     }
 

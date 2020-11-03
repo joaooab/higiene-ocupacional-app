@@ -14,6 +14,7 @@ interface FunctionRepository {
 
     suspend fun save(function: Function): Long
 
+    suspend fun delete(function: Function)
 }
 
 class FunctionRepositoryImpl(private val dao: FunctionDAO) :
@@ -22,8 +23,10 @@ class FunctionRepositoryImpl(private val dao: FunctionDAO) :
     override fun getFunctions(ambient: Ambient): LiveData<List<Function>> =
         Transformations.map(dao.getAllByAmbientId(ambient.id)) { it.toModel() }
 
-
     override suspend fun save(function: Function) =
         dao.save(function.toLocal())
+
+    override suspend fun delete(function: Function) =
+        dao.delete(function.toLocal())
 
 }
