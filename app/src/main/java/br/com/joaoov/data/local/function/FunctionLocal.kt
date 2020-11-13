@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import br.com.joaoov.data.local.ambient.AmbientLocal
 
 @Entity(
-    tableName = "Function",
+    tableName = "function",
     foreignKeys = [
         ForeignKey(
             entity = AmbientLocal::class,

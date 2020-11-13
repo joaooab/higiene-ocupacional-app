@@ -54,6 +54,9 @@
     <string name="label_artificial_ventilation">Ventilação Artificial: %s</string>
     <string name="label_work_day">Jornada de trablho:</string>
 
+    <string name="sync_complete">Sincronização finalizada</string>
+    <string name="sync_failed">Falha na sincronização</string>
+
     <string-array name="piso_array">
         <item>Concreto armado</item>
         <item>Cerâmico</item>

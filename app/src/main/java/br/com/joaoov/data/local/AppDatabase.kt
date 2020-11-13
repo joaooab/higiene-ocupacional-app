@@ -12,10 +12,22 @@ import br.com.joaoov.data.local.departament.DepartamentDAO
 import br.com.joaoov.data.local.departament.DepartamentLocal
 import br.com.joaoov.data.local.function.FunctionDAO
 import br.com.joaoov.data.local.function.FunctionLocal
+import br.com.joaoov.data.local.resource.*
+import br.com.joaoov.data.local.syncronize.SyncronizeDAO
+import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 9,
-    entities = [Company::class, DepartamentLocal::class, AmbientLocal::class, FunctionLocal::class],
+    version = 10,
+    entities = [
+        Company::class,
+        DepartamentLocal::class,
+        AmbientLocal::class,
+        FunctionLocal::class,
+        SyncronizeLocal::class,
+        ResourceRiskLocal::class,
+        ResourceAmbientLocal::class,
+        ResourceAgentLocal::class
+    ],
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -24,6 +36,10 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun departamentDAO(): DepartamentDAO
     abstract fun ambientDAO(): AmbientDAO
     abstract fun functionDAO(): FunctionDAO
+    abstract fun syncronizeDAO(): SyncronizeDAO
+    abstract fun resourceRiskDAO(): ResourceRiskDAO
+    abstract fun resourceAmbientDAO(): ResourceAmbientDAO
+    abstract fun resourceAgentDAO(): ResourceAgentDAO
 
     companion object {
         private const val DATABASE_NAME = "higieneocupacional.db"

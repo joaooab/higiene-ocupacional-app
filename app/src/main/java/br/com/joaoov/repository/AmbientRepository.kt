@@ -23,7 +23,6 @@ class AmbientRepositoryImpl(private val dao: AmbientDAO) : AmbientRepository {
     override fun getAmbients(departament: Departament): LiveData<List<Ambient>> =
         Transformations.map(dao.getAllByDepartamentId(departament.id)) { it.toModel() }
 
-
     override suspend fun save(ambient: Ambient) =
         dao.save(ambient.toLocal())
 

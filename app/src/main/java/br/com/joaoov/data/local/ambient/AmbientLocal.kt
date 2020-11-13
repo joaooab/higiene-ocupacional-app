@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import br.com.joaoov.data.local.departament.DepartamentLocal
 
 @Entity(
-    tableName = "Ambient",
+    tableName = "ambient",
     foreignKeys = [
         ForeignKey(
             entity = DepartamentLocal::class,

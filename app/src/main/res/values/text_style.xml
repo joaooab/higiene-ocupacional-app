@@ -37,5 +37,9 @@
         <item name="android:textColor">#D9000000</item>
     </style>
 
+    <style name="TextSync" parent="TextFontRegular">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 
 </resources>

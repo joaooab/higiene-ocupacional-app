@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import br.com.joaoov.data.local.company.Company
 
 @Entity(
-    tableName = "Departament",
+    tableName = "departament",
     foreignKeys = [
         ForeignKey(
             entity = Company::class,

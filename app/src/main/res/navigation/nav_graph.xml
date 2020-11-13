@@ -120,7 +120,7 @@
         android:id="@+id/departamentEditFragment"
         android:name="br.com.joaoov.ui.departament.DepartamentEditFragment"
         android:label="DepartamentEditFragment"
-        tools:layout="@layout/fragment_departament_edit" >
+        tools:layout="@layout/fragment_departament_edit">
         <argument
             android:name="departament"
             app:argType="br.com.joaoov.data.local.departament.Departament" />
@@ -143,4 +143,13 @@
             android:name="function"
             app:argType="br.com.joaoov.data.local.function.Function" />
     </fragment>
+<!--    <fragment-->
+    <!--        android:id="@+id/syncFragment"-->
+    <!--        android:name="br.com.joaoov.ui.sync.SyncFragment"-->
+    <!--        android:label="SyncFragment"-->
+    <!--        tools:layout="@layout/fragment_sync">-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_syncFragment_to_companyListFragment"-->
+    <!--            app:destination="@id/companyListFragment" />-->
+    <!--    </fragment>-->
 </navigation>
