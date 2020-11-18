@@ -97,6 +97,9 @@
         <action
             android:id="@+id/action_functionListFragment_to_functionEditFragment"
             app:destination="@id/functionEditFragment" />
+        <action
+            android:id="@+id/action_functionListFragment_to_riskListFragment"
+            app:destination="@id/riskListFragment" />
     </fragment>
     <fragment
         android:id="@+id/functionCreateFragment"
@@ -143,7 +146,21 @@
             android:name="function"
             app:argType="br.com.joaoov.data.local.function.Function" />
     </fragment>
-<!--    <fragment-->
+    <fragment
+        android:id="@+id/riskListFragment"
+        android:name="br.com.joaoov.ui.risk.RiskListFragment"
+        android:label="@string/fragment_risk_label"
+        tools:layout="@layout/fragment_risk">
+        <action
+            android:id="@+id/action_riskListFragment_to_riskCreateFragment"
+            app:destination="@id/riskCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/riskCreateFragment"
+        android:name="br.com.joaoov.ui.risk.RiskCreateFragment"
+        android:label="@string/fragment_risk_create_label"
+        tools:layout="@layout/fragment_risk_create"/>
+    <!--    <fragment-->
     <!--        android:id="@+id/syncFragment"-->
     <!--        android:name="br.com.joaoov.ui.sync.SyncFragment"-->
     <!--        android:label="SyncFragment"-->
