@@ -10,6 +10,7 @@ import br.com.joaoov.ui.ambient.AmbientViewModel
 import br.com.joaoov.ui.company.CompanyViewModel
 import br.com.joaoov.ui.departament.DepartamentViewModel
 import br.com.joaoov.ui.function.FunctionViewModel
+import br.com.joaoov.ui.risk.RiskViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -20,6 +21,7 @@ val viewModelModule = module {
     viewModel { DepartamentViewModel(get()) }
     viewModel { FunctionViewModel(get()) }
     viewModel { SyncViewModel(get(), get()) }
+    viewModel { RiskViewModel(get()) }
 }
 
 val daoModule = module {
@@ -31,6 +33,7 @@ val daoModule = module {
     single { AppDatabase.getInstance(androidContext()).resourceRiskDAO() }
     single { AppDatabase.getInstance(androidContext()).resourceAmbientDAO() }
     single { AppDatabase.getInstance(androidContext()).resourceAgentDAO() }
+    single { AppDatabase.getInstance(androidContext()).riskDao() }
 }
 
 val repositoryModule = module {
@@ -39,6 +42,7 @@ val repositoryModule = module {
     single<FunctionRepository> { FunctionRepositoryImpl(get()) }
     single<ResourceRepository> { ResourceRepositoryImpl(get(), get(), get(), get()) }
     single<SyncronizeRepository> { SyncronizeRepositoryImpl(get(), get()) }
+    single<RiskRepository> { RiskRepositoryImpl(get()) }
 }
 
 val servciceModule = module {

@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.com.joaoov.R
 import kotlinx.android.synthetic.main.fragment_risk.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RiskListFragment : Fragment(R.layout.fragment_risk) {
+
+    private val mViewModel: RiskViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
