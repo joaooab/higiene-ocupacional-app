@@ -6,7 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Risk(
-    @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val functionId: Long = 0,
     val name: String,

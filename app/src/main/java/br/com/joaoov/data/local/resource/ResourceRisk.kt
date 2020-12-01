@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ResourceRisk(
     val id: String,
-    val category: String,
+    val category: RiskCategoryResource,
     val name: String,
     var updatedAt: String,
     var deleted: Boolean
@@ -15,7 +15,7 @@ data class ResourceRisk(
 fun ResourceRisk.toLocal() =
     ResourceRiskLocal(
         id,
-        category,
+        category.toString(),
         name,
         updatedAt,
         deleted
