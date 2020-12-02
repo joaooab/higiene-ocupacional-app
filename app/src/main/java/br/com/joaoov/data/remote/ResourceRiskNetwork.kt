@@ -1,7 +1,7 @@
 package br.com.joaoov.data.remote
 
 import br.com.joaoov.data.local.resource.ResourceRisk
-import br.com.joaoov.data.local.resource.RiskCategoryResource
+import br.com.joaoov.data.local.resource.ResourceRiskCategory
 
 data class ResourceRiskNetwork(
     var _id: String?,
@@ -15,7 +15,7 @@ fun List<ResourceRiskNetwork>.toModel() = map { it.toModel() }
 
 fun ResourceRiskNetwork.toModel() = ResourceRisk(
     _id.orEmpty(),
-    RiskCategoryResource.valueOf(category.orEmpty()),
+    ResourceRiskCategory.valueOf(category.orEmpty()),
     name.orEmpty(),
     updatedAt.orEmpty(),
     deleted ?: false

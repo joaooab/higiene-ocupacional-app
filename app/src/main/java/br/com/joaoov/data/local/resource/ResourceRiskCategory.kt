@@ -1,6 +1,6 @@
 package br.com.joaoov.data.local.resource
 
-enum class RiskCategoryResource(val value: String) {
+enum class ResourceRiskCategory(val value: String) {
     GENERATED_SOURCE("Fonte geradora"),
     EXPOSURE("Modo de exposição"),
     ELIMINATION_NEUTRALIZATION("ELIMINAÇÃO E/OU NEUTRALIZAÇÃO"),
@@ -12,7 +12,7 @@ enum class RiskCategoryResource(val value: String) {
     companion object {
         fun fromValue(value: String) = values().firstOrNull { it.value == value } ?: UNKNOWN
 
-        fun fromName(name: String): RiskCategoryResource {
+        fun fromName(name: String): ResourceRiskCategory {
             return values().firstOrNull { it.toString() == name.toUpperCase() } ?: UNKNOWN
         }
     }

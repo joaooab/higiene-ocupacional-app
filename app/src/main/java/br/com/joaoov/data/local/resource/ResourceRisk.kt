@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ResourceRisk(
     val id: String,
-    val category: RiskCategoryResource,
+    val category: ResourceRiskCategory,
     val name: String,
     var updatedAt: String,
     var deleted: Boolean

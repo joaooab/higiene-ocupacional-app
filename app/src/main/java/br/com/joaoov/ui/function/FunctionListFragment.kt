@@ -79,13 +79,6 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
         })
     }
 
-
-//    private fun navigateToFunctionCreateFragment(ambient: Ambient) {
-//        val direction =
-//            FunctionListFragmentDirections.actionFunctionListFragmentToFunctionCreateFragment(ambient)
-//        findNavController().navigate(direction)
-//    }
-
     private fun navigateToEditFragment(function: Function) {
         val direction =
             FunctionListFragmentDirections.actionFunctionListFragmentToFunctionEditFragment(

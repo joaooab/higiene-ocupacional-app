@@ -37,6 +37,7 @@
     <string name="floor">Piso</string>
     <string name="wall">Parede</string>
     <string name="cover">Cobertura</string>
+    <string name="agent">Agente</string>
     <string name="natural_lighting">Iluminacao Natural</string>
     <string name="artificial_lighting">Iluminacao Artificial</string>
     <string name="natural_ventilation">Ventilação Natural</string>
@@ -99,5 +100,14 @@
         <item>Através de ar condicionado</item>
         <item>Através de exaustor</item>
         <item>Através de climatizador</item>
+    </string-array>
+
+    <string-array name="agents">
+        <item>01. QUÍMICOS</item>
+        <item>02. FÍSICOS</item>
+        <item>03. BIOLÓGICOS</item>
+        <item>04. ASSOCIAÇÃO DE AGENTES NOCIVOS FÍSICOS, QUÍMICOS E BIOLÓGICOS</item>
+        <item>05. OUTROS AGENTES NOCIVOS</item>
+        <item>06. AUSÊNCIA DE AGENTES NOCIVOS OU ATIVIDADES ESPECIAIS</item>
     </string-array>
 </resources>

@@ -16,7 +16,7 @@ data class ResourceRiskLocal(
 fun ResourceRiskLocal.toModel() =
     ResourceRisk(
         id,
-        RiskCategoryResource.valueOf(category),
+        ResourceRiskCategory.valueOf(category),
         name,
         updatedAt,
         deleted
