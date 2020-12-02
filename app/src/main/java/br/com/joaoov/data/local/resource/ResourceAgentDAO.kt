@@ -9,6 +9,8 @@ interface ResourceAgentDAO {
     @Query("SELECT * FROM resource_agents")
     fun getAll(): LiveData<List<ResourceAgentLocal>>
 
+//    fun getAllByCategory(category: String): LiveData<List<ResourceAgentLocal>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(resource: ResourceAgentLocal): Long
 

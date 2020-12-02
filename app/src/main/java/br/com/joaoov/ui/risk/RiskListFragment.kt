@@ -22,7 +22,7 @@ class RiskListFragment : Fragment(R.layout.fragment_risk) {
     }
 
     private fun navigateToCreateRiskFragment(agent: String) {
-        val action = RiskListFragmentDirections.actionRiskListFragmentToRiskCreateFragment()
+        val action = RiskListFragmentDirections.actionRiskListFragmentToRiskCreateFragment(agent)
         findNavController().navigate(action)
     }
 
