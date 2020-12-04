@@ -37,7 +37,7 @@ class RiskRepositoryImpl(
         dao.delete(risk.toLocal())
 
     override fun getAgents(agent: String): LiveData<List<ResourceAgent>> {
-        return Transformations.map(agentDAO.getAll()) {
+        return Transformations.map(agentDAO.getAllByCategory(agent)) {
             it.toModel()
         }
     }

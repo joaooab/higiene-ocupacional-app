@@ -60,6 +60,15 @@
     <string name="fragment_risk_create_label">Criar Risco</string>
     <string name="fragment_risk_label">Riscos</string>
     <string name="risk_factor">Fator de risco</string>
+    <string name="intensidade_e_ou_concentra_o">Intensidade e/ou concentração</string>
+    <string name="label_tragetoria">Tragetória</string>
+    <string name="label_eliminacao_neutralizacao">Eliminação e/ou Neutralização</string>
+    <string name="label_modo_exposicao">Modo de exposição</string>
+    <string name="label_fonte_metodologia">Fonte / Metodologia</string>
+    <string name="label_grau_de_risco">Grau de risco</string>
+    <string name="label_nivel_acao">Nível de Ação</string>
+    <string name="label_nr_15">NR-15</string>
+    <string name="label_acgih">ACGIH</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>
@@ -102,7 +111,6 @@
         <item>Através de exaustor</item>
         <item>Através de climatizador</item>
     </string-array>
-
     <string-array name="agents">
         <item>01. QUÍMICOS</item>
         <item>02. FÍSICOS</item>
@@ -110,5 +118,39 @@
         <item>04. ASSOCIAÇÃO DE AGENTES NOCIVOS FÍSICOS, QUÍMICOS E BIOLÓGICOS</item>
         <item>05. OUTROS AGENTES NOCIVOS</item>
         <item>06. AUSÊNCIA DE AGENTES NOCIVOS OU ATIVIDADES ESPECIAIS</item>
+    </string-array>
+    <string-array name="tragetoria">
+        <item>Ar</item>
+        <item>Contato</item>
+        <item>Ar/Contato</item>
+    </string-array>
+    <string-array name="eliminacao_neutralizacao">
+        <item>EPI</item>
+        <item>EPC</item>
+    </string-array>
+    <string-array name="modo_exposicao">
+        <item>HP</item>
+        <item>HI</item>
+        <item>Eventual</item>
+    </string-array>
+    <string-array name="fonte_metodologia">
+        <item>Anexo 1 NR15 “NHO-01”</item>
+        <item>“NIOSH 7303”</item>
+        <item>Anexo 10 NR15</item>
+        <item>Anexo 12 NR15 “NIOSH 7303”</item>
+        <item>Anexo 12 NR15 NIOSH 7500 NIOSH 7602</item>
+        <item>Anexo 13 NR15</item>
+        <item>Anexo 14 NR15</item>
+        <item>Anexo 3 NR15</item>
+        <item>Anexo 7 NR15</item>
+        <item>Anexo 8 NR15 “NHO-10”</item>
+        <item>NR 35</item>
+        <item>Anexo 11 NR15 “ACGIH”</item>
+    </string-array>
+    <string-array name="grau_risco">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 </resources>
