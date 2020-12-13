@@ -10,7 +10,11 @@ data class ResourceRisk(
     val name: String,
     var updatedAt: String,
     var deleted: Boolean
-) : Parcelable
+) : Parcelable {
+    override fun toString(): String {
+        return name
+    }
+}
 
 fun ResourceRisk.toLocal() =
     ResourceRiskLocal(

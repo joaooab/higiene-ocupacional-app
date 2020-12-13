@@ -18,16 +18,23 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configAutoCompleteTextViews()
+        observeResourceRisk()
         button.setOnClickListener {
 
         }
+    }
+
+    private fun observeResourceRisk() {
+        mViewModel.getResourceRisks().observe(viewLifecycleOwner, {
+            val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, it)
+            autoCompleteTextViewGeneratingSource.setAdapter(adapter)
+        })
     }
 
     private fun getAgents(category: String) {
         mViewModel.getAgents(category).observe(viewLifecycleOwner, {
             val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, it)
             autoCompleteTextViewRiskFactor.setAdapter(adapter)
-            autoCompleteTextViewGeneratingSource.setAdapter(adapter)
         })
     }
 

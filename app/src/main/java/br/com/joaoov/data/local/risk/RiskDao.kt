@@ -2,6 +2,8 @@ package br.com.joaoov.data.local.risk
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import br.com.joaoov.data.local.resource.ResourceRisk
+import br.com.joaoov.data.local.resource.ResourceRiskLocal
 
 @Dao
 interface RiskDao {

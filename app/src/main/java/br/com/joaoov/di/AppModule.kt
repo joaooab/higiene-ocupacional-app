@@ -42,7 +42,7 @@ val repositoryModule = module {
     single<FunctionRepository> { FunctionRepositoryImpl(get()) }
     single<ResourceRepository> { ResourceRepositoryImpl(get(), get(), get(), get()) }
     single<SyncronizeRepository> { SyncronizeRepositoryImpl(get(), get()) }
-    single<RiskRepository> { RiskRepositoryImpl(get(), get()) }
+    single<RiskRepository> { RiskRepositoryImpl(get(), get(), get()) }
 }
 
 val servciceModule = module {

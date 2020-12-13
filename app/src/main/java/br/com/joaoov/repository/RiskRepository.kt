@@ -3,10 +3,7 @@ package br.com.joaoov.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import br.com.joaoov.data.local.agent.Agent
-import br.com.joaoov.data.local.resource.ResourceAgent
-import br.com.joaoov.data.local.resource.ResourceAgentDAO
-import br.com.joaoov.data.local.resource.ResourceAgentLocal
-import br.com.joaoov.data.local.resource.toModel
+import br.com.joaoov.data.local.resource.*
 import br.com.joaoov.data.local.risk.Risk
 import br.com.joaoov.data.local.risk.RiskDao
 import br.com.joaoov.data.local.risk.toLocal
@@ -21,10 +18,13 @@ interface RiskRepository {
     suspend fun delete(risk: Risk)
 
     fun getAgents(agent: String): LiveData<List<ResourceAgent>>
+
+    fun getResourceRisk(): LiveData<List<ResourceRisk>>
 }
 
 class RiskRepositoryImpl(
     private val dao: RiskDao,
+    private val resourceRiskDao: ResourceRiskDAO,
     private val agentDAO: ResourceAgentDAO
 ) : RiskRepository {
     override fun getRisks(functionId: Long): LiveData<List<Risk>> =
@@ -41,4 +41,7 @@ class RiskRepositoryImpl(
             it.toModel()
         }
     }
+
+    override fun getResourceRisk(): LiveData<List<ResourceRisk>> =
+        Transformations.map(resourceRiskDao.getAll()) {it.toModel()}
 }
