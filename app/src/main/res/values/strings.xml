@@ -60,6 +60,7 @@
     <string name="fragment_risk_create_label">Criar Risco</string>
     <string name="fragment_risk_label">Riscos</string>
     <string name="risk_factor">Fator de risco</string>
+    <string name="generating_source">Fonte geradora</string>
     <string name="intensidade_e_ou_concentra_o">Intensidade e/ou concentração</string>
     <string name="label_tragetoria">Tragetória</string>
     <string name="label_eliminacao_neutralizacao">Eliminação e/ou Neutralização</string>
