@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.com.joaoov.R
-import br.com.joaoov.ui.ChooseAgentDialog
 import kotlinx.android.synthetic.main.fragment_risk.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -17,19 +16,12 @@ class RiskListFragment : Fragment(R.layout.fragment_risk) {
         super.onViewCreated(view, savedInstanceState)
 
         fab.setOnClickListener {
-            showAgentDialog()
+            navigateToCreateRiskFragment()
         }
     }
 
-    private fun navigateToCreateRiskFragment(agent: String) {
-        val action = RiskListFragmentDirections.actionRiskListFragmentToRiskCreateFragment(agent)
+    private fun navigateToCreateRiskFragment() {
+        val action = RiskListFragmentDirections.actionRiskListFragmentToRiskCreateFragment()
         findNavController().navigate(action)
-    }
-
-    private fun showAgentDialog() {
-        val dialog = ChooseAgentDialog.newInstance { agent ->
-            navigateToCreateRiskFragment(agent)
-        }
-        dialog.show(childFragmentManager, ChooseAgentDialog::class.java.name)
     }
 }
