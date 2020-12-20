@@ -45,6 +45,7 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
                 degreeOfRisk = textInputLayoutDegreeOfRisk.getString(),
                 date = Date().format()
             )
+            mViewModel.save(risk)
             showToast(R.string.message_success_created)
             findNavController().popBackStack()
         }
