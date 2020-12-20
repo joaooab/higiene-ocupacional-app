@@ -1,7 +1,6 @@
 package br.com.joaoov.ui.risk
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
@@ -18,6 +17,13 @@ class RiskListFragment : Fragment(R.layout.fragment_risk) {
     private val args by navArgs<RiskListFragmentArgs>()
     private val mViewModel: RiskViewModel by viewModel()
     private lateinit var function: Function
+    private val adapter by lazy {
+        RiskListAdapter(
+            onClick = {},
+            onEditClick = {},
+            onDeleteClick = {}
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,13 +37,14 @@ class RiskListFragment : Fragment(R.layout.fragment_risk) {
 
     private fun handleObserve() {
         mViewModel.getRisks(function).observe(viewLifecycleOwner, {
-            Log.e("RisksList", it.size.toString())
+            adapter.refresh(it)
         })
     }
 
     private fun setupAdapter() {
         val divider = DividerItemDecoration(context, LinearLayout.VERTICAL)
         recyclerView.addItemDecoration(divider)
+        recyclerView.adapter = adapter
     }
 
     private fun navigateToCreateRiskFragment() {
