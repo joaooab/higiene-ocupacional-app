@@ -61,13 +61,13 @@
     <string name="fragment_risk_label">Riscos</string>
     <string name="risk_factor">Fator de risco</string>
     <string name="generating_source">Fonte geradora</string>
-    <string name="intensidade_e_ou_concentra_o">Intensidade e/ou concentração</string>
-    <string name="label_tragetoria">Tragetória</string>
-    <string name="label_eliminacao_neutralizacao">Eliminação e/ou Neutralização</string>
-    <string name="label_modo_exposicao">Modo de exposição</string>
-    <string name="label_fonte_metodologia">Fonte / Metodologia</string>
-    <string name="label_grau_de_risco">Grau de risco</string>
-    <string name="label_nivel_acao">Nível de Ação</string>
+    <string name="intensity_concentration">Intensidade e/ou concentração</string>
+    <string name="label_trajectory">Tragetória</string>
+    <string name="label_elimination_neutralization">Eliminação e/ou Neutralização</string>
+    <string name="label_expousure_mode">Modo de exposição</string>
+    <string name="label_source_methodology">Fonte / Metodologia</string>
+    <string name="label_degree_of_risk">Grau de risco</string>
+    <string name="label_level_action">Nível de Ação</string>
     <string name="label_nr_15">NR-15</string>
     <string name="label_acgih">ACGIH</string>
 

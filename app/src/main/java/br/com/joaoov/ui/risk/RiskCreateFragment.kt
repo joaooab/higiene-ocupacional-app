@@ -5,14 +5,22 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import br.com.joaoov.R
+import br.com.joaoov.data.local.risk.Risk
 import br.com.joaoov.ext.configAdapter
+import br.com.joaoov.ext.format
+import br.com.joaoov.ext.getString
+import br.com.joaoov.ext.showToast
 import br.com.joaoov.ui.NoFilterAdapter
 import kotlinx.android.synthetic.main.fragment_risk_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
 
 class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
 
+    private val args by navArgs<RiskCreateFragmentArgs>()
     private val mViewModel: RiskViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -20,7 +28,25 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
         configAutoCompleteTextViews()
         observeResourceRisk()
         button.setOnClickListener {
-
+            // TODO: 20/12/20 validar campos obrigatorios
+            // TODO: 20/12/20 salvar
+            val risk = Risk(
+                functionId = args.function.id,
+                riskFactor = textInputLayoutRiskFactor.getString(),
+                generatingSource = textInputLayoutGeneratingSource.getString(),
+                intensityConcentration = textInputLayoutIntensityConcentration.getString(),
+                levelAction = textInputLayoutLevelAction.getString(),
+                NR15 = textInputLayoutNR15.getString(),
+                ACGIH = textInputLayoutACGIH.getString(),
+                trajectory = textInputLayoutTrajectory.getString(),
+                eliminationNeutralization = textInputLayoutEliminationNeutralization.getString(),
+                exposureMode = textInputLayoutExposureMode.getString(),
+                sourceMethodology = textInputLayoutSourceMethodology.getString(),
+                degreeOfRisk = textInputLayoutDegreeOfRisk.getString(),
+                date = Date().format()
+            )
+            showToast(R.string.message_success_created)
+            findNavController().popBackStack()
         }
     }
 
@@ -47,8 +73,8 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
             )
         )
         autoCompleteTextViewAgents.onItemClickListener =
-            AdapterView.OnItemClickListener { p0, p1, p2, p3 ->
-                val item = p0.adapter.getItem(p2) as String
+            AdapterView.OnItemClickListener { adapterView, _, position, _ ->
+                val item = adapterView.adapter.getItem(position) as String
                 val category = "${item.split(".")[0]}.%"
                 getAgents(category)
             }
@@ -58,7 +84,7 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
             R.array.eliminacao_neutralizacao
         )
         autoCompleteTextViewExposureMode.configAdapter(requireContext(), R.array.modo_exposicao)
-        autoCompleteTextViewSourceMetodology.configAdapter(
+        autoCompleteTextViewSourceMethodology.configAdapter(
             requireContext(),
             R.array.fonte_metodologia
         )

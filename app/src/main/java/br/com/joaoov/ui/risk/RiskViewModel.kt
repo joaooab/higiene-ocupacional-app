@@ -18,4 +18,8 @@ class RiskViewModel(private val repository: RiskRepository): ViewModel() {
     }
 
     fun getResourceRisks(): LiveData<List<ResourceRisk>> = repository.getResourceRisk()
+
+    fun save(risk: Risk) {
+
+    }
 }

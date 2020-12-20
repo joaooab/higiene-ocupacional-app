@@ -20,17 +20,35 @@ data class RiskLocal(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val functionId: Long = 0,
-    val name: String,
-    var updatedAt: String,
-    var deleted: Boolean
+    val riskFactor: String,
+    val generatingSource: String,
+    val intensityConcentration: String,
+    val levelAction: String,
+    val NR15: String,
+    val ACGIH: String,
+    val trajectory: String,
+    val eliminationNeutralization: String,
+    val exposureMode: String,
+    val sourceMethodology: String,
+    val degreeOfRisk: String,
+    val date: String
 )
 
 fun RiskLocal.toModel() = Risk(
     id,
     functionId,
-    name,
-    updatedAt,
-    deleted
+    riskFactor,
+    generatingSource,
+    intensityConcentration,
+    levelAction,
+    NR15,
+    ACGIH,
+    trajectory,
+    eliminationNeutralization,
+    exposureMode,
+    sourceMethodology,
+    degreeOfRisk,
+    date
 )
 
 fun List<RiskLocal>.toModel() = map { it.toModel() }

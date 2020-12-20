@@ -81,7 +81,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/textInputLayoutIntensityConcentration"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,11 +95,13 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/intensidade_e_ou_concentra_o" />
+                android:hint="@string/intensity_concentration"
+                android:inputType="text"
+                android:nextFocusDown="@id/textInputLayoutLevelAction"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
+            android:id="@+id/textInputLayoutLevelAction"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,18 +110,18 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutIntensityConcentration">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/label_nivel_acao"
+                android:hint="@string/label_level_action"
                 android:inputType="text"
-                android:nextFocusDown="@id/TextInputEditTextNR15"/>
+                android:nextFocusDown="@id/textInputLayoutNR15"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout3"
+            android:id="@+id/textInputLayoutNR15"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,19 +130,18 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLevelAction">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/TextInputEditTextNR15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/label_nr_15"
                 android:inputType="text"
-                android:nextFocusDown="@id/TextInputEditTextACGIH"/>
+                android:nextFocusDown="@id/textInputLayoutACGIH"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout4"
+            android:id="@+id/textInputLayoutACGIH"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -149,10 +150,9 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNR15">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/TextInputEditTextACGIH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -160,7 +160,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout5"
+            android:id="@+id/textInputLayoutTrajectory"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutACGIH">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewTrajectory"
@@ -178,11 +178,11 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="false"
-                android:hint="@string/label_tragetoria" />
+                android:hint="@string/label_trajectory" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout6"
+            android:id="@+id/textInputLayoutEliminationNeutralization"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTrajectory">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewEliminationNeutralization"
@@ -200,11 +200,11 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="false"
-                android:hint="@string/label_eliminacao_neutralizacao" />
+                android:hint="@string/label_elimination_neutralization" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout7"
+            android:id="@+id/textInputLayoutExposureMode"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEliminationNeutralization">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewExposureMode"
@@ -222,11 +222,11 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="false"
-                android:hint="@string/label_modo_exposicao" />
+                android:hint="@string/label_expousure_mode" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout8"
+            android:id="@+id/textInputLayoutSourceMethodology"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -235,20 +235,20 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutExposureMode">
 
             <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextViewSourceMetodology"
+                android:id="@+id/autoCompleteTextViewSourceMethodology"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="false"
-                android:hint="@string/label_fonte_metodologia" />
+                android:hint="@string/label_source_methodology" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout10"
+            android:id="@+id/textInputLayoutDegreeOfRisk"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSourceMethodology">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewDeGreeOfRisk"
@@ -266,7 +266,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="false"
-                android:hint="@string/label_grau_de_risco" />
+                android:hint="@string/label_degree_of_risk" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -281,6 +281,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout10" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDegreeOfRisk" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

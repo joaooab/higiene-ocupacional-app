@@ -22,7 +22,7 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
     private val viewModel: FunctionViewModel by viewModel()
     private val adapter: FunctionListAdapter by lazy {
         FunctionListAdapter(
-            onClick = { navigateToRiskFragment() },
+            onClick = { navigateToRiskFragment(it) },
             onEditClick = { navigateToEditFragment(it) },
             onDeleteClick = { viewModel.delete(it) }
         )
@@ -87,8 +87,8 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
         findNavController().navigate(direction)
     }
 
-    private fun navigateToRiskFragment() {
-        val direction = FunctionListFragmentDirections.actionFunctionListFragmentToRiskListFragment()
+    private fun navigateToRiskFragment(function: Function) {
+        val direction = FunctionListFragmentDirections.actionFunctionListFragmentToRiskListFragment(function)
         findNavController().navigate(direction)
     }
 
