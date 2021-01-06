@@ -15,8 +15,8 @@ class SyncViewModel(
     private val resourceRepository: ResourceRepository
 ) : ViewModel() {
 
-    private val _onSyncronize = MutableLiveData<SyncState>()
-    val onSyncronize: LiveData<SyncState> = _onSyncronize
+    private val _syncronizeState = MutableLiveData<SyncState>()
+    val syncronizeState: LiveData<SyncState> = _syncronizeState
 
     init {
         syncronize()
@@ -29,17 +29,17 @@ class SyncViewModel(
                 val syncronize = syncronizeRepository.syncronize(lastSyncronized?.createdAt)
                 if (syncronize.shouldRun) {
                     val updateAt = lastSyncronized?.createdAt
-                    _onSyncronize.postValue(SyncState.Running("Sincronizando ambientes..."))
+                    _syncronizeState.postValue(SyncState.Running("Sincronizando ambientes..."))
                     resourceRepository.fetchAllAmbientResources(updateAt)
-                    _onSyncronize.postValue(SyncState.Running("Sincronizando riscos..."))
+                    _syncronizeState.postValue(SyncState.Running("Sincronizando riscos..."))
                     resourceRepository.fetchAllRisksResources(updateAt)
-                    _onSyncronize.postValue(SyncState.Running("Sincronizando agentes..."))
+                    _syncronizeState.postValue(SyncState.Running("Sincronizando agentes..."))
                     resourceRepository.fetchAllAgentsResources(updateAt)
-                    _onSyncronize.postValue(SyncState.Completed)
+                    _syncronizeState.postValue(SyncState.Completed)
                     syncronizeRepository.save(syncronize)
                 }
             }.onFailure {
-                _onSyncronize.postValue(SyncState.Failed(it))
+                _syncronizeState.postValue(SyncState.Failed(it))
             }
         }
 

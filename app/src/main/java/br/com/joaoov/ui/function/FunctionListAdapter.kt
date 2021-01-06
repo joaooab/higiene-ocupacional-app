@@ -11,25 +11,22 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.function.Function
+import br.com.joaoov.ext.formatFirstChar
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.show
-import kotlinx.android.synthetic.main.item_ambient.view.*
-import kotlinx.android.synthetic.main.item_ambient.view.constraintLayoutDetail
-import kotlinx.android.synthetic.main.item_ambient.view.imageViewArrowDetail
-import kotlinx.android.synthetic.main.item_company.view.textViewDate
 import kotlinx.android.synthetic.main.item_function.view.*
-import kotlinx.android.synthetic.main.item_function.view.imageViewMore
 
 class FunctionListAdapter(
     private val list: MutableList<Function> = mutableListOf(),
     private val onClick: (Function) -> Unit,
     private val onEditClick: (Function) -> Unit,
-    private val onDeleteClick: (Function) -> Unit
+    private val onDeleteClick: (Function) -> Unit,
 ) : RecyclerView.Adapter<FunctionListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Function) {
             with(itemView) {
+                textViewFirstLetter.text = item.name.formatFirstChar()
                 textViewFunction.text = item.name
                 textViewDate.text = item.date
                 textViewDescription.text = item.description

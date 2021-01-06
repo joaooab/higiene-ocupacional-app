@@ -24,7 +24,7 @@
     <string name="previous">Previous</string>
 
     <string name="company">Empresa</string>
-    <string name="departament">Departamento</string>
+    <string name="departament">Setor</string>
     <string name="function">Função</string>
     <string name="description">Descrição</string>
     <string name="workday">Jornada de trabalho</string>
@@ -36,8 +36,11 @@
     <string name="height">Pé direito (m)</string>
     <string name="floor">Piso</string>
     <string name="wall">Parede</string>
-    <string name="cover">Cobertura</string>
+    <string name="roof">Cobertura</string>
+    <string name="roof_tiles">Telhas</string>
     <string name="agent">Agente</string>
+    <string name="window">Janela</string>
+    <string name="ceiling">Forro</string>
     <string name="natural_lighting">Iluminacao Natural</string>
     <string name="artificial_lighting">Iluminacao Artificial</string>
     <string name="natural_ventilation">Ventilação Natural</string>
@@ -48,7 +51,10 @@
     <string name="label_height">Pé direito: %s</string>
     <string name="label_floor">Piso: %s</string>
     <string name="label_wall">Parede: %s</string>
-    <string name="label_coverage">Cobertura: %s</string>
+    <string name="label_roof">Cobertura: %s</string>
+    <string name="label_roof_tiles">Telha: %s</string>
+    <string name="label_window">Janela: %s</string>
+    <string name="label_ceiling">Forro: %s</string>
     <string name="label_natural_lighting">Iluminacao Natural: %s</string>
     <string name="label_artificial_lighting">Iluminacao Artificial: %s</string>
     <string name="label_natural_ventilation">Ventilação Natural: %s</string>

@@ -1,9 +1,7 @@
 package br.com.joaoov.repository
 
-import br.com.joaoov.data.local.resource.ResourceAgentDAO
-import br.com.joaoov.data.local.resource.ResourceAmbientDAO
-import br.com.joaoov.data.local.resource.ResourceRiskDAO
-import br.com.joaoov.data.local.resource.toLocal
+import androidx.lifecycle.LiveData
+import br.com.joaoov.data.local.resource.*
 import br.com.joaoov.data.remote.ResourceService
 import br.com.joaoov.data.remote.toModel
 
@@ -15,6 +13,8 @@ interface ResourceRepository {
 
     suspend fun fetchAllAgentsResources(updateAt: String?)
 
+    fun getAmbentResourcesByCategory(category: ResourceAmbientCategory): LiveData<List<ResourceAmbientLocal>>
+
 }
 
 class ResourceRepositoryImpl(
@@ -22,8 +22,7 @@ class ResourceRepositoryImpl(
     private val riskDao: ResourceRiskDAO,
     private val agentDao: ResourceAgentDAO,
     private val service: ResourceService
-) :
-    ResourceRepository {
+) : ResourceRepository {
 
     override suspend fun fetchAllAmbientResources(updateAt: String?) {
         val resources = service.fetchAllAmbientResources(updateAt).map { it.toModel() }
@@ -39,5 +38,8 @@ class ResourceRepositoryImpl(
         val resources = service.fetchAllAgentsResources(updateAt).map { it.toModel() }
         agentDao.save(resources.toLocal())
     }
+
+    override fun getAmbentResourcesByCategory(category: ResourceAmbientCategory): LiveData<List<ResourceAmbientLocal>> =
+        ambientDao.getAllByCategory(category.toString())
 
 }

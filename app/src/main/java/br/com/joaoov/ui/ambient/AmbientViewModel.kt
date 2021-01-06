@@ -5,11 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.departament.Departament
+import br.com.joaoov.data.local.resource.ResourceAmbientCategory
 import br.com.joaoov.repository.AmbientRepository
+import br.com.joaoov.repository.ResourceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AmbientViewModel(private val repository: AmbientRepository) : ViewModel() {
+class AmbientViewModel(
+    private val repository: AmbientRepository,
+    private val resourceRepository: ResourceRepository
+) : ViewModel() {
 
     fun getAmbients(departament: Departament): LiveData<List<Ambient>> =
         repository.getAmbients(departament)
@@ -26,5 +31,8 @@ class AmbientViewModel(private val repository: AmbientRepository) : ViewModel() 
             repository.delete(ambient)
         }
     }
+
+    fun getResourceByCategory(category: ResourceAmbientCategory) =
+        resourceRepository.getAmbentResourcesByCategory(category)
 
 }

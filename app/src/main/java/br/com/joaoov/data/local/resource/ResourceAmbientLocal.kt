@@ -12,7 +12,11 @@ data class ResourceAmbientLocal(
     val name: String,
     var updatedAt: String,
     var deleted: Boolean
-)
+) {
+    override fun toString(): String {
+        return name
+    }
+}
 
 fun ResourceAmbientLocal.toModel() =
     ResourceAmbient(
