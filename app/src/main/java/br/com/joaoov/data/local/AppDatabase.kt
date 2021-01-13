@@ -19,7 +19,7 @@ import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 14,
+    version = 19,
     entities = [
         Company::class,
         DepartamentLocal::class,

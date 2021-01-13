@@ -10,14 +10,15 @@
     <string name="fragment_departament_create_label">Criar Setor</string>
     <string name="fragment_function_label">Funções</string>
     <string name="fragment_function_create_label">Criar Função</string>
+    <string name="fragment_risk_create_label">Criar Risco</string>
+    <string name="fragment_risk_edit_label">Editar Risco</string>
+    <string name="fragment_risk_label">Riscos</string>
 
     <string name="action_edit">Editar</string>
     <string name="action_delete">Excluir</string>
     <string name="action_export">Exportar</string>
     <string name="action_save">Salvar</string>
 
-    <string name="message_success_created">Criado com sucesso</string>
-    <string name="message_success_edited">Editado com sucesso</string>
     <string name="message_error_required">Campo obrigatório</string>
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
@@ -39,12 +40,25 @@
     <string name="roof">Cobertura</string>
     <string name="roof_tiles">Telhas</string>
     <string name="agent">Agente</string>
+    <string name="factor_type">Tipo do fator de risco</string>
     <string name="window">Janela</string>
     <string name="ceiling">Forro</string>
     <string name="natural_lighting">Iluminacao Natural</string>
     <string name="artificial_lighting">Iluminacao Artificial</string>
     <string name="natural_ventilation">Ventilação Natural</string>
     <string name="artificial_ventilation">Ventilação Artificial</string>
+
+    <string name="risk_factor">Fator de risco</string>
+    <string name="generating_source">Fonte geradora</string>
+    <string name="intensity_concentration">Intensidade e/ou concentração</string>
+    <string name="trajectory">Tragetória</string>
+    <string name="elimination_neutralization">Eliminação e/ou Neutralização</string>
+    <string name="expousure">Modo de exposição</string>
+    <string name="source_methodology">Fonte / Metodologia</string>
+    <string name="degree_of_risk">Grau de risco</string>
+    <string name="action_level">Nível de Ação</string>
+    <string name="nr15">NR-15</string>
+    <string name="acgih">ACGIH</string>
 
     <string name="label_local">Local: %s</string>
     <string name="label_area">Área: %s</string>
@@ -61,21 +75,19 @@
     <string name="label_artificial_ventilation">Ventilação Artificial: %s</string>
     <string name="label_work_day">Jornada de trablho:</string>
 
+    <string name="label_generating_source">Fonte geradora: %s</string>
+    <string name="label_intensity_concentration">Intensidade e/ou concentração: %s</string>
+    <string name="label_trajectory">Tragetória: %s</string>
+    <string name="label_elimination_neutralization">Eliminação e/ou Neutralização: %s</string>
+    <string name="label_expousure">Modo de exposição: %s</string>
+    <string name="label_source_methodology">Fonte / Metodologia: %s</string>
+    <string name="label_degree_of_risk">Grau de risco: %s</string>
+    <string name="label_action_level">Nível de Ação: %s</string>
+    <string name="label_nr15">NR15: %s</string>
+    <string name="label_acgih">ACGHI: %s</string>
+
     <string name="sync_complete">Sincronização finalizada</string>
     <string name="sync_failed">Falha na sincronização</string>
-    <string name="fragment_risk_create_label">Criar Risco</string>
-    <string name="fragment_risk_label">Riscos</string>
-    <string name="risk_factor">Fator de risco</string>
-    <string name="generating_source">Fonte geradora</string>
-    <string name="intensity_concentration">Intensidade e/ou concentração</string>
-    <string name="label_trajectory">Tragetória</string>
-    <string name="label_elimination_neutralization">Eliminação e/ou Neutralização</string>
-    <string name="label_expousure_mode">Modo de exposição</string>
-    <string name="label_source_methodology">Fonte / Metodologia</string>
-    <string name="label_degree_of_risk">Grau de risco</string>
-    <string name="label_level_action">Nível de Ação</string>
-    <string name="label_nr_15">NR-15</string>
-    <string name="label_acgih">ACGIH</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>

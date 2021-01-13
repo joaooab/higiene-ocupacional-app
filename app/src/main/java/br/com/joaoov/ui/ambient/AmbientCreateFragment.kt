@@ -10,7 +10,10 @@ import androidx.navigation.fragment.navArgs
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.resource.ResourceAmbientCategory
-import br.com.joaoov.ext.*
+import br.com.joaoov.ext.format
+import br.com.joaoov.ext.getDouble
+import br.com.joaoov.ext.getString
+import br.com.joaoov.ext.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_ambient_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -102,7 +105,6 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
                 artificialVentilation = textInputLayoutArtificialVentilation.getString()
             )
             viewModel.salvar(ambient)
-            showToast(R.string.message_success_created)
             findNavController().popBackStack()
         }
     }

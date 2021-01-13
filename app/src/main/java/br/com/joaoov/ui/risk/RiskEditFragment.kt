@@ -11,17 +11,17 @@ import androidx.navigation.fragment.navArgs
 import br.com.joaoov.R
 import br.com.joaoov.data.local.resource.ResourceAgentCategory
 import br.com.joaoov.data.local.resource.ResourceRiskCategory
-import br.com.joaoov.data.local.risk.Risk
+import br.com.joaoov.data.local.resource.getFormatedValue
 import br.com.joaoov.data.local.risk.Tolerance
-import br.com.joaoov.ext.format
 import br.com.joaoov.ext.getString
+import br.com.joaoov.ext.hideKeyboard
+import br.com.joaoov.ext.setString
 import kotlinx.android.synthetic.main.fragment_risk_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.*
 
-class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
+class RiskEditFragment : Fragment(R.layout.fragment_risk_edit) {
 
-    private val arguments by navArgs<RiskCreateFragmentArgs>()
+    private val arguments by navArgs<RiskEditFragmentArgs>()
     private val viewModel: RiskViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,6 +32,21 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
     }
 
     private fun setupView() {
+        arguments.risk.let {
+            textInputLayoutRiskFactorType.setString(it.agentType.getFormatedValue())
+            textInputLayoutRiskFactor.setString(it.agent)
+            textInputLayoutGeneratingSource.setString(it.generatingSource)
+            textInputLayoutIntensityConcentration.setString(it.intensity)
+            textInputLayoutActionLevel.setString(it.actionLevel)
+            textInputLayoutNR15.setString(it.tolerance.NR15)
+            textInputLayoutACGIH.setString(it.tolerance.ACGIH)
+            textInputLayoutTrajectory.setString(it.trajectory)
+            textInputLayoutEliminationNeutralization.setString(it.eliminationNeutralization)
+            textInputLayoutExposureMode.setString(it.exposure)
+            textInputLayoutSourceMethodology.setString(it.methodology)
+            textInputLayoutDegreeOfRisk.setString(it.degreeOfRisk)
+        }
+
         val adapter = ArrayAdapter(
             requireContext(),
             R.layout.drop_down_item,
@@ -96,8 +111,7 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
                 return@setOnClickListener
             }
             val agentType = textInputLayoutRiskFactorType.getString()
-            val risk = Risk(
-                functionId = arguments.function.id,
+            val risk = arguments.risk.copy(
                 agentType = ResourceAgentCategory.fromFormatedValue(agentType),
                 agent = agentName,
                 generatingSource = textInputLayoutGeneratingSource.getString(),
@@ -112,7 +126,6 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
                 exposure = textInputLayoutExposureMode.getString(),
                 methodology = textInputLayoutSourceMethodology.getString(),
                 degreeOfRisk = textInputLayoutDegreeOfRisk.getString(),
-                date = Date().format()
             )
             viewModel.save(risk)
             findNavController().popBackStack()
@@ -124,6 +137,11 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
             val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, it)
             textView.setAdapter(adapter)
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard()
     }
 
 }

@@ -9,6 +9,9 @@ interface ResourceRiskDAO {
     @Query("SELECT * FROM resource_risks")
     fun getAll(): LiveData<List<ResourceRiskLocal>>
 
+    @Query("SELECT * FROM resource_risks WHERE category = :category")
+    fun getAllByCategory(category: String): LiveData<List<ResourceRiskLocal>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(resourceRisk: ResourceRiskLocal): Long
 

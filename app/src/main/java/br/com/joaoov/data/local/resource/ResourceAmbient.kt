@@ -2,7 +2,6 @@ package br.com.joaoov.data.local.resource
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.util.*
 
 @Parcelize
 data class ResourceAmbient(
@@ -11,7 +10,12 @@ data class ResourceAmbient(
     val name: String,
     var updatedAt: String,
     var deleted: Boolean
-) : Parcelable
+) : Parcelable {
+
+    override fun toString(): String {
+        return name
+    }
+}
 
 fun ResourceAmbient.toLocal() =
     ResourceAmbientLocal(

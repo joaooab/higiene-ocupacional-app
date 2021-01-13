@@ -2,7 +2,6 @@ package br.com.joaoov.data.local.resource
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity(tableName = "resource_ambients")
 data class ResourceAmbientLocal(
@@ -12,11 +11,7 @@ data class ResourceAmbientLocal(
     val name: String,
     var updatedAt: String,
     var deleted: Boolean
-) {
-    override fun toString(): String {
-        return name
-    }
-}
+)
 
 fun ResourceAmbientLocal.toModel() =
     ResourceAmbient(

@@ -23,7 +23,7 @@ val viewModelModule = module {
     viewModel { DepartamentViewModel(get()) }
     viewModel { FunctionViewModel(get()) }
     viewModel { SyncViewModel(get(), get()) }
-    viewModel { RiskViewModel(get()) }
+    viewModel { RiskViewModel(get(), get()) }
 }
 
 val daoModule = module {
@@ -44,7 +44,7 @@ val repositoryModule = module {
     single<FunctionRepository> { FunctionRepositoryImpl(get()) }
     single<ResourceRepository> { ResourceRepositoryImpl(get(), get(), get(), get()) }
     single<SyncronizeRepository> { SyncronizeRepositoryImpl(get(), get()) }
-    single<RiskRepository> { RiskRepositoryImpl(get(), get(), get()) }
+    single<RiskRepository> { RiskRepositoryImpl(get()) }
 }
 
 val servciceModule = module {

@@ -8,6 +8,7 @@ data class ResourceAgentLocal(
     @PrimaryKey
     val id: String,
     val category: String,
+    val code: String,
     val name: String,
     var updatedAt: String,
     var deleted: Boolean
@@ -16,7 +17,8 @@ data class ResourceAgentLocal(
 fun ResourceAgentLocal.toModel() =
     ResourceAgent(
         id,
-        category,
+        ResourceAgentCategory.valueOf(category),
+        code,
         name,
         updatedAt,
         deleted

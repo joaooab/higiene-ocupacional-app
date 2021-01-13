@@ -9,7 +9,6 @@ import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.ext.format
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.hideKeyboard
-import br.com.joaoov.ext.showToast
 import kotlinx.android.synthetic.main.fragment_company_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -35,7 +34,6 @@ class CompanyCreateFragment : Fragment(R.layout.fragment_company_create) {
                 date = Date().format()
             )
             viewModel.salvar(company)
-            showToast(R.string.message_success_created)
             findNavController().popBackStack()
         }
     }

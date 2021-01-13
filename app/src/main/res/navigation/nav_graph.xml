@@ -157,6 +157,9 @@
         <argument
             android:name="funcion"
             app:argType="br.com.joaoov.data.local.function.Function" />
+        <action
+            android:id="@+id/action_riskListFragment_to_riskEditFragment"
+            app:destination="@id/riskEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/riskCreateFragment"
@@ -167,13 +170,13 @@
             android:name="function"
             app:argType="br.com.joaoov.data.local.function.Function" />
     </fragment>
-    <!--    <fragment-->
-    <!--        android:id="@+id/syncFragment"-->
-    <!--        android:name="br.com.joaoov.ui.sync.SyncFragment"-->
-    <!--        android:label="SyncFragment"-->
-    <!--        tools:layout="@layout/fragment_sync">-->
-    <!--        <action-->
-    <!--            android:id="@+id/action_syncFragment_to_companyListFragment"-->
-    <!--            app:destination="@id/companyListFragment" />-->
-    <!--    </fragment>-->
+    <fragment
+        android:id="@+id/riskEditFragment"
+        android:name="br.com.joaoov.ui.risk.RiskEditFragment"
+        android:label="@string/fragment_risk_edit_label"
+        tools:layout="@layout/fragment_risk_edit">
+        <argument
+            android:name="risk"
+            app:argType="br.com.joaoov.data.local.risk.Risk" />
+    </fragment>
 </navigation>

@@ -57,5 +57,6 @@ data class Path(
         const val COMPANY_PATH = "COMPANY_PATH"
         const val DEPARTAMENT_PATH = "DEPARTAMENT_PATH"
         const val AMBIENT_PATH = "AMBIENT_PATH"
+        const val FUNCTION_PATH = "FUNCTION_PATH"
     }
 }

@@ -1,40 +1,44 @@
 package br.com.joaoov.data.local.risk
 
 import android.os.Parcelable
-import androidx.room.PrimaryKey
+import br.com.joaoov.data.local.resource.ResourceAgentCategory
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Risk(
     val id: Long = 0,
     val functionId: Long = 0,
-    val riskFactor: String,
+    val agentType: ResourceAgentCategory,
+    val agent: String,
     val generatingSource: String,
-    val intensityConcentration: String,
-    val levelAction: String,
-    val NR15: String,
-    val ACGIH: String,
+    val intensity: String,
+    val actionLevel: String,
+    val tolerance: Tolerance,
     val trajectory: String,
     val eliminationNeutralization: String,
-    val exposureMode: String,
-    val sourceMethodology: String,
+    val exposure: String,
+    val methodology: String,
     val degreeOfRisk: String,
     val date: String
-): Parcelable
+) : Parcelable {
+    @IgnoredOnParcel
+    var showDetail: Boolean = false
+}
 
 fun Risk.toLocal() = RiskLocal(
     id,
     functionId,
-    riskFactor,
+    agentType.toString(),
+    agent,
     generatingSource,
-    intensityConcentration,
-    levelAction,
-    NR15,
-    ACGIH,
+    intensity,
+    actionLevel,
+    tolerance.toLocal(),
     trajectory,
     eliminationNeutralization,
-    exposureMode,
-    sourceMethodology,
+    exposure,
+    methodology,
     degreeOfRisk,
     date
 )
