@@ -8,6 +8,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.ext.formatFirstChar
 import kotlinx.android.synthetic.main.item_company.view.*
 
 class CompanyListAdapter(
@@ -20,6 +21,7 @@ class CompanyListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Company) {
             with(itemView) {
+                textViewFirstLetter.text = item.name.formatFirstChar()
                 textViewCompany.text = item.name
                 textViewDate.text = item.date
                 setOnClickListener {

@@ -13,11 +13,13 @@ import br.com.joaoov.data.local.departament.DepartamentLocal
 import br.com.joaoov.data.local.function.FunctionDAO
 import br.com.joaoov.data.local.function.FunctionLocal
 import br.com.joaoov.data.local.resource.*
+import br.com.joaoov.data.local.risk.RiskDao
+import br.com.joaoov.data.local.risk.RiskLocal
 import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 10,
+    version = 19,
     entities = [
         Company::class,
         DepartamentLocal::class,
@@ -26,7 +28,8 @@ import br.com.joaoov.data.local.syncronize.SyncronizeLocal
         SyncronizeLocal::class,
         ResourceRiskLocal::class,
         ResourceAmbientLocal::class,
-        ResourceAgentLocal::class
+        ResourceAgentLocal::class,
+        RiskLocal::class
     ],
     exportSchema = false
 )
@@ -40,6 +43,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun resourceRiskDAO(): ResourceRiskDAO
     abstract fun resourceAmbientDAO(): ResourceAmbientDAO
     abstract fun resourceAgentDAO(): ResourceAgentDAO
+    abstract fun riskDao(): RiskDao
 
     companion object {
         private const val DATABASE_NAME = "higieneocupacional.db"

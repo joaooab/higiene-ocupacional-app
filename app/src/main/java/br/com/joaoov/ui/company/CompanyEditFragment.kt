@@ -9,7 +9,6 @@ import br.com.joaoov.R
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.hideKeyboard
 import br.com.joaoov.ext.setString
-import br.com.joaoov.ext.showToast
 import kotlinx.android.synthetic.main.fragment_company_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -33,7 +32,6 @@ class CompanyEditFragment : Fragment(R.layout.fragment_company_edit) {
             }
             val company = arguemnts.company.copy(name = companyName)
             viewModel.salvar(company)
-            showToast(R.string.message_success_edited)
             findNavController().popBackStack()
         }
     }

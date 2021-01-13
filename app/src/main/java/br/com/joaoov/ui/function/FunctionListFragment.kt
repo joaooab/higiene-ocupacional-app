@@ -8,21 +8,24 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import br.com.joaoov.MainActivity
+import br.com.joaoov.MainViewModel
 import br.com.joaoov.Path
+import br.com.joaoov.Path.Companion.AMBIENT_PATH
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.function.Function
 import kotlinx.android.synthetic.main.fragment_ambient.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FunctionListFragment : Fragment(R.layout.fragment_company) {
 
     private val arguments by navArgs<FunctionListFragmentArgs>()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private val viewModel: FunctionViewModel by viewModel()
     private val adapter: FunctionListAdapter by lazy {
         FunctionListAdapter(
-            onClick = { },
+            onClick = { navigateToRiskFragment(it) },
             onEditClick = { navigateToEditFragment(it) },
             onDeleteClick = { viewModel.delete(it) }
         )
@@ -32,13 +35,7 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ambient = arguments.ambient
-        (activity as MainActivity).addPath(
-            Path(
-                Path.AMBIENT_TYPE,
-                Path.AMBIENT_TYPE_ICON,
-                ambient.name
-            )
-        )
+        mainViewModel.addPath(Path(AMBIENT_PATH, ambient.name))
         handleObserve()
         setupView()
     }
@@ -50,7 +47,7 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
 
     override fun onDestroy() {
         super.onDestroy()
-        (activity as MainActivity).removePath()
+        mainViewModel.removePath()
     }
 
     private fun setupAdapter() {
@@ -79,18 +76,16 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
         })
     }
 
-
-//    private fun navigateToFunctionCreateFragment(ambient: Ambient) {
-//        val direction =
-//            FunctionListFragmentDirections.actionFunctionListFragmentToFunctionCreateFragment(ambient)
-//        findNavController().navigate(direction)
-//    }
-
     private fun navigateToEditFragment(function: Function) {
         val direction =
             FunctionListFragmentDirections.actionFunctionListFragmentToFunctionEditFragment(
                 function
             )
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToRiskFragment(function: Function) {
+        val direction = FunctionListFragmentDirections.actionFunctionListFragmentToRiskListFragment(function)
         findNavController().navigate(direction)
     }
 

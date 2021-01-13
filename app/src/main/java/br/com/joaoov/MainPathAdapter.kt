@@ -7,14 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_path.view.*
 import java.util.*
 
-class MainPathAdapter(private val list: Stack<Path> = Stack()) :
+class MainPathAdapter(private val stack: Stack<Path> = Stack()) :
     RecyclerView.Adapter<MainPathAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(path: Path) {
             with(itemView) {
                 textViewPath.text = path.title
-                textViewPath.setCompoundDrawablesWithIntrinsicBounds(path.icon, 0, 0, 0)
             }
         }
 
@@ -25,38 +24,39 @@ class MainPathAdapter(private val list: Stack<Path> = Stack()) :
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = stack.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val path = list.elementAt(position)
+        val path = stack.elementAt(position)
         holder.bind(path)
     }
 
     fun add(path: Path) {
-        if (list.any { it.type == path.type }) {
+        if (stack.any { it.type == path.type }) {
             return
         }
-        list.add(path)
+        stack.add(path)
         notifyDataSetChanged()
     }
 
     fun remove() {
-        list.pop()
+        stack.pop()
         notifyDataSetChanged()
+    }
+
+    fun refresh() {
+        stack.peek()
     }
 }
 
 data class Path(
     val type: String,
-    val icon: Int,
-    val title: String
+    val title: String,
 ) {
     companion object {
-        const val COMPANY_TYPE = "COMPANY"
-        const val COMPANY_ICON = R.drawable.ic_company
-        const val DEPARTAMENT_TYPE = "DEPARTAMENT"
-        const val DEPARTAMENT_ICON = R.drawable.ic_departament
-        const val AMBIENT_TYPE = "AMBIENT_TYPE"
-        const val AMBIENT_TYPE_ICON = R.drawable.ic_ambient
+        const val COMPANY_PATH = "COMPANY_PATH"
+        const val DEPARTAMENT_PATH = "DEPARTAMENT_PATH"
+        const val AMBIENT_PATH = "AMBIENT_PATH"
+        const val FUNCTION_PATH = "FUNCTION_PATH"
     }
 }

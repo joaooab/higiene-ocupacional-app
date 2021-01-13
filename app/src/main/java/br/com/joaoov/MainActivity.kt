@@ -10,9 +10,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import br.com.joaoov.data.PathState
 import br.com.joaoov.data.SyncState
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.show
+import br.com.joaoov.ext.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -20,6 +22,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
 
     private val syncViewModel: SyncViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
 
     private val adapterPath by lazy {
         MainPathAdapter()
@@ -35,7 +38,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleObserve() {
-        syncViewModel.onSyncronize.observe(this, { state ->
+        observeSyncronizeState()
+        observePathState()
+    }
+
+    private fun observePathState() {
+        mainViewModel.pathState.observe(this, { state ->
+            when (state) {
+                is PathState.Add -> {
+                    adapterPath.add(state.path)
+                }
+                is PathState.Remove -> {
+                    adapterPath.remove()
+                }
+            }
+        })
+    }
+
+    private fun observeSyncronizeState() {
+        syncViewModel.syncronizeState.observe(this, { state ->
             when (state) {
                 is SyncState.Running -> {
                     linearLayoutSync.show()
@@ -49,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 is SyncState.Failed -> {
                     linearLayoutSync.gone()
+                    showToast(R.string.sync_failed)
                 }
             }
         })
@@ -66,14 +88,6 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    fun addPath(path: Path) {
-        adapterPath.add(path)
-    }
-
-    fun removePath() {
-        adapterPath.remove()
     }
 
     override fun onSupportNavigateUp(): Boolean {

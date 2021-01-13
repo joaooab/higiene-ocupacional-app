@@ -8,17 +8,20 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import br.com.joaoov.MainActivity
+import br.com.joaoov.MainViewModel
 import br.com.joaoov.Path
+import br.com.joaoov.Path.Companion.COMPANY_PATH
 import br.com.joaoov.R
 import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.data.local.departament.Departament
 import kotlinx.android.synthetic.main.fragment_ambient.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DepartamentListFragment : Fragment(R.layout.fragment_departament) {
 
     private val arguments by navArgs<DepartamentListFragmentArgs>()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private val viewModel: DepartamentViewModel by viewModel()
     private val adapter: DepartamentListAdapter by lazy {
         DepartamentListAdapter(
@@ -32,7 +35,7 @@ class DepartamentListFragment : Fragment(R.layout.fragment_departament) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         company = arguments.company
-        (activity as MainActivity).addPath(Path(Path.COMPANY_TYPE, Path.COMPANY_ICON, company.name))
+        mainViewModel.addPath(Path(COMPANY_PATH, company.name))
         setupView()
         handleObserve()
     }
@@ -48,7 +51,7 @@ class DepartamentListFragment : Fragment(R.layout.fragment_departament) {
 
     override fun onDestroy() {
         super.onDestroy()
-        (activity as MainActivity).removePath()
+        mainViewModel.removePath()
     }
 
     private fun setupAdapter() {

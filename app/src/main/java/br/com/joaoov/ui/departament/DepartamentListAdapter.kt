@@ -8,19 +8,21 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.departament.Departament
-import kotlinx.android.synthetic.main.item_company.view.*
+import br.com.joaoov.ext.formatFirstChar
+import kotlinx.android.synthetic.main.item_departament.view.*
 
 class DepartamentListAdapter(
     private val list: MutableList<Departament> = mutableListOf(),
     private val onClick: (Departament) -> Unit,
     private val onEditClick: (Departament) -> Unit,
-    private val onDeleteClick: (Departament) -> Unit
+    private val onDeleteClick: (Departament) -> Unit,
 ) : RecyclerView.Adapter<DepartamentListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Departament) {
             with(itemView) {
-                textViewCompany.text = item.name
+                textViewFirstLetter.text = item.name.formatFirstChar()
+                textViewDepartament.text = item.name
                 textViewDate.text = item.date
                 setOnClickListener {
                     onClick(item)

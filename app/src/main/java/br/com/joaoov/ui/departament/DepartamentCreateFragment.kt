@@ -10,7 +10,6 @@ import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.ext.format
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.hideKeyboard
-import br.com.joaoov.ext.showToast
 import kotlinx.android.synthetic.main.fragment_departament_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -38,7 +37,6 @@ class DepartamentCreateFragment : Fragment(R.layout.fragment_departament_create)
                 date = Date().format()
             )
             viewModel.salvar(departament)
-            showToast(R.string.message_success_created)
             findNavController().popBackStack()
         }
     }

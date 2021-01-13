@@ -11,6 +11,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
+import br.com.joaoov.ext.formatFirstChar
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.show
 import kotlinx.android.synthetic.main.item_ambient.view.*
@@ -19,12 +20,13 @@ class AmbientListAdapter(
     private val list: MutableList<Ambient> = mutableListOf(),
     private val onClick: (Ambient) -> Unit,
     private val onEditClick: (Ambient) -> Unit,
-    private val onDeleteClick: (Ambient) -> Unit
+    private val onDeleteClick: (Ambient) -> Unit,
 ) : RecyclerView.Adapter<AmbientListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Ambient) {
             with(itemView) {
+                textViewFirstLetter.text = item.name.formatFirstChar()
                 textViewDate.text = item.date
                 textViewLocal.text = item.name
                 textViewArea.text = getString(
@@ -42,15 +44,15 @@ class AmbientListAdapter(
                     R.string.label_floor,
                     item.floor
                 )
-                textViewWall.text = getString(
+                textViewRoof.text = getString(
                     context,
-                    R.string.label_wall,
-                    item.wall
+                    R.string.label_roof,
+                    item.roof
                 )
-                textViewCoverage.text = getString(
+                textViewRoofTiles.text = getString(
                     context,
-                    R.string.label_coverage,
-                    item.wall
+                    R.string.label_roof,
+                    item.roofTiles
                 )
                 textViewNaturalLighting.text = getString(
                     context,
@@ -72,9 +74,26 @@ class AmbientListAdapter(
                     R.string.label_artificial_ventilation,
                     item.artificialVentilation
                 )
+                textViewWall.text = getString(
+                    context,
+                    R.string.label_wall,
+                    item.wall
+                )
+                textViewWindow.text = getString(
+                    context,
+                    R.string.label_window,
+                    item.window
+                )
+                textViewCeiling.text = getString(
+                    context,
+                    R.string.label_ceiling,
+                    item.ceiling
+                )
+
                 setOnClickListener {
                     onClick(item)
                 }
+
                 imageViewArrowDetail.setOnClickListener {
                     item.showDetail = !item.showDetail
                     if (item.showDetail) {

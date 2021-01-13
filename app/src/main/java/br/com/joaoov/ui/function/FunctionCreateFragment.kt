@@ -10,7 +10,6 @@ import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.ext.format
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.hideKeyboard
-import br.com.joaoov.ext.showToast
 import kotlinx.android.synthetic.main.fragment_funciton_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -40,7 +39,6 @@ class FunctionCreateFragment : Fragment(R.layout.fragment_funciton_create) {
                 workday = textInputLayoutWorkDay.getString()
             )
             viewModel.salvar(function)
-            showToast(R.string.message_success_created)
             findNavController().popBackStack()
         }
     }

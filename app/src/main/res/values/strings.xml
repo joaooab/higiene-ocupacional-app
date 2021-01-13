@@ -10,21 +10,22 @@
     <string name="fragment_departament_create_label">Criar Setor</string>
     <string name="fragment_function_label">Funções</string>
     <string name="fragment_function_create_label">Criar Função</string>
+    <string name="fragment_risk_create_label">Criar Risco</string>
+    <string name="fragment_risk_edit_label">Editar Risco</string>
+    <string name="fragment_risk_label">Riscos</string>
 
     <string name="action_edit">Editar</string>
     <string name="action_delete">Excluir</string>
     <string name="action_export">Exportar</string>
     <string name="action_save">Salvar</string>
 
-    <string name="message_success_created">Criado com sucesso</string>
-    <string name="message_success_edited">Editado com sucesso</string>
     <string name="message_error_required">Campo obrigatório</string>
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="company">Empresa</string>
-    <string name="departament">Departamento</string>
+    <string name="departament">Setor</string>
     <string name="function">Função</string>
     <string name="description">Descrição</string>
     <string name="workday">Jornada de trabalho</string>
@@ -36,23 +37,54 @@
     <string name="height">Pé direito (m)</string>
     <string name="floor">Piso</string>
     <string name="wall">Parede</string>
-    <string name="cover">Cobertura</string>
+    <string name="roof">Cobertura</string>
+    <string name="roof_tiles">Telhas</string>
+    <string name="agent">Agente</string>
+    <string name="factor_type">Tipo do fator de risco</string>
+    <string name="window">Janela</string>
+    <string name="ceiling">Forro</string>
     <string name="natural_lighting">Iluminacao Natural</string>
     <string name="artificial_lighting">Iluminacao Artificial</string>
     <string name="natural_ventilation">Ventilação Natural</string>
     <string name="artificial_ventilation">Ventilação Artificial</string>
+
+    <string name="risk_factor">Fator de risco</string>
+    <string name="generating_source">Fonte geradora</string>
+    <string name="intensity_concentration">Intensidade e/ou concentração</string>
+    <string name="trajectory">Tragetória</string>
+    <string name="elimination_neutralization">Eliminação e/ou Neutralização</string>
+    <string name="expousure">Modo de exposição</string>
+    <string name="source_methodology">Fonte / Metodologia</string>
+    <string name="degree_of_risk">Grau de risco</string>
+    <string name="action_level">Nível de Ação</string>
+    <string name="nr15">NR-15</string>
+    <string name="acgih">ACGIH</string>
 
     <string name="label_local">Local: %s</string>
     <string name="label_area">Área: %s</string>
     <string name="label_height">Pé direito: %s</string>
     <string name="label_floor">Piso: %s</string>
     <string name="label_wall">Parede: %s</string>
-    <string name="label_coverage">Cobertura: %s</string>
+    <string name="label_roof">Cobertura: %s</string>
+    <string name="label_roof_tiles">Telha: %s</string>
+    <string name="label_window">Janela: %s</string>
+    <string name="label_ceiling">Forro: %s</string>
     <string name="label_natural_lighting">Iluminacao Natural: %s</string>
     <string name="label_artificial_lighting">Iluminacao Artificial: %s</string>
     <string name="label_natural_ventilation">Ventilação Natural: %s</string>
     <string name="label_artificial_ventilation">Ventilação Artificial: %s</string>
     <string name="label_work_day">Jornada de trablho:</string>
+
+    <string name="label_generating_source">Fonte geradora: %s</string>
+    <string name="label_intensity_concentration">Intensidade e/ou concentração: %s</string>
+    <string name="label_trajectory">Tragetória: %s</string>
+    <string name="label_elimination_neutralization">Eliminação e/ou Neutralização: %s</string>
+    <string name="label_expousure">Modo de exposição: %s</string>
+    <string name="label_source_methodology">Fonte / Metodologia: %s</string>
+    <string name="label_degree_of_risk">Grau de risco: %s</string>
+    <string name="label_action_level">Nível de Ação: %s</string>
+    <string name="label_nr15">NR15: %s</string>
+    <string name="label_acgih">ACGHI: %s</string>
 
     <string name="sync_complete">Sincronização finalizada</string>
     <string name="sync_failed">Falha na sincronização</string>
@@ -97,5 +129,47 @@
         <item>Através de ar condicionado</item>
         <item>Através de exaustor</item>
         <item>Através de climatizador</item>
+    </string-array>
+    <string-array name="agents">
+        <item>01. QUÍMICOS</item>
+        <item>02. FÍSICOS</item>
+        <item>03. BIOLÓGICOS</item>
+        <item>04. ASSOCIAÇÃO DE AGENTES NOCIVOS FÍSICOS, QUÍMICOS E BIOLÓGICOS</item>
+        <item>05. OUTROS AGENTES NOCIVOS</item>
+        <item>06. AUSÊNCIA DE AGENTES NOCIVOS OU ATIVIDADES ESPECIAIS</item>
+    </string-array>
+    <string-array name="tragetoria">
+        <item>Ar</item>
+        <item>Contato</item>
+        <item>Ar/Contato</item>
+    </string-array>
+    <string-array name="eliminacao_neutralizacao">
+        <item>EPI</item>
+        <item>EPC</item>
+    </string-array>
+    <string-array name="modo_exposicao">
+        <item>HP</item>
+        <item>HI</item>
+        <item>Eventual</item>
+    </string-array>
+    <string-array name="fonte_metodologia">
+        <item>Anexo 1 NR15 “NHO-01”</item>
+        <item>“NIOSH 7303”</item>
+        <item>Anexo 10 NR15</item>
+        <item>Anexo 12 NR15 “NIOSH 7303”</item>
+        <item>Anexo 12 NR15 NIOSH 7500 NIOSH 7602</item>
+        <item>Anexo 13 NR15</item>
+        <item>Anexo 14 NR15</item>
+        <item>Anexo 3 NR15</item>
+        <item>Anexo 7 NR15</item>
+        <item>Anexo 8 NR15 “NHO-10”</item>
+        <item>NR 35</item>
+        <item>Anexo 11 NR15 “ACGIH”</item>
+    </string-array>
+    <string-array name="grau_risco">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 </resources>

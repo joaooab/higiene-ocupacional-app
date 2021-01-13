@@ -9,6 +9,9 @@ interface ResourceAgentDAO {
     @Query("SELECT * FROM resource_agents")
     fun getAll(): LiveData<List<ResourceAgentLocal>>
 
+    @Query("SELECT * FROM resource_agents WHERE category like :category order by name")
+    fun getAllByCategory(category: String): LiveData<List<ResourceAgentLocal>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(resource: ResourceAgentLocal): Long
 
