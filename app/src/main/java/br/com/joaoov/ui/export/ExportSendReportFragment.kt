@@ -24,10 +24,17 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
     }
 
     private fun handleObserve() {
+        observeAllOfCompany()
+        observeSendState()
+    }
+
+    private fun observeAllOfCompany() {
         viewModel.getAllOfCompany(arguments.company).observe(viewLifecycleOwner, {
             report.data = it
         })
+    }
 
+    private fun observeSendState() {
         viewModel.sendState.observe(viewLifecycleOwner, {
             when (it) {
                 is State.Loading -> {
@@ -51,7 +58,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
     }
 
     private fun setupView() {
-        textViewInfo.text = arguments.company.name
+        textViewInfo.text = arguments.company.name.toUpperCase()
         textInputLayoutEmail.setTypeEmail()
         setupButtonSend()
     }

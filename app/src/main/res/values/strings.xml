@@ -101,6 +101,7 @@
     <string name="message_select_company_info">Selecione a empresa para gerar o relatório</string>
     <string name="message_send_success">Enviado relatório com sucesso</string>
     <string name="message_send_failure">Falha ao enviar relatório, verifique sua conexão com a internet ou tente novamente</string>
+    <string name="message_email_send_info">Informe o e-mail para enviarmos o relatório</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>
