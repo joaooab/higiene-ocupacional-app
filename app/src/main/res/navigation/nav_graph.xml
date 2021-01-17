@@ -6,7 +6,7 @@
     app:startDestination="@id/companyListFragment">
 
     <fragment
-        android:id="@+id/AmbientListFragment"
+        android:id="@+id/ambientListFragment"
         android:name="br.com.joaoov.ui.ambient.AmbientListFragment"
         android:label="@string/fragment_ambient_label"
         tools:layout="@layout/fragment_ambient">
@@ -69,7 +69,7 @@
             app:destination="@id/departamentCreateFragment" />
         <action
             android:id="@+id/action_departamentListFragment_to_AmbientListFragment"
-            app:destination="@id/AmbientListFragment" />
+            app:destination="@id/ambientListFragment" />
         <action
             android:id="@+id/action_departamentListFragment_to_departamentEditFragment"
             app:destination="@id/departamentEditFragment" />
@@ -122,7 +122,7 @@
     <fragment
         android:id="@+id/departamentEditFragment"
         android:name="br.com.joaoov.ui.departament.DepartamentEditFragment"
-        android:label="DepartamentEditFragment"
+        android:label="@string/fragment_departament_edit_label"
         tools:layout="@layout/fragment_departament_edit">
         <argument
             android:name="departament"
@@ -131,7 +131,7 @@
     <fragment
         android:id="@+id/ambientEditFragment"
         android:name="br.com.joaoov.ui.ambient.AmbientEditFragment"
-        android:label="AmbientEditFragment"
+        android:label="@string/fragment_ambient_edit_label"
         tools:layout="@layout/fragment_ambient_edit">
         <argument
             android:name="ambient"
@@ -140,7 +140,7 @@
     <fragment
         android:id="@+id/functionEditFragment"
         android:name="br.com.joaoov.ui.function.FunctionEditFragment"
-        android:label="FunctionEditFragment"
+        android:label="@string/fragment_function_edit_label"
         tools:layout="@layout/fragment_funciton_edit">
         <argument
             android:name="function"
@@ -178,5 +178,23 @@
         <argument
             android:name="risk"
             app:argType="br.com.joaoov.data.local.risk.Risk" />
+    </fragment>
+    <fragment
+        android:id="@+id/exportSelectCompanyFragment"
+        android:name="br.com.joaoov.ui.export.ExportSelectCompanyFragment"
+        android:label="@string/fragment_export_select_company_label"
+        tools:layout="@layout/fragment_export_select_company">
+        <action
+            android:id="@+id/action_exportFragment_to_exportSendReportFragment"
+            app:destination="@id/exportSendReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exportSendReportFragment"
+        android:name="br.com.joaoov.ui.export.ExportSendReportFragment"
+        android:label="@string/fragment_export_send_report_label"
+        tools:layout="@layout/fragment_export_send_report">
+        <argument
+            android:name="company"
+            app:argType="br.com.joaoov.data.local.company.Company" />
     </fragment>
 </navigation>

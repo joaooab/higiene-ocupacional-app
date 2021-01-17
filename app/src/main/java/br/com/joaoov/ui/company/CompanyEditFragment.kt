@@ -31,7 +31,7 @@ class CompanyEditFragment : Fragment(R.layout.fragment_company_edit) {
                 return@setOnClickListener
             }
             val company = arguemnts.company.copy(name = companyName)
-            viewModel.salvar(company)
+            viewModel.update(company)
             findNavController().popBackStack()
         }
     }

@@ -43,7 +43,7 @@ class FunctionEditFragment : Fragment(R.layout.fragment_funciton_edit) {
                 description = textInputLayoutDescription.getString(),
                 workday = textInputLayoutWorkDay.getString()
             )
-            viewModel.salvar(function)
+            viewModel.update(function)
             findNavController().popBackStack()
         }
     }

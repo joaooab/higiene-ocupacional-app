@@ -31,7 +31,7 @@ class DepartamentEditFragment : Fragment(R.layout.fragment_departament_edit) {
                 return@setOnClickListener
             }
             val departament = arguments.departament.copy(name = departamentName)
-            viewModel.salvar(departament)
+            viewModel.update(departament)
             findNavController().popBackStack()
         }
     }

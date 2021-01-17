@@ -4,6 +4,8 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private val syncViewModel: SyncViewModel by viewModel()
     private val mainViewModel: MainViewModel by viewModel()
+    private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
     private val adapterPath by lazy {
         MainPathAdapter()
@@ -40,6 +43,24 @@ class MainActivity : AppCompatActivity() {
     private fun handleObserve() {
         observeSyncronizeState()
         observePathState()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_export -> {
+                navigateToExportCompanyFragment()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun navigateToExportCompanyFragment() {
+        navController.navigate(R.id.exportSelectCompanyFragment)
     }
 
     private fun observePathState() {
@@ -81,13 +102,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavController() {
-        val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.companyListFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.exportSelectCompanyFragment -> {
+                    recyclerViewPath.gone()
+                }
+                R.id.exportSendReportFragment -> {
+                    recyclerViewPath.gone()
+                }
+                else -> {
+                    recyclerViewPath.show()
+                }
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

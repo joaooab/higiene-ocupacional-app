@@ -4,8 +4,8 @@ import br.com.joaoov.data.local.syncronize.Syncronize
 import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.toLocal
 import br.com.joaoov.data.local.syncronize.toModel
-import br.com.joaoov.data.remote.SyncService
-import br.com.joaoov.data.remote.toModel
+import br.com.joaoov.data.remote.sync.SyncService
+import br.com.joaoov.data.remote.sync.toModel
 
 interface SyncronizeRepository {
 

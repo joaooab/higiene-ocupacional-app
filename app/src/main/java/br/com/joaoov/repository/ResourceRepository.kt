@@ -3,8 +3,8 @@ package br.com.joaoov.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import br.com.joaoov.data.local.resource.*
-import br.com.joaoov.data.remote.ResourceService
-import br.com.joaoov.data.remote.toModel
+import br.com.joaoov.data.remote.resource.ResourceService
+import br.com.joaoov.data.remote.resource.toModel
 
 interface ResourceRepository {
 

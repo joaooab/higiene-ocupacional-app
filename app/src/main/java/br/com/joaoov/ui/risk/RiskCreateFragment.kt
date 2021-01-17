@@ -100,7 +100,7 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
                 functionId = arguments.function.id,
                 agentType = ResourceAgentCategory.fromFormatedValue(agentType),
                 agent = agentName,
-                generatingSource = textInputLayoutGeneratingSource.getString(),
+                generatedSource = textInputLayoutGeneratingSource.getString(),
                 intensity = textInputLayoutIntensityConcentration.getString(),
                 actionLevel = textInputLayoutActionLevel.getString(),
                 tolerance = Tolerance(

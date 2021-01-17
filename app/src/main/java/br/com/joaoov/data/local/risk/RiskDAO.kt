@@ -6,7 +6,7 @@ import br.com.joaoov.data.local.resource.ResourceRisk
 import br.com.joaoov.data.local.resource.ResourceRiskLocal
 
 @Dao
-interface RiskDao {
+interface RiskDAO {
 
     @Query("SELECT * FROM risk")
     fun getAll(): LiveData<List<RiskLocal>>
@@ -15,11 +15,11 @@ interface RiskDao {
     fun getAllByFuncionId(functionId: Long): LiveData<List<RiskLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(risk: RiskLocal): Long
+    suspend fun save(risk: RiskLocal)
 
     @Delete
-    fun delete(risk: RiskLocal)
+    suspend fun delete(risk: RiskLocal)
 
     @Update
-    fun update(risk: RiskLocal)
+    suspend fun update(risk: RiskLocal)
 }

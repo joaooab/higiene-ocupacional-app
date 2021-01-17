@@ -21,7 +21,7 @@ class RiskViewModel(
     private val _category = MutableLiveData<ResourceAgentCategory>()
     val category: LiveData<ResourceAgentCategory> = _category
 
-    fun getRisks(function: Function): LiveData<List<Risk>> = repository.getRisks(function.id)
+    fun getRisks(function: Function): LiveData<List<Risk>> = repository.getAllByFunction(function.id)
 
     fun changeCategory(category: ResourceAgentCategory) =
         _category.postValue(category)
@@ -41,6 +41,12 @@ class RiskViewModel(
     fun delete(risk: Risk) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.delete(risk)
+        }
+    }
+
+    fun update(risk: Risk) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.update(risk)
         }
     }
 }

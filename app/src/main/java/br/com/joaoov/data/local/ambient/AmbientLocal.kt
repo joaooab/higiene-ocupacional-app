@@ -2,6 +2,7 @@ package br.com.joaoov.data.local.ambient
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import br.com.joaoov.data.local.departament.DepartamentLocal
 
@@ -14,7 +15,8 @@ import br.com.joaoov.data.local.departament.DepartamentLocal
             childColumns = arrayOf("departamentId"),
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index("departamentId")]
 )
 data class AmbientLocal(
     @PrimaryKey(autoGenerate = true)

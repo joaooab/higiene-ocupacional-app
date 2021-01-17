@@ -2,6 +2,7 @@ package br.com.joaoov.data.local.function
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import br.com.joaoov.data.local.ambient.AmbientLocal
 
@@ -14,7 +15,8 @@ import br.com.joaoov.data.local.ambient.AmbientLocal
             childColumns = arrayOf("ambientId"),
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index("ambientId")]
 )
 data class FunctionLocal(
     @PrimaryKey(autoGenerate = true)

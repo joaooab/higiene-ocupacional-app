@@ -1,4 +1,4 @@
-package br.com.joaoov.data.remote
+package br.com.joaoov.data.remote.resource
 
 import retrofit2.http.GET
 import retrofit2.http.Query

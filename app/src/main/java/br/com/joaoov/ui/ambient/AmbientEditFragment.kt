@@ -70,7 +70,7 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
                 naturalVentilation = textInputLayoutNaturalVentilation.getString(),
                 artificialVentilation = textInputLayoutArtificialVentilation.getString()
             )
-            viewModel.salvar(ambient)
+            viewModel.update(ambient)
             findNavController().popBackStack()
         }
     }

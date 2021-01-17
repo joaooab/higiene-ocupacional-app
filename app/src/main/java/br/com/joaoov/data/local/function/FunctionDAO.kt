@@ -13,15 +13,12 @@ interface FunctionDAO {
     fun getAllByAmbientId(ambientId: Long): LiveData<List<FunctionLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(function: FunctionLocal): Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(function: List<FunctionLocal>)
+    suspend fun save(function: FunctionLocal)
 
     @Delete
-    fun delete(function: FunctionLocal)
+    suspend fun delete(function: FunctionLocal)
 
     @Update
-    fun update(function: FunctionLocal)
+    suspend fun update(function: FunctionLocal)
 
 }

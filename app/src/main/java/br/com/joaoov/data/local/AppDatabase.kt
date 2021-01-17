@@ -6,22 +6,23 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import br.com.joaoov.data.local.ambient.AmbientDAO
 import br.com.joaoov.data.local.ambient.AmbientLocal
-import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.data.local.company.CompanyDAO
+import br.com.joaoov.data.local.company.CompanyLocal
 import br.com.joaoov.data.local.departament.DepartamentDAO
 import br.com.joaoov.data.local.departament.DepartamentLocal
 import br.com.joaoov.data.local.function.FunctionDAO
 import br.com.joaoov.data.local.function.FunctionLocal
+import br.com.joaoov.data.local.report.ReportDAO
 import br.com.joaoov.data.local.resource.*
-import br.com.joaoov.data.local.risk.RiskDao
+import br.com.joaoov.data.local.risk.RiskDAO
 import br.com.joaoov.data.local.risk.RiskLocal
 import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 19,
+    version = 22,
     entities = [
-        Company::class,
+        CompanyLocal::class,
         DepartamentLocal::class,
         AmbientLocal::class,
         FunctionLocal::class,
@@ -43,7 +44,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun resourceRiskDAO(): ResourceRiskDAO
     abstract fun resourceAmbientDAO(): ResourceAmbientDAO
     abstract fun resourceAgentDAO(): ResourceAgentDAO
-    abstract fun riskDao(): RiskDao
+    abstract fun riskDAO(): RiskDAO
+    abstract fun reportDAO(): ReportDAO
 
     companion object {
         private const val DATABASE_NAME = "higieneocupacional.db"

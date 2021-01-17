@@ -13,15 +13,12 @@ interface DepartamentDAO {
     fun getAllByCompanyId(companyId: Long): LiveData<List<DepartamentLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(departament: DepartamentLocal): Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(departament: List<DepartamentLocal>)
+    suspend fun save(departament: DepartamentLocal)
 
     @Delete
-    fun delete(departament: DepartamentLocal)
+    suspend fun delete(departament: DepartamentLocal)
 
     @Update
-    fun update(departament: DepartamentLocal)
+    suspend fun update(departament: DepartamentLocal)
 
 }

@@ -42,7 +42,7 @@ class RiskListAdapter(
                 textViewGeneratingSource.text = getString(
                     context,
                     R.string.label_generating_source,
-                    item.generatingSource
+                    item.generatedSource
                 )
                 textViewIntensityConcentration.text = getString(
                     context,

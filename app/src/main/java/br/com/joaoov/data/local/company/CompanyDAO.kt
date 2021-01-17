@@ -6,19 +6,16 @@ import androidx.room.*
 @Dao
 interface CompanyDAO {
 
-    @Query("SELECT * FROM Company ORDER BY Name")
-    fun getAll(): LiveData<List<Company>>
+    @Query("SELECT * FROM company ORDER BY Name")
+    fun getAll(): LiveData<List<CompanyLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(company: Company): Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(companies: List<Company>)
+    suspend fun save(company: CompanyLocal)
 
     @Delete
-    fun delete(company: Company)
+    suspend fun delete(company: CompanyLocal)
 
     @Update
-    fun update(company: Company)
+    suspend fun update(company: CompanyLocal)
 
 }

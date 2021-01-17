@@ -10,17 +10,19 @@ import br.com.joaoov.data.local.function.toModel
 
 interface FunctionRepository {
 
-    fun getFunctions(ambient: Ambient): LiveData<List<Function>>
+    fun getAllByAmbient(ambient: Ambient): LiveData<List<Function>>
 
-    suspend fun save(function: Function): Long
+    suspend fun save(function: Function)
 
     suspend fun delete(function: Function)
+
+    suspend fun update(function: Function)
 }
 
 class FunctionRepositoryImpl(private val dao: FunctionDAO) :
     FunctionRepository {
 
-    override fun getFunctions(ambient: Ambient): LiveData<List<Function>> =
+    override fun getAllByAmbient(ambient: Ambient): LiveData<List<Function>> =
         Transformations.map(dao.getAllByAmbientId(ambient.id)) { it.toModel() }
 
     override suspend fun save(function: Function) =
@@ -28,5 +30,8 @@ class FunctionRepositoryImpl(private val dao: FunctionDAO) :
 
     override suspend fun delete(function: Function) =
         dao.delete(function.toLocal())
+
+    override suspend fun update(function: Function) =
+        dao.update(function.toLocal())
 
 }

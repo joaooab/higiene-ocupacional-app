@@ -35,7 +35,7 @@ class RiskEditFragment : Fragment(R.layout.fragment_risk_edit) {
         arguments.risk.let {
             textInputLayoutRiskFactorType.setString(it.agentType.getFormatedValue())
             textInputLayoutRiskFactor.setString(it.agent)
-            textInputLayoutGeneratingSource.setString(it.generatingSource)
+            textInputLayoutGeneratingSource.setString(it.generatedSource)
             textInputLayoutIntensityConcentration.setString(it.intensity)
             textInputLayoutActionLevel.setString(it.actionLevel)
             textInputLayoutNR15.setString(it.tolerance.NR15)
@@ -114,7 +114,7 @@ class RiskEditFragment : Fragment(R.layout.fragment_risk_edit) {
             val risk = arguments.risk.copy(
                 agentType = ResourceAgentCategory.fromFormatedValue(agentType),
                 agent = agentName,
-                generatingSource = textInputLayoutGeneratingSource.getString(),
+                generatedSource = textInputLayoutGeneratingSource.getString(),
                 intensity = textInputLayoutIntensityConcentration.getString(),
                 actionLevel = textInputLayoutActionLevel.getString(),
                 tolerance = Tolerance(
@@ -127,7 +127,7 @@ class RiskEditFragment : Fragment(R.layout.fragment_risk_edit) {
                 methodology = textInputLayoutSourceMethodology.getString(),
                 degreeOfRisk = textInputLayoutDegreeOfRisk.getString(),
             )
-            viewModel.save(risk)
+            viewModel.update(risk)
             findNavController().popBackStack()
         }
     }

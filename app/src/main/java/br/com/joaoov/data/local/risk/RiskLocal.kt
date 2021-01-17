@@ -1,9 +1,6 @@
 package br.com.joaoov.data.local.risk
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import br.com.joaoov.data.local.function.FunctionLocal
 import br.com.joaoov.data.local.resource.ResourceAgentCategory
 
@@ -15,16 +12,17 @@ import br.com.joaoov.data.local.resource.ResourceAgentCategory
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("functionId"),
             onDelete = ForeignKey.CASCADE
-        )]
+        )
+    ],
+    indices = [Index("functionId")]
 )
-
 data class RiskLocal(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val functionId: Long = 0,
     val agentType: String,
     val agent: String,
-    val generatingSource: String,
+    val generatedSource: String,
     val intensityConcentration: String,
     val levelAction: String,
     @Embedded(prefix = "tolerance_")
@@ -42,7 +40,7 @@ fun RiskLocal.toModel() = Risk(
     functionId,
     ResourceAgentCategory.valueOf(agentType),
     agent,
-    generatingSource,
+    generatedSource,
     intensityConcentration,
     levelAction,
     tolerance.toModel(),

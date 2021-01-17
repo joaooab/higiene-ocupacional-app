@@ -33,7 +33,7 @@ class CompanyCreateFragment : Fragment(R.layout.fragment_company_create) {
                 name = companyName,
                 date = Date().format()
             )
-            viewModel.salvar(company)
+            viewModel.save(company)
             findNavController().popBackStack()
         }
     }

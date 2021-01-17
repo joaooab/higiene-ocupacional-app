@@ -1,4 +1,4 @@
-package br.com.joaoov.data.remote
+package br.com.joaoov.data.remote.sync
 
 import br.com.joaoov.data.local.syncronize.Syncronize
 

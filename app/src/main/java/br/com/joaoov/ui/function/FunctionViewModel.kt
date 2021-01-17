@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class FunctionViewModel(private val repository: FunctionRepository) : ViewModel() {
 
-    fun getFunctions(ambient: Ambient) = repository.getFunctions(ambient)
+    fun getFunctions(ambient: Ambient) = repository.getAllByAmbient(ambient)
 
     fun salvar(function: Function) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -21,6 +21,12 @@ class FunctionViewModel(private val repository: FunctionRepository) : ViewModel(
     fun delete(function: Function) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.delete(function)
+        }
+    }
+
+    fun update(function: Function) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.update(function)
         }
     }
 

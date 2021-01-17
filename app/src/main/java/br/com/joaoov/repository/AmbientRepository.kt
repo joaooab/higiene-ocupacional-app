@@ -12,9 +12,11 @@ interface AmbientRepository {
 
     fun getAmbients(departament: Departament): LiveData<List<Ambient>>
 
-    suspend fun save(ambient: Ambient): Long
+    suspend fun save(ambient: Ambient)
 
     suspend fun delete(ambient: Ambient)
+
+    suspend fun update(ambient: Ambient)
 
 }
 
@@ -29,4 +31,6 @@ class AmbientRepositoryImpl(private val dao: AmbientDAO) : AmbientRepository {
     override suspend fun delete(ambient: Ambient) =
         dao.delete(ambient.toLocal())
 
+    override suspend fun update(ambient: Ambient) =
+        dao.update(ambient.toLocal())
 }

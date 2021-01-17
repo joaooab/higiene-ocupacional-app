@@ -13,10 +13,7 @@ interface AmbientDAO {
     fun getAllByDepartamentId(departamentId: Long): LiveData<List<AmbientLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(ambient: AmbientLocal): Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(Ambient: List<AmbientLocal>)
+    suspend fun save(ambient: AmbientLocal)
 
     @Delete
     suspend fun delete(ambient: AmbientLocal)

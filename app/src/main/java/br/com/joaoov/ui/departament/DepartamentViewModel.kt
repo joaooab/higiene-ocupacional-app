@@ -10,11 +10,17 @@ import kotlinx.coroutines.launch
 
 class DepartamentViewModel(private val repository: DepartamentRepository) : ViewModel() {
 
-    fun getDepartaments(company: Company) = repository.getDepartaments(company)
+    fun getDepartaments(company: Company) = repository.getAllByCompany(company)
 
     fun salvar(departament: Departament) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.save(departament)
+        }
+    }
+
+    fun update(departament: Departament) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.update(departament)
         }
     }
 

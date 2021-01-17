@@ -32,6 +32,13 @@ class AmbientViewModel(
         }
     }
 
+    fun update(ambient: Ambient) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.update(ambient)
+        }
+    }
+
+
     fun getResourceByCategory(category: ResourceAmbientCategory) =
         resourceRepository.getAmbentResourcesByCategory(category)
 

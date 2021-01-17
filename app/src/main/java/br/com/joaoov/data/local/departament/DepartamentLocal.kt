@@ -2,19 +2,21 @@ package br.com.joaoov.data.local.departament
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
-import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.data.local.company.CompanyLocal
 
 @Entity(
     tableName = "departament",
     foreignKeys = [
         ForeignKey(
-            entity = Company::class,
+            entity = CompanyLocal::class,
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("companyId"),
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index("companyId")]
 )
 data class DepartamentLocal(
     @PrimaryKey(autoGenerate = true)

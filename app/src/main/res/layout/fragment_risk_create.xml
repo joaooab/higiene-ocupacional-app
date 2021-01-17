@@ -36,10 +36,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="false"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRiskFactorType">
@@ -49,7 +49,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/risk_factor"
-                android:inputType="text" />
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:lines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +72,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/generating_source"
-                android:inputType="text" />
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:lines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,8 +115,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/action_level"
+                android:imeOptions="actionNext"
                 android:inputType="text"
-                android:nextFocusDown="@id/textInputLayoutNR15"/>
+                android:lines="1"
+                android:nextFocusDown="@id/textInputLayoutNR15" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -131,7 +137,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/nr15"
+                android:imeOptions="actionNext"
                 android:inputType="text"
+                android:lines="1"
                 android:nextFocusDown="@id/textInputLayoutACGIH" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,8 +158,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/acgih"
+                android:imeOptions="actionDone"
                 android:inputType="text"
-                android:hint="@string/acgih" />
+                android:lines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

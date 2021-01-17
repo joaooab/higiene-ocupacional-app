@@ -3,23 +3,29 @@ package br.com.joaoov.ui.company
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.local.company.Company
-import br.com.joaoov.data.local.company.CompanyDAO
+import br.com.joaoov.repository.CompanyRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CompanyViewModel(private val companyDAO: CompanyDAO) : ViewModel() {
+class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() {
 
-    fun getCompanies() = companyDAO.getAll()
+    fun getCompanies() = repository.getAll()
 
-    fun salvar(company: Company) {
+    fun save(company: Company) {
         viewModelScope.launch(Dispatchers.IO) {
-            companyDAO.save(company)
+            repository.save(company)
+        }
+    }
+
+    fun update(company: Company) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.update(company)
         }
     }
 
     fun delete(company: Company) {
         viewModelScope.launch(Dispatchers.IO) {
-            companyDAO.delete(company)
+            repository.delete(company)
         }
     }
 
