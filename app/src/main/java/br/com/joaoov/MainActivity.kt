@@ -55,6 +55,9 @@ class MainActivity : AppCompatActivity() {
             R.id.action_export -> {
                 navigateToExportCompanyFragment()
             }
+            R.id.action_sycronize -> {
+                syncViewModel.forceSyncronize()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

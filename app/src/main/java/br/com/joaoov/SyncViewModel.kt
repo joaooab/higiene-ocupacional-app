@@ -48,4 +48,11 @@ class SyncViewModel(
         }
     }
 
+    fun forceSyncronize() {
+        viewModelScope.launch {
+            syncronizeRepository.clear()
+            syncronize()
+        }
+    }
+
 }

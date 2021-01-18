@@ -22,6 +22,7 @@
     <string name="action_edit">Editar</string>
     <string name="action_delete">Excluir</string>
     <string name="action_export">Exportar</string>
+    <string name="action_sync">Sincronizar</string>
     <string name="action_save">Salvar</string>
     <string name="action_send">Enviar</string>
     <string name="action_send_again">Enviar</string>

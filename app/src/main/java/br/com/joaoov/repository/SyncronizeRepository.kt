@@ -13,7 +13,9 @@ interface SyncronizeRepository {
 
     suspend fun getLastSyncronized(): Syncronize?
 
-    suspend fun save(syncronize: Syncronize): Long
+    suspend fun save(syncronize: Syncronize)
+
+    suspend fun clear()
 }
 
 class SyncronizeRepositoryImpl(private val dao: SyncronizeDAO, private val service: SyncService) :
@@ -23,6 +25,8 @@ class SyncronizeRepositoryImpl(private val dao: SyncronizeDAO, private val servi
 
     override suspend fun getLastSyncronized(): Syncronize? = dao.getLast()?.toModel()
 
-    override suspend fun save(syncronize: Syncronize): Long = dao.save(syncronize.toLocal())
+    override suspend fun save(syncronize: Syncronize) = dao.save(syncronize.toLocal())
+
+    override suspend fun clear() = dao.clear()
 
 }

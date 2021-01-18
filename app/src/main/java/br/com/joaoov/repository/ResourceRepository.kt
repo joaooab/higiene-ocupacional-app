@@ -23,34 +23,34 @@ interface ResourceRepository {
 }
 
 class ResourceRepositoryImpl(
-    private val resorceAmbientDao: ResourceAmbientDAO,
-    private val resourceRiskDao: ResourceRiskDAO,
-    private val resourceAgentDao: ResourceAgentDAO,
+    private val resorceAmbientDAO: ResourceAmbientDAO,
+    private val resourceRiskDAO: ResourceRiskDAO,
+    private val resourceAgentDAO: ResourceAgentDAO,
     private val service: ResourceService
 ) : ResourceRepository {
 
     override suspend fun fetchAllAmbientResources(updateAt: String?) {
         val resources = service.fetchAllAmbientResources(updateAt).map { it.toModel() }
-        resorceAmbientDao.save(resources.toLocal())
+        resorceAmbientDAO.save(resources.toLocal())
     }
 
     override suspend fun fetchAllRisksResources(updateAt: String?) {
         val resources = service.fetchAllRisksResources(updateAt).map { it.toModel() }
-        resourceRiskDao.save(resources.toLocal())
+        resourceRiskDAO.save(resources.toLocal())
     }
 
     override suspend fun fetchAllAgentsResources(updateAt: String?) {
         val resources = service.fetchAllAgentsResources(updateAt).map { it.toModel() }
-        resourceAgentDao.save(resources.toLocal())
+        resourceAgentDAO.save(resources.toLocal())
     }
 
     override fun getAmbentResourcesByCategory(category: ResourceAmbientCategory): LiveData<List<ResourceAmbient>> =
-        resorceAmbientDao.getAllByCategory(category.toString()).map { it.toModel() }
+        resorceAmbientDAO.getAllByCategory(category.toString()).map { it.toModel() }
 
     override fun getRiskResourcesByCategory(category: ResourceRiskCategory): LiveData<List<ResourceRisk>> =
-        resourceRiskDao.getAllByCategory(category.toString()).map { it.toModel() }
+        resourceRiskDAO.getAllByCategory(category.toString()).map { it.toModel() }
 
     override fun getAgentResourcesByCategory(category: ResourceAgentCategory): LiveData<List<ResourceAgent>> =
-        resourceAgentDao.getAllByCategory(category.toString()).map { it.toModel() }
+        resourceAgentDAO.getAllByCategory(category.toString()).map { it.toModel() }
 
 }

@@ -12,9 +12,8 @@ interface SyncronizeDAO {
     suspend fun getLast(): SyncronizeLocal?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(syncronize: SyncronizeLocal): Long
+    suspend fun save(syncronize: SyncronizeLocal)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(syncronize: List<SyncronizeLocal>)
-
+    @Query("DELETE FROM syncronize")
+    suspend fun clear()
 }

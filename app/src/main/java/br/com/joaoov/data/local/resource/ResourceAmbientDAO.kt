@@ -9,11 +9,8 @@ interface ResourceAmbientDAO {
     @Query("SELECT * FROM resource_ambients")
     fun getAll(): LiveData<List<ResourceAmbientLocal>>
 
-    @Query("SELECT * FROM resource_ambients WHERE category = :category")
+    @Query("SELECT * FROM resource_ambients WHERE category = :category ORDER BY name")
     fun getAllByCategory(category: String): LiveData<List<ResourceAmbientLocal>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(resource: ResourceAmbientLocal): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(resources: List<ResourceAmbientLocal>)
