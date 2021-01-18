@@ -23,6 +23,11 @@ android {
     buildTypes {
         debug {
             debuggable true
+            aaptOptions.cruncherEnabled = false //disable png cunching
+            splits.abi.enable = false  //disable multi apk generation
+            splits.density.enable = false  //disable multi apk generation
+            ext.alwaysUpdateBuildId = false  //crashlytics will generate a unique build ID
+            ext.enableCrashlytics = false
             manifestPlaceholders = [crashlyticsEnabled: true]
         }
         release {
