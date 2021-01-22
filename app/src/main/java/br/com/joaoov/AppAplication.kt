@@ -5,6 +5,7 @@ import br.com.joaoov.di.daoModule
 import br.com.joaoov.di.repositoryModule
 import br.com.joaoov.di.servciceModule
 import br.com.joaoov.di.viewModelModule
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -23,5 +24,6 @@ class AppAplication : Application() {
                 )
             )
         }
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
     }
 }

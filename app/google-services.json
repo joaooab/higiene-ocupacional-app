@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1071464772587",
+    "project_id": "higiene-ocupacional-android",
+    "storage_bucket": "higiene-ocupacional-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071464772587:android:3ac09d9039697298b15fae",
+        "android_client_info": {
+          "package_name": "br.com.joaoov"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071464772587-kdgoifs6utueau8p8jg05ktu2acffafk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.joaoov",
+            "certificate_hash": "47d61e996fdb11c4d109275cce1853e8922e6a11"
+          }
+        },
+        {
+          "client_id": "1071464772587-ac1qvleb1161ko53bmvp3ovpm1m583up.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMW05mKjzSQTs3R4pHR7BZEF-f5y4pT6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071464772587-ac1qvleb1161ko53bmvp3ovpm1m583up.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

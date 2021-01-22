@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 30
@@ -19,8 +21,20 @@ android {
     }
 
     buildTypes {
+        debug {
+            debuggable true
+            aaptOptions.cruncherEnabled = false //disable png cunching
+            splits.abi.enable = false  //disable multi apk generation
+            splits.density.enable = false  //disable multi apk generation
+            ext.alwaysUpdateBuildId = false  //crashlytics will generate a unique build ID
+            ext.enableCrashlytics = false
+            manifestPlaceholders = [crashlyticsEnabled: true]
+        }
         release {
             minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            manifestPlaceholders = [crashlyticsEnabled: true]
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -61,6 +75,10 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+
+    implementation platform('com.google.firebase:firebase-bom:26.3.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
