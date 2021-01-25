@@ -1,5 +1,7 @@
 package br.com.joaoov.ext
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Patterns
 import com.google.android.material.textfield.TextInputLayout
 
@@ -10,6 +12,7 @@ fun String.isValidEmail(): Boolean {
 }
 
 fun TextInputLayout.setTypeEmail() {
+    this.errorListener()
     this.editText?.let {
         it.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
@@ -24,4 +27,19 @@ fun TextInputLayout.setTypeEmail() {
             }
         }
     }
+}
+
+fun TextInputLayout.errorListener() {
+    editText?.addTextChangedListener(object :
+        TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            error = null
+        }
+    })
 }

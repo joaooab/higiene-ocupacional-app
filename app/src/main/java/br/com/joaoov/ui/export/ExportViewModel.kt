@@ -9,6 +9,7 @@ import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.data.local.report.Report
 import br.com.joaoov.repository.CompanyRepository
 import br.com.joaoov.repository.ReportRepository
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -32,6 +33,7 @@ class ExportViewModel(
             }.onSuccess {
                 _sendState.postValue(State.Success(Unit))
             }.onFailure {
+                FirebaseCrashlytics.getInstance().recordException(it)
                 _sendState.postValue(State.Error(it))
             }
         }

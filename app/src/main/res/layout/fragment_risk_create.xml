@@ -5,22 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         tools:context="ui.risk.RiskCreateFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutRiskFactorType"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="0dp"
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:checkedButton="@id/radioButtonESocial"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonESocial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/e_social" />
+
+            <RadioButton
+                android:id="@+id/radioButtonOld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/not_e_social" />
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutRiskFactorType"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewAgents"
@@ -34,15 +57,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutRiskFactor"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:enabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRiskFactorType">
+            android:enabled="false">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewRiskFactor"
@@ -58,14 +78,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutGeneratingSource"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRiskFactor">
+            android:layout_marginEnd="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewGeneratingSource"
@@ -86,10 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutGeneratingSource">
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -106,10 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutIntensityConcentration">
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -128,10 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutActionLevel">
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -150,10 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNR15">
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -171,10 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutACGIH">
+            android:layout_marginEnd="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewTrajectory"
@@ -193,10 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTrajectory">
+            android:layout_marginEnd="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewEliminationNeutralization"
@@ -215,10 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEliminationNeutralization">
+            android:layout_marginEnd="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewExposure"
@@ -237,10 +233,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutExposureMode">
+            android:layout_marginEnd="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewSourceMethodology"
@@ -259,10 +252,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSourceMethodology">
+            android:layout_marginEnd="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewDegreeOfRisk"
@@ -276,7 +266,7 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -287,5 +277,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDegreeOfRisk" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>

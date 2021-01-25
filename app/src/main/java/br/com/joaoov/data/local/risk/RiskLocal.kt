@@ -20,7 +20,7 @@ data class RiskLocal(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val functionId: Long = 0,
-    val agentType: String,
+    val agentCategory: String,
     val agent: String,
     val generatedSource: String,
     val intensityConcentration: String,
@@ -38,7 +38,7 @@ data class RiskLocal(
 fun RiskLocal.toModel() = Risk(
     id,
     functionId,
-    ResourceAgentCategory.valueOf(agentType),
+    ResourceAgentCategory.valueOf(agentCategory),
     agent,
     generatedSource,
     intensityConcentration,

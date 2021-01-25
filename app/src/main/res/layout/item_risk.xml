@@ -26,7 +26,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/textViewFirstLetter"
@@ -40,6 +40,8 @@
             style="@style/TextItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textAllCaps="true"
             tools:text="01.19.003 - 1-3-butadieno" />
 
@@ -86,10 +88,18 @@
         tools:visibility="visible">
 
         <TextView
+            android:id="@+id/textViewRiskFactor"
+            style="@style/TextItemDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Fator de risco: Benzeno e seus compostos tóxicos (exceto os abaixo especificados, que constam expressamente no Anexo IV do Decreto 3.048/1999)" />
+
+        <TextView
             android:id="@+id/textViewGeneratingSource"
             style="@style/TextItemDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             tools:text="Fonte geradora: Ar" />
 
         <TextView

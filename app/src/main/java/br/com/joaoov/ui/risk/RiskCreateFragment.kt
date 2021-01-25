@@ -28,14 +28,32 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
         handleObserve()
-        setupSaveButton()
     }
 
     private fun setupView() {
+        setupAgents(ResourceAgentCategory.getFormatedValues())
+        setupRadioButton()
+        setupSaveButton()
+    }
+
+    private fun setupRadioButton() {
+        radioGroup.setOnCheckedChangeListener { radioGroup, id ->
+            when (id) {
+                R.id.radioButtonESocial -> {
+                    setupAgents(ResourceAgentCategory.getFormatedValues(isESocial = true))
+                }
+                R.id.radioButtonOld -> {
+                    setupAgents(ResourceAgentCategory.getFormatedValues(isESocial = false))
+                }
+            }
+        }
+    }
+
+    private fun setupAgents(categories: List<String>) {
         val adapter = ArrayAdapter(
             requireContext(),
             R.layout.drop_down_item,
-            ResourceAgentCategory.getFormatedValues()
+            categories
         )
         autoCompleteTextViewAgents.setAdapter(adapter)
         autoCompleteTextViewAgents.onItemClickListener =
@@ -77,7 +95,7 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
     private fun observeAgentCategory() {
         viewModel.category.observe(viewLifecycleOwner, { category ->
             autoCompleteTextViewRiskFactor.setText("")
-            if (category != null && category != ResourceAgentCategory.UNKNOW) {
+            if (category != null && category != ResourceAgentCategory.UNKNOWN) {
                 textInputLayoutRiskFactor.isEnabled = true
                 autoCompleteTextViewRiskFactor.isEnabled = true
                 viewModel.getResourceAgentByCategory(category).observe(viewLifecycleOwner, {
@@ -98,7 +116,7 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
             val agentType = textInputLayoutRiskFactorType.getString()
             val risk = Risk(
                 functionId = arguments.function.id,
-                agentType = ResourceAgentCategory.fromFormatedValue(agentType),
+                agentCategory = ResourceAgentCategory.fromFormatedValue(agentType),
                 agent = agentName,
                 generatedSource = textInputLayoutGeneratingSource.getString(),
                 intensity = textInputLayoutIntensityConcentration.getString(),

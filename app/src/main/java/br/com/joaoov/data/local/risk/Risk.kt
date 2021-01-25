@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 data class Risk(
     val id: Long = 0,
     val functionId: Long = 0,
-    val agentType: ResourceAgentCategory,
+    val agentCategory: ResourceAgentCategory,
     val agent: String,
     val generatedSource: String,
     val intensity: String,
@@ -29,7 +29,7 @@ data class Risk(
 fun Risk.toLocal() = RiskLocal(
     id,
     functionId,
-    agentType.toString(),
+    agentCategory.toString(),
     agent,
     generatedSource,
     intensity,

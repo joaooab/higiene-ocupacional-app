@@ -1,5 +1,7 @@
 package br.com.joaoov.ext
 
+import java.util.*
+
 fun String?.formatFirstChar(): String {
     if (this.isNullOrEmpty()) return ""
     val text = this.trim()
@@ -10,3 +12,5 @@ fun String?.formatFirstChar(): String {
     }
     return first.toUpperCase().toString()
 }
+
+fun String.toUpperCaseWithLocale() = this.toUpperCase(Locale("pt", "BR"))
