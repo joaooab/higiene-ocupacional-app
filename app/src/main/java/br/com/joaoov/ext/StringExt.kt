@@ -2,6 +2,12 @@ package br.com.joaoov.ext
 
 import java.util.*
 
+private const val DEFAULT_EMPTY = "N.A."
+
+fun String.formatToArea() = "$this m²"
+
+fun String.formatToMeters() = "$this m"
+
 fun String?.formatFirstChar(): String {
     if (this.isNullOrEmpty()) return ""
     val text = this.trim()
@@ -14,3 +20,9 @@ fun String?.formatFirstChar(): String {
 }
 
 fun String.toUpperCaseWithLocale() = this.toUpperCase(Locale("pt", "BR"))
+
+fun List<String>.addDefaultResource(): List<String> {
+    val mutableList = mutableListOf(DEFAULT_EMPTY)
+    mutableList.addAll(this)
+    return mutableList.toList()
+}

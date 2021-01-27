@@ -11,9 +11,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
-import br.com.joaoov.ext.formatFirstChar
-import br.com.joaoov.ext.gone
-import br.com.joaoov.ext.show
+import br.com.joaoov.ext.*
 import kotlinx.android.synthetic.main.item_ambient.view.*
 
 class AmbientListAdapter(
@@ -32,12 +30,12 @@ class AmbientListAdapter(
                 textViewArea.text = getString(
                     context,
                     R.string.label_area,
-                    item.getAreaFormat()
+                    item.area.formatToArea()
                 )
                 textViewHeight.text = getString(
                     context,
                     R.string.label_height,
-                    item.getHeightFormat()
+                    item.height.formatToMeters()
                 )
                 textViewFloor.text = getString(
                     context,

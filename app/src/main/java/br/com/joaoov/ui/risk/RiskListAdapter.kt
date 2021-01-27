@@ -41,7 +41,7 @@ class RiskListAdapter(
                 textViewDate.text = item.date
                 textViewRiskFactor.text = getString(
                     context,
-                    R.string.label_generating_source,
+                    R.string.label_risk_factor,
                     item.agent
                 )
                 textViewGeneratingSource.text = getString(

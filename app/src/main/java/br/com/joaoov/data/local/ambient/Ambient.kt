@@ -10,9 +10,8 @@ data class Ambient(
     val departamentId: Long,
     val date: String,
     val name: String,
-    val width: Double,
-    val length: Double,
-    val height: Double,
+    val area: String,
+    val height: String,
     val floor: String,
     val wall: String,
     val roof: String,
@@ -24,9 +23,6 @@ data class Ambient(
     val naturalVentilation: String,
     val artificialVentilation: String
 ) : Parcelable {
-    fun getAreaFormat() = "${width}m x ${length}m"
-
-    fun getHeightFormat() = "${height}m"
 
     @IgnoredOnParcel
     var showDetail: Boolean = false
@@ -38,8 +34,7 @@ fun Ambient.toLocal() =
         departamentId,
         date,
         name,
-        width,
-        length,
+        area,
         height,
         floor,
         wall,

@@ -41,8 +41,9 @@
     <string name="add_ambient">Adicionar ambient</string>
 
     <string name="local">Local</string>
-    <string name="width_area">Área largura (m)</string>
-    <string name="length_area">Área comp. (m)</string>
+    <string name="area">Área (m²)</string>
+    <string name="width_area">Largura (m)</string>
+    <string name="length_area">Comprimento. (m)</string>
     <string name="height">Pé direito (m)</string>
     <string name="floor">Piso</string>
     <string name="wall">Parede</string>
@@ -106,6 +107,7 @@
     <string name="message_email_send_info">Informe o e-mail para enviarmos o relatório</string>
     <string name="e_social">Previdência</string>
     <string name="not_e_social">Trabalhista</string>
+    <string name="calc_area">Calcular Área</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>

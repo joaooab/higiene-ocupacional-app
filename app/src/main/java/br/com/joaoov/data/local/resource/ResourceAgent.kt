@@ -13,7 +13,11 @@ data class ResourceAgent(
     var deleted: Boolean
 ) : Parcelable {
     override fun toString(): String {
-        return "$code - $name"
+        return if (category.isESocial()) {
+            "$code - $name"
+        } else {
+            name
+        }
     }
 }
 

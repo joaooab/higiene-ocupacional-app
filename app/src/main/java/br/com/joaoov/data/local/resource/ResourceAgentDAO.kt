@@ -9,7 +9,7 @@ interface ResourceAgentDAO {
     @Query("SELECT * FROM resource_agents")
     fun getAll(): LiveData<List<ResourceAgentLocal>>
 
-    @Query("SELECT * FROM resource_agents WHERE category LIKE :category ORDER BY code")
+    @Query("SELECT * FROM resource_agents WHERE category LIKE :category ORDER BY code, name")
     fun getAllByCategory(category: String): LiveData<List<ResourceAgentLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

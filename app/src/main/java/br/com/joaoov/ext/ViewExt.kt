@@ -25,10 +25,10 @@ fun TextInputLayout.getString(): String {
 
 fun TextInputLayout.setString(text: String) = this.editText?.setText(text)
 
-fun TextInputLayout.getDouble(): Double {
+fun TextInputLayout.getDouble(): Double? {
     return try {
         this.editText?.text.toString().toDouble()
     } catch (e: Exception) {
-        0.0
+        null
     }
 }

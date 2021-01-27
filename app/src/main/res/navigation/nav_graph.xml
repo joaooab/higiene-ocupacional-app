@@ -197,4 +197,5 @@
             android:name="company"
             app:argType="br.com.joaoov.data.local.company.Company" />
     </fragment>
+
 </navigation>

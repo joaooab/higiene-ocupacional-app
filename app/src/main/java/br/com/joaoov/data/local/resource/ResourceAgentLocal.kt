@@ -1,9 +1,13 @@
 package br.com.joaoov.data.local.resource
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "resource_agents")
+@Entity(
+    tableName = "resource_agents",
+    indices = [Index("code"), Index("name")]
+)
 data class ResourceAgentLocal(
     @PrimaryKey
     val id: String,

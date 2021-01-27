@@ -38,7 +38,6 @@ class AmbientViewModel(
         }
     }
 
-
     fun getResourceByCategory(category: ResourceAmbientCategory) =
         resourceRepository.getAmbentResourcesByCategory(category)
 

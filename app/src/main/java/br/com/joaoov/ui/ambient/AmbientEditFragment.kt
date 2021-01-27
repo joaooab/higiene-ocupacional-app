@@ -9,11 +9,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.joaoov.R
 import br.com.joaoov.data.local.resource.ResourceAmbientCategory
-import br.com.joaoov.ext.getDouble
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.hideKeyboard
 import br.com.joaoov.ext.setString
-import kotlinx.android.synthetic.main.fragment_ambient_create.*
+import br.com.joaoov.ext.supportFragmentManager
+import br.com.joaoov.ui.component.AreaDialog
+import kotlinx.android.synthetic.main.fragment_ambient_edit.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
@@ -25,15 +26,13 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
         handleObserve()
-        setupSaveButton()
     }
 
     private fun setupView() {
         arguments.ambient.let {
             textInputLayoutLocal.setString(it.name)
-            textInputLayoutAreaWidth.setString(it.width.toString())
-            textInputLayoutAreaLenght.setString(it.length.toString())
-            textInputLayoutHeight.setString(it.height.toString())
+            textInputLayoutArea.setString(it.area)
+            textInputLayoutHeight.setString(it.height)
             textInputLayoutFloor.setString(it.floor)
             textInputLayoutWall.setString(it.wall)
             textInputLayoutRoof.setString(it.roof)
@@ -45,6 +44,9 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
             textInputLayoutNaturalVentilation.setString(it.naturalVentilation)
             textInputLayoutArtificialVentilation.setString(it.artificialVentilation)
         }
+
+        setupSaveButton()
+        setupCalcButton()
     }
 
     private fun setupSaveButton() {
@@ -56,9 +58,8 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
             }
             val ambient = arguments.ambient.copy(
                 name = localName,
-                width = textInputLayoutAreaWidth.getDouble(),
-                length = textInputLayoutAreaLenght.getDouble(),
-                height = textInputLayoutHeight.getDouble(),
+                area = textInputLayoutArea.getString(),
+                height = textInputLayoutHeight.getString(),
                 floor = textInputLayoutFloor.getString(),
                 wall = textInputLayoutWall.getString(),
                 roof = textInputLayoutRoof.getString(),
@@ -72,6 +73,16 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
             )
             viewModel.update(ambient)
             findNavController().popBackStack()
+        }
+    }
+
+    private fun setupCalcButton() {
+        calcButton.setOnClickListener {
+            supportFragmentManager {
+                AreaDialog.newInstance {
+                    textInputLayoutArea.setString(it)
+                }.show(this, "")
+            }
         }
     }
 

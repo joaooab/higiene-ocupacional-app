@@ -10,10 +10,8 @@ import androidx.navigation.fragment.navArgs
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.resource.ResourceAmbientCategory
-import br.com.joaoov.ext.format
-import br.com.joaoov.ext.getDouble
-import br.com.joaoov.ext.getString
-import br.com.joaoov.ext.hideKeyboard
+import br.com.joaoov.ext.*
+import br.com.joaoov.ui.component.AreaDialog
 import kotlinx.android.synthetic.main.fragment_ambient_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -26,7 +24,7 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleObserve()
-        setupSaveButton()
+        setupView()
     }
 
     private fun handleObserve() {
@@ -73,11 +71,28 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
     }
 
     private fun observeResource(category: ResourceAmbientCategory, textView: AutoCompleteTextView) {
-        viewModel.getResourceByCategory(category).observe(viewLifecycleOwner, {
-            val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, it)
+        viewModel.getResourceByCategory(category).observe(viewLifecycleOwner, { resources ->
+            val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, resources)
             textView.setAdapter(adapter)
         })
     }
+
+
+    private fun setupView() {
+        setupSaveButton()
+        setupCalcButton()
+    }
+
+    private fun setupCalcButton() {
+        calcButton.setOnClickListener {
+            supportFragmentManager {
+                AreaDialog.newInstance {
+                    textInputLayoutArea.setString(it)
+                }.show(this, "")
+            }
+        }
+    }
+
 
     private fun setupSaveButton() {
         buttonSave.setOnClickListener {
@@ -90,9 +105,8 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
                 departamentId = arguments.departament.id,
                 name = localName,
                 date = Date().format(),
-                width = textInputLayoutAreaWidth.getDouble(),
-                length = textInputLayoutAreaLenght.getDouble(),
-                height = textInputLayoutHeight.getDouble(),
+                area = textInputLayoutArea.getString(),
+                height = textInputLayoutHeight.getString(),
                 floor = textInputLayoutFloor.getString(),
                 wall = textInputLayoutWall.getString(),
                 roof = textInputLayoutRoof.getString(),
