@@ -1,12 +1,11 @@
 package br.com.joaoov.data.local.departament
 
 import android.os.Parcelable
-import androidx.room.PrimaryKey
+import br.com.joaoov.data.remote.departament.DepartamentNetwork
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Departament(
-    @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val companyId: Long = 0,
     val name: String,
@@ -22,3 +21,13 @@ fun Departament.toLocal() =
     )
 
 fun List<Departament>.toLocal() = map { it.toLocal() }
+
+fun Departament.toNetwork() =
+    DepartamentNetwork(
+        id,
+        companyId,
+        name,
+        date
+    )
+
+fun List<Departament>.toNetwork() = map { it.toNetwork() }

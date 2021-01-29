@@ -21,7 +21,7 @@ object AppRemote {
             .build()
     }
 
-    val service = Retrofit.Builder()
+    val service: Retrofit = Retrofit.Builder()
         .baseUrl(URL)
         .client(createClient())
         .addConverterFactory(GsonConverterFactory.create())

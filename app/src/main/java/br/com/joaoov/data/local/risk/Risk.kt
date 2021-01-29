@@ -2,6 +2,7 @@ package br.com.joaoov.data.local.risk
 
 import android.os.Parcelable
 import br.com.joaoov.data.local.resource.ResourceAgentCategory
+import br.com.joaoov.data.remote.risk.RiskNetwork
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
@@ -44,3 +45,23 @@ fun Risk.toLocal() = RiskLocal(
 )
 
 fun List<Risk>.toLocal() = map { it.toLocal() }
+
+
+fun Risk.toNetwork() = RiskNetwork(
+    id,
+    functionId,
+    agentCategory.toString(),
+    agent,
+    generatedSource,
+    intensity,
+    actionLevel,
+    tolerance.toNetwork(),
+    trajectory,
+    eliminationNeutralization,
+    exposure,
+    methodology,
+    degreeOfRisk,
+    date
+)
+
+fun List<Risk>.toNetwork() = map { it.toNetwork() }

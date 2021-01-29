@@ -1,6 +1,7 @@
 package br.com.joaoov.data.local.company
 
 import android.os.Parcelable
+import br.com.joaoov.data.remote.company.CompanyNetwork
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -18,3 +19,12 @@ fun Company.toLocal() =
     )
 
 fun List<Company>.toLocal() = map { it.toLocal() }
+
+fun Company.toNetwork() =
+    CompanyNetwork(
+        id,
+        name,
+        date
+    )
+
+fun List<Company>.toNetwork() = map { it.toNetwork() }

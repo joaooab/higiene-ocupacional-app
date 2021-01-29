@@ -1,6 +1,7 @@
 package br.com.joaoov.data.local.risk
 
 import android.os.Parcelable
+import br.com.joaoov.data.remote.risk.ToleranceNetwork
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -15,3 +16,10 @@ fun Tolerance.toLocal() = ToleranceLocal(
 )
 
 fun List<Tolerance>.toLocal() = map { it.toLocal() }
+
+fun Tolerance.toNetwork() = ToleranceNetwork(
+    NR15,
+    ACGIH
+)
+
+fun List<Tolerance>.toNetwork() = map { it.toNetwork() }

@@ -1,6 +1,7 @@
 package br.com.joaoov.data.local.ambient
 
 import android.os.Parcelable
+import br.com.joaoov.data.remote.ambient.AmbientNetwork
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
@@ -49,3 +50,25 @@ fun Ambient.toLocal() =
     )
 
 fun List<Ambient>.toLocal() = map { it.toLocal() }
+
+fun Ambient.toNetwork() =
+    AmbientNetwork(
+        id,
+        departamentId,
+        date,
+        name,
+        area,
+        height,
+        floor,
+        wall,
+        roof,
+        roofTiles,
+        window,
+        ceiling,
+        naturalLighting,
+        artificialLighting,
+        naturalVentilation,
+        artificialVentilation
+    )
+
+fun List<Ambient>.toNetwork() = map { it.toNetwork() }
