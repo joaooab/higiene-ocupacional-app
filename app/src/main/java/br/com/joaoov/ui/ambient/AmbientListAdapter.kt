@@ -49,7 +49,7 @@ class AmbientListAdapter(
                 )
                 textViewRoofTiles.text = getString(
                     context,
-                    R.string.label_roof,
+                    R.string.label_roof_tiles,
                     item.roofTiles
                 )
                 textViewNaturalLighting.text = getString(
