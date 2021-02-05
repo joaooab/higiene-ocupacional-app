@@ -1,6 +1,6 @@
 package br.com.joaoov.di
 
-import br.com.joaoov.ComponentViewModel
+import br.com.joaoov.MainViewModel
 import br.com.joaoov.SyncViewModel
 import br.com.joaoov.data.local.AppDatabase
 import br.com.joaoov.data.remote.AppRemote
@@ -19,7 +19,7 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { ComponentViewModel() }
+    viewModel { MainViewModel() }
     viewModel { AmbientViewModel(get(), get()) }
     viewModel { CompanyViewModel(get()) }
     viewModel { DepartamentViewModel(get()) }

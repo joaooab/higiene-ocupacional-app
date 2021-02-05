@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import br.com.joaoov.ComponentViewModel
+import br.com.joaoov.MainViewModel
 import br.com.joaoov.Path
 import br.com.joaoov.R
 import br.com.joaoov.data.local.function.Function
@@ -19,7 +19,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class RiskListFragment : Fragment(R.layout.fragment_risk) {
 
     private val args by navArgs<RiskListFragmentArgs>()
-    private val componentViewModel: ComponentViewModel by sharedViewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private val viewModel: RiskViewModel by viewModel()
     private lateinit var function: Function
     private val adapter by lazy {
@@ -33,14 +33,14 @@ class RiskListFragment : Fragment(R.layout.fragment_risk) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         function = args.funcion
-        componentViewModel.addPath(Path(Path.FUNCTION_PATH, function.name))
+        mainViewModel.addPath(Path(Path.FUNCTION_PATH, function.name))
         setupView()
         handleObserve()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        componentViewModel.removePath()
+        mainViewModel.removePath()
     }
 
     private fun setupView() {

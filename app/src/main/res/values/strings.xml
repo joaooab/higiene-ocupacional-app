@@ -3,7 +3,6 @@
 
     <string name="fragment_compay_label">Empresas</string>
     <string name="fragment_compay_create_label">Criar empresa</string>
-    <string name="fragment_compay_edit_label">Editar empresa</string>
     <string name="fragment_ambient_label">Ambientes</string>
     <string name="fragment_ambient_detail_label">Detalhes do Ambiente</string>
     <string name="fragment_ambient_create_label">Criar Ambiente</string>
@@ -19,7 +18,6 @@
     <string name="fragment_risk_label">Riscos</string>
     <string name="fragment_export_select_company_label">Exportar Relatório</string>
     <string name="fragment_export_send_report_label">Enviar Relatório</string>
-    <string name="fragment_workday">Jornada de Trabalho</string>
 
     <string name="action_edit">Editar</string>
     <string name="action_delete">Excluir</string>
@@ -27,9 +25,7 @@
     <string name="action_sync">Sincronizar</string>
     <string name="action_save">Salvar</string>
     <string name="action_send">Enviar</string>
-    <string name="action_send_again">Tentar Novamente</string>
-    <string name="action_finish">Finalizar</string>
-    <string name="action_cancel">Cancelar</string>
+    <string name="action_send_again">Enviar</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
@@ -105,7 +101,6 @@
     <string name="sync_failed">Falha na sincronização</string>
 
     <string name="message_error_required">Campo obrigatório</string>
-    <string name="message_error_start_greater_then_end">Horário início não pode ser maior ou igual ao horário fim</string>
     <string name="message_invalid_email">Email inválido</string>
     <string name="message_select_company_info">Selecione a empresa para gerar o relatório</string>
     <string name="message_send_success">Relatório enviado com sucesso</string>
@@ -113,11 +108,6 @@
     <string name="e_social">Previdência</string>
     <string name="not_e_social">Trabalhista</string>
     <string name="calc_area">Calcular Área</string>
-    <string name="function_amount">Quantidade de funcionários</string>
-    <string name="end">Horário final:</string>
-    <string name="begin">Horário início:</string>
-    <string name="message_select_dayofweek">Selecione os dias da semana</string>
-    <string name="message_select_hour">Selecione o horário de ínicio e fim</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>

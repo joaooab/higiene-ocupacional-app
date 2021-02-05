@@ -11,19 +11,3 @@ fun Date.format(): String {
         ""
     }
 }
-
-fun Int.toHour(): String {
-    return if (this < 10) {
-        "0$this"
-    } else {
-        "$this"
-    }
-}
-
-fun Int.toMinute(): String {
-    return if (this < 10) {
-        "${this}0"
-    } else {
-        "$this"
-    }
-}

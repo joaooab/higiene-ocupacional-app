@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import br.com.joaoov.data.local.ambient.AmbientDAO
 import br.com.joaoov.data.local.ambient.AmbientLocal
 import br.com.joaoov.data.local.company.CompanyDAO
@@ -22,7 +20,7 @@ import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 25,
+    version = 24,
     entities = [
         CompanyLocal::class,
         DepartamentLocal::class,
@@ -63,24 +61,8 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                .addMigrations(*DatabaseMigrations.getMigrations())
+                .fallbackToDestructiveMigration()
                 .build()
         }
     }
-}
-
-object DatabaseMigrations {
-
-    fun getMigrations(): Array<Migration> {
-        return arrayOf(
-            MIGRATION_24_25,
-        )
-    }
-
-    private val MIGRATION_24_25: Migration = object : Migration(24, 25) {
-        override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("ALTER TABLE function ADD COLUMN amount INTEGER")
-        }
-    }
-
 }

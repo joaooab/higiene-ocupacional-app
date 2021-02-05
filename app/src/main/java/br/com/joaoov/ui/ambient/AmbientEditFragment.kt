@@ -7,8 +7,6 @@ import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import br.com.joaoov.ComponentViewModel
-import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.local.resource.ResourceAmbientCategory
 import br.com.joaoov.ext.getString
@@ -17,19 +15,15 @@ import br.com.joaoov.ext.setString
 import br.com.joaoov.ext.supportFragmentManager
 import br.com.joaoov.ui.component.AreaDialog
 import kotlinx.android.synthetic.main.fragment_ambient_edit.*
-import kotlinx.android.synthetic.main.include_ambient_form.*
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
 
     private val arguments by navArgs<AmbientEditFragmentArgs>()
     private val viewModel: AmbientViewModel by viewModel()
-    private val componentViewModel: ComponentViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        componentViewModel.withComponents = Components(path = true)
         setupView()
         handleObserve()
     }
@@ -56,7 +50,7 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
     }
 
     private fun setupSaveButton() {
-        buttonEdit.setOnClickListener {
+        buttonSave.setOnClickListener {
             val localName = textInputLayoutLocal.getString()
             if (localName.isEmpty()) {
                 textInputLayoutLocal.error = getString(R.string.message_error_required)

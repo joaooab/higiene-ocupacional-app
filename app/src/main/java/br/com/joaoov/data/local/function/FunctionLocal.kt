@@ -25,7 +25,6 @@ data class FunctionLocal(
     val name: String,
     val date: String,
     val description: String,
-    val amount: Int?,
     val workday: String
 )
 
@@ -36,7 +35,6 @@ fun FunctionLocal.toModel() =
         name,
         date,
         description,
-        amount,
         workday
     )
 

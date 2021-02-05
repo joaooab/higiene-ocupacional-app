@@ -24,7 +24,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
 
     private val syncViewModel: SyncViewModel by viewModel()
-    private val componentViewModel: ComponentViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
     private val adapterPath by lazy {
@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleObserve() {
         observeSyncronizeState()
-        observeComponents()
         observePathState()
     }
 
@@ -67,18 +66,8 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(R.id.exportSelectCompanyFragment)
     }
 
-    private fun observeComponents() {
-        componentViewModel.components.observe(this, {
-            if (it.path) {
-                recyclerViewPath.show()
-            } else {
-                recyclerViewPath.gone()
-            }
-        })
-    }
-
     private fun observePathState() {
-        componentViewModel.pathState.observe(this, { state ->
+        mainViewModel.pathState.observe(this, { state ->
             when (state) {
                 is PathState.Add -> {
                     adapterPath.add(state.path)
@@ -123,17 +112,17 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-//            when (destination.id) {
-//                R.id.exportSelectCompanyFragment -> {
-//                    recyclerViewPath.gone()
-//                }
-//                R.id.exportSendReportFragment -> {
-//                    recyclerViewPath.gone()
-//                }
-//                else -> {
-//                    recyclerViewPath.show()
-//                }
-//            }
+            when (destination.id) {
+                R.id.exportSelectCompanyFragment -> {
+                    recyclerViewPath.gone()
+                }
+                R.id.exportSendReportFragment -> {
+                    recyclerViewPath.gone()
+                }
+                else -> {
+                    recyclerViewPath.show()
+                }
+            }
         }
     }
 

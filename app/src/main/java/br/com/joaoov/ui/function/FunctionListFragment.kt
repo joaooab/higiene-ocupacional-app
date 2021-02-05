@@ -8,8 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import br.com.joaoov.ComponentViewModel
-import br.com.joaoov.Components
+import br.com.joaoov.MainViewModel
 import br.com.joaoov.Path
 import br.com.joaoov.Path.Companion.AMBIENT_PATH
 import br.com.joaoov.R
@@ -22,7 +21,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FunctionListFragment : Fragment(R.layout.fragment_company) {
 
     private val arguments by navArgs<FunctionListFragmentArgs>()
-    private val componentViewModel: ComponentViewModel by sharedViewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private val viewModel: FunctionViewModel by viewModel()
     private val adapter: FunctionListAdapter by lazy {
         FunctionListAdapter(
@@ -36,8 +35,7 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ambient = arguments.ambient
-        componentViewModel.withComponents = Components(path = true)
-        componentViewModel.addPath(Path(AMBIENT_PATH, ambient.name))
+        mainViewModel.addPath(Path(AMBIENT_PATH, ambient.name))
         handleObserve()
         setupView()
     }
@@ -49,7 +47,7 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
 
     override fun onDestroy() {
         super.onDestroy()
-        componentViewModel.removePath()
+        mainViewModel.removePath()
     }
 
     private fun setupAdapter() {
