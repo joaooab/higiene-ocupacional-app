@@ -8,14 +8,18 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import br.com.joaoov.ComponentViewModel
+import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.local.company.Company
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class ExportSelectCompanyFragment : Fragment(R.layout.fragment_export_select_company) {
 
     private val viewModel: ExportViewModel by inject()
+    private val componentViewModel: ComponentViewModel by sharedViewModel()
 
     private val adapterCompany: ExportCompanyListAdapter by lazy {
         ExportCompanyListAdapter(
@@ -43,6 +47,7 @@ class ExportSelectCompanyFragment : Fragment(R.layout.fragment_export_select_com
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        componentViewModel.withComponents = Components(path = false)
         setupView()
         handleObserve()
     }

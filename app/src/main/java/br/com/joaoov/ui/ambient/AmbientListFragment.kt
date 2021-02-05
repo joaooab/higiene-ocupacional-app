@@ -8,8 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import br.com.joaoov.MainActivity
-import br.com.joaoov.MainViewModel
+import br.com.joaoov.ComponentViewModel
+import br.com.joaoov.Components
 import br.com.joaoov.Path
 import br.com.joaoov.Path.Companion.DEPARTAMENT_PATH
 import br.com.joaoov.R
@@ -23,7 +23,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
 
     private val arguments by navArgs<AmbientListFragmentArgs>()
-    private val mainViewModel: MainViewModel by sharedViewModel()
+    private val componentViewModel: ComponentViewModel by sharedViewModel()
     private val viewModel: AmbientViewModel by viewModel()
     private val adapter: AmbientListAdapter by lazy {
         AmbientListAdapter(
@@ -38,7 +38,8 @@ class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         departament = arguments.departament
-        mainViewModel.addPath(Path(DEPARTAMENT_PATH, departament.name))
+        componentViewModel.withComponents = Components(path = true)
+        componentViewModel.addPath(Path(DEPARTAMENT_PATH, departament.name))
         handleObserve()
         setupView()
     }
@@ -54,7 +55,7 @@ class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
 
     override fun onDestroy() {
         super.onDestroy()
-        mainViewModel.removePath()
+        componentViewModel.removePath()
     }
 
     private fun setupFab() {

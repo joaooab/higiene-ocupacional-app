@@ -12,6 +12,7 @@ data class Function(
     val name: String,
     val date: String,
     val description: String,
+    val amount: Int?,
     val workday: String
 ) : Parcelable {
 
@@ -26,6 +27,7 @@ fun Function.toLocal() =
         name,
         date,
         description,
+        amount,
         workday
     )
 
@@ -39,6 +41,7 @@ fun Function.toNetwork() =
         name,
         date,
         description,
+        amount,
         workday
     )
 

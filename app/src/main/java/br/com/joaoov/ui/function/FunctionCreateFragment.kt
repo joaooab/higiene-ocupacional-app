@@ -3,14 +3,18 @@ package br.com.joaoov.ui.function
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import br.com.joaoov.ComponentViewModel
+import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.local.function.Function
-import br.com.joaoov.ext.format
-import br.com.joaoov.ext.getString
-import br.com.joaoov.ext.hideKeyboard
+import br.com.joaoov.ext.*
+import br.com.joaoov.ui.component.WorkdayFragment
 import kotlinx.android.synthetic.main.fragment_funciton_create.*
+import kotlinx.android.synthetic.main.include_funciton_form.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -18,10 +22,37 @@ class FunctionCreateFragment : Fragment(R.layout.fragment_funciton_create) {
 
     private val arguments by navArgs<FunctionCreateFragmentArgs>()
     private val viewModel: FunctionViewModel by viewModel()
+    private val componentViewModel: ComponentViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        componentViewModel.withComponents = Components(path = true)
+        setupView()
+    }
+
+    private fun setupView() {
         setupSaveButton()
+        setupWorkday()
+    }
+
+    private fun setupWorkday() {
+        editTextWorkDay.setOnClickListener {
+            viewModel.functionDraft = createFunction()
+            setFragmentResultListener(WorkdayFragment.REQUEST_KEY) { _, bundle ->
+                val workDayResult = bundle.getString(WorkdayFragment.RESULT_KEY, "")
+                viewModel.functionDraft?.let { draft ->
+                    textInputLayoutFunction.setString(draft.name)
+                    textInputLayoutDescription.setString(draft.description)
+                    textInputLayoutAmount.setString(draft.amount.toString())
+                    if (workDayResult.isNotEmpty()) {
+                        textInputLayoutWorkDay.setString(workDayResult)
+                    } else {
+                        textInputLayoutWorkDay.setString(draft.workday)
+                    }
+                }
+            }
+            findNavController().navigate(R.id.workdayFragment)
+        }
     }
 
     private fun setupSaveButton() {
@@ -31,16 +62,21 @@ class FunctionCreateFragment : Fragment(R.layout.fragment_funciton_create) {
                 textInputLayoutFunction.error = getString(R.string.message_error_required)
                 return@setOnClickListener
             }
-            val function = Function(
-                name = functionName,
-                ambientId = arguments.ambient.id,
-                date = Date().format(),
-                description = textInputLayoutDescription.getString(),
-                workday = textInputLayoutWorkDay.getString()
-            )
+            val function = createFunction()
             viewModel.salvar(function)
             findNavController().popBackStack()
         }
+    }
+
+    private fun createFunction(): Function {
+        return Function(
+            name = textInputLayoutFunction.getString(),
+            ambientId = arguments.ambient.id,
+            date = Date().format(),
+            description = textInputLayoutDescription.getString(),
+            amount = textInputLayoutAmount.getInt(),
+            workday = textInputLayoutWorkDay.getString()
+        )
     }
 
     override fun onPause() {

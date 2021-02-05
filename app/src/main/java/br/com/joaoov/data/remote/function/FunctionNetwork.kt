@@ -6,5 +6,6 @@ data class FunctionNetwork(
     val name: String?,
     val date: String?,
     val description: String?,
+    val amount: Int?,
     val workday: String?
 )
