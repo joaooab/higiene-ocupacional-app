@@ -31,23 +31,27 @@ class FunctionCreateFragment : Fragment(R.layout.fragment_funciton_create) {
     }
 
     private fun setupView() {
+        setupDraft()
         setupSaveButton()
         setupWorkday()
+    }
+
+    private fun setupDraft() {
+        viewModel.functionDraft?.let { draft ->
+            textInputLayoutFunction.setString(draft.name)
+            textInputLayoutDescription.setString(draft.description)
+            textInputLayoutAmount.setString(draft.amount.toStringOrEmpty())
+            textInputLayoutWorkDay.setString(draft.workday)
+        }
     }
 
     private fun setupWorkday() {
         editTextWorkDay.setOnClickListener {
             viewModel.functionDraft = createFunction()
             setFragmentResultListener(WorkdayFragment.REQUEST_KEY) { _, bundle ->
-                val workDayResult = bundle.getString(WorkdayFragment.RESULT_KEY, "")
-                viewModel.functionDraft?.let { draft ->
-                    textInputLayoutFunction.setString(draft.name)
-                    textInputLayoutDescription.setString(draft.description)
-                    textInputLayoutAmount.setString(draft.amount.toString())
-                    if (workDayResult.isNotEmpty()) {
-                        textInputLayoutWorkDay.setString(workDayResult)
-                    } else {
-                        textInputLayoutWorkDay.setString(draft.workday)
+                bundle.getString(WorkdayFragment.RESULT_KEY, "").let { workDay ->
+                    if (workDay.isNotEmpty()) {
+                        textInputLayoutWorkDay.setString(workDay)
                     }
                 }
             }

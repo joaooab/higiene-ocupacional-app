@@ -10,10 +10,7 @@ import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.local.function.Function
-import br.com.joaoov.ext.getInt
-import br.com.joaoov.ext.getString
-import br.com.joaoov.ext.hideKeyboard
-import br.com.joaoov.ext.setString
+import br.com.joaoov.ext.*
 import br.com.joaoov.ui.component.WorkdayFragment
 import kotlinx.android.synthetic.main.fragment_funciton_edit.*
 import kotlinx.android.synthetic.main.include_funciton_form.*
@@ -33,29 +30,26 @@ class FunctionEditFragment : Fragment(R.layout.fragment_funciton_edit) {
     }
 
     private fun setupView() {
-        arguments.function.let {
-            textInputLayoutFunction.setString(it.name)
-            textInputLayoutDescription.setString(it.description)
-            textInputLayoutWorkDay.setString(it.workday)
-            textInputLayoutAmount.setString(it.amount.toString())
-        }
+        setupDraft()
         setupSaveButton()
         setupWorkday()
+    }
+
+    private fun setupDraft() {
+        val function = viewModel.functionDraft ?: arguments.function
+        textInputLayoutFunction.setString(function.name)
+        textInputLayoutDescription.setString(function.description)
+        textInputLayoutAmount.setString(function.amount.toStringOrEmpty())
+        textInputLayoutWorkDay.setString(function.workday)
     }
 
     private fun setupWorkday() {
         editTextWorkDay.setOnClickListener {
             viewModel.functionDraft = createFunction()
             setFragmentResultListener(WorkdayFragment.REQUEST_KEY) { _, bundle ->
-                val workDayResult = bundle.getString(WorkdayFragment.RESULT_KEY, "")
-                viewModel.functionDraft?.let { draft ->
-                    textInputLayoutFunction.setString(draft.name)
-                    textInputLayoutDescription.setString(draft.description)
-                    textInputLayoutAmount.setString(draft.amount.toString())
-                    if (workDayResult.isNotEmpty()) {
-                        textInputLayoutWorkDay.setString(workDayResult)
-                    } else {
-                        textInputLayoutWorkDay.setString(draft.workday)
+                bundle.getString(WorkdayFragment.RESULT_KEY, "").let { workDay ->
+                    if (workDay.isNotEmpty()) {
+                        textInputLayoutWorkDay.setString(workDay)
                     }
                 }
             }

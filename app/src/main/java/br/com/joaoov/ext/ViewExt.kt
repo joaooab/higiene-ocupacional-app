@@ -31,7 +31,9 @@ fun TextInputLayout.getInt(): Int? {
     }
 }
 
-fun TextInputLayout.setString(text: String) = this.editText?.setText(text)
+fun TextInputLayout.setString(text: String) {
+    this.editText?.setText(text)
+}
 
 fun TextInputLayout.getDouble(): Double? {
     return try {

@@ -114,7 +114,7 @@
     <string name="not_e_social">Trabalhista</string>
     <string name="calc_area">Calcular Área</string>
     <string name="function_amount">Quantidade de funcionários</string>
-    <string name="end">Horário final:</string>
+    <string name="end">Horário fim:</string>
     <string name="begin">Horário início:</string>
     <string name="message_select_dayofweek">Selecione os dias da semana</string>
     <string name="message_select_hour">Selecione o horário de ínicio e fim</string>
