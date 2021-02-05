@@ -122,19 +122,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-//            when (destination.id) {
-//                R.id.exportSelectCompanyFragment -> {
-//                    recyclerViewPath.gone()
-//                }
-//                R.id.exportSendReportFragment -> {
-//                    recyclerViewPath.gone()
-//                }
-//                else -> {
-//                    recyclerViewPath.show()
-//                }
-//            }
-        }
+        navController.addOnDestinationChangedListener { _, _, _ -> }
     }
 
     override fun onSupportNavigateUp(): Boolean {
