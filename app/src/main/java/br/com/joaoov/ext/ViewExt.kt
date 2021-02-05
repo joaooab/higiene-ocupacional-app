@@ -23,7 +23,17 @@ fun TextInputLayout.getString(): String {
     }
 }
 
-fun TextInputLayout.setString(text: String) = this.editText?.setText(text)
+fun TextInputLayout.getInt(): Int? {
+    return try {
+        this.editText?.text.toString().toInt()
+    } catch (e: Exception) {
+        null
+    }
+}
+
+fun TextInputLayout.setString(text: String) {
+    this.editText?.setText(text)
+}
 
 fun TextInputLayout.getDouble(): Double? {
     return try {

@@ -113,7 +113,7 @@
     <fragment
         android:id="@+id/companyEditFragment"
         android:name="br.com.joaoov.ui.company.CompanyEditFragment"
-        android:label="CompanyEditFragment"
+        android:label="@string/fragment_compay_edit_label"
         tools:layout="@layout/fragment_company_create">
         <argument
             android:name="company"
@@ -197,5 +197,10 @@
             android:name="company"
             app:argType="br.com.joaoov.data.local.company.Company" />
     </fragment>
+    <fragment
+        android:id="@+id/workdayFragment"
+        android:name="br.com.joaoov.ui.component.WorkdayFragment"
+        android:label="@string/fragment_workday"
+        tools:layout="@layout/fragment_workday"/>
 
 </navigation>

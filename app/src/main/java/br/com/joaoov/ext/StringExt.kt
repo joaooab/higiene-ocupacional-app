@@ -26,3 +26,5 @@ fun List<String>.addDefaultResource(): List<String> {
     mutableList.addAll(this)
     return mutableList.toList()
 }
+
+fun Any?.toStringOrEmpty() = this?.toString() ?: ""

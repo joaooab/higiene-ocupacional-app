@@ -8,6 +8,8 @@ import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import br.com.joaoov.ComponentViewModel
+import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.local.resource.ResourceAgentCategory
 import br.com.joaoov.data.local.resource.ResourceRiskCategory
@@ -16,6 +18,8 @@ import br.com.joaoov.data.local.risk.Tolerance
 import br.com.joaoov.ext.format
 import br.com.joaoov.ext.getString
 import kotlinx.android.synthetic.main.fragment_risk_create.*
+import kotlinx.android.synthetic.main.include_risk_form.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -23,9 +27,11 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
 
     private val arguments by navArgs<RiskCreateFragmentArgs>()
     private val viewModel: RiskViewModel by viewModel()
+    private val componentViewModel: ComponentViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        componentViewModel.withComponents = Components(path = true)
         setupView()
         handleObserve()
     }
@@ -107,7 +113,7 @@ class RiskCreateFragment : Fragment(R.layout.fragment_risk_create) {
     }
 
     private fun setupSaveButton() {
-        button.setOnClickListener {
+        buttonSave.setOnClickListener {
             val agentName = textInputLayoutRiskFactor.getString()
             if (agentName.isEmpty()) {
                 textInputLayoutRiskFactor.error = getString(R.string.message_error_required)

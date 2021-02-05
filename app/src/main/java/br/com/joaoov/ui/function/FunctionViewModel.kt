@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 
 class FunctionViewModel(private val repository: FunctionRepository) : ViewModel() {
 
+    var functionDraft: Function? = null
+
     fun getFunctions(ambient: Ambient) = repository.getAllByAmbient(ambient)
 
     fun salvar(function: Function) {
