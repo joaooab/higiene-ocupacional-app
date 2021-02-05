@@ -4,22 +4,26 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import br.com.joaoov.ComponentViewModel
+import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.State
 import br.com.joaoov.data.local.report.Report
 import br.com.joaoov.ext.*
 import kotlinx.android.synthetic.main.fragment_export_send_report.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.*
 
 class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) {
 
     private val viewModel: ExportViewModel by viewModel()
+    private val componentViewModel: ComponentViewModel by sharedViewModel()
     private val arguments by navArgs<ExportSendReportFragmentArgs>()
     private val report = Report()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        componentViewModel.withComponents = Components(path = false)
         setupView()
         handleObserve()
     }
