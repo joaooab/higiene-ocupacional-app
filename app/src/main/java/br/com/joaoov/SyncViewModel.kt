@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.SyncState
 import br.com.joaoov.repository.ResourceRepository
 import br.com.joaoov.repository.SyncronizeRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -35,7 +36,6 @@ class SyncViewModel(
                     resourceRepository.fetchAllRisksResources(updateAt)
                     _syncronizeState.postValue(SyncState.Running("Sincronizando agentes..."))
                     resourceRepository.fetchAllAgentsResources(updateAt)
-                    _syncronizeState.postValue(SyncState.Completed)
                     syncronizeRepository.save(syncronize)
                 }
             }.onFailure {
@@ -43,14 +43,18 @@ class SyncViewModel(
             }
         }
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             syncronize.await()
+            _syncronizeState.postValue(SyncState.Completed)
         }
     }
 
     fun forceSyncronize() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             syncronizeRepository.clear()
+            resourceRepository.clearAmbients()
+            resourceRepository.clearRisks()
+            resourceRepository.clearAgents()
             syncronize()
         }
     }

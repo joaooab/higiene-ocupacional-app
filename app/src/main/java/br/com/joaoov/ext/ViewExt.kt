@@ -2,6 +2,7 @@ package br.com.joaoov.ext
 
 import android.view.View
 import com.google.android.material.textfield.TextInputLayout
+import java.math.BigDecimal
 
 fun View.show() {
     this.visibility = View.VISIBLE
@@ -38,6 +39,14 @@ fun TextInputLayout.setString(text: String) {
 fun TextInputLayout.getDouble(): Double? {
     return try {
         this.editText?.text.toString().toDouble()
+    } catch (e: Exception) {
+        null
+    }
+}
+
+fun TextInputLayout.getBigdecimal(): BigDecimal? {
+    return try {
+        this.editText?.text.toString().toBigDecimal()
     } catch (e: Exception) {
         null
     }

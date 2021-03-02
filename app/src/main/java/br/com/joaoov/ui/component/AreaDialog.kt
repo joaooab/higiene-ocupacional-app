@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import br.com.joaoov.R
-import br.com.joaoov.ext.getDouble
+import br.com.joaoov.ext.getBigdecimal
 import kotlinx.android.synthetic.main.dialog_area.*
+import java.math.RoundingMode
 
 class AreaDialog : DialogFragment() {
 
@@ -43,8 +44,8 @@ class AreaDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonCalc.setOnClickListener {
-            val width = textInputLayoutAreaWidth.getDouble()
-            val lenght = textInputLayoutAreaLenght.getDouble()
+            val width = textInputLayoutAreaWidth.getBigdecimal()
+            val lenght = textInputLayoutAreaLenght.getBigdecimal()
             if (width == null) {
                 textInputLayoutAreaWidth.error = getString(R.string.message_error_required)
                 return@setOnClickListener
@@ -53,7 +54,7 @@ class AreaDialog : DialogFragment() {
                 textInputLayoutAreaLenght.error = getString(R.string.message_error_required)
                 return@setOnClickListener
             }
-            val area = width * lenght
+            val area = width.multiply(lenght).setScale(2, RoundingMode.UP)
             onFinished(area.toString())
             dismiss()
         }
