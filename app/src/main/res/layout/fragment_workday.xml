@@ -155,14 +155,14 @@
                         android:orientation="horizontal">
 
                         <br.com.joaoov.ui.component.TimePickerCustom
-                            android:id="@+id/timePickerStart2"
+                            android:id="@+id/timePickerStartLunch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:timePickerMode="spinner" />
 
                         <br.com.joaoov.ui.component.TimePickerCustom
-                            android:id="@+id/timePickerEnd2"
+                            android:id="@+id/timePickerLunchEnd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

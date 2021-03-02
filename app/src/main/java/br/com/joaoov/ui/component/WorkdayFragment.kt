@@ -29,8 +29,8 @@ class WorkdayFragment : Fragment(R.layout.fragment_workday) {
         setupRecyclerView()
         setupTimePickerStart()
         setupTimePickerEnd()
-        setupTimePickerStart2()
-        setupTimePickerEnd2()
+        setupTimePickerStartLunch()
+        setupTimePickerEndLunch()
     }
 
     private fun setupRecyclerView() {
@@ -53,16 +53,16 @@ class WorkdayFragment : Fragment(R.layout.fragment_workday) {
         }
     }
 
-    private fun setupTimePickerStart2() {
-        timePickerStart2.apply {
+    private fun setupTimePickerStartLunch() {
+        timePickerStartLunch.apply {
             setIs24HourView(true)
             setHourValue(13)
             setMinuteValue(12)
         }
     }
 
-    private fun setupTimePickerEnd2() {
-        timePickerEnd2.apply {
+    private fun setupTimePickerEndLunch() {
+        timePickerLunchEnd.apply {
             setIs24HourView(true)
             setHourValue(18)
             setMinuteValue(0)
@@ -78,10 +78,10 @@ class WorkdayFragment : Fragment(R.layout.fragment_workday) {
             val formatedDaysOfWeek = adapter.getFormatedValeus()
             val startTime = timePickerStart.getFormatedTime()
             val endTime = timePickerEnd.getFormatedTime()
-            val startTime2 = timePickerStart2.getFormatedTime()
-            val endTime2 = timePickerEnd2.getFormatedTime()
+            val startLunchTime = timePickerStartLunch.getFormatedTime()
+            val endLunchTime = timePickerLunchEnd.getFormatedTime()
             val formatedWorkTime =
-                formatWorkDay(formatedDaysOfWeek, startTime, endTime, startTime2, endTime2)
+                formatWorkDay(formatedDaysOfWeek, startTime, endTime, startLunchTime, endLunchTime)
 
             setFragmentResult(REQUEST_KEY, bundleOf(RESULT_KEY to formatedWorkTime))
             findNavController().navigateUp()
@@ -100,10 +100,10 @@ class WorkdayFragment : Fragment(R.layout.fragment_workday) {
         formatedDaysOfWeek: String,
         startTime: String,
         endTime: String,
-        startTime2: String,
-        endTime2: String
+        startLunchTime: String,
+        endLunchTime: String
     ) =
-        "$formatedDaysOfWeek. $startTime-$endTime $startTime2-$endTime2"
+        "$formatedDaysOfWeek. $startTime-$endTime $startLunchTime-$endLunchTime"
 
     companion object {
         const val REQUEST_KEY = "WORKDAY_REQUEST"
