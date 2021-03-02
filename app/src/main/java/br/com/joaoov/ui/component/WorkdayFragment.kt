@@ -29,24 +29,42 @@ class WorkdayFragment : Fragment(R.layout.fragment_workday) {
         setupRecyclerView()
         setupTimePickerStart()
         setupTimePickerEnd()
+        setupTimePickerStartLunch()
+        setupTimePickerEndLunch()
     }
 
     private fun setupRecyclerView() {
         recyclerViewWorkday.adapter = this.adapter
     }
 
-    private fun setupTimePickerEnd() {
-        timePickerEnd.apply {
-            setIs24HourView(true)
-            setHourValue(18)
-            setMinuteValue(0)
-        }
-    }
-
     private fun setupTimePickerStart() {
         timePickerStart.apply {
             setIs24HourView(true)
             setHourValue(8)
+            setMinuteValue(0)
+        }
+    }
+
+    private fun setupTimePickerEnd() {
+        timePickerEnd.apply {
+            setIs24HourView(true)
+            setHourValue(12)
+            setMinuteValue(0)
+        }
+    }
+
+    private fun setupTimePickerStartLunch() {
+        timePickerStartLunch.apply {
+            setIs24HourView(true)
+            setHourValue(13)
+            setMinuteValue(12)
+        }
+    }
+
+    private fun setupTimePickerEndLunch() {
+        timePickerLunchEnd.apply {
+            setIs24HourView(true)
+            setHourValue(18)
             setMinuteValue(0)
         }
     }
@@ -60,9 +78,12 @@ class WorkdayFragment : Fragment(R.layout.fragment_workday) {
             val formatedDaysOfWeek = adapter.getFormatedValeus()
             val startTime = timePickerStart.getFormatedTime()
             val endTime = timePickerEnd.getFormatedTime()
-            val formatedWorkDay = formatWorkDay(formatedDaysOfWeek, startTime, endTime)
+            val startLunchTime = timePickerStartLunch.getFormatedTime()
+            val endLunchTime = timePickerLunchEnd.getFormatedTime()
+            val formatedWorkTime =
+                formatWorkDay(formatedDaysOfWeek, startTime, endTime, startLunchTime, endLunchTime)
 
-            setFragmentResult(REQUEST_KEY, bundleOf(RESULT_KEY to formatedWorkDay))
+            setFragmentResult(REQUEST_KEY, bundleOf(RESULT_KEY to formatedWorkTime))
             findNavController().navigateUp()
         }
     }
@@ -75,8 +96,14 @@ class WorkdayFragment : Fragment(R.layout.fragment_workday) {
         }
     }
 
-    private fun formatWorkDay(formatedDaysOfWeek: String, startTime: String, endTime: String) =
-        "$formatedDaysOfWeek. $startTime às $endTime"
+    private fun formatWorkDay(
+        formatedDaysOfWeek: String,
+        startTime: String,
+        endTime: String,
+        startLunchTime: String,
+        endLunchTime: String
+    ) =
+        "$formatedDaysOfWeek. $startTime-$endTime $startLunchTime-$endLunchTime"
 
     companion object {
         const val REQUEST_KEY = "WORKDAY_REQUEST"
