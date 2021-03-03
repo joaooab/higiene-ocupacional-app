@@ -16,9 +16,11 @@ interface ResourceAmbientDAO {
     suspend fun save(resources: List<ResourceAmbientLocal>)
 
     @Delete
-    suspend fun delete(resource: ResourceAmbientLocal)
+    suspend fun delete(resources: List<ResourceAmbientLocal>)
 
     @Update
     suspend fun update(resource: ResourceAmbientLocal)
 
+    @Query("DELETE FROM resource_ambients")
+    suspend fun clear()
 }

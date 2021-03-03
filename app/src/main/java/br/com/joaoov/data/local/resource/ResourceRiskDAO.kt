@@ -16,9 +16,12 @@ interface ResourceRiskDAO {
     suspend fun save(resourceRisks: List<ResourceRiskLocal>)
 
     @Delete
-    suspend fun delete(resourceRisk: ResourceRiskLocal)
+    suspend fun delete(resourceRisks: List<ResourceRiskLocal>)
 
     @Update
     suspend fun update(resourceRisk: ResourceRiskLocal)
+
+    @Query("DELETE FROM resource_risks")
+    suspend fun clear()
 
 }

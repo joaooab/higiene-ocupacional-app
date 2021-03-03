@@ -16,9 +16,12 @@ interface ResourceAgentDAO {
     suspend fun save(resources: List<ResourceAgentLocal>)
 
     @Delete
-    suspend fun delete(resource: ResourceAgentLocal)
+    suspend fun delete(resources: List<ResourceAgentLocal>)
 
     @Update
     suspend fun update(resource: ResourceAgentLocal)
+
+    @Query("DELETE FROM resource_agents")
+    suspend fun clear()
 
 }
