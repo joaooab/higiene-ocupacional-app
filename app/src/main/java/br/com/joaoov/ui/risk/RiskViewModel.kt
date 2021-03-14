@@ -8,10 +8,12 @@ import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.resource.ResourceAgentCategory
 import br.com.joaoov.data.local.resource.ResourceRiskCategory
 import br.com.joaoov.data.local.risk.Risk
+import br.com.joaoov.ext.format
 import br.com.joaoov.repository.ResourceRepository
 import br.com.joaoov.repository.RiskRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class RiskViewModel(
     private val repository: RiskRepository,
@@ -21,7 +23,8 @@ class RiskViewModel(
     private val _category = MutableLiveData<ResourceAgentCategory>()
     val category: LiveData<ResourceAgentCategory> = _category
 
-    fun getRisks(function: Function): LiveData<List<Risk>> = repository.getAllByFunction(function.id)
+    fun getRisks(function: Function): LiveData<List<Risk>> =
+        repository.getAllByFunction(function.id)
 
     fun changeCategory(category: ResourceAgentCategory) =
         _category.postValue(category)
@@ -48,5 +51,10 @@ class RiskViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             repository.update(risk)
         }
+    }
+
+    fun duplicate(risk: Risk) {
+        val copy = risk.copy(id = 0, date = Date().format())
+        save(copy)
     }
 }

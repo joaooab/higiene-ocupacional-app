@@ -83,7 +83,6 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
         })
     }
 
-
     private fun setupView() {
         setupSaveButton()
         setupCalcButton()
@@ -98,7 +97,6 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
             }
         }
     }
-
 
     private fun setupSaveButton() {
         buttonSave.setOnClickListener {
@@ -124,7 +122,7 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
                 naturalVentilation = textInputLayoutNaturalVentilation.getString(),
                 artificialVentilation = textInputLayoutArtificialVentilation.getString()
             )
-            viewModel.salvar(ambient)
+            viewModel.save(ambient)
             findNavController().popBackStack()
         }
     }

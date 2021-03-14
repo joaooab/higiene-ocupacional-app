@@ -6,10 +6,12 @@ import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.data.local.resource.ResourceAmbientCategory
+import br.com.joaoov.ext.format
 import br.com.joaoov.repository.AmbientRepository
 import br.com.joaoov.repository.ResourceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class AmbientViewModel(
     private val repository: AmbientRepository,
@@ -20,7 +22,7 @@ class AmbientViewModel(
         repository.getAmbients(departament)
 
 
-    fun salvar(ambient: Ambient) {
+    fun save(ambient: Ambient) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.save(ambient)
         }
@@ -40,5 +42,11 @@ class AmbientViewModel(
 
     fun getResourceByCategory(category: ResourceAmbientCategory) =
         resourceRepository.getAmbentResourcesByCategory(category)
+
+
+    fun duplicate(ambient: Ambient) {
+        val copy = ambient.copy(id = 0, date = Date().format())
+        save(copy)
+    }
 
 }

@@ -67,7 +67,7 @@ class FunctionCreateFragment : Fragment(R.layout.fragment_funciton_create) {
                 return@setOnClickListener
             }
             val function = createFunction()
-            viewModel.salvar(function)
+            viewModel.save(function)
             findNavController().popBackStack()
         }
     }

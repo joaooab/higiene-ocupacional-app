@@ -8,10 +8,10 @@ import br.com.joaoov.data.local.resource.ResourceRiskLocal
 @Dao
 interface RiskDAO {
 
-    @Query("SELECT * FROM risk")
+    @Query("SELECT * FROM risk ORDER BY id")
     fun getAll(): LiveData<List<RiskLocal>>
 
-    @Query("SELECT * FROM risk WHERE functionId = :functionId")
+    @Query("SELECT * FROM risk WHERE functionId = :functionId ORDER BY id")
     fun getAllByFuncionId(functionId: Long): LiveData<List<RiskLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

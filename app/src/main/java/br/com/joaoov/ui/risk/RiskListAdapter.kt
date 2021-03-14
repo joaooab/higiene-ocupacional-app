@@ -20,6 +20,7 @@ class RiskListAdapter(
     private val list: MutableList<Risk> = mutableListOf(),
     private val onClick: (Risk) -> Unit,
     private val onEditClick: (Risk) -> Unit,
+    private val onDuplicateClick: (Risk) -> Unit,
     private val onDeleteClick: (Risk) -> Unit,
 ) : RecyclerView.Adapter<RiskListAdapter.ViewHolder>() {
 
@@ -114,6 +115,7 @@ class RiskListAdapter(
                 setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.actionEdit -> onEditClick(item)
+                        R.id.actionDuplicate -> onDuplicateClick(item)
                         R.id.actionDelete -> onDeleteClick(item)
                     }
                     true

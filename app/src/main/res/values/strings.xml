@@ -23,6 +23,7 @@
 
     <string name="action_edit">Editar</string>
     <string name="action_delete">Excluir</string>
+    <string name="action_duplicate">Duplicar</string>
     <string name="action_export">Exportar</string>
     <string name="action_sync">Sincronizar</string>
     <string name="action_save">Salvar</string>
@@ -30,10 +31,7 @@
     <string name="action_send_again">Tentar Novamente</string>
     <string name="action_finish">Finalizar</string>
     <string name="action_cancel">Cancelar</string>
-
-    <!-- Strings used for fragments for navigation -->
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="action_ok">OK</string>
 
     <string name="company">Empresa</string>
     <string name="departament">Setor</string>
@@ -104,6 +102,8 @@
     <string name="sync_complete">Sincronização finalizada</string>
     <string name="sync_failed">Falha na sincronização</string>
 
+    <string name="message_alert">Atenção</string>
+    <string name="message_alert_delete">Deseja realmente excluir?</string>
     <string name="message_error_required">Campo obrigatório</string>
     <string name="message_error_start_greater_then_end">Horário início não pode ser maior ou igual ao horário fim</string>
     <string name="message_invalid_email">Email inválido</string>

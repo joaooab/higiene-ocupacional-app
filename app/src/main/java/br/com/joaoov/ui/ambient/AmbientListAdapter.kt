@@ -18,6 +18,7 @@ class AmbientListAdapter(
     private val list: MutableList<Ambient> = mutableListOf(),
     private val onClick: (Ambient) -> Unit,
     private val onEditClick: (Ambient) -> Unit,
+    private val onDuplicateClick: (Ambient) -> Unit,
     private val onDeleteClick: (Ambient) -> Unit,
 ) : RecyclerView.Adapter<AmbientListAdapter.ViewHolder>() {
 
@@ -114,6 +115,7 @@ class AmbientListAdapter(
                 setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.actionEdit -> onEditClick(item)
+                        R.id.actionDuplicate -> onDuplicateClick(item)
                         R.id.actionDelete -> onDeleteClick(item)
                     }
                     true

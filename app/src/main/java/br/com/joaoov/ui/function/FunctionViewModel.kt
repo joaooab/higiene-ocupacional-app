@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.function.Function
+import br.com.joaoov.ext.format
 import br.com.joaoov.repository.FunctionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class FunctionViewModel(private val repository: FunctionRepository) : ViewModel() {
 
@@ -14,7 +16,7 @@ class FunctionViewModel(private val repository: FunctionRepository) : ViewModel(
 
     fun getFunctions(ambient: Ambient) = repository.getAllByAmbient(ambient)
 
-    fun salvar(function: Function) {
+    fun save(function: Function) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.save(function)
         }
@@ -30,6 +32,11 @@ class FunctionViewModel(private val repository: FunctionRepository) : ViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             repository.update(function)
         }
+    }
+
+    fun duplicate(function: Function) {
+        val copy = function.copy(id = 0, date = Date().format())
+        save(copy)
     }
 
 }
