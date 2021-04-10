@@ -23,6 +23,7 @@ data class Risk(
     val degreeOfRisk: String,
     val date: String
 ) : Parcelable {
+
     @IgnoredOnParcel
     var showDetail: Boolean = false
 }

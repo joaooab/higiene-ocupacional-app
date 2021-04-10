@@ -91,9 +91,6 @@
                 android:id="@+id/autoCompleteTextViewFloor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/floor"
                 android:inputType="none" />
 
@@ -110,9 +107,6 @@
                 android:id="@+id/autoCompleteTextViewRoof"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/roof"
                 android:inputType="none" />
 
@@ -129,9 +123,6 @@
                 android:id="@+id/autoCompleteTextViewRoofTiles"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/roof_tiles"
                 android:inputType="none" />
 
@@ -149,9 +140,6 @@
                 android:id="@+id/autoCompleteTextViewNaturalLighting"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/natural_lighting"
                 android:inputType="none" />
 
@@ -169,9 +157,6 @@
                 android:id="@+id/autoCompleteTextViewArtificialLighting"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/artificial_lighting"
                 android:inputType="none" />
 
@@ -189,9 +174,6 @@
                 android:id="@+id/autoCompleteTextViewNaturalVentilation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/natural_ventilation"
                 android:inputType="none" />
 
@@ -209,9 +191,6 @@
                 android:id="@+id/autoCompleteTextViewArtificialVentilation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/artificial_ventilation"
                 android:inputType="none" />
 
@@ -230,9 +209,6 @@
                 android:id="@+id/autoCompleteTextViewWall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/wall"
                 android:inputType="none" />
 
@@ -251,9 +227,6 @@
                 android:id="@+id/autoCompleteTextViewWindow"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/window"
                 android:inputType="none" />
 
@@ -271,13 +244,11 @@
                 android:id="@+id/autoCompleteTextViewCeiling"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="false"
                 android:hint="@string/ceiling"
                 android:inputType="none" />
-
         </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
+
 </androidx.core.widget.NestedScrollView>
 

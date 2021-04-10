@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
         android:id="@+id/actionEdit"
@@ -8,7 +9,22 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/actionDuplicate"
+        android:title="@string/action_duplicate"
+        android:visible="false"
+        app:showAsAction="never"
+        tools:visible="false" />
+
+    <item
+        android:id="@+id/actionMove"
+        android:title="@string/action_move"
+        android:visible="false"
+        app:showAsAction="never"
+        tools:visible="false" />
+
+    <item
         android:id="@+id/actionDelete"
         android:title="@string/action_delete"
         app:showAsAction="never" />
+
 </menu>

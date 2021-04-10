@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Company(
     val id: Long = 0,
-    val name: String,
-    val date: String
+    val name: String = "",
+    val date: String = ""
 ) : Parcelable
 
 fun Company.toLocal() =

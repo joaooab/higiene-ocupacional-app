@@ -23,6 +23,8 @@
 
     <string name="action_edit">Editar</string>
     <string name="action_delete">Excluir</string>
+    <string name="action_duplicate">Duplicar</string>
+    <string name="action_move">Mover</string>
     <string name="action_export">Exportar</string>
     <string name="action_sync">Sincronizar</string>
     <string name="action_save">Salvar</string>
@@ -30,20 +32,16 @@
     <string name="action_send_again">Tentar Novamente</string>
     <string name="action_finish">Finalizar</string>
     <string name="action_cancel">Cancelar</string>
-
-    <!-- Strings used for fragments for navigation -->
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="action_ok">Confirmar</string>
+    <string name="add_ambient">Adicionar ambient</string>
 
     <string name="company">Empresa</string>
     <string name="departament">Setor</string>
+    <string name="ambient">Ambiente</string>
     <string name="function">Função</string>
     <string name="description">Descrição</string>
     <string name="workday">Jornada de trabalho</string>
     <string name="email">E-mail</string>
-
-    <string name="add_ambient">Adicionar ambient</string>
-
     <string name="local">Local</string>
     <string name="area">Área (m²)</string>
     <string name="width_area">Largura (m)</string>
@@ -104,12 +102,17 @@
     <string name="sync_complete">Sincronização finalizada</string>
     <string name="sync_failed">Falha na sincronização</string>
 
+    <string name="message_alert">Atenção</string>
+    <string name="message_alert_delete">Deseja realmente excluir?</string>
+    <string name="message_alert_duplicate">Deseja realmente duplicar?</string>
     <string name="message_error_required">Campo obrigatório</string>
     <string name="message_error_start_greater_then_end">Horário início não pode ser maior ou igual ao horário fim</string>
+    <string name="message_error_generic">Erro inesperado</string>
     <string name="message_invalid_email">Email inválido</string>
     <string name="message_select_company_info">Selecione a empresa para gerar o relatório</string>
     <string name="message_send_success">Relatório enviado com sucesso</string>
     <string name="message_email_send_info">Informe o e-mail para enviarmos o relatório</string>
+    <string name="message_move_to">Mover para:</string>
     <string name="e_social">Previdência</string>
     <string name="not_e_social">Trabalhista</string>
     <string name="calc_area">Calcular Área</string>
@@ -118,6 +121,7 @@
     <string name="begin">Entrada:</string>
     <string name="message_select_dayofweek">Selecione os dias da semana</string>
     <string name="message_select_hour">Selecione o horário de ínicio e fim</string>
+    <string name="message_possible_move_empty">Não foi encontrado nenhum %s possível para mover</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>

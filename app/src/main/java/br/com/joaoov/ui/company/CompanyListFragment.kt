@@ -11,6 +11,7 @@ import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.ui.component.AlertDialogCustom
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -23,7 +24,10 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
         CompanyListAdapter(
             onClick = { navigateToDepartamentFragment(it) },
             onEditClick = { navigateToEditCompanyFragment(it) },
-            onDeleteClick = { viewModel.delete(it) }
+            onDeleteClick = {
+                AlertDialogCustom(requireContext())
+                    .showDeleteDialog { viewModel.delete(it) }
+            }
         )
     }
 

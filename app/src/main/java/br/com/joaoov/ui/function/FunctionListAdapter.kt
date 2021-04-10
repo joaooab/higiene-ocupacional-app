@@ -20,6 +20,8 @@ class FunctionListAdapter(
     private val list: MutableList<Function> = mutableListOf(),
     private val onClick: (Function) -> Unit,
     private val onEditClick: (Function) -> Unit,
+    private val onDuplicateClick: (Function) -> Unit,
+    private val onMoveClick: (Function) -> Unit,
     private val onDeleteClick: (Function) -> Unit,
 ) : RecyclerView.Adapter<FunctionListAdapter.ViewHolder>() {
 
@@ -57,10 +59,14 @@ class FunctionListAdapter(
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.actionEdit -> onEditClick(item)
+                    R.id.actionDuplicate -> onDuplicateClick(item)
+                    R.id.actionMove -> onMoveClick(item)
                     R.id.actionDelete -> onDeleteClick(item)
                 }
                 true
             }
+            menu.findItem(R.id.actionDuplicate).isVisible = true
+            menu.findItem(R.id.actionMove).isVisible = true
             show()
         }
     }

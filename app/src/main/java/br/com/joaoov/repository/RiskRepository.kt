@@ -11,7 +11,7 @@ interface RiskRepository {
 
     fun getAllByFunction(functionId: Long): LiveData<List<Risk>>
 
-    suspend fun save(risk: Risk)
+    suspend fun save(risk: Risk): Long
 
     suspend fun delete(risk: Risk)
 

@@ -2,8 +2,6 @@ package br.com.joaoov.ui.ambient
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,6 +12,7 @@ import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.resource.ResourceAmbientCategory
 import br.com.joaoov.ext.*
 import br.com.joaoov.ui.component.AreaDialog
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_ambient_create.*
 import kotlinx.android.synthetic.main.include_ambient_form.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -36,53 +35,51 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
     private fun handleObserve() {
         observeResource(
             ResourceAmbientCategory.FLOOR,
-            autoCompleteTextViewFloor
+            textInputLayoutFloor
         )
         observeResource(
             ResourceAmbientCategory.ROOF,
-            autoCompleteTextViewRoof
+            textInputLayoutRoof
         )
         observeResource(
             ResourceAmbientCategory.ROOF_TILES,
-            autoCompleteTextViewRoofTiles
+            textInputLayoutRoofTiles
         )
         observeResource(
             ResourceAmbientCategory.NATURAL_LIGHTING,
-            autoCompleteTextViewNaturalLighting
+            textInputLayoutNaturalLighting
         )
         observeResource(
             ResourceAmbientCategory.NATURAL_VENTILATION,
-            autoCompleteTextViewNaturalVentilation
+            textInputLayoutNaturalVentilation
         )
         observeResource(
             ResourceAmbientCategory.ARTIFICIAL_LIGHTING,
-            autoCompleteTextViewArtificialLighting
+            textInputLayoutArtificialLighting
         )
         observeResource(
             ResourceAmbientCategory.ARTIFICIAL_VENTILATION,
-            autoCompleteTextViewArtificialVentilation
+            textInputLayoutArtificialVentilation
         )
         observeResource(
             ResourceAmbientCategory.WALL,
-            autoCompleteTextViewWall
+            textInputLayoutWall
         )
         observeResource(
             ResourceAmbientCategory.WINDOWN,
-            autoCompleteTextViewWindow
+            textInputLayoutWindow
         )
         observeResource(
             ResourceAmbientCategory.CEILING,
-            autoCompleteTextViewCeiling
+            textInputLayoutCeiling
         )
     }
 
-    private fun observeResource(category: ResourceAmbientCategory, textView: AutoCompleteTextView) {
+    private fun observeResource(category: ResourceAmbientCategory, inputLayout: TextInputLayout) {
         viewModel.getResourceByCategory(category).observe(viewLifecycleOwner, { resources ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, resources)
-            textView.setAdapter(adapter)
+            inputLayout.setupData(resources)
         })
     }
-
 
     private fun setupView() {
         setupSaveButton()
@@ -98,7 +95,6 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
             }
         }
     }
-
 
     private fun setupSaveButton() {
         buttonSave.setOnClickListener {
@@ -124,7 +120,7 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
                 naturalVentilation = textInputLayoutNaturalVentilation.getString(),
                 artificialVentilation = textInputLayoutArtificialVentilation.getString()
             )
-            viewModel.salvar(ambient)
+            viewModel.save(ambient)
             findNavController().popBackStack()
         }
     }

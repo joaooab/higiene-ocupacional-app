@@ -8,25 +8,30 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Ambient(
     val id: Long = 0,
-    val departamentId: Long,
-    val date: String,
-    val name: String,
-    val area: String,
-    val height: String,
-    val floor: String,
-    val wall: String,
-    val roof: String,
-    val roofTiles: String,
-    val window: String,
-    val ceiling: String,
-    val naturalLighting: String,
-    val artificialLighting: String,
-    val naturalVentilation: String,
-    val artificialVentilation: String
+    val departamentId: Long = 0,
+    val date: String = "",
+    val name: String = "",
+    val area: String = "",
+    val height: String = "",
+    val floor: String = "",
+    val wall: String = "",
+    val roof: String = "",
+    val roofTiles: String = "",
+    val window: String = "",
+    val ceiling: String = "",
+    val naturalLighting: String = "",
+    val artificialLighting: String = "",
+    val naturalVentilation: String = "",
+    val artificialVentilation: String = ""
 ) : Parcelable {
 
     @IgnoredOnParcel
     var showDetail: Boolean = false
+
+    override fun toString(): String {
+        return name
+    }
+
 }
 
 fun Ambient.toLocal() =

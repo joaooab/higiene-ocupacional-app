@@ -15,6 +15,8 @@ import br.com.joaoov.Path.Companion.AMBIENT_PATH
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.function.Function
+import br.com.joaoov.ui.component.AlertDialogCustom
+import br.com.joaoov.ui.component.openMoveDialog
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -28,7 +30,15 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
         FunctionListAdapter(
             onClick = { navigateToRiskFragment(it) },
             onEditClick = { navigateToEditFragment(it) },
-            onDeleteClick = { viewModel.delete(it) }
+            onDuplicateClick = {
+                AlertDialogCustom(requireContext())
+                    .showDuplicateDialog { viewModel.duplicate(it) }
+            },
+            onMoveClick = { openMoveDialog(it) },
+            onDeleteClick = {
+                AlertDialogCustom(requireContext())
+                    .showDeleteDialog { viewModel.delete(it) }
+            }
         )
     }
     private lateinit var ambient: Ambient

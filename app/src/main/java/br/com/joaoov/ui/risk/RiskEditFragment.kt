@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,9 +15,8 @@ import br.com.joaoov.data.local.resource.ResourceRiskCategory
 import br.com.joaoov.data.local.resource.getFormatedValue
 import br.com.joaoov.data.local.resource.isOld
 import br.com.joaoov.data.local.risk.Tolerance
-import br.com.joaoov.ext.getString
-import br.com.joaoov.ext.hideKeyboard
-import br.com.joaoov.ext.setString
+import br.com.joaoov.ext.*
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_risk_edit.*
 import kotlinx.android.synthetic.main.include_risk_form.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -100,27 +98,27 @@ class RiskEditFragment : Fragment(R.layout.fragment_risk_edit) {
         observeAgentCategory()
         observeResource(
             ResourceRiskCategory.GENERATED_SOURCE,
-            autoCompleteTextViewGeneratingSource
+            textInputLayoutGeneratingSource,
         )
         observeResource(
             ResourceRiskCategory.TRAJECTORY,
-            autoCompleteTextViewTrajectory
+            textInputLayoutTrajectory
         )
         observeResource(
             ResourceRiskCategory.ELIMINATION_NEUTRALIZATION,
-            autoCompleteTextViewEliminationNeutralization
+            textInputLayoutEliminationNeutralization
         )
         observeResource(
             ResourceRiskCategory.EXPOSURE,
-            autoCompleteTextViewExposure
+            textInputLayoutExposureMode
         )
         observeResource(
             ResourceRiskCategory.DEGREE_OF_RISK,
-            autoCompleteTextViewDegreeOfRisk
+            textInputLayoutDegreeOfRisk
         )
         observeResource(
             ResourceRiskCategory.METHODOLOGY,
-            autoCompleteTextViewSourceMethodology
+            textInputLayoutSourceMethodology
         )
     }
 
@@ -130,6 +128,7 @@ class RiskEditFragment : Fragment(R.layout.fragment_risk_edit) {
             if (category != null && category != ResourceAgentCategory.UNKNOWN) {
                 textInputLayoutRiskFactor.isEnabled = true
                 autoCompleteTextViewRiskFactor.isEnabled = true
+                textInputLayoutRiskFactor.setupTextChangedIcon()
                 viewModel.getResourceAgentByCategory(category).observe(viewLifecycleOwner, {
                     val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, it)
                     autoCompleteTextViewRiskFactor.setAdapter(adapter)
@@ -167,10 +166,9 @@ class RiskEditFragment : Fragment(R.layout.fragment_risk_edit) {
         }
     }
 
-    private fun observeResource(category: ResourceRiskCategory, textView: AutoCompleteTextView) {
+    private fun observeResource(category: ResourceRiskCategory, textInputLayout: TextInputLayout) {
         viewModel.getResourceRiskByCategory(category).observe(viewLifecycleOwner, {
-            val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, it)
-            textView.setAdapter(adapter)
+            textInputLayout.setupData(it)
         })
     }
 
