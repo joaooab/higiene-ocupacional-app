@@ -40,8 +40,10 @@ class MainPathAdapter(private val stack: Stack<Path> = Stack()) :
     }
 
     fun remove() {
-        stack.pop()
-        notifyDataSetChanged()
+        if (stack.isNotEmpty()) {
+            stack.pop()
+            notifyDataSetChanged()
+        }
     }
 
     fun refresh() {
