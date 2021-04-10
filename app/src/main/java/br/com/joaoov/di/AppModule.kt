@@ -10,6 +10,7 @@ import br.com.joaoov.data.remote.sync.SyncService
 import br.com.joaoov.repository.*
 import br.com.joaoov.ui.ambient.AmbientViewModel
 import br.com.joaoov.ui.company.CompanyViewModel
+import br.com.joaoov.ui.component.move.MoveViewModel
 import br.com.joaoov.ui.departament.DepartamentViewModel
 import br.com.joaoov.ui.export.ExportViewModel
 import br.com.joaoov.ui.function.FunctionViewModel
@@ -27,6 +28,7 @@ val viewModelModule = module {
     viewModel { SyncViewModel(get(), get()) }
     viewModel { RiskViewModel(get(), get()) }
     viewModel { ExportViewModel(get(), get()) }
+    viewModel { MoveViewModel(get(), get(), get()) }
 }
 
 val daoModule = module {

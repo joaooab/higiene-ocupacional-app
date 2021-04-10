@@ -1,18 +1,24 @@
 package br.com.joaoov.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.function.FunctionDAO
 import br.com.joaoov.data.local.function.toLocal
 import br.com.joaoov.data.local.function.toModel
+import br.com.joaoov.data.local.report.FunctionWithRisks
+import br.com.joaoov.data.local.report.toModel
 
 interface FunctionRepository {
 
+    fun getById(id: Long): Function
+
     fun getAllByAmbient(ambient: Ambient): LiveData<List<Function>>
 
-    suspend fun save(function: Function)
+    suspend fun getFunctionWithRelation(function: Function): FunctionWithRisks
+
+    suspend fun save(function: Function): Long
 
     suspend fun delete(function: Function)
 
@@ -22,8 +28,13 @@ interface FunctionRepository {
 class FunctionRepositoryImpl(private val dao: FunctionDAO) :
     FunctionRepository {
 
+    override fun getById(id: Long) = dao.getById(id).toModel()
+
     override fun getAllByAmbient(ambient: Ambient): LiveData<List<Function>> =
-        Transformations.map(dao.getAllByAmbientId(ambient.id)) { it.toModel() }
+        dao.getAllByAmbientId(ambient.id).map { it.toModel() }
+
+    override suspend fun getFunctionWithRelation(function: Function) =
+        dao.getFunctionWithRelation(function.id).toModel()
 
     override suspend fun save(function: Function) =
         dao.save(function.toLocal())

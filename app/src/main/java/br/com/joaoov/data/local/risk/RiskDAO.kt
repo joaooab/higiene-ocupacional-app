@@ -15,7 +15,7 @@ interface RiskDAO {
     fun getAllByFuncionId(functionId: Long): LiveData<List<RiskLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(risk: RiskLocal)
+    suspend fun save(risk: RiskLocal) : Long
 
     @Delete
     suspend fun delete(risk: RiskLocal)

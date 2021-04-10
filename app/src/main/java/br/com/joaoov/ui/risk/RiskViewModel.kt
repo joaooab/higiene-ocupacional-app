@@ -8,12 +8,11 @@ import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.resource.ResourceAgentCategory
 import br.com.joaoov.data.local.resource.ResourceRiskCategory
 import br.com.joaoov.data.local.risk.Risk
-import br.com.joaoov.ext.format
 import br.com.joaoov.repository.ResourceRepository
 import br.com.joaoov.repository.RiskRepository
+import br.com.joaoov.ui.component.move.RiskDuplicateChain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 
 class RiskViewModel(
     private val repository: RiskRepository,
@@ -54,7 +53,8 @@ class RiskViewModel(
     }
 
     fun duplicate(risk: Risk) {
-        val copy = risk.copy(id = 0, date = Date().format())
-        save(copy)
+        viewModelScope.launch(Dispatchers.IO) {
+            RiskDuplicateChain(risk).duplicate(parentId = null)
+        }
     }
 }

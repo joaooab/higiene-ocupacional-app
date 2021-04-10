@@ -19,6 +19,7 @@ class AmbientListAdapter(
     private val onClick: (Ambient) -> Unit,
     private val onEditClick: (Ambient) -> Unit,
     private val onDuplicateClick: (Ambient) -> Unit,
+    private val onMoveClick: (Ambient) -> Unit,
     private val onDeleteClick: (Ambient) -> Unit,
 ) : RecyclerView.Adapter<AmbientListAdapter.ViewHolder>() {
 
@@ -116,10 +117,13 @@ class AmbientListAdapter(
                     when (it.itemId) {
                         R.id.actionEdit -> onEditClick(item)
                         R.id.actionDuplicate -> onDuplicateClick(item)
+                        R.id.actionMove -> onMoveClick(item)
                         R.id.actionDelete -> onDeleteClick(item)
                     }
                     true
                 }
+                menu.findItem(R.id.actionDuplicate).isVisible = true
+                menu.findItem(R.id.actionMove).isVisible = true
                 show()
             }
         }

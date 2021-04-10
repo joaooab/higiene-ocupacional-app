@@ -8,9 +8,15 @@ import kotlinx.android.parcel.Parcelize
 data class Departament(
     val id: Long = 0,
     val companyId: Long = 0,
-    val name: String,
-    val date: String
-) : Parcelable
+    val name: String = "",
+    val date: String = ""
+) : Parcelable {
+
+    override fun toString(): String {
+        return name
+    }
+
+}
 
 fun Departament.toLocal() =
     DepartamentLocal(

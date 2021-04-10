@@ -21,6 +21,7 @@ class RiskListAdapter(
     private val onClick: (Risk) -> Unit,
     private val onEditClick: (Risk) -> Unit,
     private val onDuplicateClick: (Risk) -> Unit,
+    private val onMoveClick: (Risk) -> Unit,
     private val onDeleteClick: (Risk) -> Unit,
 ) : RecyclerView.Adapter<RiskListAdapter.ViewHolder>() {
 
@@ -116,10 +117,13 @@ class RiskListAdapter(
                     when (it.itemId) {
                         R.id.actionEdit -> onEditClick(item)
                         R.id.actionDuplicate -> onDuplicateClick(item)
+                        R.id.actionMove -> onMoveClick(item)
                         R.id.actionDelete -> onDeleteClick(item)
                     }
                     true
                 }
+                menu.findItem(R.id.actionDuplicate).isVisible = true
+                menu.findItem(R.id.actionMove).isVisible = true
                 show()
             }
         }

@@ -1,6 +1,11 @@
 package br.com.joaoov.ext
 
+import android.text.InputType
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import androidx.core.widget.doOnTextChanged
+import br.com.joaoov.R
 import com.google.android.material.textfield.TextInputLayout
 import java.math.BigDecimal
 
@@ -50,4 +55,30 @@ fun TextInputLayout.getBigdecimal(): BigDecimal? {
     } catch (e: Exception) {
         null
     }
+}
+
+fun TextInputLayout.setupData(data: List<*>) {
+    (this.editText as AutoCompleteTextView).setAdapter(
+        ArrayAdapter(
+            context,
+            R.layout.drop_down_item,
+            data
+        )
+    )
+    if (editText?.inputType == InputType.TYPE_NULL) {
+        editText?.setOnFocusChangeListener { _, _ ->  context.hideKeyboardFrom(this)  }
+    } else {
+        setupTextChangedIcon()
+    }
+}
+
+fun TextInputLayout.setupTextChangedIcon() {
+    editText?.doOnTextChanged { text, _, _, _ ->
+        if (text.isNullOrEmpty()) {
+            this.endIconMode = TextInputLayout.END_ICON_DROPDOWN_MENU
+        } else {
+            this.endIconMode = TextInputLayout.END_ICON_CLEAR_TEXT
+        }
+    }
+
 }

@@ -12,7 +12,8 @@ import br.com.joaoov.Path
 import br.com.joaoov.R
 import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.risk.Risk
-import br.com.joaoov.ui.component.GenericDialog
+import br.com.joaoov.ui.component.AlertDialogCustom
+import br.com.joaoov.ui.component.openMoveDialog
 import kotlinx.android.synthetic.main.fragment_risk.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -27,9 +28,13 @@ class RiskListFragment : Fragment(R.layout.fragment_risk) {
         RiskListAdapter(
             onClick = {},
             onEditClick = { navigateToEditFragment(it) },
-            onDuplicateClick = { viewModel.duplicate(it) },
+            onDuplicateClick = {
+                AlertDialogCustom(requireContext())
+                    .showDuplicateDialog { viewModel.duplicate(it) }
+            },
+            onMoveClick = { openMoveDialog(it) },
             onDeleteClick = {
-                GenericDialog(requireContext())
+                AlertDialogCustom(requireContext())
                     .showDeleteDialog { viewModel.delete(it) }
             }
         )
