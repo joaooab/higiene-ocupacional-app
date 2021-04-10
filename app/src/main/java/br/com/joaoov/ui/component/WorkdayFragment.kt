@@ -71,10 +71,6 @@ class WorkdayFragment : Fragment(R.layout.fragment_workday) {
 
     private fun setupButtonFinish() {
         buttonFinish.setOnClickListener {
-            if (timePickerStart.isGreaterThan(timePickerEnd)) {
-                this.showToast(R.string.message_error_start_greater_then_end)
-                return@setOnClickListener
-            }
             val formatedDaysOfWeek = adapter.getFormatedValeus()
             val startTime = timePickerStart.getFormatedTime()
             val endTime = timePickerEnd.getFormatedTime()

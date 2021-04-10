@@ -42,7 +42,7 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
             textInputLayoutFloor.setString(it.floor)
             textInputLayoutWall.setString(it.wall)
             textInputLayoutRoof.setString(it.roof)
-            textInputLayoutRoofTiles.setString(it.ceiling)
+            textInputLayoutRoofTiles.setString(it.roofTiles)
             textInputLayoutWindow.setString(it.window)
             textInputLayoutCeiling.setString(it.ceiling)
             textInputLayoutNaturalLighting.setString(it.naturalLighting)
@@ -69,7 +69,7 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
                 floor = textInputLayoutFloor.getString(),
                 wall = textInputLayoutWall.getString(),
                 roof = textInputLayoutRoof.getString(),
-                roofTiles = textInputLayoutRoof.getString(),
+                roofTiles = textInputLayoutRoofTiles.getString(),
                 window = textInputLayoutWindow.getString(),
                 ceiling = textInputLayoutCeiling.getString(),
                 naturalLighting = textInputLayoutNaturalLighting.getString(),
