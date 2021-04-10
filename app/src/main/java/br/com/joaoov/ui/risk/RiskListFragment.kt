@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.joaoov.ComponentViewModel
+import br.com.joaoov.Components
 import br.com.joaoov.Path
 import br.com.joaoov.R
 import br.com.joaoov.data.local.function.Function
@@ -43,6 +44,7 @@ class RiskListFragment : Fragment(R.layout.fragment_risk) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         function = args.funcion
+        componentViewModel.withComponents = Components(path = true)
         componentViewModel.addPath(Path(Path.FUNCTION_PATH, function.name))
         setupView()
         handleObserve()
