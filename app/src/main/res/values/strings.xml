@@ -85,7 +85,7 @@
     <string name="label_artificial_lighting">Iluminacao Artificial: %s</string>
     <string name="label_natural_ventilation">Ventilação Natural: %s</string>
     <string name="label_artificial_ventilation">Ventilação Artificial: %s</string>
-    <string name="label_work_day">Jornada de trablho:</string>
+    <string name="label_work_day">Jornada de trabalho:</string>
 
     <string name="label_risk_factor">Fator de risco: %s</string>
     <string name="label_generating_source">Fonte geradora: %s</string>
