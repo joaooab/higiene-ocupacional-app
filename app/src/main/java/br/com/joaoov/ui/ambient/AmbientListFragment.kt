@@ -15,6 +15,7 @@ import br.com.joaoov.Path.Companion.DEPARTAMENT_PATH
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.departament.Departament
+import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.component.AlertDialogCustom
 import br.com.joaoov.ui.component.openMoveDialog
 import kotlinx.android.synthetic.main.fragment_ambient.*
@@ -92,6 +93,7 @@ class AmbientListFragment : Fragment(R.layout.fragment_ambient) {
     private fun observeAmbients() {
         viewModel.getAmbients(departament).observe(viewLifecycleOwner, Observer {
             adapter.refresh(it)
+            fab.slideUp()
         })
     }
 

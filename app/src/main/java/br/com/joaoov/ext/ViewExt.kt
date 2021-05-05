@@ -4,8 +4,11 @@ import android.text.InputType
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.doOnTextChanged
 import br.com.joaoov.R
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
 import java.math.BigDecimal
 
@@ -66,7 +69,7 @@ fun TextInputLayout.setupData(data: List<*>) {
         )
     )
     if (editText?.inputType == InputType.TYPE_NULL) {
-        editText?.setOnFocusChangeListener { _, _ ->  context.hideKeyboardFrom(this)  }
+        editText?.setOnFocusChangeListener { _, _ -> context.hideKeyboardFrom(this) }
     } else {
         setupTextChangedIcon()
     }
@@ -81,4 +84,14 @@ fun TextInputLayout.setupTextChangedIcon() {
         }
     }
 
+}
+
+fun FloatingActionButton.slideUp() {
+    val layoutParams = this.layoutParams
+    if (layoutParams is CoordinatorLayout.LayoutParams) {
+        val behavior = layoutParams.behavior
+        if (behavior is HideBottomViewOnScrollBehavior) {
+            behavior.slideUp(this)
+        }
+    }
 }

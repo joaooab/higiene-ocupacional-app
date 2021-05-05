@@ -11,6 +11,7 @@ import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.component.AlertDialogCustom
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -40,7 +41,7 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
 
     private fun setupView() {
         setupAdapter()
-        setupFAb()
+        setupFab()
     }
 
     private fun setupAdapter() {
@@ -49,7 +50,7 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
         recyclerView.adapter = adapter
     }
 
-    private fun setupFAb() {
+    private fun setupFab() {
         fab.setOnClickListener {
             navigateToCreateFragment()
         }
@@ -64,6 +65,7 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
     private fun handleObserve() {
         viewModel.getCompanies().observe(viewLifecycleOwner, Observer {
             adapter.refresh(it)
+            fab.slideUp()
         })
     }
 
