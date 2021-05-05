@@ -33,7 +33,7 @@
     <string name="action_finish">Finalizar</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_ok">Confirmar</string>
-    <string name="add_ambient">Adicionar ambient</string>
+    <string name="action_add"></string>
 
     <string name="company">Empresa</string>
     <string name="departament">Setor</string>

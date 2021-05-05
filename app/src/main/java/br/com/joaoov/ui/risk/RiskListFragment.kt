@@ -13,6 +13,7 @@ import br.com.joaoov.Path
 import br.com.joaoov.R
 import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.risk.Risk
+import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.component.AlertDialogCustom
 import br.com.joaoov.ui.component.openMoveDialog
 import kotlinx.android.synthetic.main.fragment_risk.*
@@ -69,6 +70,7 @@ class RiskListFragment : Fragment(R.layout.fragment_risk) {
     private fun handleObserve() {
         viewModel.getRisks(function).observe(viewLifecycleOwner, {
             adapter.refresh(it)
+            fab.slideUp()
         })
     }
 

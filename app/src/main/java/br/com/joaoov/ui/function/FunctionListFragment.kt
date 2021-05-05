@@ -15,6 +15,7 @@ import br.com.joaoov.Path.Companion.AMBIENT_PATH
 import br.com.joaoov.R
 import br.com.joaoov.data.local.ambient.Ambient
 import br.com.joaoov.data.local.function.Function
+import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.component.AlertDialogCustom
 import br.com.joaoov.ui.component.openMoveDialog
 import kotlinx.android.synthetic.main.fragment_ambient.*
@@ -85,6 +86,7 @@ class FunctionListFragment : Fragment(R.layout.fragment_company) {
     private fun handleObserve() {
         viewModel.getFunctions(ambient).observe(viewLifecycleOwner, Observer {
             adapter.refresh(it)
+            fab.slideUp()
         })
     }
 

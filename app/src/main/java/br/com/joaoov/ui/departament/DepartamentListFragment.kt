@@ -15,6 +15,7 @@ import br.com.joaoov.Path.Companion.COMPANY_PATH
 import br.com.joaoov.R
 import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.data.local.departament.Departament
+import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.component.AlertDialogCustom
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -83,6 +84,7 @@ class DepartamentListFragment : Fragment(R.layout.fragment_departament) {
     private fun observeDepartaments() {
         viewModel.getDepartaments(company).observe(viewLifecycleOwner, Observer {
             adapter.refresh(it)
+            fab.slideUp()
         })
     }
 
