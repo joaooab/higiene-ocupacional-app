@@ -25,8 +25,8 @@ data class FunctionLocal(
     val name: String,
     val date: String,
     val description: String,
-    val amount: Int?,
-    val workday: String
+    val workday: String,
+    val quantity: Int
 )
 
 fun FunctionLocal.toModel() =
@@ -36,8 +36,8 @@ fun FunctionLocal.toModel() =
         name,
         date,
         description,
-        amount,
-        workday
+        workday,
+        quantity
     )
 
 fun List<FunctionLocal>.toModel() = map { it.toModel() }

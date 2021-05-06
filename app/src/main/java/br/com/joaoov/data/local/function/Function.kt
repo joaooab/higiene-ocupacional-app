@@ -12,8 +12,8 @@ data class Function(
     val name: String,
     val date: String,
     val description: String,
-    val amount: Int?,
-    val workday: String
+    val workday: String,
+    val quantity: Int
 ) : Parcelable {
 
     @IgnoredOnParcel
@@ -31,8 +31,8 @@ fun Function.toLocal() =
         name,
         date,
         description,
-        amount,
-        workday
+        workday,
+        quantity
     )
 
 fun List<Function>.toLocal() = map { it.toLocal() }
@@ -45,8 +45,8 @@ fun Function.toNetwork() =
         name,
         date,
         description,
-        amount,
-        workday
+        workday,
+        quantity
     )
 
 fun List<Function>.toNetwork() = map { it.toNetwork() }

@@ -40,7 +40,7 @@ class FunctionCreateFragment : Fragment(R.layout.fragment_funciton_create) {
         viewModel.functionDraft?.let { draft ->
             textInputLayoutFunction.setString(draft.name)
             textInputLayoutDescription.setString(draft.description)
-            textInputLayoutAmount.setString(draft.amount.toStringOrEmpty())
+            textInputLayoutQuantity.setString(draft.quantity.toStringOrEmpty())
             textInputLayoutWorkDay.setString(draft.workday)
         }
     }
@@ -78,7 +78,7 @@ class FunctionCreateFragment : Fragment(R.layout.fragment_funciton_create) {
             ambientId = arguments.ambient.id,
             date = Date().format(),
             description = textInputLayoutDescription.getString(),
-            amount = textInputLayoutAmount.getInt(),
+            quantity = textInputLayoutQuantity.getInt(),
             workday = textInputLayoutWorkDay.getString()
         )
     }

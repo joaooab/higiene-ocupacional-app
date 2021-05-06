@@ -39,7 +39,7 @@ class FunctionEditFragment : Fragment(R.layout.fragment_funciton_edit) {
         val function = viewModel.functionDraft ?: arguments.function
         textInputLayoutFunction.setString(function.name)
         textInputLayoutDescription.setString(function.description)
-        textInputLayoutAmount.setString(function.amount.toStringOrEmpty())
+        textInputLayoutQuantity.setString(function.quantity.toStringOrEmpty())
         textInputLayoutWorkDay.setString(function.workday)
     }
 
@@ -75,7 +75,7 @@ class FunctionEditFragment : Fragment(R.layout.fragment_funciton_edit) {
             name = textInputLayoutFunction.getString(),
             description = textInputLayoutDescription.getString(),
             workday = textInputLayoutWorkDay.getString(),
-            amount = textInputLayoutAmount.getInt()
+            quantity = textInputLayoutQuantity.getInt()
         )
     }
 

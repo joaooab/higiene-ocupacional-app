@@ -22,7 +22,7 @@ import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 25,
+    version = 26,
     entities = [
         CompanyLocal::class,
         DepartamentLocal::class,
@@ -75,12 +75,25 @@ object DatabaseMigrations {
     fun getMigrations(): Array<Migration> {
         return arrayOf(
             MIGRATION_24_25,
+            MIGRATION_25_26
         )
     }
 
     private val MIGRATION_24_25: Migration = object : Migration(24, 25) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL("ALTER TABLE function ADD COLUMN amount INTEGER")
+        }
+    }
+
+    private val MIGRATION_25_26: Migration = object : Migration(25, 26) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS `function_backup` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ambientId` INTEGER NOT NULL, `name` TEXT NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `workday` TEXT NOT NULL, `quantity` INTEGER NOT NULL, FOREIGN KEY(`ambientId`) REFERENCES `ambient`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )")
+            database.execSQL("INSERT INTO function_backup SELECT `id`, `ambientId`, `name`, `date`, `description`, `workday`, 0 FROM function;")
+            database.execSQL("DROP TABLE function;")
+            database.execSQL("CREATE TABLE IF NOT EXISTS `function` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ambientId` INTEGER NOT NULL, `name` TEXT NOT NULL, `date` TEXT NOT NULL, `description` TEXT NOT NULL, `workday` TEXT NOT NULL, `quantity` INTEGER NOT NULL, FOREIGN KEY(`ambientId`) REFERENCES `ambient`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )")
+            database.execSQL("CREATE INDEX IF NOT EXISTS `index_function_ambientId` ON `function` (`ambientId`);")
+            database.execSQL("INSERT INTO function SELECT `id`, `ambientId`, `name`, `date`, `description`, `workday`, `quantity` FROM function_backup;")
+            database.execSQL("DROP TABLE function_backup;")
         }
     }
 
