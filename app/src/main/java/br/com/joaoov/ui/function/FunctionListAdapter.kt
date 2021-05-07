@@ -33,6 +33,7 @@ class FunctionListAdapter(
                 textViewDate.text = item.date
                 textViewDescription.text = item.description
                 textViewtextViewWorkday.text = item.workday
+                textViewtextViewQuantity.text = item.quantity.toString()
                 setOnClickListener {
                     onClick(item)
                 }

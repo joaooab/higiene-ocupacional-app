@@ -125,13 +125,35 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textViewLabelWorkday"
             app:layout_constraintTop_toBottomOf="@id/textViewLabelWorkday"
             tools:text="Segunda a Sexta das 07h10min às 18h00min com 02h de intervalo intrajornada." />
+
+        <TextView
+            android:id="@+id/textViewLabelQuantity"
+            style="@style/TextItemDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_quantity_function"
+            app:layout_constraintStart_toStartOf="@id/textViewtextViewWorkday"
+            app:layout_constraintTop_toBottomOf="@id/textViewtextViewWorkday" />
+
+        <TextView
+            android:id="@+id/textViewtextViewQuantity"
+            style="@style/TextItemDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textViewLabelQuantity"
+            app:layout_constraintTop_toBottomOf="@id/textViewLabelQuantity"
+            tools:text="3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
