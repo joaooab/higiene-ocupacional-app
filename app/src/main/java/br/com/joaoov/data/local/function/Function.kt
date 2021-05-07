@@ -19,9 +19,8 @@ data class Function(
     @IgnoredOnParcel
     var showDetail: Boolean = false
 
-    override fun toString(): String {
-        return name
-    }
+    override fun toString() = name
+
 }
 
 fun Function.toLocal() =

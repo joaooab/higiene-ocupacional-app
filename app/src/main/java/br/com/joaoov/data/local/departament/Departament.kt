@@ -12,9 +12,7 @@ data class Departament(
     val date: String = ""
 ) : Parcelable {
 
-    override fun toString(): String {
-        return name
-    }
+    override fun toString() = name
 
 }
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import br.com.joaoov.R
 import br.com.joaoov.data.State
 import br.com.joaoov.data.local.ambient.Ambient
+import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.risk.Risk
 import br.com.joaoov.ext.gone
@@ -111,6 +112,9 @@ class MoveDialog : DialogFragment() {
     }
 
     private fun getMoveHint() = when (itemToMove) {
+        is Departament -> {
+            R.string.company
+        }
         is Ambient -> {
             R.string.departament
         }

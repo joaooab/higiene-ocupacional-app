@@ -28,9 +28,7 @@ data class Ambient(
     @IgnoredOnParcel
     var showDetail: Boolean = false
 
-    override fun toString(): String {
-        return name
-    }
+    override fun toString() = name
 
 }
 
