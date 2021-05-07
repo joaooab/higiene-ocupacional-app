@@ -17,6 +17,7 @@ import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.component.AlertDialogCustom
+import br.com.joaoov.ui.component.openMoveDialog
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -30,6 +31,11 @@ class DepartamentListFragment : Fragment(R.layout.fragment_departament) {
         DepartamentListAdapter(
             onClick = { navigateToAmbientFragment(it) },
             onEditClick = { navigateToEditFragment(it) },
+            onDuplicateClick = {
+                AlertDialogCustom(requireContext())
+                    .showDuplicateDialog { viewModel.duplicate(it) }
+            },
+            onMoveClick = { openMoveDialog(it) },
             onDeleteClick = {
                 AlertDialogCustom(requireContext())
                     .showDeleteDialog { viewModel.delete(it) }

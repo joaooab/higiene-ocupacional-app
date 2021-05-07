@@ -2,15 +2,22 @@ package br.com.joaoov.data.local.company
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import br.com.joaoov.data.local.report.CompanyWithDepartamentsLocal
 
 @Dao
 interface CompanyDAO {
 
+    @Query("SELECT * FROM company WHERE id =:id")
+    fun getById(id: Long): CompanyLocal
+
     @Query("SELECT * FROM company ORDER BY id")
     fun getAll(): LiveData<List<CompanyLocal>>
 
+    @Query("SELECT * FROM company WHERE id =:id")
+    fun getCompanyWithRelation(id: Long): CompanyWithDepartamentsLocal
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(company: CompanyLocal)
+    suspend fun save(company: CompanyLocal): Long
 
     @Delete
     suspend fun delete(company: CompanyLocal)

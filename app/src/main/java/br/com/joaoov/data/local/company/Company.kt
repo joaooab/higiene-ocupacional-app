@@ -9,7 +9,11 @@ data class Company(
     val id: Long = 0,
     val name: String = "",
     val date: String = ""
-) : Parcelable
+) : Parcelable {
+
+    override fun toString() = name
+
+}
 
 fun Company.toLocal() =
     CompanyLocal(

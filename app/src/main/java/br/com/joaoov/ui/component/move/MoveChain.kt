@@ -3,9 +3,11 @@ package br.com.joaoov.ui.component.move
 import androidx.lifecycle.MutableLiveData
 import br.com.joaoov.data.State
 import br.com.joaoov.data.local.ambient.Ambient
+import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.risk.Risk
 import br.com.joaoov.repository.AmbientRepository
+import br.com.joaoov.repository.DepartamentRepository
 import br.com.joaoov.repository.FunctionRepository
 import br.com.joaoov.repository.RiskRepository
 import org.koin.core.KoinComponent
@@ -26,6 +28,17 @@ abstract class MoveChain : KoinComponent {
         }
     }
 
+}
+
+class DepartamentMoveChain(private val departament: Departament, private val companyId: Long) :
+    MoveChain() {
+
+    private val departamentRepository: DepartamentRepository by inject()
+
+    override suspend fun move() {
+        DepartamentDuplicateChain(departament).duplicate(companyId)
+        departamentRepository.delete(departament)
+    }
 }
 
 class AmbientMoveChain(private val ambient: Ambient, private val departamentId: Long) :

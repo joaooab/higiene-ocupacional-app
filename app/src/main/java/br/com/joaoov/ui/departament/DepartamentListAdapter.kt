@@ -15,6 +15,8 @@ class DepartamentListAdapter(
     private val list: MutableList<Departament> = mutableListOf(),
     private val onClick: (Departament) -> Unit,
     private val onEditClick: (Departament) -> Unit,
+    private val onDuplicateClick: (Departament) -> Unit,
+    private val onMoveClick: (Departament) -> Unit,
     private val onDeleteClick: (Departament) -> Unit,
 ) : RecyclerView.Adapter<DepartamentListAdapter.ViewHolder>() {
 
@@ -40,10 +42,14 @@ class DepartamentListAdapter(
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.actionEdit -> onEditClick(item)
+                    R.id.actionDuplicate -> onDuplicateClick(item)
+                    R.id.actionMove -> onMoveClick(item)
                     R.id.actionDelete -> onDeleteClick(item)
                 }
                 true
             }
+            menu.findItem(R.id.actionDuplicate).isVisible = true
+            menu.findItem(R.id.actionMove).isVisible = true
             show()
         }
     }

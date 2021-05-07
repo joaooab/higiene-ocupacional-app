@@ -33,7 +33,7 @@
     <string name="action_finish">Finalizar</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_ok">Confirmar</string>
-    <string name="action_add"></string>
+    <string name="action_add">Adicionar</string>
 
     <string name="company">Empresa</string>
     <string name="departament">Setor</string>
@@ -86,6 +86,7 @@
     <string name="label_natural_ventilation">Ventilação Natural: %s</string>
     <string name="label_artificial_ventilation">Ventilação Artificial: %s</string>
     <string name="label_work_day">Jornada de trabalho:</string>
+    <string name="label_quantity_function">Nº de funcionários:</string>
 
     <string name="label_risk_factor">Fator de risco: %s</string>
     <string name="label_generating_source">Fonte geradora: %s</string>

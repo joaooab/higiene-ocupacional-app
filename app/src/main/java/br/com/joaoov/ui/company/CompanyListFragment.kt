@@ -25,6 +25,10 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
         CompanyListAdapter(
             onClick = { navigateToDepartamentFragment(it) },
             onEditClick = { navigateToEditCompanyFragment(it) },
+            onDuplicateClick = {
+                AlertDialogCustom(requireContext())
+                    .showDuplicateDialog { viewModel.duplicate(it) }
+            },
             onDeleteClick = {
                 AlertDialogCustom(requireContext())
                     .showDeleteDialog { viewModel.delete(it) }

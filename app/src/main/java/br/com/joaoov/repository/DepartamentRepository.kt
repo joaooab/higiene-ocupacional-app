@@ -7,6 +7,8 @@ import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.data.local.departament.DepartamentDAO
 import br.com.joaoov.data.local.departament.toLocal
 import br.com.joaoov.data.local.departament.toModel
+import br.com.joaoov.data.local.report.DepartamentWithAmbients
+import br.com.joaoov.data.local.report.toModel
 
 interface DepartamentRepository {
 
@@ -14,7 +16,9 @@ interface DepartamentRepository {
 
     fun getAllByCompany(company: Company): LiveData<List<Departament>>
 
-    suspend fun save(departament: Departament)
+    suspend fun getDepartamentWithRelation(departament: Departament): DepartamentWithAmbients
+
+    suspend fun save(departament: Departament): Long
 
     suspend fun delete(departament: Departament)
 
@@ -28,6 +32,9 @@ class DepartamentRepositoryImpl(private val dao: DepartamentDAO) :
 
     override fun getAllByCompany(company: Company) =
         dao.getAllByCompanyId(company.id).map { it.toModel() }
+
+    override suspend fun getDepartamentWithRelation(departament: Departament): DepartamentWithAmbients =
+        dao.getDepartamentWithRelation(departament.id).toModel()
 
     override suspend fun save(departament: Departament) =
         dao.save(departament.toLocal())

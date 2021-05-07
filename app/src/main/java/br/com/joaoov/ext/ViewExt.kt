@@ -32,11 +32,11 @@ fun TextInputLayout.getString(): String {
     }
 }
 
-fun TextInputLayout.getInt(): Int? {
+fun TextInputLayout.getInt(): Int {
     return try {
         this.editText?.text.toString().toInt()
     } catch (e: Exception) {
-        null
+        0
     }
 }
 

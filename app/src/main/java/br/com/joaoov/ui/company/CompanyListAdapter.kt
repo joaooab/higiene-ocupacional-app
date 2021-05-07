@@ -15,6 +15,7 @@ class CompanyListAdapter(
     private val list: MutableList<Company> = mutableListOf(),
     private val onClick: (Company) -> Unit,
     private val onEditClick: (Company) -> Unit,
+    private val onDuplicateClick: (Company) -> Unit,
     private val onDeleteClick: (Company) -> Unit
 ) : RecyclerView.Adapter<CompanyListAdapter.ViewHolder>() {
 
@@ -40,10 +41,12 @@ class CompanyListAdapter(
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.actionEdit -> onEditClick(item)
+                    R.id.actionDuplicate -> onDuplicateClick(item)
                     R.id.actionDelete -> onDeleteClick(item)
                 }
                 true
             }
+            menu.findItem(R.id.actionDuplicate).isVisible = true
             show()
         }
     }

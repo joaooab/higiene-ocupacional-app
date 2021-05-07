@@ -8,11 +8,13 @@ import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.risk.Risk
 import br.com.joaoov.repository.AmbientRepository
+import br.com.joaoov.repository.CompanyRepository
 import br.com.joaoov.repository.DepartamentRepository
 import br.com.joaoov.repository.FunctionRepository
 import kotlinx.coroutines.launch
 
 class MoveViewModel(
+    private val companyRepository: CompanyRepository,
     private val departamentRepository: DepartamentRepository,
     private val ambientRepository: AmbientRepository,
     private val functionRepository: FunctionRepository
@@ -26,6 +28,13 @@ class MoveViewModel(
 
     fun loadPossibleMoves(move: Any): LiveData<List<Any>> {
         return when (move) {
+            is Departament -> {
+                val company = companyRepository.getById(move.companyId)
+                companyRepository.getAll()
+                    .map { companies ->
+                        companies.filter { it.id != company.id }
+                    }
+            }
             is Ambient -> {
                 val department = departamentRepository.getById(move.departamentId)
                 departamentRepository.getAllByCompany(Company(department.companyId))
@@ -58,6 +67,9 @@ class MoveViewModel(
     fun move(move: Any, to: Any) {
         viewModelScope.launch {
             when (move) {
+                is Departament -> {
+                    DepartamentMoveChain(move, (to as Company).id).startMove(_moveState)
+                }
                 is Ambient -> {
                     AmbientMoveChain(move, (to as Departament).id).startMove(_moveState)
                 }

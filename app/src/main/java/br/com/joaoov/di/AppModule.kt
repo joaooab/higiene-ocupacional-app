@@ -28,7 +28,7 @@ val viewModelModule = module {
     viewModel { SyncViewModel(get(), get()) }
     viewModel { RiskViewModel(get(), get()) }
     viewModel { ExportViewModel(get(), get()) }
-    viewModel { MoveViewModel(get(), get(), get()) }
+    viewModel { MoveViewModel(get(), get(), get(), get()) }
 }
 
 val daoModule = module {

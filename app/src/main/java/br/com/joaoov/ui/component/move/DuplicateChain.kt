@@ -1,12 +1,12 @@
 package br.com.joaoov.ui.component.move
 
 import br.com.joaoov.data.local.ambient.Ambient
+import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.data.local.function.Function
 import br.com.joaoov.data.local.risk.Risk
 import br.com.joaoov.ext.format
-import br.com.joaoov.repository.AmbientRepository
-import br.com.joaoov.repository.FunctionRepository
-import br.com.joaoov.repository.RiskRepository
+import br.com.joaoov.repository.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -14,6 +14,40 @@ import java.util.*
 interface DuplicateChain : KoinComponent {
 
     suspend fun duplicate(parentId: Long? = null)
+
+}
+
+class CompanyDuplicateChain(private val company: Company) : DuplicateChain {
+
+    private val companyRepository: CompanyRepository by inject()
+
+    override suspend fun duplicate(parentId: Long?) {
+        val companyWithDepartaments = companyRepository.getCompanyWithRelation(company)
+        val copy = company.copy(id = 0, date = Date().format())
+        val newId = companyRepository.save(copy)
+        companyWithDepartaments.departamentsWithAmbients.forEach {
+            DepartamentDuplicateChain(it.departament).duplicate(newId)
+        }
+    }
+
+}
+
+class DepartamentDuplicateChain(private val departament: Departament) : DuplicateChain {
+
+    private val departamentRepository: DepartamentRepository by inject()
+
+    override suspend fun duplicate(parentId: Long?) {
+        val departamentWithAmbients = departamentRepository.getDepartamentWithRelation(departament)
+        val copy = if (parentId == null) {
+            departament.copy(id = 0, date = Date().format())
+        } else {
+            departament.copy(id = 0, date = Date().format(), companyId = parentId)
+        }
+        val newId = departamentRepository.save(copy)
+        departamentWithAmbients.ambientsWithFunctions.forEach {
+            AmbientDuplicateChain(it.ambient).duplicate(newId)
+        }
+    }
 
 }
 
