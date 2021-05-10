@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Higiene Ocupacional</string>
+    <string name="app_name">E-Labor</string>
 
     <string name="fragment_compay_label">Empresas</string>
     <string name="fragment_compay_create_label">Criar empresa</string>
