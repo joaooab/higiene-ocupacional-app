@@ -180,13 +180,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:endIconMode="clear_text">
+            android:layout_marginEnd="16dp">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextViewTrajectory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="none"
                 android:hint="@string/trajectory" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -203,6 +203,7 @@
                 android:id="@+id/autoCompleteTextViewEliminationNeutralization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="none"
                 android:hint="@string/elimination_neutralization" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -219,6 +220,7 @@
                 android:id="@+id/autoCompleteTextViewExposure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="none"
                 android:hint="@string/expousure" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -251,6 +253,7 @@
                 android:id="@+id/autoCompleteTextViewDegreeOfRisk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="none"
                 android:hint="@string/degree_of_risk" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
