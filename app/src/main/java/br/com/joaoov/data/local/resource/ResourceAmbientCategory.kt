@@ -11,6 +11,7 @@ enum class ResourceAmbientCategory(val value: String) {
     ARTIFICIAL_VENTILATION("Ventilação Artificial"),
     WINDOWN("Janela"),
     CEILING("Forro"),
+    STRUCTURE("Estrutura"),
     UNKNOWN("");
 
     companion object {

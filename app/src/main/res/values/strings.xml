@@ -55,6 +55,7 @@
     <string name="factor_type">Tipo do fator de risco</string>
     <string name="window">Janela</string>
     <string name="ceiling">Forro</string>
+    <string name="structure">Estrutura</string>
     <string name="natural_lighting">Iluminacao Natural</string>
     <string name="artificial_lighting">Iluminacao Artificial</string>
     <string name="natural_ventilation">Ventilação Natural</string>
@@ -81,6 +82,7 @@
     <string name="label_roof_tiles">Telha: %s</string>
     <string name="label_window">Janela: %s</string>
     <string name="label_ceiling">Forro: %s</string>
+    <string name="label_structure">Estrutura: %s</string>
     <string name="label_natural_lighting">Iluminacao Natural: %s</string>
     <string name="label_artificial_lighting">Iluminacao Artificial: %s</string>
     <string name="label_natural_ventilation">Ventilação Natural: %s</string>

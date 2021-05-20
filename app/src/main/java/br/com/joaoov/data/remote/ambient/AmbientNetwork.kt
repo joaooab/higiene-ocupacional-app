@@ -16,5 +16,6 @@ data class AmbientNetwork(
     val naturalLighting: String?,
     val artificialLighting: String?,
     val naturalVentilation: String?,
-    val artificialVentilation: String?
+    val artificialVentilation: String?,
+    val structure: String?
 )
