@@ -22,7 +22,7 @@ import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 26,
+    version = 27,
     entities = [
         CompanyLocal::class,
         DepartamentLocal::class,
@@ -75,7 +75,8 @@ object DatabaseMigrations {
     fun getMigrations(): Array<Migration> {
         return arrayOf(
             MIGRATION_24_25,
-            MIGRATION_25_26
+            MIGRATION_25_26,
+            MIGRATION_26_27
         )
     }
 
@@ -94,6 +95,13 @@ object DatabaseMigrations {
             database.execSQL("CREATE INDEX IF NOT EXISTS `index_function_ambientId` ON `function` (`ambientId`);")
             database.execSQL("INSERT INTO function SELECT `id`, `ambientId`, `name`, `date`, `description`, `workday`, `quantity` FROM function_backup;")
             database.execSQL("DROP TABLE function_backup;")
+        }
+    }
+
+
+    private val MIGRATION_26_27: Migration = object : Migration(26, 27) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE ambient ADD COLUMN structure TEXT DEFAULT '' NOT NULL")
         }
     }
 

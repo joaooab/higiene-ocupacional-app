@@ -28,8 +28,53 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentViewModel.withComponents = Components(path = true)
-        handleObserve()
         setupView()
+        handleObserve()
+    }
+
+    private fun setupView() {
+        setupSaveButton()
+        setupCalcButton()
+    }
+
+    private fun setupCalcButton() {
+        calcButton.setOnClickListener {
+            supportFragmentManager {
+                AreaDialog.newInstance {
+                    textInputLayoutArea.setString(it)
+                }.show(this, "")
+            }
+        }
+    }
+
+    private fun setupSaveButton() {
+        buttonSave.setOnClickListener {
+            val localName = textInputLayoutLocal.getString()
+            if (localName.isEmpty()) {
+                textInputLayoutLocal.error = getString(R.string.message_error_required)
+                return@setOnClickListener
+            }
+            val ambient = Ambient(
+                departamentId = arguments.departament.id,
+                name = localName,
+                date = Date().format(),
+                area = textInputLayoutArea.getString(),
+                height = textInputLayoutHeight.getString(),
+                floor = textInputLayoutFloor.getString(),
+                wall = textInputLayoutWall.getString(),
+                roof = textInputLayoutRoof.getString(),
+                roofTiles = textInputLayoutRoofTiles.getString(),
+                window = textInputLayoutWindow.getString(),
+                ceiling = textInputLayoutCeiling.getString(),
+                naturalLighting = textInputLayoutNaturalLighting.getString(),
+                artificialLighting = textInputLayoutArtificialLighting.getString(),
+                naturalVentilation = textInputLayoutNaturalVentilation.getString(),
+                artificialVentilation = textInputLayoutArtificialVentilation.getString(),
+                structure = textInputLayoutStructure.getString()
+            )
+            viewModel.save(ambient)
+            findNavController().popBackStack()
+        }
     }
 
     private fun handleObserve() {
@@ -73,56 +118,16 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
             ResourceAmbientCategory.CEILING,
             textInputLayoutCeiling
         )
+        observeResource(
+            ResourceAmbientCategory.STRUCTURE,
+            textInputLayoutStructure
+        )
     }
 
     private fun observeResource(category: ResourceAmbientCategory, inputLayout: TextInputLayout) {
         viewModel.getResourceByCategory(category).observe(viewLifecycleOwner, { resources ->
             inputLayout.setupData(resources)
         })
-    }
-
-    private fun setupView() {
-        setupSaveButton()
-        setupCalcButton()
-    }
-
-    private fun setupCalcButton() {
-        calcButton.setOnClickListener {
-            supportFragmentManager {
-                AreaDialog.newInstance {
-                    textInputLayoutArea.setString(it)
-                }.show(this, "")
-            }
-        }
-    }
-
-    private fun setupSaveButton() {
-        buttonSave.setOnClickListener {
-            val localName = textInputLayoutLocal.getString()
-            if (localName.isEmpty()) {
-                textInputLayoutLocal.error = getString(R.string.message_error_required)
-                return@setOnClickListener
-            }
-            val ambient = Ambient(
-                departamentId = arguments.departament.id,
-                name = localName,
-                date = Date().format(),
-                area = textInputLayoutArea.getString(),
-                height = textInputLayoutHeight.getString(),
-                floor = textInputLayoutFloor.getString(),
-                wall = textInputLayoutWall.getString(),
-                roof = textInputLayoutRoof.getString(),
-                roofTiles = textInputLayoutRoofTiles.getString(),
-                window = textInputLayoutWindow.getString(),
-                ceiling = textInputLayoutCeiling.getString(),
-                naturalLighting = textInputLayoutNaturalLighting.getString(),
-                artificialLighting = textInputLayoutArtificialLighting.getString(),
-                naturalVentilation = textInputLayoutNaturalVentilation.getString(),
-                artificialVentilation = textInputLayoutArtificialVentilation.getString()
-            )
-            viewModel.save(ambient)
-            findNavController().popBackStack()
-        }
     }
 
     override fun onPause() {

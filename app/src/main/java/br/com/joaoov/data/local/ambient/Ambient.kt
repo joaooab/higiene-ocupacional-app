@@ -22,7 +22,8 @@ data class Ambient(
     val naturalLighting: String = "",
     val artificialLighting: String = "",
     val naturalVentilation: String = "",
-    val artificialVentilation: String = ""
+    val artificialVentilation: String = "",
+    val structure: String = ""
 ) : Parcelable {
 
     @IgnoredOnParcel
@@ -49,7 +50,8 @@ fun Ambient.toLocal() =
         naturalLighting,
         artificialLighting,
         naturalVentilation,
-        artificialVentilation
+        artificialVentilation,
+        structure
     )
 
 fun List<Ambient>.toLocal() = map { it.toLocal() }
@@ -71,7 +73,8 @@ fun Ambient.toNetwork() =
         naturalLighting,
         artificialLighting,
         naturalVentilation,
-        artificialVentilation
+        artificialVentilation,
+        structure
     )
 
 fun List<Ambient>.toNetwork() = map { it.toNetwork() }

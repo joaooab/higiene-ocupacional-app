@@ -45,6 +45,7 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
             textInputLayoutArtificialLighting.setString(it.artificialLighting)
             textInputLayoutNaturalVentilation.setString(it.naturalVentilation)
             textInputLayoutArtificialVentilation.setString(it.artificialVentilation)
+            textInputLayoutStructure.setString(it.structure)
         }
 
         setupSaveButton()
@@ -71,7 +72,8 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
                 naturalLighting = textInputLayoutNaturalLighting.getString(),
                 artificialLighting = textInputLayoutArtificialLighting.getString(),
                 naturalVentilation = textInputLayoutNaturalVentilation.getString(),
-                artificialVentilation = textInputLayoutArtificialVentilation.getString()
+                artificialVentilation = textInputLayoutArtificialVentilation.getString(),
+                structure = textInputLayoutStructure.getString()
             )
             viewModel.update(ambient)
             findNavController().popBackStack()
@@ -128,6 +130,10 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
         observeResource(
             ResourceAmbientCategory.CEILING,
             textInputLayoutCeiling
+        )
+        observeResource(
+            ResourceAmbientCategory.STRUCTURE,
+            textInputLayoutStructure
         )
     }
 

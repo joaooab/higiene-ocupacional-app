@@ -35,7 +35,8 @@ data class AmbientLocal(
     val naturalLighting: String,
     val artificialLighting: String,
     val naturalVentilation: String,
-    val artificialVentilation: String
+    val artificialVentilation: String,
+    val structure: String
 )
 
 fun AmbientLocal.toModel() =
@@ -55,7 +56,8 @@ fun AmbientLocal.toModel() =
         naturalLighting,
         artificialLighting,
         naturalVentilation,
-        artificialVentilation
+        artificialVentilation,
+        structure
     )
 
 fun List<AmbientLocal>.toModel() = map { it.toModel() }

@@ -89,6 +89,11 @@ class AmbientListAdapter(
                     R.string.label_ceiling,
                     item.ceiling
                 )
+                textViewStructure.text = getString(
+                    context,
+                    R.string.label_structure,
+                    item.structure
+                )
 
                 setOnClickListener {
                     onClick(item)
