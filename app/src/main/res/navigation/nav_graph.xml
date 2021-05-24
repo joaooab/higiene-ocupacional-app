@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/companyListFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/ambientListFragment"
@@ -201,6 +201,17 @@
         android:id="@+id/workdayFragment"
         android:name="br.com.joaoov.ui.component.WorkdayFragment"
         android:label="@string/fragment_workday"
-        tools:layout="@layout/fragment_workday"/>
+        tools:layout="@layout/fragment_workday" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="br.com.joaoov.ui.splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_companyListFragment"
+            app:destination="@id/companyListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>
