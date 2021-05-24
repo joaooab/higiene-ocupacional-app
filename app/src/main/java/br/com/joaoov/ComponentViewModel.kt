@@ -33,4 +33,5 @@ class ComponentViewModel : ViewModel() {
 
 data class Components(
     val path: Boolean = true,
+    val toolbar: Boolean = true
 )

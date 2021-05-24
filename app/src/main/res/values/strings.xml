@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">E-Labor</string>
+    <string name="app_name">GRO</string>
 
     <string name="fragment_compay_label">Empresas</string>
     <string name="fragment_compay_create_label">Criar empresa</string>
@@ -125,6 +125,7 @@
     <string name="message_select_dayofweek">Selecione os dias da semana</string>
     <string name="message_select_hour">Selecione o horário de ínicio e fim</string>
     <string name="message_possible_move_empty">Não foi encontrado nenhum %s possível para mover</string>
+    <string name="splash">splash</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>

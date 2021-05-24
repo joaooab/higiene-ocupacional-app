@@ -74,6 +74,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 recyclerViewPath.gone()
             }
+            if (it.toolbar) {
+                appBar.show()
+            } else {
+                appBar.gone()
+            }
         })
     }
 
