@@ -45,6 +45,7 @@
 
     <Button
         android:id="@+id/buttonMove"
+        android:backgroundTint="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
