@@ -18,6 +18,10 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentViewModel.withComponents = Components(path = false, toolbar = false)
+    }
+
+    override fun onResume() {
+        super.onResume()
         Handler(Looper.getMainLooper()).postDelayed({
             val direction = SplashFragmentDirections.actionSplashFragmentToCompanyListFragment()
             findNavController().navigate(direction)
