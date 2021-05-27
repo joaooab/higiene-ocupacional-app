@@ -1,22 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TextFontMedium" parent="@style/TextAppearance.AppCompat">
-        <item name="android:fontFamily">sans-serif-medium</item>
+    <style name="TextGRO" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorDarkBlue</item>
     </style>
 
-    <style name="TextFontRegular" parent="@style/TextAppearance.AppCompat">
-        <item name="android:fontFamily">sans-serif</item>
+    <style name="TextFontThin" parent="TextGRO">
+        <item name="android:fontFamily">@font/roboto_thin</item>
     </style>
 
-    <style name="TextFontBold" parent="@style/TextAppearance.AppCompat">
-        <item name="android:fontFamily">sans-serif-black</item>
+    <style name="TextFontRegular" parent="TextGRO">
+        <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="TextFontLight" parent="@style/TextAppearance.AppCompat">
-        <item name="android:fontFamily">sans-serif-light</item>
+    <style name="TextFontBold" parent="TextGRO">
+        <item name="android:fontFamily">@font/roboto_bold</item>
     </style>
 
+    <style name="TitleLight" parent="TextFontThin">
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="TitleLightMedium" parent="TextFontThin">
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+    </style>
+
+    <style name="TitleLightSmall" parent="TextFontThin">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">12sp</item>
+    </style>
+
+    <style name="TitleLightXSmall" parent="TextFontThin">
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">17sp</item>
+    </style>
+
+    <style name="TitleLarge" parent="TextFontRegular">
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="TitleMedium" parent="TextFontRegular">
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+    </style>
+
+    <style name="TitleSmall" parent="TextFontRegular">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">12sp</item>
+    </style>
+
+    <style name="TitleXSmall" parent="TextFontRegular">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TitleLargeBold" parent="TextFontBold">
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="TitleMediumBold" parent="TextFontBold">
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+    </style>
+
+    <style name="TitleSmallBold" parent="TextFontBold">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">12sp</item>
+    </style>
+
+    <style name="TitleXSmallBold" parent="TextFontBold">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextLarge" parent="TextFontRegular">
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">9sp</item>
+    </style>
+
+    <style name="TextMedium" parent="TextFontRegular">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+    </style>
+
+    <style name="TextSmall" parent="TextFontRegular">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="TextXSmall" parent="TextFontRegular">
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="TextLargeBold" parent="TextFontBold">
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">9sp</item>
+    </style>
+
+    <style name="TextMediumBold" parent="TextFontBold">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+    </style>
+
+    <style name="TextSmallBold" parent="TextFontBold">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="TextXSmallBold" parent="TextFontBold">
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="CapitionLarge" parent="TextLargeBold">
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="CapitionMedium" parent="TextMediumBold">
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="CapitionSmall" parent="TextSmallBold">
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="CapitionXSmall" parent="TextXSmallBold">
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="TextItemUserLetter" parent="TextMediumBold">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <!--    Deprecated-->
     <style name="TextItemDrawable" parent="TextFontBold">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#ffffff</item>

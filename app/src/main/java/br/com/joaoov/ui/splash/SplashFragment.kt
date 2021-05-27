@@ -23,7 +23,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onResume() {
         super.onResume()
         Handler(Looper.getMainLooper()).postDelayed({
-            val direction = SplashFragmentDirections.actionSplashFragmentToCompanyListFragment()
+            val direction = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
             findNavController().navigate(direction)
         }, 3000)
     }
