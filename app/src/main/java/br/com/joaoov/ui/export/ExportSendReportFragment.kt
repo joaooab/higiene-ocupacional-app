@@ -10,6 +10,9 @@ import br.com.joaoov.R
 import br.com.joaoov.data.State
 import br.com.joaoov.data.local.report.Report
 import br.com.joaoov.ext.*
+import br.com.joaoov.ui.component.ValidatorEditText
+import br.com.joaoov.ui.component.ValidatorEditTextBuilder
+import br.com.joaoov.ui.component.ValidatorEditTextType
 import kotlinx.android.synthetic.main.fragment_export_send_report.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -19,11 +22,16 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
     private val viewModel: ExportViewModel by viewModel()
     private val componentViewModel: ComponentViewModel by sharedViewModel()
     private val arguments by navArgs<ExportSendReportFragmentArgs>()
+    private lateinit var validator: ValidatorEditText
     private val report = Report()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentViewModel.withComponents = Components(path = false)
+        validator = ValidatorEditTextBuilder()
+            .addField(textInputLayoutEmail, ValidatorEditTextType.Email(isRequired = true))
+            .build()
+
         setupView()
         handleObserve()
     }
@@ -53,7 +61,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
                     buttonSend.setText(R.string.action_send_again)
                 }
                 is State.Error -> {
-                    showToast(it.throwable.handleError())
+                    it.throwable.handle(requireContext())
                     buttonSend.show()
                     progressBar.gone()
                     buttonSend.setText(R.string.action_send_again)
@@ -64,19 +72,17 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
 
     private fun setupView() {
         textViewInfo.text = arguments.company.name.toUpperCaseWithLocale()
-        textInputLayoutEmail.setTypeEmail()
         setupButtonSend()
     }
 
     private fun setupButtonSend() {
         buttonSend.setOnClickListener {
-            val email = textInputLayoutEmail.getString()
-            if (!email.isValidEmail()) {
-                textInputLayoutEmail.error = getString(R.string.message_invalid_email)
-                return@setOnClickListener
+            if (validator.validate()) {
+                val email = textInputLayoutEmail.getString()
+                report.email = email
+
+                viewModel.send(report)
             }
-            report.email = email
-            viewModel.send(report)
         }
     }
 
