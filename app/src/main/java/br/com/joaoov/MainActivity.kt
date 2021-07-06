@@ -9,16 +9,14 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import br.com.joaoov.data.PathState
 import br.com.joaoov.data.SyncState
 import br.com.joaoov.ext.gone
+import br.com.joaoov.ext.handle
 import br.com.joaoov.ext.show
-import br.com.joaoov.ext.showToast
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private val syncViewModel: SyncViewModel by viewModel()
     private val componentViewModel: ComponentViewModel by viewModel()
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
+    private var menu: Menu? = null
 
     private val adapterPath by lazy {
         MainPathAdapter()
@@ -48,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        this.menu = menu
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -56,11 +56,19 @@ class MainActivity : AppCompatActivity() {
             R.id.action_export -> {
                 navigateToExportCompanyFragment()
             }
-            R.id.action_sycronize -> {
-                syncViewModel.forceSyncronize()
+            R.id.action_settings -> {
+                navController.navigate(R.id.settingsFragment)
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun logout() {
+        Session.logout()
+        if (R.id.authFragment != navController.currentDestination?.id) {
+            navController.popBackStack(R.id.nav_graph, true)
+            navController.navigate(R.id.authFragment)
+        }
     }
 
     private fun navigateToExportCompanyFragment() {
@@ -79,6 +87,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 appBar.gone()
             }
+            menu?.findItem(R.id.action_export)?.isVisible = it.menu
+            menu?.findItem(R.id.action_settings)?.isVisible = it.menu
         })
     }
 
@@ -103,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                     textViewSync.text = state.message
                 }
                 is SyncState.Completed -> {
+                    linearLayoutSync.show()
                     textViewSync.setText(R.string.sync_complete)
                     Handler(Looper.getMainLooper()).postDelayed({
                         linearLayoutSync.gone()
@@ -110,7 +121,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 is SyncState.Failed -> {
                     linearLayoutSync.gone()
-                    showToast(R.string.sync_failed)
+                    state.throwable.handle(this)
                 }
             }
         })
@@ -131,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavHostFragment.findNavController(nav_host_fragment).navigateUp()
+        return navController.navigateUp()
     }
 
     fun checkPermission(permission: String): Boolean {

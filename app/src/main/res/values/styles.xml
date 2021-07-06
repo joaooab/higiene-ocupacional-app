@@ -32,6 +32,7 @@
         <item name="android:gravity">center</item>
         <item name="cornerRadius">100dp</item>
         <item name="android:radius">100dp</item>
+        <item name="progressColor">@color/colorAccent</item>
         <item name="android:minHeight">47dp</item>
         <item name="android:elevation">3dp</item>
         <item name="android:background">@drawable/primary_button</item>
@@ -40,6 +41,7 @@
     <style name="SecondaryButton" parent="PrimaryButton">
         <item name="android:textColor">@color/colorDarkBlue</item>
         <item name="android:background">@drawable/secondary_button</item>
+        <item name="progressColor">@color/colorWhite</item>
     </style>
 
 </resources>

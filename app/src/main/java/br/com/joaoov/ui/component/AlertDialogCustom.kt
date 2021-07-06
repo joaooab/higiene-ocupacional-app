@@ -14,7 +14,7 @@ class AlertDialogCustom(private val context: Context) {
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.message_alert)
             .setMessage(R.string.message_alert_delete)
-            .setPositiveButton(R.string.action_ok) { _, _ ->
+            .setPositiveButton(R.string.action_confirm) { _, _ ->
                 onPositiveButton()
             }
             .setNegativeButton(R.string.action_cancel) { dialog, _ ->
@@ -27,6 +27,18 @@ class AlertDialogCustom(private val context: Context) {
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.message_alert)
             .setMessage(R.string.message_alert_duplicate)
+            .setPositiveButton(R.string.action_confirm) { _, _ ->
+                onPositiveButton()
+            }
+            .setNegativeButton(R.string.action_cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+
+    fun showPaylmentDialog(onPositiveButton: () -> Unit): AlertDialog =
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.message_alert)
+            .setMessage(R.string.message_alert_payment)
             .setPositiveButton(R.string.action_ok) { _, _ ->
                 onPositiveButton()
             }
