@@ -5,21 +5,26 @@
     <string name="fragment_compay_create_label">Criar empresa</string>
     <string name="fragment_compay_edit_label">Editar empresa</string>
     <string name="fragment_ambient_label">Ambientes</string>
-    <string name="fragment_ambient_detail_label">Detalhes do Ambiente</string>
-    <string name="fragment_ambient_create_label">Criar Ambiente</string>
-    <string name="fragment_ambient_edit_label">Editar Ambiente</string>
+    <string name="fragment_ambient_detail_label">Detalhes do ambiente</string>
+    <string name="fragment_ambient_create_label">Criar ambiente</string>
+    <string name="fragment_ambient_edit_label">Editar ambiente</string>
     <string name="fragment_departament_label">Setores</string>
-    <string name="fragment_departament_create_label">Criar Setor</string>
-    <string name="fragment_departament_edit_label">Editar Setor</string>
+    <string name="fragment_departament_create_label">Criar setor</string>
+    <string name="fragment_departament_edit_label">Editar setor</string>
     <string name="fragment_function_label">Funções</string>
-    <string name="fragment_function_create_label">Criar Função</string>
-    <string name="fragment_function_edit_label">Editar Função</string>
-    <string name="fragment_risk_create_label">Criar Risco</string>
-    <string name="fragment_risk_edit_label">Editar Risco</string>
+    <string name="fragment_function_create_label">Criar função</string>
+    <string name="fragment_function_edit_label">Editar função</string>
+    <string name="fragment_risk_create_label">Criar risco</string>
+    <string name="fragment_risk_edit_label">Editar risco</string>
     <string name="fragment_risk_label">Riscos</string>
-    <string name="fragment_export_select_company_label">Exportar Relatório</string>
-    <string name="fragment_export_send_report_label">Enviar Relatório</string>
-    <string name="fragment_workday">Jornada de Trabalho</string>
+    <string name="fragment_export_select_company_label">Exportar relatório</string>
+    <string name="fragment_export_send_report_label">Enviar relatório</string>
+    <string name="fragment_workday">Jornada de trabalho</string>
+    <string name="fragment_user">Criar usuário</string>
+    <string name="fragment_user_update">Alterar senha</string>
+    <string name="fragment_auth">Login</string>
+    <string name="fragment_settings">Configurações</string>
+    <string name="fragment_forgot_password">Recuperar senha</string>
 
     <string name="action_edit">Editar</string>
     <string name="action_delete">Excluir</string>
@@ -27,13 +32,19 @@
     <string name="action_move">Mover</string>
     <string name="action_export">Exportar</string>
     <string name="action_sync">Sincronizar</string>
+    <string name="action_settings">Configuração</string>
+    <string name="action_change_password">Alterar senha</string>
+    <string name="action_logout">Sair</string>
     <string name="action_save">Salvar</string>
     <string name="action_send">Enviar</string>
-    <string name="action_send_again">Tentar Novamente</string>
+    <string name="action_send_again">Tentar novamente</string>
     <string name="action_finish">Finalizar</string>
     <string name="action_cancel">Cancelar</string>
-    <string name="action_ok">Confirmar</string>
+    <string name="action_ok">OK</string>
+    <string name="action_confirm">Confirmar</string>
     <string name="action_add">Adicionar</string>
+    <string name="action_login">Entrar</string>
+    <string name="action_register">Cadastrar</string>
 
     <string name="company">Empresa</string>
     <string name="departament">Setor</string>
@@ -41,7 +52,6 @@
     <string name="function">Função</string>
     <string name="description">Descrição</string>
     <string name="workday">Jornada de trabalho</string>
-    <string name="email">E-mail</string>
     <string name="local">Local</string>
     <string name="area">Área (m²)</string>
     <string name="width_area">Largura (m)</string>
@@ -60,7 +70,13 @@
     <string name="artificial_lighting">Iluminacao Artificial</string>
     <string name="natural_ventilation">Ventilação Natural</string>
     <string name="artificial_ventilation">Ventilação Artificial</string>
-
+    <string name="splash">splash</string>
+    <string name="email">E-mail</string>
+    <string name="name">Nome</string>
+    <string name="password">senha</string>
+    <string name="password_confirm">confirmar senha</string>
+    <string name="old_password">senha atual</string>
+    <string name="new_password">nova senha</string>
     <string name="risk_factor">Fator de risco</string>
     <string name="generating_source">Fonte geradora</string>
     <string name="intensity_concentration">Intensidade e/ou concentração</string>
@@ -72,7 +88,14 @@
     <string name="action_level">Nível de Ação</string>
     <string name="nr15">NR-15</string>
     <string name="acgih">ACGIH</string>
+    <string name="e_social">Previdência</string>
+    <string name="not_e_social">Trabalhista</string>
+    <string name="calc_area">Calcular Área</string>
+    <string name="function_amount">Quantidade de funcionários</string>
+    <string name="end">Saída:</string>
+    <string name="begin">Entrada:</string>
 
+    <string name="label_email">E-mail: %s</string>
     <string name="label_local">Local: %s</string>
     <string name="label_area">Área: %s</string>
     <string name="label_height">Pé direito: %s</string>
@@ -89,7 +112,6 @@
     <string name="label_artificial_ventilation">Ventilação Artificial: %s</string>
     <string name="label_work_day">Jornada de trabalho:</string>
     <string name="label_quantity_function">Nº de funcionários:</string>
-
     <string name="label_risk_factor">Fator de risco: %s</string>
     <string name="label_generating_source">Fonte geradora: %s</string>
     <string name="label_intensity_concentration">Intensidade e/ou concentração: %s</string>
@@ -108,24 +130,27 @@
     <string name="message_alert">Atenção</string>
     <string name="message_alert_delete">Deseja realmente excluir?</string>
     <string name="message_alert_duplicate">Deseja realmente duplicar?</string>
+    <string name="message_alert_payment">Seu pagamento expirou! Entre em contato com nosso suporte para saber mais detalhes!</string>
     <string name="message_error_required">Campo obrigatório</string>
-    <string name="message_error_start_greater_then_end">Horário início não pode ser maior ou igual ao horário fim</string>
     <string name="message_error_generic">Erro inesperado</string>
     <string name="message_invalid_email">Email inválido</string>
     <string name="message_select_company_info">Selecione a empresa para gerar o relatório</string>
     <string name="message_send_success">Relatório enviado com sucesso</string>
     <string name="message_email_send_info">Informe o e-mail para enviarmos o relatório</string>
     <string name="message_move_to">Mover para:</string>
-    <string name="e_social">Previdência</string>
-    <string name="not_e_social">Trabalhista</string>
-    <string name="calc_area">Calcular Área</string>
-    <string name="function_amount">Quantidade de funcionários</string>
-    <string name="end">Saída:</string>
-    <string name="begin">Entrada:</string>
     <string name="message_select_dayofweek">Selecione os dias da semana</string>
     <string name="message_select_hour">Selecione o horário de ínicio e fim</string>
     <string name="message_possible_move_empty">Não foi encontrado nenhum %s possível para mover</string>
-    <string name="splash">splash</string>
+    <string name="message_not_register">Ainda não possui cadastro? <u>Clique aqui</u></string>
+    <string name="message_forgot_password">Esqueceu sua senha? <u>Clique aqui</u></string>
+    <string name="message_user_created">Usuário criado com sucesso</string>
+    <string name="message_user_updated_password">Senha alterada com sucesso</string>
+    <string name="message_recorey_password_success">Uma nova senha foi gerada e enviada para o e-mail informado</string>
+    <string name="message_valid_email_info">Por favor, informe um e-mail válido</string>
+    <string name="message_forgot_password_info">Informe o seu e-mail cadastrado para enviarmos uma nova senha</string>
+
+    <string name="throwable_connect">Falha ao conectar com o servidor tente novamente ou contate nosso suporte</string>
+    <string name="throwable_generic">Erro inesperado tente novamente ou contate nosso suporte</string>
 
     <string-array name="piso_array">
         <item>Concreto armado</item>

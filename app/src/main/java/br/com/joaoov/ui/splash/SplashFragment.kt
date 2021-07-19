@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
+import br.com.joaoov.Session
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
@@ -23,7 +24,11 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onResume() {
         super.onResume()
         Handler(Looper.getMainLooper()).postDelayed({
-            val direction = SplashFragmentDirections.actionSplashFragmentToCompanyListFragment()
+            val direction = if (Session.isLoggedIn()) {
+                SplashFragmentDirections.actionSplashFragmentToCompanyListFragment()
+            } else {
+                SplashFragmentDirections.actionSplashFragmentToAuthFragment()
+            }
             findNavController().navigate(direction)
         }, 3000)
     }

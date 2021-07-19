@@ -35,19 +35,9 @@ class ExportSelectCompanyFragment : Fragment(R.layout.fragment_export_select_com
         findNavController().navigate(direction)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.findItem(R.id.action_export)?.isVisible = false
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        componentViewModel.withComponents = Components(path = false)
+        componentViewModel.withComponents = Components(path = false, menu = false)
         setupView()
         handleObserve()
     }

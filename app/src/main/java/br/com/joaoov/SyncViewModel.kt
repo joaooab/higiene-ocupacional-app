@@ -19,11 +19,7 @@ class SyncViewModel(
     private val _syncronizeState = MutableLiveData<SyncState>()
     val syncronizeState: LiveData<SyncState> = _syncronizeState
 
-    init {
-        syncronize()
-    }
-
-    private fun syncronize() {
+    fun syncronize() {
         val syncronize = viewModelScope.async {
             runCatching {
                 val lastSyncronized = syncronizeRepository.getLastSyncronized()

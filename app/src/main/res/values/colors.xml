@@ -8,6 +8,9 @@
 	<color name="colorAccentLight">#898898</color>
 	<color name="colorAccentDark">#32323f</color>
 
+	<color name="colorWhite">#FFFFFF</color>
+	<color name="colorDarkBlue">#14142B</color>
+
 	<color name="colorDisable">#D4D4D4</color>
 	<color name="colorDisableText">#515151</color>
 </resources>

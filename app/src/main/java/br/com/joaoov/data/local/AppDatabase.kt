@@ -22,7 +22,7 @@ import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 27,
+    version = 28,
     entities = [
         CompanyLocal::class,
         DepartamentLocal::class,
@@ -76,7 +76,8 @@ object DatabaseMigrations {
         return arrayOf(
             MIGRATION_24_25,
             MIGRATION_25_26,
-            MIGRATION_26_27
+            MIGRATION_26_27,
+            MIGRATION_27_28
         )
     }
 
@@ -102,6 +103,12 @@ object DatabaseMigrations {
     private val MIGRATION_26_27: Migration = object : Migration(26, 27) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL("ALTER TABLE ambient ADD COLUMN structure TEXT DEFAULT '' NOT NULL")
+        }
+    }
+
+    private val MIGRATION_27_28: Migration = object : Migration(27, 28) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE company ADD COLUMN userId TEXT DEFAULT '' NOT NULL")
         }
     }
 
