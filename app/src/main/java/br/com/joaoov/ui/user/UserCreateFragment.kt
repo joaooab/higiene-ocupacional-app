@@ -67,4 +67,5 @@ class UserCreateFragment : Fragment(R.layout.fragment_user_create) {
             }
         }
     }
+
 }

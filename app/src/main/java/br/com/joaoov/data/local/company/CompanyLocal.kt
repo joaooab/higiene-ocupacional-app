@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class CompanyLocal(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+    val userId: String,
     val name: String,
     val date: String
 )
@@ -14,6 +15,7 @@ data class CompanyLocal(
 fun CompanyLocal.toModel() =
     Company(
         id,
+        userId,
         name,
         date
     )

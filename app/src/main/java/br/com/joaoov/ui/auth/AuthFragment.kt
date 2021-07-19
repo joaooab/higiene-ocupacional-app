@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.SyncViewModel
 import br.com.joaoov.data.State
+import br.com.joaoov.data.local.worker.OldCompanyWorker
 import br.com.joaoov.data.remote.auth.Auth
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.handle
@@ -67,6 +70,8 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
                 }
                 is State.Success -> {
                     buttonLogin.endLoading()
+                    WorkManager.getInstance(requireContext())
+                        .enqueue(OneTimeWorkRequest.from(OldCompanyWorker::class.java))
                     navigateToHome()
                     syncViewModel.syncronize()
                 }

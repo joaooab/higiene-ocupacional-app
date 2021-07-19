@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Company(
     val id: Long = 0,
+    val userId: String = "",
     val name: String = "",
     val date: String = ""
 ) : Parcelable {
@@ -18,6 +19,7 @@ data class Company(
 fun Company.toLocal() =
     CompanyLocal(
         id,
+        userId,
         name,
         date
     )
@@ -27,6 +29,7 @@ fun List<Company>.toLocal() = map { it.toLocal() }
 fun Company.toNetwork() =
     CompanyNetwork(
         id,
+        userId,
         name,
         date
     )

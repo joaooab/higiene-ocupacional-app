@@ -31,7 +31,7 @@ object AppService {
 
     private fun attachToken(chain: Interceptor.Chain): Request {
         return if (Session.isLoggedIn()) {
-            val token = Session.userToken ?: return chain.request()
+            val token = Session.userToken
             chain.request()
                 .newBuilder()
                 .addHeader("Authorization", "${token.type} ${token.token}")

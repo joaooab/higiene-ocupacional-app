@@ -10,8 +10,8 @@ interface CompanyDAO {
     @Query("SELECT * FROM company WHERE id =:id")
     fun getById(id: Long): CompanyLocal
 
-    @Query("SELECT * FROM company ORDER BY id")
-    fun getAll(): LiveData<List<CompanyLocal>>
+    @Query("SELECT * FROM company WHERE userId =:userId ORDER BY id")
+    fun getAll(userId: String): LiveData<List<CompanyLocal>>
 
     @Query("SELECT * FROM company WHERE id =:id")
     fun getCompanyWithRelation(id: Long): CompanyWithDepartamentsLocal
@@ -24,5 +24,8 @@ interface CompanyDAO {
 
     @Update
     suspend fun update(company: CompanyLocal)
+
+    @Query("SELECT * FROM company WHERE userId =''")
+    fun getOldCompanies(): List<CompanyLocal>
 
 }

@@ -2,6 +2,7 @@ package br.com.joaoov.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import br.com.joaoov.Session
 import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.data.local.company.CompanyDAO
 import br.com.joaoov.data.local.company.toLocal
@@ -23,6 +24,8 @@ interface CompanyRepository {
 
     suspend fun delete(company: Company)
 
+    suspend fun getOldCompanies() : List<Company>
+
 }
 
 class CompanyRepositoryImpl(private val dao: CompanyDAO) :
@@ -30,7 +33,7 @@ class CompanyRepositoryImpl(private val dao: CompanyDAO) :
 
     override fun getById(id: Long): Company = dao.getById(id).toModel()
 
-    override fun getAll() = dao.getAll().map { it.toModel() }
+    override fun getAll() = dao.getAll(Session.user.id.orEmpty()).map { it.toModel() }
 
     override suspend fun getCompanyWithRelation(company: Company) =
         dao.getCompanyWithRelation(company.id).toModel()
@@ -44,4 +47,5 @@ class CompanyRepositoryImpl(private val dao: CompanyDAO) :
     override suspend fun delete(company: Company) =
         dao.delete(company.toLocal())
 
+    override suspend fun getOldCompanies() = dao.getOldCompanies().map { it.toModel() }
 }

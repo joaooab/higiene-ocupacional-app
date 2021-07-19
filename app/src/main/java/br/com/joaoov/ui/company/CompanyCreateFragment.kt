@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
+import br.com.joaoov.Session
 import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.ext.format
 import br.com.joaoov.ext.getString
@@ -37,6 +38,7 @@ class CompanyCreateFragment : Fragment(R.layout.fragment_company_create) {
             }
             val company = Company(
                 name = companyName,
+                userId = Session.user.id.orEmpty(),
                 date = Date().format()
             )
             viewModel.save(company)
