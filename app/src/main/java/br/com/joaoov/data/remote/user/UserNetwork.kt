@@ -5,10 +5,12 @@ data class UserNetwork(
     val username: String,
     val password: String,
     val name: String,
+    val document: String? = null,
     val companyId: String? = null,
     val enabled: Boolean? = null,
     val role: String? = null,
-    val reportCount: Int? = null
+    val reportCount: Int? = null,
+    val accessKey: String? = null
 )
 
 fun UserNetwork.toModel() = User(
@@ -16,8 +18,10 @@ fun UserNetwork.toModel() = User(
     username = username,
     password = password,
     name = name,
+    document = document,
     companyId = companyId,
     enabled = enabled ?: false,
     role = role ?: "",
-    reportCount = reportCount
+    reportCount = reportCount,
+    accessKey = accessKey
 )

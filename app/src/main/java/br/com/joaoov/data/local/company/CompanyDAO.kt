@@ -25,7 +25,4 @@ interface CompanyDAO {
     @Update
     suspend fun update(company: CompanyLocal)
 
-    @Query("SELECT * FROM company WHERE userId =''")
-    fun getOldCompanies(): List<CompanyLocal>
-
 }

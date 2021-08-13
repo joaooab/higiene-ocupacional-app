@@ -24,8 +24,6 @@ interface CompanyRepository {
 
     suspend fun delete(company: Company)
 
-    suspend fun getOldCompanies() : List<Company>
-
 }
 
 class CompanyRepositoryImpl(private val dao: CompanyDAO) :
@@ -47,5 +45,4 @@ class CompanyRepositoryImpl(private val dao: CompanyDAO) :
     override suspend fun delete(company: Company) =
         dao.delete(company.toLocal())
 
-    override suspend fun getOldCompanies() = dao.getOldCompanies().map { it.toModel() }
 }

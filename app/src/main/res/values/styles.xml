@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -20,6 +21,17 @@
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_box</item>
+    </style>
+
     <style name="CancelButton">
         <item name="android:textColor">@color/colorDisableText</item>
         <item name="android:gravity">center</item>
@@ -33,7 +45,7 @@
         <item name="cornerRadius">100dp</item>
         <item name="android:radius">100dp</item>
         <item name="progressColor">@color/colorAccent</item>
-        <item name="android:minHeight">47dp</item>
+        <item name="android:minHeight">48dp</item>
         <item name="android:elevation">3dp</item>
         <item name="android:background">@drawable/primary_button</item>
     </style>

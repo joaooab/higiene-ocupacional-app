@@ -13,13 +13,18 @@ import br.com.joaoov.data.remote.user.UserService
 import br.com.joaoov.repository.*
 import br.com.joaoov.ui.ambient.AmbientViewModel
 import br.com.joaoov.ui.auth.AuthViewModel
+import br.com.joaoov.ui.billing.BillingPurchaseViewModel
+import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.company.CompanyViewModel
 import br.com.joaoov.ui.component.move.MoveViewModel
 import br.com.joaoov.ui.departament.DepartamentViewModel
 import br.com.joaoov.ui.export.ExportViewModel
 import br.com.joaoov.ui.function.FunctionViewModel
 import br.com.joaoov.ui.risk.RiskViewModel
+import br.com.joaoov.ui.settings.AccessKeyViewModel
 import br.com.joaoov.ui.user.UserViewModel
+import br.com.joaoov.usecase.CheckBillingUseCase
+import br.com.joaoov.usecase.CheckBillingUseCaseImpl
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -37,6 +42,9 @@ val viewModelModule = module {
     viewModel { MoveViewModel(get(), get(), get(), get()) }
     viewModel { UserViewModel(get()) }
     viewModel { AuthViewModel(get()) }
+    viewModel { BillingViewModel() }
+    viewModel { BillingPurchaseViewModel(get()) }
+    viewModel { AccessKeyViewModel(get()) }
 }
 
 val daoModule = module {
@@ -73,5 +81,9 @@ val servciceModule = module {
     single { AppService.create<ReportService>() }
     single { AppService.create<UserService>() }
     single { AppService.create<AuthService>() }
+}
+
+val useCaseModule = module {
+    factory<CheckBillingUseCase> { CheckBillingUseCaseImpl() }
 }
 

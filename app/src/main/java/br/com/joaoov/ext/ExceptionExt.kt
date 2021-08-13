@@ -4,7 +4,6 @@ import android.content.Context
 import br.com.joaoov.MainActivity
 import br.com.joaoov.R
 import br.com.joaoov.data.BusinessError
-import br.com.joaoov.ui.component.AlertDialogCustom
 import com.google.gson.Gson
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -20,15 +19,20 @@ private fun Throwable.handleMessage(context: Context): String {
 
 private fun genericError(context: Context) = context.getString(R.string.throwable_generic)
 
-fun Throwable.handle(context: Context) {
-    if (this is HttpException && this.code() == HttpURLConnection.HTTP_FORBIDDEN) {
+fun Throwable.handle(context: Context, showToast: Boolean = true): String {
+    return if (this is HttpException && this.code() == HttpURLConnection.HTTP_FORBIDDEN) {
         (context as MainActivity).logout()
-        AlertDialogCustom(context).showPaylmentDialog {
+        val message = context.getString(R.string.throwable_session)
+        context.showToast(message)
 
-        }
+        message
     } else {
         val message = handleMessage(context)
-        context.showToast(message)
+        if (showToast) {
+            context.showToast(message)
+        }
+
+        message
     }
 }
 

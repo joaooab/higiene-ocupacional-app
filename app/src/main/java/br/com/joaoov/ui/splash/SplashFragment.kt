@@ -10,6 +10,7 @@ import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.Session
+import br.com.joaoov.ext.findNavControllerSafely
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
@@ -29,7 +30,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
             } else {
                 SplashFragmentDirections.actionSplashFragmentToAuthFragment()
             }
-            findNavController().navigate(direction)
+            findNavControllerSafely()?.navigate(direction)
         }, 3000)
     }
 

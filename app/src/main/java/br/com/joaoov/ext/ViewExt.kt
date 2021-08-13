@@ -24,11 +24,27 @@ fun View.gone() {
     this.visibility = View.GONE
 }
 
+fun View.setVisible(isVisible: Boolean) {
+    this.visibility = if (isVisible) {
+        View.VISIBLE
+    } else {
+        View.GONE
+    }
+}
+
 fun TextInputLayout.getString(): String {
     return try {
         this.editText?.text.toString()
     } catch (e: Exception) {
         ""
+    }
+}
+
+fun TextInputLayout.getStringOrNull(): String? {
+    return try {
+        this.editText?.text.toString()
+    } catch (e: Exception) {
+        null
     }
 }
 

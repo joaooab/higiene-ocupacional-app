@@ -50,6 +50,9 @@
         <action
             android:id="@+id/action_companyListFragment_to_companyEditFragment"
             app:destination="@id/companyEditFragment" />
+        <action
+            android:id="@+id/action_companyListFragment_to_billingListFragment"
+            app:destination="@id/billingListFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyCreateFragment"
@@ -244,7 +247,7 @@
         android:id="@+id/userUpdateFragment"
         android:name="br.com.joaoov.ui.user.UserUpdateFragment"
         android:label="@string/fragment_user_update"
-        tools:layout="@layout/fragment_user_update"/>
+        tools:layout="@layout/fragment_user_update" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="br.com.joaoov.ui.settings.SettingsFragment"
@@ -253,11 +256,27 @@
         <action
             android:id="@+id/action_settingsFragment_to_userUpdateFragment"
             app:destination="@id/userUpdateFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_billingListFragment"
+            app:destination="@id/billingListFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_settingsAccesskeyFragment"
+            app:destination="@id/settingsAccesskeyFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="br.com.joaoov.ui.auth.ForgotPasswordFragment"
         android:label="@string/fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password"/>
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/billingListFragment"
+        android:name="br.com.joaoov.ui.billing.BillingListFragment"
+        android:label="@string/fragment_billing"
+        tools:layout="@layout/fragment_billing" />
+    <fragment
+        android:id="@+id/settingsAccesskeyFragment"
+        android:name="br.com.joaoov.ui.settings.SettingsAccessKeyFragment"
+        android:label="@string/fragment_access_key"
+        tools:layout="@layout/fragment_settings_access_key" />
 
 </navigation>

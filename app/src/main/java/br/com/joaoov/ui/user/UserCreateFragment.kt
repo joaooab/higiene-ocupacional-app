@@ -7,10 +7,8 @@ import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.State
-import br.com.joaoov.data.remote.user.User
-import br.com.joaoov.ext.getString
-import br.com.joaoov.ext.handle
-import br.com.joaoov.ext.showToast
+import br.com.joaoov.data.remote.user.UserCreate
+import br.com.joaoov.ext.*
 import br.com.joaoov.ui.component.ValidatorEditText
 import br.com.joaoov.ui.component.ValidatorEditTextBuilder
 import br.com.joaoov.ui.component.ValidatorEditTextType
@@ -22,18 +20,25 @@ class UserCreateFragment : Fragment(R.layout.fragment_user_create) {
 
     private val viewModel: UserViewModel by viewModel()
     private val componentViewModel: ComponentViewModel by sharedViewModel()
-    private lateinit var validator: ValidatorEditText
+    private lateinit var userValidator: ValidatorEditText
+    private lateinit var legalUserValidator: ValidatorEditText
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentViewModel.withComponents = Components(path = false, toolbar = true, menu = false)
-        validator = ValidatorEditTextBuilder()
+        userValidator = ValidatorEditTextBuilder()
             .addField(textInputLayoutEmail, ValidatorEditTextType.Email(isRequired = true))
             .addField(textInputLayoutName, ValidatorEditTextType.Requiered)
             .addField(textInputLayoutPassword, ValidatorEditTextType.Password)
-            .addField(textInputLayoutPasswordConfirm, ValidatorEditTextType.PasswordConfirm(textInputLayoutPassword))
+            .addField(
+                textInputLayoutPasswordConfirm,
+                ValidatorEditTextType.PasswordConfirm(textInputLayoutPassword)
+            )
             .build()
 
+        legalUserValidator = ValidatorEditTextBuilder()
+            .addField(textInputLayoutDocument, ValidatorEditTextType.CNPJ(isRequired = true))
+            .build()
         setupView()
         handleObserver()
     }
@@ -57,14 +62,45 @@ class UserCreateFragment : Fragment(R.layout.fragment_user_create) {
     }
 
     private fun setupView() {
+        setupGroupUserType()
+        setupButtonRegister()
+    }
+
+    private fun setupGroupUserType() {
+        radioGroupUserType.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.radioButtomPhysicalUser) {
+                textInputLayoutAccessKey.show()
+                textInputLayoutDocument.gone()
+            } else {
+                textInputLayoutAccessKey.gone()
+                textInputLayoutDocument.show()
+            }
+        }
+    }
+
+    private fun setupButtonRegister() {
         buttonRegister.setOnClickListener {
-            if (validator.validate()) {
+            if (formValidate()) {
                 val email = textInputLayoutEmail.getString()
                 val name = textInputLayoutName.getString()
                 val password = textInputLayoutPassword.getString()
+                val document = textInputLayoutDocument.getStringOrNull()
+                val accessKey = textInputLayoutAccessKey.getStringOrNull()
+                val userCreate = UserCreate(email, name, password, document, accessKey)
 
-                viewModel.create(User(username = email, name = name, password = password))
+                viewModel.create(userCreate)
             }
+        }
+    }
+
+    private fun formValidate(): Boolean {
+        return if (radioGroupUserType.checkedRadioButtonId == R.id.radioButtomPhysicalUser) {
+            userValidator.validate()
+        } else {
+            val userValidate = userValidator.validate()
+            val legalUserValidate = legalUserValidator.validate()
+
+            userValidate && legalUserValidate
         }
     }
 

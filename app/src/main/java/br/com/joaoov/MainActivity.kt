@@ -1,13 +1,11 @@
 package br.com.joaoov
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -16,13 +14,15 @@ import br.com.joaoov.data.SyncState
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.handle
 import br.com.joaoov.ext.show
+import br.com.joaoov.ui.billing.BillingViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val syncViewModel: SyncViewModel by viewModel()
     private val componentViewModel: ComponentViewModel by viewModel()
+    private val billingViewModel: BillingViewModel by viewModel()
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
     private var menu: Menu? = null
 
@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        billingViewModel.init(this)
         setupNavController()
         setupPath()
         handleObserve()
@@ -143,29 +143,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp()
-    }
-
-    fun checkPermission(permission: String): Boolean {
-        if (hasContainPermission(permission)) {
-            return true
-        }
-        requestPermission(permission)
-        return false
-    }
-
-    private fun hasContainPermission(permission: String): Boolean {
-        return ActivityCompat.checkSelfPermission(
-            this,
-            permission
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun requestPermission(permission: String) {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(permission),
-            1
-        )
     }
 
 }
