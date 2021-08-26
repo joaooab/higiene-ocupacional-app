@@ -42,7 +42,7 @@ fun TextInputLayout.getString(): String {
 
 fun TextInputLayout.getStringOrNull(): String? {
     return try {
-        this.editText?.text.toString()
+        this.editText?.text.toString().ifBlank { null }
     } catch (e: Exception) {
         null
     }

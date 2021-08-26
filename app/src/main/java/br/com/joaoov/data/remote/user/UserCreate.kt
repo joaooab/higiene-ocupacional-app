@@ -5,5 +5,4 @@ data class UserCreate(
     val name: String,
     val password: String,
     val document: String?,
-    val accessKey: String?
 )

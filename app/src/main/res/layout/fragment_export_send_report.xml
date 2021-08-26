@@ -8,14 +8,38 @@
 
     <TextView
         android:id="@+id/textViewInfo"
-        style="@style/TextItemSubTitle"
+        style="@style/TitleXSmallBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Empresa" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/TextSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/message_email_send_info"
+        app:layout_constraintEnd_toEndOf="@id/textViewInfo"
+        app:layout_constraintStart_toStartOf="@id/textViewInfo"
+        app:layout_constraintTop_toBottomOf="@id/textViewInfo" />
+
+    <TextView
+        android:id="@+id/textViewReportCount"
+        style="@style/TextSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_report_count"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/textView"
+        app:layout_constraintStart_toStartOf="@id/textView"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        tools:visibility="visible" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutEmail"
@@ -24,10 +48,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSend"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@id/textViewReportCount">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -35,21 +59,31 @@
             android:hint="@string/email"
             android:imeOptions="actionDone"
             android:inputType="textEmailAddress"
-            android:lines="1" />
+            android:lines="1"
+            android:textAppearance="@style/TextSmall" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/buttonSend"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/linearLayoutButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/action_send"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@drawable/white_bordered_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <br.com.joaoov.ui.component.CustomButton
+            android:id="@+id/buttonSend"
+            style="@style/PrimaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:text="@string/action_send" />
+    </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -62,16 +96,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
-
-    <TextView
-        android:id="@+id/textView"
-        style="@style/TextItemSubTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/message_email_send_info"
-        app:layout_constraintEnd_toEndOf="@+id/textViewInfo"
-        app:layout_constraintStart_toStartOf="@+id/textViewInfo"
-        app:layout_constraintTop_toBottomOf="@+id/textViewInfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

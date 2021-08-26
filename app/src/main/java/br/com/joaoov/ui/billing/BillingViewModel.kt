@@ -3,16 +3,21 @@ package br.com.joaoov.ui.billing
 import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.State
-import br.com.joaoov.data.remote.billing.BillingState
+import br.com.joaoov.data.local.billing.BillingPlan
+import br.com.joaoov.data.local.billing.BillingState
+import br.com.joaoov.repository.BillingRepository
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingFlowParams.ProrationMode.IMMEDIATE_WITH_TIME_PRORATION
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class BillingViewModel : ViewModel() {
+class BillingViewModel(private val repository: BillingRepository) : ViewModel() {
 
     private val _subsListState = MutableStateFlow<State<SkuDetailsResult>>(State.Loading())
     val subsListState: StateFlow<State<SkuDetailsResult>> = _subsListState
@@ -50,9 +55,10 @@ class BillingViewModel : ViewModel() {
     }
 
     fun fetchSubs() {
-        viewModelScope.launch {
-            val params = createSkuListParams()
-            fetchSkuDetails(params).flowOn(Dispatchers.IO)
+        viewModelScope.launch(Dispatchers.IO) {
+            val plans = repository.getPlans().first()
+            val params = createSkuListParams(plans)
+            fetchSkuDetails(params)
                 .onStart {
                     _subsListState.value = State.Loading()
                 }.catch {
@@ -63,8 +69,8 @@ class BillingViewModel : ViewModel() {
         }
     }
 
-    private fun createSkuListParams(): SkuDetailsParams {
-        val skuList = arrayListOf("1_signature_user_plan", "2_signature_user_plan")
+    private fun createSkuListParams(plans: List<BillingPlan>): SkuDetailsParams {
+        val skuList = plans.map { it.productId }
         val params = SkuDetailsParams.newBuilder()
         params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS)
 
@@ -76,7 +82,7 @@ class BillingViewModel : ViewModel() {
     }
 
     fun fetchPurchases() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS) { billingResult, purchases ->
                 handlePurchases(billingResult, purchases)
             }
@@ -86,10 +92,32 @@ class BillingViewModel : ViewModel() {
     private fun handlePurchases(billingResult: BillingResult, purchases: List<Purchase>?) {
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && !purchases.isNullOrEmpty()) {
             purchases.forEach { handlePurchase(it) }
-        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
-            _billingState.value = BillingState.Canceled
-        } else {
-            _billingState.value = BillingState.Error
+        }
+//        else if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases.isNullOrEmpty()) {
+//            _billingState.value = BillingState.Empty
+//        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
+//            _billingState.value = BillingState.Canceled
+//        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+//            _billingState.value = BillingState.AlreadyOwned
+//        } else {
+//            _billingState.value = BillingState.Error
+//        }
+    }
+
+    fun fetchBilling() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.fetch().onStart {
+                _billingState.value = BillingState.Holding
+                delay(1000)
+            }.catch {
+                _billingState.value = BillingState.Error
+            }.collect { billing ->
+                if (billing.isAvailable) {
+                    _billingState.value = BillingState.Payed(billing)
+                } else {
+                    _billingState.value = BillingState.Empty
+                }
+            }
         }
     }
 
@@ -98,13 +126,16 @@ class BillingViewModel : ViewModel() {
             if (!purchase.isAcknowledged) {
                 val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
                     .setPurchaseToken(purchase.purchaseToken)
-                viewModelScope.launch {
-                    billingClient.acknowledgePurchase(acknowledgePurchaseParams.build())
+                viewModelScope.launch(Dispatchers.IO) {
+                    runCatching {
+                        billingClient.acknowledgePurchase(acknowledgePurchaseParams.build())
+                        repository.create(purchase)
+                    }.onFailure {
+                        FirebaseCrashlytics.getInstance().recordException(it)
+                    }
                 }
-
             }
         }
-        _billingState.value = BillingState.Purchased(purchase)
     }
 
     fun contract(activity: Activity, skuSelected: SkuDetails) {
@@ -127,17 +158,18 @@ class BillingViewModel : ViewModel() {
 
             billingClient.launchBillingFlow(activity, flowParams)
         }
-
     }
 
     private fun getCurrentPurchase(): Purchase? {
-        val billingState = billingState.value
-        return if (billingState is BillingState.Purchased) {
-            billingState.purchase
+        val state = billingState.value
+        return if (state is BillingState.Payed) {
+            state.billing.purchase
         } else {
             null
         }
     }
+
+    fun getBillingPlan(sku: String?) = repository.getPlanByProductId(sku.orEmpty()).asLiveData()
 
     override fun onCleared() {
         super.onCleared()

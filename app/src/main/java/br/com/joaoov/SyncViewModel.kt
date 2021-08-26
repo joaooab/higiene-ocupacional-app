@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.SyncState
+import br.com.joaoov.repository.BillingRepository
 import br.com.joaoov.repository.ResourceRepository
 import br.com.joaoov.repository.SyncronizeRepository
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +14,8 @@ import kotlinx.coroutines.launch
 
 class SyncViewModel(
     private val syncronizeRepository: SyncronizeRepository,
-    private val resourceRepository: ResourceRepository
+    private val resourceRepository: ResourceRepository,
+    private val billingRepository: BillingRepository
 ) : ViewModel() {
 
     private val _syncronizeState = MutableLiveData<SyncState>()
@@ -32,6 +34,8 @@ class SyncViewModel(
                     resourceRepository.fetchAllRisksResources(updateAt)
                     _syncronizeState.postValue(SyncState.Running("Sincronizando agentes..."))
                     resourceRepository.fetchAllAgentsResources(updateAt)
+                    _syncronizeState.postValue(SyncState.Running("Sincronizando planos..."))
+                    billingRepository.fetchPlans()
                     syncronizeRepository.save(syncronize)
                 }
             }.onFailure {
@@ -51,6 +55,7 @@ class SyncViewModel(
             resourceRepository.clearAmbients()
             resourceRepository.clearRisks()
             resourceRepository.clearAgents()
+            billingRepository.clearPlans()
             syncronize()
         }
     }

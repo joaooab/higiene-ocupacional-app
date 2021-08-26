@@ -11,6 +11,7 @@ import br.com.joaoov.data.State
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.handle
 import br.com.joaoov.ext.show
+import br.com.joaoov.ui.component.AlertDialogCustom
 import kotlinx.android.synthetic.main.fragment_settings_access_key.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -22,7 +23,8 @@ class SettingsAccessKeyFragment : Fragment(R.layout.fragment_settings_access_key
     private val user by lazy { Session.user }
     private val adapter by lazy {
         SettingsAccessKeyAdapater(onDeleteClick = {
-            accessKeyViewModel.deleteLinkedUser(it)
+            AlertDialogCustom(requireContext())
+                .showDeleteDialog { accessKeyViewModel.deleteLinkedUser(it) }
         })
     }
 
@@ -72,7 +74,7 @@ class SettingsAccessKeyFragment : Fragment(R.layout.fragment_settings_access_key
     }
 
     private fun setupView() {
-        textAccessKey.text = getString(R.string.label_access_key, user.accessKey.orEmpty())
+        textAccessKey.text = getString(R.string.label_access_key, user?.accessKey.orEmpty())
         recyclerViewLinkedUsers.adapter = adapter
         setupAddButton()
     }

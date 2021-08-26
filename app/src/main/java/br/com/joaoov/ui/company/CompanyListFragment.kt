@@ -12,7 +12,7 @@ import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.local.company.Company
-import br.com.joaoov.data.remote.billing.BillingState
+import br.com.joaoov.data.local.billing.BillingState
 import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.component.AlertDialogCustom
@@ -89,13 +89,15 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
     }
 
     private fun observeBilling() {
-        lifecycleScope.launchWhenCreated {
+        billingViewModel.fetchBilling()
+        lifecycleScope.launchWhenStarted {
             billingViewModel.billingState.collect { state ->
                 when (state) {
-                    is BillingState.Purchased,
-                    is BillingState.Holding -> { }
-                    else -> {
+                    is BillingState.Empty -> {
                         showAlertDialogPayment()
+                    }
+                    else -> {
+
                     }
                 }
             }

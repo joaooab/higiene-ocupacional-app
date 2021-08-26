@@ -6,6 +6,7 @@ import br.com.joaoov.data.local.AppDatabase
 import br.com.joaoov.data.local.defaultPref
 import br.com.joaoov.data.remote.AppService
 import br.com.joaoov.data.remote.auth.AuthService
+import br.com.joaoov.data.remote.billing.BillingService
 import br.com.joaoov.data.remote.report.ReportService
 import br.com.joaoov.data.remote.resource.ResourceService
 import br.com.joaoov.data.remote.sync.SyncService
@@ -36,13 +37,13 @@ val viewModelModule = module {
     viewModel { CompanyViewModel(get()) }
     viewModel { DepartamentViewModel(get()) }
     viewModel { FunctionViewModel(get()) }
-    viewModel { SyncViewModel(get(), get()) }
+    viewModel { SyncViewModel(get(), get(), get()) }
     viewModel { RiskViewModel(get(), get()) }
     viewModel { ExportViewModel(get(), get()) }
     viewModel { MoveViewModel(get(), get(), get(), get()) }
     viewModel { UserViewModel(get()) }
     viewModel { AuthViewModel(get()) }
-    viewModel { BillingViewModel() }
+    viewModel { BillingViewModel(get()) }
     viewModel { BillingPurchaseViewModel(get()) }
     viewModel { AccessKeyViewModel(get()) }
 }
@@ -60,6 +61,7 @@ val daoModule = module {
     single { get<AppDatabase>().resourceAgentDAO() }
     single { get<AppDatabase>().riskDAO() }
     single { get<AppDatabase>().reportDAO() }
+    single { get<AppDatabase>().billingPlanDAO() }
 }
 
 val repositoryModule = module {
@@ -73,6 +75,7 @@ val repositoryModule = module {
     single<ReportRepository> { ReportRepositoryImpl(get(), get()) }
     single<UserRepository> { UserRepositoryImpl(get()) }
     single<AuthRepository> { AuthRepositoryImpl(get()) }
+    single<BillingRepository> { BillingRepositoryImpl(get(), get()) }
 }
 
 val servciceModule = module {
@@ -81,6 +84,7 @@ val servciceModule = module {
     single { AppService.create<ReportService>() }
     single { AppService.create<UserService>() }
     single { AppService.create<AuthService>() }
+    single { AppService.create<BillingService>() }
 }
 
 val useCaseModule = module {

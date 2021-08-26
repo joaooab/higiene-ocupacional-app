@@ -9,13 +9,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.joaoov.*
 import br.com.joaoov.Constants.PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL
-import br.com.joaoov.data.remote.billing.BillingState
+import br.com.joaoov.data.local.billing.Billing
+import br.com.joaoov.data.local.billing.BillingState
+import br.com.joaoov.data.remote.user.isCompanyUser
+import br.com.joaoov.data.remote.user.isLegalEntity
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.setVisible
 import br.com.joaoov.ext.show
 import br.com.joaoov.ui.billing.BillingViewModel
-import com.android.billingclient.api.Purchase
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.item_payment.*
 import kotlinx.coroutines.flow.collect
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
@@ -44,37 +47,37 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun observeBilling() {
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
             billingViewModel.billingState.collect { state ->
                 when (state) {
-                    is BillingState.Purchased -> {
-                        setupPurchasedPayments(state.purchase)
-                    }
-                    is BillingState.Error -> {
-                        settingEmptyPayments.text = getString(R.string.message_payment_error)
+                    is BillingState.Payed -> {
+                        setupPurchasedPayments(state.billing)
                     }
                     else -> {
-                        if (user.isCompanyUser()) {
-                            setupCompanyUserPayments()
-                        }
+                        settingEmptyPayments.text = getString(R.string.message_payment_error)
                     }
                 }
             }
         }
     }
 
-    private fun setupPurchasedPayments(purchase: Purchase) {
+    private fun setupPurchasedPayments(billing: Billing) {
         when {
             user.isCompanyUser() -> {
                 setupCompanyUserPayments()
             }
-            user.isLegalEntity() -> {
-
-            }
-            else -> {
+            billing.purchase != null -> {
                 settingEmptyPayments.gone()
-                val sku = purchase.skus.firstOrNull()
-                settingPaymentManager.setOnClickListener {
+                includeItemPayment.show()
+                val sku = billing.productId
+                billingViewModel.getBillingPlan(sku).observe(viewLifecycleOwner, {
+                    itemPaymentTitle.text = it?.name.orEmpty()
+                })
+
+                itemPaymentChange.setOnClickListener {
+                    navigateToBillingList()
+                }
+                itemPaymentManager.setOnClickListener {
                     val url = String.format(
                         PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL,
                         sku, requireContext().applicationContext.packageName
@@ -82,8 +85,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                     val intent = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
                     startActivity(intent)
                 }
-                settingPaymentManager.text = sku.orEmpty()
-                settingPaymentManager.show()
             }
         }
     }
@@ -94,22 +95,23 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun setupPayments() {
         settingEmptyPayments.setOnClickListener {
-            val direction = SettingsFragmentDirections.actionSettingsFragmentToBillingListFragment()
-            findNavController().navigate(direction)
+            navigateToBillingList()
         }
+    }
+
+    private fun navigateToBillingList() {
+        val direction = SettingsFragmentDirections.actionSettingsFragmentToBillingListFragment()
+        findNavController().navigate(direction)
     }
 
     private fun setupActions() {
         settingChangePassword.setOnClickListener {
-            val direction = SettingsFragmentDirections.actionSettingsFragmentToUserUpdateFragment()
-            findNavController().navigate(direction)
+            navigateToUpdateUser()
         }
 
         settingAccessKey.setVisible(user.isLegalEntity())
         settingAccessKey.setOnClickListener {
-            val direction =
-                SettingsFragmentDirections.actionSettingsFragmentToSettingsAccesskeyFragment()
-            findNavController().navigate(direction)
+            navigateToAccessKey()
         }
 
         settingSync.setOnClickListener {
@@ -121,9 +123,22 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
     }
 
+    private fun navigateToAccessKey() {
+        val direction =
+            SettingsFragmentDirections.actionSettingsFragmentToSettingsAccesskeyFragment()
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToUpdateUser() {
+        val direction = SettingsFragmentDirections.actionSettingsFragmentToUserUpdateFragment()
+        findNavController().navigate(direction)
+    }
+
     private fun setupProfile() {
-        textPersonName.text = user.name
-        textPersonEmail.text = getString(R.string.label_email, user.username)
+        user?.let { user ->
+            textPersonName.text = user.name
+            textPersonEmail.text = getString(R.string.label_email, user.username)
+        }
     }
 
 }

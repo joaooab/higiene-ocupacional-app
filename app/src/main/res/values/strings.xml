@@ -49,6 +49,8 @@
     <string name="action_login">Entrar</string>
     <string name="action_register">Cadastrar</string>
     <string name="action_contract">Contratar</string>
+    <string name="action_change">Alterar</string>
+    <string name="action_manage">Gerenciar</string>
 
     <string name="suport_email"><u>groappsuporte@gmail.com</u></string>
     <string name="company">Empresa</string>
@@ -137,6 +139,7 @@
     <string name="label_end">Saída:</string>
     <string name="label_begin">Entrada:</string>
     <string name="label_access_key">Chave de acesso: %s</string>
+    <string name="label_report_count">Quantidade de relatórios disponíveis: %s</string>
 
     <string name="sync_complete">Sincronização finalizada</string>
     <string name="sync_failed">Falha na sincronização</string>
@@ -164,8 +167,8 @@
     <string name="message_recorey_password_success">Uma nova senha foi gerada e enviada para o e-mail informado</string>
     <string name="message_valid_email_info">Informe um e-mail válido</string>
     <string name="message_forgot_password_info">Informe o seu e-mail cadastrado para enviarmos uma nova senha</string>
-    <string name="message_empty_payments">Oops.. Nenhum pagamento encontrado, clique aqui para avalar os nossos planos de pagamentos e continar utilizando o GRO</string>
-    <string name="message_payment_error">Falha ao buscar os pagamentos</string>
+    <string name="message_empty_payments">Oops.. Nenhum pagamento foi encontrado, clique aqui para avaliar os nossos planos e continar utilizando o GRO</string>
+    <string name="message_payment_error">Nenhum pagamento encontrado clique aqui para avaliar os nossos planos</string>
     <string name="message_company_user_payment">Seu pagamento está vínculado a uma empresa</string>
 
     <string name="throwable_session">Usuário está inativo contate nosso suporte</string>

@@ -9,8 +9,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-//private const val URL = "http://138.197.3.119:8080"
-private const val URL = "http://10.0.0.113:8080"
+private const val URL = "http://138.197.3.119:8080"
+//private const val URL = "http://192.168.1.22:8080"
 
 object AppService {
 
@@ -34,7 +34,7 @@ object AppService {
             val token = Session.userToken
             chain.request()
                 .newBuilder()
-                .addHeader("Authorization", "${token.type} ${token.token}")
+                .addHeader("Authorization", "${token?.type} ${token?.token}")
                 .build()
         } else {
             chain.request()

@@ -69,10 +69,8 @@ class UserCreateFragment : Fragment(R.layout.fragment_user_create) {
     private fun setupGroupUserType() {
         radioGroupUserType.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == R.id.radioButtomPhysicalUser) {
-                textInputLayoutAccessKey.show()
                 textInputLayoutDocument.gone()
             } else {
-                textInputLayoutAccessKey.gone()
                 textInputLayoutDocument.show()
             }
         }
@@ -84,9 +82,12 @@ class UserCreateFragment : Fragment(R.layout.fragment_user_create) {
                 val email = textInputLayoutEmail.getString()
                 val name = textInputLayoutName.getString()
                 val password = textInputLayoutPassword.getString()
-                val document = textInputLayoutDocument.getStringOrNull()
-                val accessKey = textInputLayoutAccessKey.getStringOrNull()
-                val userCreate = UserCreate(email, name, password, document, accessKey)
+                val document = if (isPhysicalUserForm()) {
+                    null
+                } else {
+                    textInputLayoutDocument.getStringOrNull()
+                }
+                val userCreate = UserCreate(email, name, password, document)
 
                 viewModel.create(userCreate)
             }
@@ -94,7 +95,7 @@ class UserCreateFragment : Fragment(R.layout.fragment_user_create) {
     }
 
     private fun formValidate(): Boolean {
-        return if (radioGroupUserType.checkedRadioButtonId == R.id.radioButtomPhysicalUser) {
+        return if (isPhysicalUserForm()) {
             userValidator.validate()
         } else {
             val userValidate = userValidator.validate()
@@ -103,5 +104,8 @@ class UserCreateFragment : Fragment(R.layout.fragment_user_create) {
             userValidate && legalUserValidate
         }
     }
+
+    private fun isPhysicalUserForm() =
+        radioGroupUserType.checkedRadioButtonId == R.id.radioButtomPhysicalUser
 
 }

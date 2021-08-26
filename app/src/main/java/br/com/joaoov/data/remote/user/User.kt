@@ -1,6 +1,7 @@
 package br.com.joaoov.data.remote.user
 
 import android.os.Parcelable
+import br.com.joaoov.data.local.billing.Billing
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -9,24 +10,26 @@ data class User(
     val username: String,
     val password: String,
     val name: String,
+    val productId: String,
     val companyId: String? = null,
     val enabled: Boolean = true,
     val role: String = "",
-    val reportCount: Int? = null,
     val document: String? = null,
     val accessKey: String? = null
-) : Parcelable {
+) : Parcelable
 
-    fun isLegalEntity() = document != null
+fun User?.isLegalEntity() = !this?.document.isNullOrBlank()
 
-    fun isPhysicalUser() = !isLegalEntity()
+fun User?.isPhysicalUser() = !isLegalEntity()
 
-    fun isCompanyUser() = isPhysicalUser() && accessKey != null
+fun User?.isCompanyUser() = isPhysicalUser() && hasAccessKey()
 
-}
+fun User?.hasAccessKey() = !this?.accessKey.isNullOrBlank()
+
+fun User?.isTrialPlan() = this?.productId == Billing.DEFAULT_PRODUCT
 
 fun User.toNetwork() = UserNetwork(
     username = username,
     password = password,
-    name = name
+    name = name,
 )

@@ -56,7 +56,7 @@ class BillingListFragment : Fragment(R.layout.fragment_billing) {
     }
 
     private fun handleObserve() {
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
             viewModel.subsListState.collect { state ->
                 when (state) {
                     is State.Loading -> {

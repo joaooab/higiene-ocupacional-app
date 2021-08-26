@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/name"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPersonName"
                     android:textAppearance="@style/TextSmall"
                     app:backgroundTint="@color/colorWhite" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -161,28 +161,6 @@
                     android:textAppearance="@style/TextSmall"
                     app:backgroundTint="@color/colorWhite" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAccessKey"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:textAppearance="@style/TextMediumBold"
-                app:helperText="Chave de acesso empresarial">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/access_key"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPassword"
-                    android:textAppearance="@style/TextSmall"
-                    app:backgroundTint="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

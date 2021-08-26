@@ -12,6 +12,7 @@ import br.com.joaoov.data.State
 import br.com.joaoov.data.remote.auth.Auth
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.handle
+import br.com.joaoov.ext.hideKeyboard
 import br.com.joaoov.ext.sendSupportEmail
 import br.com.joaoov.ui.component.ValidatorEditText
 import br.com.joaoov.ui.component.ValidatorEditTextBuilder
@@ -74,6 +75,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
                     buttonLogin.endLoading()
                     navigateToHome()
                     syncViewModel.syncronize()
+                    hideKeyboard()
                 }
                 is State.Error -> {
                     buttonLogin.endLoading()

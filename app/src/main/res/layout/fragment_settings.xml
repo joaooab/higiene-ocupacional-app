@@ -88,21 +88,10 @@
                     android:padding="16dp"
                     android:text="@string/message_empty_payments" />
 
-                <TextView
-                    android:id="@+id/settingPaymentManager"
-                    style="@style/TitleXSmallBold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_outline_vpn_key_24"
-                    android:drawableEnd="@drawable/ic_outline_payments_24"
-                    android:padding="16dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorAccent"
+                <include
+                    android:id="@+id/includeItemPayment"
+                    layout="@layout/item_payment"
                     android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Plano 1"
                     tools:visibility="visible" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

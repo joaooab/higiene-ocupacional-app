@@ -31,7 +31,7 @@ class CompanyRepositoryImpl(private val dao: CompanyDAO) :
 
     override fun getById(id: Long): Company = dao.getById(id).toModel()
 
-    override fun getAll() = dao.getAll(Session.user.id.orEmpty()).map { it.toModel() }
+    override fun getAll() = dao.getAll(Session.user?.id.orEmpty()).map { it.toModel() }
 
     override suspend fun getCompanyWithRelation(company: Company) =
         dao.getCompanyWithRelation(company.id).toModel()
