@@ -26,8 +26,6 @@ fun User?.isCompanyUser() = isPhysicalUser() && hasAccessKey()
 
 fun User?.hasAccessKey() = !this?.accessKey.isNullOrBlank()
 
-fun User?.isTrialPlan() = this?.productId == Billing.DEFAULT_PRODUCT
-
 fun User.toNetwork() = UserNetwork(
     username = username,
     password = password,

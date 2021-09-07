@@ -148,6 +148,7 @@
     <string name="message_alert_delete">Deseja realmente excluir?</string>
     <string name="message_alert_duplicate">Deseja realmente duplicar?</string>
     <string name="message_alert_payment">Seu pagamento expirou! Avalie os nossos planos de pagamentos e continue utilizando o GRO!</string>
+    <string name="message_alert_trial_plan">Seu plano de teste expirou! Avalie os nossos planos de pagamentos e continue utilizando o GRO!</string>
     <string name="message_error_required">Campo obrigatório</string>
     <string name="message_error_no_plan_selected">Nenhum plano selecionado</string>
     <string name="message_error_generic">Erro inesperado</string>

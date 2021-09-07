@@ -5,6 +5,6 @@ sealed class BillingState {
     class Payed(val billing: Billing) : BillingState()
     object Canceled : BillingState()
     object AlreadyOwned : BillingState()
-    object Empty : BillingState()
+    class Empty(val billing: Billing) : BillingState()
     object Error : BillingState()
 }

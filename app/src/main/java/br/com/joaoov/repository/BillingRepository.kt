@@ -15,6 +15,10 @@ interface BillingRepository {
 
     suspend fun create(purchase: Purchase): Billing
 
+    suspend fun update(purchase: Purchase): Billing
+
+    suspend fun delete(): Billing
+
     suspend fun fetchPlans()
 
     fun getPlanByProductId(productId: String): Flow<BillingPlan?>
@@ -35,6 +39,15 @@ class BillingRepositoryImpl(
     override suspend fun create(purchase: Purchase): Billing {
         val json = Gson().fromJson(purchase.originalJson, JsonObject::class.java)
         return service.create(json).toModel()
+    }
+
+    override suspend fun update(purchase: Purchase): Billing {
+        val json = Gson().fromJson(purchase.originalJson, JsonObject::class.java)
+        return service.create(json).toModel()
+    }
+
+    override suspend fun delete(): Billing {
+        return service.delete().toModel()
     }
 
     override suspend fun fetchPlans() {

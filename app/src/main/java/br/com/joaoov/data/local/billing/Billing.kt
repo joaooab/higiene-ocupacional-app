@@ -12,3 +12,5 @@ data class Billing(
         const val DEFAULT_PRODUCT = "trial"
     }
 }
+
+fun Billing.isTrialPlan() = this.productId == Billing.DEFAULT_PRODUCT

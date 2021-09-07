@@ -92,16 +92,18 @@ class BillingViewModel(private val repository: BillingRepository) : ViewModel() 
     private fun handlePurchases(billingResult: BillingResult, purchases: List<Purchase>?) {
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && !purchases.isNullOrEmpty()) {
             purchases.forEach { handlePurchase(it) }
+        } else if (
+            billingResult.responseCode == BillingClient.BillingResponseCode.OK
+            || billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED
+        ) {
+            viewModelScope.launch {
+                runCatching {
+                    repository.delete()
+                }.onFailure {
+                    FirebaseCrashlytics.getInstance().recordException(it)
+                }
+            }
         }
-//        else if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases.isNullOrEmpty()) {
-//            _billingState.value = BillingState.Empty
-//        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
-//            _billingState.value = BillingState.Canceled
-//        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
-//            _billingState.value = BillingState.AlreadyOwned
-//        } else {
-//            _billingState.value = BillingState.Error
-//        }
     }
 
     fun fetchBilling() {
@@ -115,7 +117,7 @@ class BillingViewModel(private val repository: BillingRepository) : ViewModel() 
                 if (billing.isAvailable) {
                     _billingState.value = BillingState.Payed(billing)
                 } else {
-                    _billingState.value = BillingState.Empty
+                    _billingState.value = BillingState.Empty(billing)
                 }
             }
         }
@@ -130,6 +132,14 @@ class BillingViewModel(private val repository: BillingRepository) : ViewModel() 
                     runCatching {
                         billingClient.acknowledgePurchase(acknowledgePurchaseParams.build())
                         repository.create(purchase)
+                    }.onFailure {
+                        FirebaseCrashlytics.getInstance().recordException(it)
+                    }
+                }
+            } else {
+                viewModelScope.launch {
+                    runCatching {
+                        repository.update(purchase)
                     }.onFailure {
                         FirebaseCrashlytics.getInstance().recordException(it)
                     }

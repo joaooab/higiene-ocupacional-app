@@ -77,19 +77,16 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
         viewModel.sendState.observe(viewLifecycleOwner, {
             when (it) {
                 is State.Loading -> {
-                    buttonSend.gone()
-                    progressBar.show()
+                    buttonSend.startLoading()
                 }
                 is State.Success -> {
                     showToast(R.string.message_send_success)
-                    buttonSend.show()
-                    progressBar.gone()
+                    buttonSend.endLoading()
                     buttonSend.setText(R.string.action_send_again)
                 }
                 is State.Error -> {
                     it.throwable.handle(requireContext())
-                    buttonSend.show()
-                    progressBar.gone()
+                    buttonSend.endLoading()
                     buttonSend.setText(R.string.action_send_again)
                 }
             }

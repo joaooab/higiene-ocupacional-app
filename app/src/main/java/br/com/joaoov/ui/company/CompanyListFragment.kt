@@ -6,13 +6,14 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
-import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.data.local.billing.Billing
 import br.com.joaoov.data.local.billing.BillingState
+import br.com.joaoov.data.local.company.Company
+import br.com.joaoov.ext.findNavControllerSafely
 import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.component.AlertDialogCustom
@@ -41,16 +42,16 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
         )
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        billingViewModel.fetchPurchases()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentViewModel.withComponents = Components(path = true)
         setupView()
         handleObserve()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        billingViewModel.fetchPurchases()
     }
 
     private fun setupView() {
@@ -73,7 +74,7 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
     private fun navigateToCreateFragment() {
         val direction =
             CompanyListFragmentDirections.actionCompanyListFragmentToCompanyCreateFragment()
-        findNavController().navigate(direction)
+        findNavControllerSafely()?.navigate(direction)
     }
 
     private fun handleObserve() {
@@ -94,7 +95,7 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
             billingViewModel.billingState.collect { state ->
                 when (state) {
                     is BillingState.Empty -> {
-                        showAlertDialogPayment()
+                        showAlertDialogPayment(state.billing)
                     }
                     else -> {
 
@@ -104,24 +105,24 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
         }
     }
 
-    private fun showAlertDialogPayment() {
-        AlertDialogCustom(requireContext()).showPaylmentDialog {
+    private fun showAlertDialogPayment(billing: Billing) {
+        AlertDialogCustom(requireContext()).showPaylmentDialog(billing) {
             val dicretion =
                 CompanyListFragmentDirections.actionCompanyListFragmentToBillingListFragment()
-            findNavController().navigate(dicretion)
+            findNavControllerSafely()?.navigate(dicretion)
         }
     }
 
     private fun navigateToDepartamentFragment(company: Company) {
         val direction =
             CompanyListFragmentDirections.actionCompanyListFragmentToDepartamentListFragment(company)
-        findNavController().navigate(direction)
+        findNavControllerSafely()?.navigate(direction)
     }
 
     private fun navigateToEditCompanyFragment(company: Company) {
         val direction =
             CompanyListFragmentDirections.actionCompanyListFragmentToCompanyEditFragment(company)
-        findNavController().navigate(direction)
+        findNavControllerSafely()?.navigate(direction)
     }
 
 }
