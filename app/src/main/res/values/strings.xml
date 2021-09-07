@@ -140,6 +140,7 @@
     <string name="label_begin">Entrada:</string>
     <string name="label_access_key">Chave de acesso: %s</string>
     <string name="label_report_count">Quantidade de relatórios disponíveis: %s</string>
+    <string name="label_billing_value">%s / mês</string>
 
     <string name="sync_complete">Sincronização finalizada</string>
     <string name="sync_failed">Falha na sincronização</string>

@@ -22,7 +22,7 @@ class BillingAdapter :
             with(itemView) {
                 textViewTitle.text = formatTitle(data)
                 textViewDescription.text = data.description
-                textViewValue.text = data.price
+                textViewValue.text = context.getString(R.string.label_billing_value, data.price)
 
                 if (item.isSelected) {
                     layoutItemBilling.setBackgroundColor(ContextCompat.getColor(context,R.color.colorAccent))
