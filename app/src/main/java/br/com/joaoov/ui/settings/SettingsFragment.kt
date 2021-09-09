@@ -14,6 +14,7 @@ import br.com.joaoov.data.local.billing.BillingState
 import br.com.joaoov.data.remote.user.isCompanyUser
 import br.com.joaoov.data.remote.user.isLegalEntity
 import br.com.joaoov.ext.gone
+import br.com.joaoov.ext.sendSupportEmail
 import br.com.joaoov.ext.setVisible
 import br.com.joaoov.ext.show
 import br.com.joaoov.ui.billing.BillingViewModel
@@ -40,6 +41,13 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         setupProfile()
         setupActions()
         setupPayments()
+        setupSupport()
+    }
+
+    private fun setupSupport() {
+        textViewSupport.setOnClickListener {
+            requireContext().sendSupportEmail()
+        }
     }
 
     private fun handleObserver() {

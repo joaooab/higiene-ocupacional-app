@@ -157,6 +157,21 @@
                     android:padding="8dp"
                     android:text="@string/action_logout"
                     app:drawableStartCompat="@drawable/ic_outline_exit_to_app_24" />
+
+                <TextView
+                    android:id="@+id/textViewSupport"
+                    style="@style/TextSmallBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawablePadding="16dp"
+                    android:text="@string/suport"
+                    app:drawableStartCompat="@drawable/ic_outline_chat_24"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/buttonLogin"
+                    app:layout_constraintStart_toStartOf="@id/buttonLogin" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
