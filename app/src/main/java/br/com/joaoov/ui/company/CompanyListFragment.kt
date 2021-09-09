@@ -49,6 +49,7 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentViewModel.withComponents = Components(path = true)
+        componentViewModel.clearPaths()
         setupView()
         handleObserve()
     }

@@ -56,7 +56,7 @@ class BillingRepositoryImpl(
     }
 
     override fun getPlanByProductId(productId: String): Flow<BillingPlan?> =
-        dao.getByProductId(productId).map { it.toModel() }
+        dao.getByProductId(productId).map { it?.toModel() }
 
     override fun getPlans(): Flow<List<BillingPlan>> =
         dao.getAll().map { plans -> plans.map { it.toModel() } }

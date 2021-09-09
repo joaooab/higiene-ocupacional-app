@@ -29,6 +29,10 @@ class ComponentViewModel : ViewModel() {
         _pathState.postValue(PathState.Remove)
     }
 
+    fun clearPaths() {
+        _pathState.postValue(PathState.Clear)
+    }
+
 }
 
 data class Components(

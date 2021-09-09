@@ -26,6 +26,8 @@ fun User?.isCompanyUser() = isPhysicalUser() && hasAccessKey()
 
 fun User?.hasAccessKey() = !this?.accessKey.isNullOrBlank()
 
+fun User?.isAdmin() = this?.role == "ADMIN"
+
 fun User.toNetwork() = UserNetwork(
     username = username,
     password = password,

@@ -101,6 +101,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 is PathState.Remove -> {
                     adapterPath.remove()
                 }
+                is PathState.Clear -> {
+                    adapterPath.clear()
+                }
             }
         })
     }
