@@ -46,8 +46,8 @@ class MainPathAdapter(private val stack: Stack<Path> = Stack()) :
         }
     }
 
-    fun refresh() {
-        stack.peek()
+    fun clear() {
+         stack.clear()
     }
 }
 

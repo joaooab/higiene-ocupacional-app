@@ -10,7 +10,7 @@ interface BillingPlanDAO {
     fun getAll(): Flow<List<BillingPlanLocal>>
 
     @Query("SELECT * FROM billing_plan WHERE productId =:id AND deleted = 0")
-    fun getByProductId(id: String): Flow<BillingPlanLocal>
+    fun getByProductId(id: String): Flow<BillingPlanLocal?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(plan: BillingPlanLocal): Long

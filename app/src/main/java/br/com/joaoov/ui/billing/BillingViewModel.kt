@@ -5,9 +5,11 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import br.com.joaoov.Session
 import br.com.joaoov.data.State
 import br.com.joaoov.data.local.billing.BillingPlan
 import br.com.joaoov.data.local.billing.BillingState
+import br.com.joaoov.data.remote.user.isAdmin
 import br.com.joaoov.repository.BillingRepository
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingFlowParams.ProrationMode.IMMEDIATE_WITH_TIME_PRORATION
@@ -116,7 +118,7 @@ class BillingViewModel(private val repository: BillingRepository) : ViewModel() 
             }.catch {
                 _billingState.value = BillingState.Error
             }.collect { billing ->
-                if (billing.isAvailable) {
+                if (Session.user.isAdmin() || billing.isAvailable) {
                     _billingState.value = BillingState.Payed(billing)
                 } else {
                     _billingState.value = BillingState.Empty(billing)

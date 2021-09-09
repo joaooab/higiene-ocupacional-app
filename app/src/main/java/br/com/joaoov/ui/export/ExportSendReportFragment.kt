@@ -83,6 +83,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
                     showToast(R.string.message_send_success)
                     buttonSend.endLoading()
                     buttonSend.setText(R.string.action_send_again)
+                    billingViewModel.fetchBilling()
                 }
                 is State.Error -> {
                     it.throwable.handle(requireContext())
