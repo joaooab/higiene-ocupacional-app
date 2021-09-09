@@ -24,8 +24,6 @@ interface CompanyRepository {
 
     suspend fun delete(company: Company)
 
-    suspend fun getOldCompanies() : List<Company>
-
 }
 
 class CompanyRepositoryImpl(private val dao: CompanyDAO) :
@@ -33,7 +31,7 @@ class CompanyRepositoryImpl(private val dao: CompanyDAO) :
 
     override fun getById(id: Long): Company = dao.getById(id).toModel()
 
-    override fun getAll() = dao.getAll(Session.user.id.orEmpty()).map { it.toModel() }
+    override fun getAll() = dao.getAll(Session.user?.id.orEmpty()).map { it.toModel() }
 
     override suspend fun getCompanyWithRelation(company: Company) =
         dao.getCompanyWithRelation(company.id).toModel()
@@ -47,5 +45,4 @@ class CompanyRepositoryImpl(private val dao: CompanyDAO) :
     override suspend fun delete(company: Company) =
         dao.delete(company.toLocal())
 
-    override suspend fun getOldCompanies() = dao.getOldCompanies().map { it.toModel() }
 }

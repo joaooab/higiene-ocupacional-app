@@ -12,9 +12,8 @@ import org.koin.core.inject
 object Session : KoinComponent {
 
     private val sharedPreferences: SharedPreferences by inject()
-    lateinit var userToken: UserToken
-    val user: User
-        get() = userToken.user
+    var userToken: UserToken? = null
+    val user: User? get() = userToken?.user
 
     fun createSession(token: UserToken) {
         this.userToken = token
@@ -22,7 +21,7 @@ object Session : KoinComponent {
     }
 
     fun isLoggedIn(): Boolean {
-        if (this::userToken.isInitialized) {
+        if (userToken != null) {
             return true
         } else {
             val localToken = sharedPreferences.getSerializable<UserToken>(PREFS_KEY_SESSION)
@@ -37,7 +36,14 @@ object Session : KoinComponent {
     fun isLoggedOut(): Boolean = !isLoggedIn()
 
     fun logout() {
+        userToken = null
         sharedPreferences[PREFS_KEY_SESSION] = null
     }
 
+}
+
+sealed class SessionState {
+    object Empty : SessionState()
+    class LoggedIn(val userToken: UserToken) : SessionState()
+    object LoggedOut : SessionState()
 }

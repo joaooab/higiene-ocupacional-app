@@ -1,6 +1,7 @@
 package br.com.joaoov.ext
 
 import java.util.*
+import java.util.regex.Pattern
 
 private const val DEFAULT_EMPTY = "N.A."
 
@@ -28,3 +29,6 @@ fun List<String>.addDefaultResource(): List<String> {
 }
 
 fun Any?.toStringOrEmpty() = this?.toString() ?: ""
+
+fun String.getOnlyNumbers(): String = replace("[^0-9]".toRegex(), "")
+

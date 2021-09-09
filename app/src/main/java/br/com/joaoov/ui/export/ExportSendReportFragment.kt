@@ -3,13 +3,16 @@ package br.com.joaoov.ui.export
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.State
+import br.com.joaoov.data.local.billing.BillingState
 import br.com.joaoov.data.local.report.Report
 import br.com.joaoov.ext.*
+import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.component.ValidatorEditText
 import br.com.joaoov.ui.component.ValidatorEditTextBuilder
 import br.com.joaoov.ui.component.ValidatorEditTextType
@@ -21,6 +24,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
 
     private val viewModel: ExportViewModel by viewModel()
     private val componentViewModel: ComponentViewModel by sharedViewModel()
+    private val billingViewModel: BillingViewModel by sharedViewModel()
     private val arguments by navArgs<ExportSendReportFragmentArgs>()
     private lateinit var validator: ValidatorEditText
     private val report = Report()
@@ -45,25 +49,44 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
         viewModel.getAllOfCompany(arguments.company).observe(viewLifecycleOwner, {
             report.data = it
         })
+        billingViewModel.billingState.asLiveData().observe(viewLifecycleOwner, { state ->
+            when (state) {
+                is BillingState.Payed -> {
+                    val sku = state.billing.productId
+                    val reportCount = state.billing.reportCount
+                    billingViewModel.getBillingPlan(sku).observe(viewLifecycleOwner, {
+                        it?.let { plan ->
+                            val count = plan.totalReport - reportCount
+                            if (count in 0..10) {
+                                textViewReportCount.text = getString(
+                                    R.string.label_report_count,
+                                    count.toString()
+                                )
+                                textViewReportCount.show()
+                            }
+                        }
+                    })
+                }
+                else -> {
+                }
+            }
+        })
     }
 
     private fun observeSendState() {
         viewModel.sendState.observe(viewLifecycleOwner, {
             when (it) {
                 is State.Loading -> {
-                    buttonSend.gone()
-                    progressBar.show()
+                    buttonSend.startLoading()
                 }
                 is State.Success -> {
                     showToast(R.string.message_send_success)
-                    buttonSend.show()
-                    progressBar.gone()
+                    buttonSend.endLoading()
                     buttonSend.setText(R.string.action_send_again)
                 }
                 is State.Error -> {
                     it.throwable.handle(requireContext())
-                    buttonSend.show()
-                    progressBar.gone()
+                    buttonSend.endLoading()
                     buttonSend.setText(R.string.action_send_again)
                 }
             }

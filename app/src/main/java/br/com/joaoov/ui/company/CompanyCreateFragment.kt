@@ -38,7 +38,7 @@ class CompanyCreateFragment : Fragment(R.layout.fragment_company_create) {
             }
             val company = Company(
                 name = companyName,
-                userId = Session.user.id.orEmpty(),
+                userId = Session.user?.id.orEmpty(),
                 date = Date().format()
             )
             viewModel.save(company)

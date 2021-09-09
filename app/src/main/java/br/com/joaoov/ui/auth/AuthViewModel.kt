@@ -1,6 +1,9 @@
 package br.com.joaoov.ui.auth
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.joaoov.Session
 import br.com.joaoov.data.State
 import br.com.joaoov.data.remote.auth.Auth

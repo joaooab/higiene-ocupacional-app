@@ -8,6 +8,8 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import br.com.joaoov.data.local.ambient.AmbientDAO
 import br.com.joaoov.data.local.ambient.AmbientLocal
+import br.com.joaoov.data.local.billing.BillingPlanDAO
+import br.com.joaoov.data.local.billing.BillingPlanLocal
 import br.com.joaoov.data.local.company.CompanyDAO
 import br.com.joaoov.data.local.company.CompanyLocal
 import br.com.joaoov.data.local.departament.DepartamentDAO
@@ -22,7 +24,7 @@ import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 28,
+    version = 29,
     entities = [
         CompanyLocal::class,
         DepartamentLocal::class,
@@ -32,7 +34,8 @@ import br.com.joaoov.data.local.syncronize.SyncronizeLocal
         ResourceRiskLocal::class,
         ResourceAmbientLocal::class,
         ResourceAgentLocal::class,
-        RiskLocal::class
+        RiskLocal::class,
+        BillingPlanLocal::class
     ],
     exportSchema = false
 )
@@ -48,6 +51,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun resourceAgentDAO(): ResourceAgentDAO
     abstract fun riskDAO(): RiskDAO
     abstract fun reportDAO(): ReportDAO
+    abstract fun billingPlanDAO(): BillingPlanDAO
 
     companion object {
         private const val DATABASE_NAME = "higieneocupacional.db"
@@ -77,7 +81,8 @@ object DatabaseMigrations {
             MIGRATION_24_25,
             MIGRATION_25_26,
             MIGRATION_26_27,
-            MIGRATION_27_28
+            MIGRATION_27_28,
+            MIGRATION_28_29
         )
     }
 
@@ -109,6 +114,12 @@ object DatabaseMigrations {
     private val MIGRATION_27_28: Migration = object : Migration(27, 28) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL("ALTER TABLE company ADD COLUMN userId TEXT DEFAULT '' NOT NULL")
+        }
+    }
+
+    private val MIGRATION_28_29: Migration = object : Migration(28, 29) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS `billing_plan` (`productId` TEXT NOT NULL, `name` TEXT NOT NULL, `totalReport` INTEGER NOT NULL, `price` INTEGER NOT NULL, `deleted` INTEGER NOT NULL, PRIMARY KEY(`productId`))")
         }
     }
 

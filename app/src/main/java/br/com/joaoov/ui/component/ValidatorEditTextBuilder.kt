@@ -12,6 +12,7 @@ data class ValidatorEditTextField(
 sealed class ValidatorEditTextType {
     object Requiered : ValidatorEditTextType()
     class Email(val isRequired: Boolean) : ValidatorEditTextType()
+    class CNPJ(val isRequired: Boolean) : ValidatorEditTextType()
     object Password : ValidatorEditTextType()
     class PasswordConfirm(val passwordField: TextInputLayout) : ValidatorEditTextType()
 }
@@ -27,6 +28,7 @@ class ValidatorEditTextBuilder {
         when (type) {
             is ValidatorEditTextType.Requiered -> setRequired(field)
             is ValidatorEditTextType.Email -> setEmail(field, type.isRequired)
+            is ValidatorEditTextType.CNPJ -> setCNPJ(field, type.isRequired)
             is ValidatorEditTextType.Password -> setPassword(field)
             is ValidatorEditTextType.PasswordConfirm -> setPasswordConfirm(
                 field,
@@ -53,6 +55,19 @@ class ValidatorEditTextBuilder {
         }
 
         field.setTypeEmail(required)
+    }
+
+    private fun setCNPJ(field: TextInputLayout, required: Boolean) {
+        addField(field, FIELD_ERROR_CNPJ) {
+            val text = field.getString()
+            if (required) {
+                text.isValidCNPJ()
+            } else {
+                text.isEmpty() || text.isValidCNPJ()
+            }
+        }
+
+        field.setTypeCNPJ(required)
     }
 
     private fun setPassword(field: TextInputLayout) {

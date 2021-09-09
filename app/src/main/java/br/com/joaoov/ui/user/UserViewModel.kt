@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.joaoov.data.State
 import br.com.joaoov.data.remote.user.User
+import br.com.joaoov.data.remote.user.UserCreate
 import br.com.joaoov.data.remote.user.UserPassword
 import br.com.joaoov.repository.UserRepository
 import kotlinx.coroutines.launch
@@ -15,7 +16,7 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     private val _stateUser = MutableLiveData<State<User>>()
     val stateUser: LiveData<State<User>> = _stateUser
 
-    fun create(user: User) {
+    fun create(user: UserCreate) {
         viewModelScope.launch {
             runCatching {
                 _stateUser.value = State.Loading()

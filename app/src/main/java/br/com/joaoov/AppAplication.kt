@@ -1,10 +1,7 @@
 package br.com.joaoov
 
 import android.app.Application
-import br.com.joaoov.di.daoModule
-import br.com.joaoov.di.repositoryModule
-import br.com.joaoov.di.servciceModule
-import br.com.joaoov.di.viewModelModule
+import br.com.joaoov.di.*
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -20,7 +17,8 @@ class AppAplication : Application() {
                     viewModelModule,
                     daoModule,
                     repositoryModule,
-                    servciceModule
+                    servciceModule,
+                    useCaseModule
                 )
             )
         }

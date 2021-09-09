@@ -40,7 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:textAppearance="@style/TextMediumBold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/action_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,4 +96,19 @@
         app:layout_constraintEnd_toEndOf="@id/buttonLogin"
         app:layout_constraintStart_toStartOf="@id/buttonLogin"
         app:layout_constraintTop_toBottomOf="@id/textViewForgotPassword" />
+
+    <TextView
+        android:id="@+id/textViewSupport"
+        style="@style/TextSmallBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginHorizontal="16dp"
+        android:textAlignment="center"
+        android:text="@string/suport_email"
+        android:textAppearance="@style/TextMediumBold"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="@id/buttonLogin"
+        app:layout_constraintStart_toStartOf="@id/buttonLogin"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,7 @@ android {
         applicationId "br.com.joaoov"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
+        versionCode 3
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -59,6 +59,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'com.google.android.play:core-ktx:1.8.1'
 
     def room_version = "2.2.5"
 
@@ -79,6 +80,10 @@ dependencies {
 
     def work_version = "2.5.0"
     implementation("androidx.work:work-runtime-ktx:$work_version")
+
+    def billing_version = "4.0.0"
+
+    implementation("com.android.billingclient:billing-ktx:$billing_version")
 
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'

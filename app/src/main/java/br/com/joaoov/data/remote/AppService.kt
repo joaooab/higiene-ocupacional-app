@@ -34,7 +34,7 @@ object AppService {
             val token = Session.userToken
             chain.request()
                 .newBuilder()
-                .addHeader("Authorization", "${token.type} ${token.token}")
+                .addHeader("Authorization", "${token?.type} ${token?.token}")
                 .build()
         } else {
             chain.request()
