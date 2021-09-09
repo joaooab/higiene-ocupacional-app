@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
@@ -18,7 +18,6 @@ import br.com.joaoov.ext.slideUp
 import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.component.AlertDialogCustom
 import kotlinx.android.synthetic.main.fragment_ambient.*
-import kotlinx.coroutines.flow.collect
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -90,19 +89,16 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
     }
 
     private fun observeBilling() {
-        billingViewModel.fetchBilling()
-        lifecycleScope.launchWhenStarted {
-            billingViewModel.billingState.collect { state ->
-                when (state) {
-                    is BillingState.Empty -> {
-                        showAlertDialogPayment(state.billing)
-                    }
-                    else -> {
+        billingViewModel.billingState.asLiveData().observe(viewLifecycleOwner, { state ->
+            when (state) {
+                is BillingState.Empty -> {
+                    showAlertDialogPayment(state.billing)
+                }
+                else -> {
 
-                    }
                 }
             }
-        }
+        })
     }
 
     private fun showAlertDialogPayment(billing: Billing) {

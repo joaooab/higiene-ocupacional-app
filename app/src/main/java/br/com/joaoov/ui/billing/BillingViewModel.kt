@@ -104,6 +104,8 @@ class BillingViewModel(private val repository: BillingRepository) : ViewModel() 
                 }
             }
         }
+
+        fetchBilling()
     }
 
     fun fetchBilling() {
