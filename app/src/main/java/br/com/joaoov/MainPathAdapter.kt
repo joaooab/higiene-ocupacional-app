@@ -36,13 +36,13 @@ class MainPathAdapter(private val stack: Stack<Path> = Stack()) :
             return
         }
         stack.add(path)
-        notifyDataSetChanged()
+        notifyItemChanged(stack.lastIndex)
     }
 
     fun remove() {
         if (stack.isNotEmpty()) {
             stack.pop()
-            notifyDataSetChanged()
+            notifyItemChanged(stack.lastIndex + 1)
         }
     }
 

@@ -28,7 +28,6 @@ class FunctionListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Function) {
             with(itemView) {
-                textViewFirstLetter.text = item.name.formatFirstChar()
                 textViewFunction.text = item.name
                 textViewDate.text = item.date
                 textViewDescription.text = item.description

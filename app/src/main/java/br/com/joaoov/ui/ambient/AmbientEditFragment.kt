@@ -53,7 +53,7 @@ class AmbientEditFragment : Fragment(R.layout.fragment_ambient_edit) {
     }
 
     private fun setupSaveButton() {
-        buttonEdit.setOnClickListener {
+        buttonSave.setOnClickListener {
             val localName = textInputLayoutLocal.getString()
             if (localName.isEmpty()) {
                 textInputLayoutLocal.error = getString(R.string.message_error_required)

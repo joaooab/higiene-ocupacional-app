@@ -11,7 +11,6 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import br.com.joaoov.R
 import br.com.joaoov.data.local.risk.Risk
-import br.com.joaoov.ext.formatFirstChar
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.show
 import kotlinx.android.synthetic.main.item_risk.view.*
@@ -38,7 +37,6 @@ class RiskListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Risk) {
             with(itemView) {
-                textViewFirstLetter.text = item.agent.formatFirstChar()
                 textViewAgent.text = item.agent
                 textViewDate.text = item.date
                 textViewRiskFactor.text = getString(

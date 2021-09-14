@@ -30,7 +30,7 @@ class DepartamentEditFragment : Fragment(R.layout.fragment_departament_edit) {
     }
 
     private fun setupSaveButton() {
-        buttonEdit.setOnClickListener {
+        buttonSave.setOnClickListener {
             val departamentName = textInputLayoutDepartament.getString()
             if (departamentName.isEmpty()) {
                 textInputLayoutDepartament.error = getString(R.string.message_error_required)

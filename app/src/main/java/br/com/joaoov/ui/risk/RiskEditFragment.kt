@@ -138,7 +138,7 @@ class RiskEditFragment : Fragment(R.layout.fragment_risk_edit) {
     }
 
     private fun setupSaveButton() {
-        buttonEdit.setOnClickListener {
+        buttonSave.setOnClickListener {
             val agentName = textInputLayoutRiskFactor.getString()
             if (agentName.isEmpty()) {
                 textInputLayoutRiskFactor.error = getString(R.string.message_error_required)

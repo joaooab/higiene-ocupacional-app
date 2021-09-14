@@ -58,7 +58,7 @@ class FunctionEditFragment : Fragment(R.layout.fragment_funciton_edit) {
     }
 
     private fun setupSaveButton() {
-        buttonEdit.setOnClickListener {
+        buttonSave.setOnClickListener {
             val functionName = textInputLayoutFunction.getString()
             if (functionName.isEmpty()) {
                 textInputLayoutFunction.error = getString(R.string.message_error_required)
