@@ -23,7 +23,6 @@ class DepartamentListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Departament) {
             with(itemView) {
-                textViewFirstLetter.text = item.name.formatFirstChar()
                 textViewDepartament.text = item.name
                 textViewDate.text = item.date
                 setOnClickListener {

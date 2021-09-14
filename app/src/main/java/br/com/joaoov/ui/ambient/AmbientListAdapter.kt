@@ -26,7 +26,6 @@ class AmbientListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Ambient) {
             with(itemView) {
-                textViewFirstLetter.text = item.name.formatFirstChar()
                 textViewDate.text = item.date
                 textViewLocal.text = item.name
                 textViewArea.text = getString(

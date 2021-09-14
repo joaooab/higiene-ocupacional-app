@@ -22,7 +22,6 @@ class CompanyListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Company) {
             with(itemView) {
-                textViewFirstLetter.text = item.name.formatFirstChar()
                 textViewCompany.text = item.name
                 textViewDate.text = item.date
                 setOnClickListener {

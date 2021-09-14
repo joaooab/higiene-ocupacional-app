@@ -9,18 +9,19 @@
     android:foreground="?android:attr/selectableItemBackground"
     tools:ignore="UnusedAttribute">
 
-    <TextView
-        android:id="@+id/textViewFirstLetter"
-        style="@style/TextItemDrawable"
+    <ImageView
+        android:id="@+id/imageViewIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_circle"
+        android:contentDescription="@string/menu"
+        android:padding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="1" />
+        app:srcCompat="@drawable/ic_risk" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,15 +30,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFirstLetter"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewMore"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirstLetter"
-        app:layout_constraintTop_toTopOf="@+id/textViewFirstLetter">
+        app:layout_constraintBottom_toBottomOf="@id/imageViewIcon"
+        app:layout_constraintEnd_toStartOf="@id/imageViewMore"
+        app:layout_constraintStart_toEndOf="@id/imageViewIcon"
+        app:layout_constraintTop_toTopOf="@id/imageViewIcon">
 
         <TextView
             android:id="@+id/textViewAgent"
-            style="@style/TextItemTitle"
+            style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/textViewDate"
-            style="@style/TextItemDate"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +59,7 @@
         android:id="@+id/imageViewMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/menu"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -68,6 +69,7 @@
         android:id="@+id/imageViewArrowDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/detail"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewMore"
@@ -78,8 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingHorizontal="16dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,81 +90,81 @@
 
         <TextView
             android:id="@+id/textViewRiskFactor"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Fator de risco: Benzeno e seus compostos tóxicos (exceto os abaixo especificados, que constam expressamente no Anexo IV do Decreto 3.048/1999)" />
 
         <TextView
             android:id="@+id/textViewGeneratingSource"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             tools:text="Fonte geradora: Ar" />
 
         <TextView
             android:id="@+id/textViewIntensityConcentration"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             tools:text="Intensidade e/ou concentração: -" />
 
         <TextView
             android:id="@+id/textViewActionLevel"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             tools:text="Nível de Ação:  -" />
 
         <TextView
             android:id="@+id/textViewNR15"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             tools:text="NR15: 5.71dB(A)" />
 
         <TextView
             android:id="@+id/textViewACGHI"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             tools:text="ACGHI: 5.71dB(A)" />
 
         <TextView
             android:id="@+id/textViewEliminationNeutralization"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             tools:text="Eliminação e/ou Neutralização: EPI" />
 
         <TextView
             android:id="@+id/textViewExposure"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             tools:text="Modo de exposição: HP" />
 
         <TextView
             android:id="@+id/textViewMetodology"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             tools:text="Fonte / Metodologia: ANEXO 1 NR15" />
 
         <TextView
             android:id="@+id/textViewDegreeOfRisk"
-            style="@style/TextItemDetail"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             tools:text="Grau de risco: 1" />
 

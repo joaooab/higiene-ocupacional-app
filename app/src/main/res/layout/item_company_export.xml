@@ -10,49 +10,52 @@
     android:foreground="?android:attr/selectableItemBackground"
     tools:ignore="UnusedAttribute">
 
-    <TextView
-        android:id="@+id/textViewFirstLetter"
-        style="@style/TextItemDrawable"
+    <ImageView
+        android:id="@+id/imageViewIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_circle"
+        android:contentDescription="@string/menu"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="P" />
+        app:srcCompat="@drawable/ic_company" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFirstLetter"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirstLetter"
-        app:layout_constraintTop_toTopOf="@+id/textViewFirstLetter">
+        app:layout_constraintStart_toEndOf="@id/imageViewIcon"
+        app:layout_constraintTop_toTopOf="@id/imageViewIcon">
 
         <TextView
             android:id="@+id/textViewCompany"
-            style="@style/TextItemTitle"
+            style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textAllCaps="true"
             tools:text="Prodap" />
 
         <TextView
             android:id="@+id/textViewDate"
-            style="@style/TextItemDate"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="19/08/2020" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

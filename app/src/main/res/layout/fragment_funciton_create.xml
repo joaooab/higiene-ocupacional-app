@@ -13,15 +13,23 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/buttonSave"
+    <LinearLayout
+        android:id="@+id/linearLayoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/colorAccent"
-        android:layout_marginBottom="16dp"
-        android:text="@string/action_save" />
+        android:background="@drawable/white_bordered_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="16dp">
+
+        <br.com.joaoov.ui.component.CustomButton
+            android:id="@+id/buttonSave"
+            style="@style/PrimaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:text="@string/action_save" />
+    </LinearLayout>
 
 </LinearLayout>
 

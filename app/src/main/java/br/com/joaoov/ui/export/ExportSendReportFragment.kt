@@ -31,7 +31,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        componentViewModel.withComponents = Components(path = false)
+        componentViewModel.withComponents = Components(path = false, menu = false)
         validator = ValidatorEditTextBuilder()
             .addField(textInputLayoutEmail, ValidatorEditTextType.Email(isRequired = true))
             .build()
