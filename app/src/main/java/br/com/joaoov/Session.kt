@@ -39,11 +39,4 @@ object Session : KoinComponent {
         userToken = null
         sharedPreferences[PREFS_KEY_SESSION] = null
     }
-
-}
-
-sealed class SessionState {
-    object Empty : SessionState()
-    class LoggedIn(val userToken: UserToken) : SessionState()
-    object LoggedOut : SessionState()
 }
