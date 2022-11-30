@@ -10,7 +10,6 @@ data class User(
     val username: String,
     val password: String,
     val name: String,
-    val productId: String,
     val companyId: String? = null,
     val enabled: Boolean = true,
     val role: String = "",

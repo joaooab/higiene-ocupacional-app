@@ -21,7 +21,6 @@ fun UserNetwork.toModel() = User(
     password = password,
     name = name,
     document = document,
-    productId = billing?.productId ?: Billing.DEFAULT_PRODUCT,
     companyId = companyId,
     enabled = enabled ?: false,
     role = role ?: "",
