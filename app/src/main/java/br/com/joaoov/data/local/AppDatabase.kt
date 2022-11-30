@@ -24,7 +24,7 @@ import br.com.joaoov.data.local.syncronize.SyncronizeDAO
 import br.com.joaoov.data.local.syncronize.SyncronizeLocal
 
 @Database(
-    version = 29,
+    version = 30,
     entities = [
         CompanyLocal::class,
         DepartamentLocal::class,
@@ -82,7 +82,8 @@ object DatabaseMigrations {
             MIGRATION_25_26,
             MIGRATION_26_27,
             MIGRATION_27_28,
-            MIGRATION_28_29
+            MIGRATION_28_29,
+            MIGRATION_29_30,
         )
     }
 
@@ -123,4 +124,10 @@ object DatabaseMigrations {
         }
     }
 
+    private val MIGRATION_29_30: Migration = object : Migration(29, 30) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("DROP TABLE `billing_plan`")
+            database.execSQL("CREATE TABLE IF NOT EXISTS `billing_plan` (`productId` TEXT NOT NULL, `name` TEXT NOT NULL, `price` INTEGER NOT NULL, `deleted` INTEGER NOT NULL, PRIMARY KEY(`productId`))")
+        }
+    }
 }

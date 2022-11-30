@@ -9,9 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.joaoov.*
 import br.com.joaoov.Constants.PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL
-import br.com.joaoov.data.local.billing.Billing
-import br.com.joaoov.data.local.billing.BillingState
-import br.com.joaoov.data.remote.user.isCompanyUser
+import br.com.joaoov.data.remote.user.UserPlan
 import br.com.joaoov.data.remote.user.isLegalEntity
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.sendSupportEmail
@@ -56,49 +54,35 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun observeBilling() {
         lifecycleScope.launchWhenStarted {
-            billingViewModel.billingState.collect { state ->
-                when (state) {
-                    is BillingState.Payed -> {
-                        setupPurchasedPayments(state.billing)
-                    }
-                    else -> {
-                        settingEmptyPayments.text = getString(R.string.message_payment_error)
-                    }
+            billingViewModel.userPlan.collect { plan ->
+                if (plan != null) {
+                    setupPurchasedPayments(plan)
+                } else {
+                    settingEmptyPayments.text = getString(R.string.message_payment_error)
                 }
             }
         }
     }
 
-    private fun setupPurchasedPayments(billing: Billing) {
-        when {
-            user.isCompanyUser() -> {
-                setupCompanyUserPayments()
-            }
-            billing.purchase != null -> {
-                settingEmptyPayments.gone()
-                includeItemPayment.show()
-                val sku = billing.productId
-                billingViewModel.getBillingPlan(sku).observe(viewLifecycleOwner, {
-                    itemPaymentTitle.text = it?.name.orEmpty()
-                })
-
-                itemPaymentChange.setOnClickListener {
-                    navigateToBillingList()
-                }
-                itemPaymentManager.setOnClickListener {
-                    val url = String.format(
-                        PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL,
-                        sku, requireContext().applicationContext.packageName
-                    )
-                    val intent = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
-                    startActivity(intent)
-                }
-            }
+    private fun setupPurchasedPayments(userPlan: UserPlan) {
+        settingEmptyPayments.gone()
+        includeItemPayment.show()
+        val sku = userPlan.id
+        billingViewModel.getBillingPlan(sku).observe(viewLifecycleOwner) {
+            itemPaymentTitle.text = it?.name.orEmpty()
         }
-    }
 
-    private fun setupCompanyUserPayments() {
-        settingEmptyPayments.text = getString(R.string.message_company_user_payment)
+        itemPaymentChange.setOnClickListener {
+            navigateToBillingList()
+        }
+        itemPaymentManager.setOnClickListener {
+            val url = String.format(
+                PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL,
+                sku, requireContext().applicationContext.packageName
+            )
+            val intent = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
+            startActivity(intent)
+        }
     }
 
     private fun setupPayments() {
@@ -148,5 +132,4 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             textPersonEmail.text = getString(R.string.label_email, user.username)
         }
     }
-
 }

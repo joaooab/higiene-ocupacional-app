@@ -9,8 +9,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val URL = "http://138.197.3.119:8080"
-//private const val URL = "http://192.168.1.22:8080"
+//private const val URL = "http://138.197.3.119:8080"
+private const val URL = "http://192.168.1.22:8080"
 
 object AppService {
 

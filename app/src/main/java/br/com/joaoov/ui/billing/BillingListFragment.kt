@@ -16,12 +16,11 @@ import com.android.billingclient.api.SkuDetailsResult
 import kotlinx.android.synthetic.main.fragment_billing.*
 import kotlinx.coroutines.flow.collect
 import org.koin.android.viewmodel.ext.android.sharedViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
 
 class BillingListFragment : Fragment(R.layout.fragment_billing) {
 
     private val componentViewModel: ComponentViewModel by sharedViewModel()
-    private val viewModel: BillingViewModel by viewModel()
+    private val viewModel: BillingViewModel by sharedViewModel()
     private val adapter by lazy { BillingAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,7 +28,6 @@ class BillingListFragment : Fragment(R.layout.fragment_billing) {
         componentViewModel.withComponents = Components(menu = false)
         setupView()
         handleObserve()
-        viewModel.init(requireContext())
     }
 
     private fun setupView() {
@@ -41,7 +39,9 @@ class BillingListFragment : Fragment(R.layout.fragment_billing) {
         buttonContract.setOnClickListener {
             val skuSelected = viewModel.skuSelected
             if (skuSelected != null) {
-                viewModel.contract(requireActivity(), skuSelected)
+                viewModel.contract(skuSelected) { client, params ->
+                    client.launchBillingFlow(requireActivity(), params)
+                }
             } else {
                 requireContext().showToast(R.string.message_error_no_plan_selected)
             }
@@ -57,7 +57,7 @@ class BillingListFragment : Fragment(R.layout.fragment_billing) {
 
     private fun handleObserve() {
         lifecycleScope.launchWhenStarted {
-            viewModel.subsListState.collect { state ->
+            viewModel.plans.collect { state ->
                 when (state) {
                     is State.Loading -> {
                         loading.show()

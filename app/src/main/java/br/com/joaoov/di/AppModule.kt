@@ -40,7 +40,7 @@ val viewModelModule = module {
     viewModel { MoveViewModel(get(), get(), get(), get()) }
     viewModel { UserViewModel(get()) }
     viewModel { AuthViewModel(get()) }
-    viewModel { BillingViewModel(get()) }
+    viewModel { BillingViewModel(get(), get(), get(), get(), get()) }
     viewModel { AccessKeyViewModel(get()) }
 }
 
@@ -84,6 +84,9 @@ val servciceModule = module {
 }
 
 val useCaseModule = module {
-    factory<CheckBillingUseCase> { CheckBillingUseCaseImpl() }
+    factory<StartConnectionUseCase> { StartConnectionUseCaseImpl(androidContext()) }
+    factory<FetchPlansUseCase> { FetchPlansUseCaseImpl(get()) }
+    factory<HandlePurchaseUseCase> { HandlePurchaseUseCaseImpl() }
+    factory<ContractPlanUseCase> { ContractPlanUseCaseImpl() }
 }
 

@@ -8,7 +8,6 @@ data class BillingPlanLocal(
     @PrimaryKey
     val productId: String,
     val name: String,
-    val totalReport: Int,
     val price: Long,
     val deleted: Boolean
 )
@@ -16,7 +15,6 @@ data class BillingPlanLocal(
 fun BillingPlanLocal.toModel() = BillingPlan(
     productId = productId,
     name = name,
-    totalReport = totalReport,
     price = price,
     deleted = deleted
 )

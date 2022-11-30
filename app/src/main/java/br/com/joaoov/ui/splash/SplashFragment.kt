@@ -33,5 +33,4 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
             findNavControllerSafely()?.navigate(direction)
         }, 3000)
     }
-
 }
