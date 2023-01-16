@@ -1,6 +1,5 @@
 package br.com.joaoov.ui.billing
 
-import android.util.Log
 import br.com.joaoov.Session
 import br.com.joaoov.data.remote.user.UserPlan
 import br.com.joaoov.data.remote.user.isAdmin
@@ -29,13 +28,10 @@ class HandlePurchaseUseCaseImpl : HandlePurchaseUseCase {
         purchases: Collection<Purchase>?,
         emit: (UserPlan?) -> Unit,
     ) {
-        Log.i("billing", "HandlePurchaseUseCase init")
         this.client = client
         this.emit = emit
 
-        Log.i("billing", "HandlePurchaseUseCase isAdmin ${Session.user.isAdmin()}")
         if (Session.user.isAdmin()) {
-            Log.i("billing", "HandlePurchaseUseCase isAdmin")
             this.emit(UserPlan.Basic())
             return
         }
@@ -52,18 +48,15 @@ class HandlePurchaseUseCaseImpl : HandlePurchaseUseCase {
         ) {
             purchases.forEach { handlePurchase(it) }
         } else {
-            Log.i("billing", "handlePurchase, NotPayed")
             emit(null)
         }
     }
 
     private suspend fun handlePurchase(purchase: Purchase) {
-        Log.i("billing", "handlePurchase")
         if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
             if (!purchase.isAcknowledged) {
                 acknowledgePurchase(purchase)
             }
-            Log.i("billing", "handlePurchase, Payed2")
             emit(UserPlan.Basic(purchase.purchaseToken))
         }
     }
