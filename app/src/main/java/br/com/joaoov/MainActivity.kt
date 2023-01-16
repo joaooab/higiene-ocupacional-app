@@ -15,7 +15,6 @@ import br.com.joaoov.data.SyncState
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.handle
 import br.com.joaoov.ext.show
-import br.com.joaoov.ui.billing.BillingViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -23,7 +22,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val syncViewModel: SyncViewModel by viewModel()
     private val componentViewModel: ComponentViewModel by viewModel()
-    private val billingViewModel: BillingViewModel by viewModel()
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
     private var menu: Menu? = null
 
@@ -34,7 +32,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
-        billingViewModel.init(this)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setupNavController()
         setupPath()

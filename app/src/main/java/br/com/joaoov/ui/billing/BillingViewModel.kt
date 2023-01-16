@@ -1,193 +1,84 @@
 package br.com.joaoov.ui.billing
 
-import android.app.Activity
-import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import br.com.joaoov.Session
 import br.com.joaoov.data.State
-import br.com.joaoov.data.local.billing.BillingPlan
-import br.com.joaoov.data.local.billing.BillingState
-import br.com.joaoov.data.remote.user.isAdmin
+import br.com.joaoov.data.remote.user.UserPlan
 import br.com.joaoov.repository.BillingRepository
 import com.android.billingclient.api.*
-import com.android.billingclient.api.BillingFlowParams.ProrationMode.IMMEDIATE_WITH_TIME_PRORATION
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class BillingViewModel(private val repository: BillingRepository) : ViewModel() {
+class BillingViewModel(
+    private val repository: BillingRepository,
+    private val startConnectionUseCase: StartConnectionUseCase,
+    private val fetchPlansUseCase: FetchPlansUseCase,
+    private val handlePurchaseUseCase: HandlePurchaseUseCase,
+    private val contractPlanUseCase: ContractPlanUseCase
+) : ViewModel() {
 
-    private val _subsListState = MutableStateFlow<State<SkuDetailsResult>>(State.Loading())
-    val subsListState: StateFlow<State<SkuDetailsResult>> = _subsListState
-    private val _billingState = MutableStateFlow<BillingState>(BillingState.Holding)
-    val billingState: StateFlow<BillingState> = _billingState
+    private val _plans = MutableStateFlow<State<SkuDetailsResult>>(State.Loading())
+    val plans = _plans.asStateFlow()
+    private val _userPlan = MutableStateFlow<UserPlan?>(null)
+    val userPlan = _userPlan.asStateFlow()
     var skuSelected: SkuDetails? = null
-    private lateinit var billingClient: BillingClient
+    private lateinit var client: BillingClient
 
     private val purchasesUpdatedListener =
         PurchasesUpdatedListener { billingResult, purchases ->
+            Log.i("billing", "listenerPurchases")
+            if (purchases.isNullOrEmpty()) return@PurchasesUpdatedListener
             handlePurchases(billingResult, purchases)
         }
 
-    fun init(context: Context) {
-        billingClient = BillingClient.newBuilder(context)
-            .setListener(purchasesUpdatedListener)
-            .enablePendingPurchases()
-            .build()
-
-        startConnection()
-    }
-
-    private fun startConnection() {
-        billingClient.startConnection(object : BillingClientStateListener {
-            override fun onBillingServiceDisconnected() {
-                startConnection()
-            }
-
-            override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                    fetchSubs()
-                }
-            }
-        })
-    }
-
-    fun fetchSubs() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val plans = repository.getPlans().first()
-            val params = createSkuListParams(plans)
-            fetchSkuDetails(params)
-                .onStart {
-                    _subsListState.value = State.Loading()
-                }.catch {
-                    _subsListState.value = State.Error(it)
-                }.collect {
-                    _subsListState.value = State.Success(it)
-                }
-        }
-    }
-
-    private fun createSkuListParams(plans: List<BillingPlan>): SkuDetailsParams {
-        val skuList = plans.map { it.productId }
-        val params = SkuDetailsParams.newBuilder()
-        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS)
-
-        return params.build()
-    }
-
-    private fun fetchSkuDetails(params: SkuDetailsParams) = flow {
-        emit(billingClient.querySkuDetails(params))
-    }
-
-    fun fetchPurchases() {
-        viewModelScope.launch(Dispatchers.IO) {
-            billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS) { billingResult, purchases ->
-                handlePurchases(billingResult, purchases)
+    init {
+        viewModelScope.launch {
+            client = startConnectionUseCase(purchasesUpdatedListener) {
+                fetchPlans()
+                fetchPurchases()
             }
         }
     }
 
-    private fun handlePurchases(billingResult: BillingResult, purchases: List<Purchase>?) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && !purchases.isNullOrEmpty()) {
-            purchases.forEach { handlePurchase(it) }
-        } else if (
-            billingResult.responseCode == BillingClient.BillingResponseCode.OK
-            || billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED
-        ) {
-            viewModelScope.launch {
-                runCatching {
-                    repository.delete()
-                }.onFailure {
-                    FirebaseCrashlytics.getInstance().recordException(it)
-                }
-            }
+    private fun fetchPlans() {
+        viewModelScope.launch {
+            _plans.emit(State.Loading())
+            val plans = fetchPlansUseCase(client)
+            _plans.emit(State.Success(plans))
         }
-
-        fetchBilling()
     }
 
-    fun fetchBilling() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.fetch().onStart {
-                _billingState.value = BillingState.Holding
-                delay(1000)
-            }.catch {
-                _billingState.value = BillingState.Error
-            }.collect { billing ->
-                if (Session.user.isAdmin() || billing.isAvailable) {
-                    _billingState.value = BillingState.Payed(billing)
-                } else {
-                    _billingState.value = BillingState.Empty(billing)
+    private fun fetchPurchases() {
+        client.queryPurchasesAsync(BillingClient.SkuType.SUBS) { billingResult, purchases ->
+            Log.i("billing", "fetchPurchases $billingResult, $purchases")
+            handlePurchases(billingResult, purchases)
+        }
+    }
+
+    private fun handlePurchases(billingResult: BillingResult, purchases: Collection<Purchase>) {
+        viewModelScope.launch {
+            handlePurchaseUseCase(client, billingResult, purchases) { plan ->
+                plan?.let {
+                    _userPlan.tryEmit(it)
                 }
             }
         }
     }
 
-    private fun handlePurchase(purchase: Purchase) {
-        if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-            if (!purchase.isAcknowledged) {
-                val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
-                    .setPurchaseToken(purchase.purchaseToken)
-                viewModelScope.launch(Dispatchers.IO) {
-                    runCatching {
-                        billingClient.acknowledgePurchase(acknowledgePurchaseParams.build())
-                        repository.create(purchase)
-                    }.onFailure {
-                        FirebaseCrashlytics.getInstance().recordException(it)
-                    }
-                }
-            } else {
-                viewModelScope.launch {
-                    runCatching {
-                        repository.update(purchase)
-                    }.onFailure {
-                        FirebaseCrashlytics.getInstance().recordException(it)
-                    }
-                }
-            }
-        }
-    }
-
-    fun contract(activity: Activity, skuSelected: SkuDetails) {
-        val currentPurchase = getCurrentPurchase()
-        if (currentPurchase == null) {
-            val flowParams = BillingFlowParams.newBuilder()
-                .setSkuDetails(skuSelected)
-                .build()
-            billingClient.launchBillingFlow(activity, flowParams)
-        } else {
-            val flowParams = BillingFlowParams.newBuilder()
-                .setSubscriptionUpdateParams(
-                    BillingFlowParams.SubscriptionUpdateParams.newBuilder()
-                        .setOldSkuPurchaseToken(currentPurchase.purchaseToken)
-                        .setReplaceSkusProrationMode(IMMEDIATE_WITH_TIME_PRORATION)
-                        .build()
-                )
-                .setSkuDetails(skuSelected)
-                .build()
-
-            billingClient.launchBillingFlow(activity, flowParams)
-        }
-    }
-
-    private fun getCurrentPurchase(): Purchase? {
-        val state = billingState.value
-        return if (state is BillingState.Payed) {
-            state.billing.purchase
-        } else {
-            null
+    fun contract(skuSelected: SkuDetails, launch: (BillingClient, BillingFlowParams) -> Unit) {
+        viewModelScope.launch {
+            val params = contractPlanUseCase(client, skuSelected, userPlan.value)
+            launch(client, params)
         }
     }
 
     fun getBillingPlan(sku: String?) = repository.getPlanByProductId(sku.orEmpty()).asLiveData()
 
     override fun onCleared() {
+        client.endConnection()
         super.onCleared()
-        billingClient.endConnection()
     }
-
 }

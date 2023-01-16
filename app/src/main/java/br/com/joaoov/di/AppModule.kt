@@ -14,8 +14,7 @@ import br.com.joaoov.data.remote.user.UserService
 import br.com.joaoov.repository.*
 import br.com.joaoov.ui.ambient.AmbientViewModel
 import br.com.joaoov.ui.auth.AuthViewModel
-import br.com.joaoov.ui.billing.BillingPurchaseViewModel
-import br.com.joaoov.ui.billing.BillingViewModel
+import br.com.joaoov.ui.billing.*
 import br.com.joaoov.ui.company.CompanyViewModel
 import br.com.joaoov.ui.component.move.MoveViewModel
 import br.com.joaoov.ui.departament.DepartamentViewModel
@@ -24,8 +23,6 @@ import br.com.joaoov.ui.function.FunctionViewModel
 import br.com.joaoov.ui.risk.RiskViewModel
 import br.com.joaoov.ui.settings.AccessKeyViewModel
 import br.com.joaoov.ui.user.UserViewModel
-import br.com.joaoov.usecase.CheckBillingUseCase
-import br.com.joaoov.usecase.CheckBillingUseCaseImpl
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -43,8 +40,7 @@ val viewModelModule = module {
     viewModel { MoveViewModel(get(), get(), get(), get()) }
     viewModel { UserViewModel(get()) }
     viewModel { AuthViewModel(get()) }
-    viewModel { BillingViewModel(get()) }
-    viewModel { BillingPurchaseViewModel(get()) }
+    viewModel { BillingViewModel(get(), get(), get(), get(), get()) }
     viewModel { AccessKeyViewModel(get()) }
 }
 
@@ -88,6 +84,9 @@ val servciceModule = module {
 }
 
 val useCaseModule = module {
-    factory<CheckBillingUseCase> { CheckBillingUseCaseImpl() }
+    factory<StartConnectionUseCase> { StartConnectionUseCaseImpl(androidContext()) }
+    factory<FetchPlansUseCase> { FetchPlansUseCaseImpl(get()) }
+    factory<HandlePurchaseUseCase> { HandlePurchaseUseCaseImpl() }
+    factory<ContractPlanUseCase> { ContractPlanUseCaseImpl() }
 }
 

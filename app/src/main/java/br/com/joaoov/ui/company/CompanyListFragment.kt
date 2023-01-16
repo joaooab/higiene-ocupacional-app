@@ -5,17 +5,13 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
-import br.com.joaoov.data.local.billing.Billing
-import br.com.joaoov.data.local.billing.BillingState
 import br.com.joaoov.data.local.company.Company
 import br.com.joaoov.ext.findNavControllerSafely
 import br.com.joaoov.ext.slideUp
-import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.component.AlertDialogCustom
 import kotlinx.android.synthetic.main.fragment_ambient.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -24,7 +20,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class CompanyListFragment : Fragment(R.layout.fragment_company) {
 
     private val viewModel: CompanyViewModel by viewModel()
-    private val billingViewModel: BillingViewModel by sharedViewModel()
     private val componentViewModel: ComponentViewModel by sharedViewModel()
     private val adapter: CompanyListAdapter by lazy {
         CompanyListAdapter(
@@ -39,11 +34,6 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
                     .showDeleteDialog { viewModel.delete(it) }
             }
         )
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        billingViewModel.fetchPurchases()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,7 +69,6 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
 
     private fun handleObserve() {
         observeCompanies()
-        observeBilling()
     }
 
     private fun observeCompanies() {
@@ -87,27 +76,6 @@ class CompanyListFragment : Fragment(R.layout.fragment_company) {
             adapter.refresh(it)
             fab.slideUp()
         })
-    }
-
-    private fun observeBilling() {
-        billingViewModel.billingState.asLiveData().observe(viewLifecycleOwner, { state ->
-            when (state) {
-                is BillingState.Empty -> {
-                    showAlertDialogPayment(state.billing)
-                }
-                else -> {
-
-                }
-            }
-        })
-    }
-
-    private fun showAlertDialogPayment(billing: Billing) {
-        AlertDialogCustom(requireContext()).showPaylmentDialog(billing) {
-            val dicretion =
-                CompanyListFragmentDirections.actionCompanyListFragmentToBillingListFragment()
-            findNavControllerSafely()?.navigate(dicretion)
-        }
     }
 
     private fun navigateToDepartamentFragment(company: Company) {
