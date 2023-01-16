@@ -29,7 +29,6 @@ class BillingViewModel(
 
     private val purchasesUpdatedListener =
         PurchasesUpdatedListener { billingResult, purchases ->
-            Log.i("billing", "listenerPurchases")
             if (purchases.isNullOrEmpty()) return@PurchasesUpdatedListener
             handlePurchases(billingResult, purchases)
         }
@@ -53,7 +52,6 @@ class BillingViewModel(
 
     private fun fetchPurchases() {
         client.queryPurchasesAsync(BillingClient.SkuType.SUBS) { billingResult, purchases ->
-            Log.i("billing", "fetchPurchases $billingResult, $purchases")
             handlePurchases(billingResult, purchases)
         }
     }
