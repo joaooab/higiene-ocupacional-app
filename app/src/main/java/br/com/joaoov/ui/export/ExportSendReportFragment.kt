@@ -1,7 +1,6 @@
 package br.com.joaoov.ui.export
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -79,10 +78,11 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
 
     private fun showAdd() {
         val adRequest = AdRequest.Builder().build()
+        val adUnitId = loadUnitID()
 
         InterstitialAd.load(
             requireContext(),
-            BuildConfig.AD_INTERSTITIAL,
+            adUnitId,
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -94,6 +94,9 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
             }
         )
     }
+
+    private fun loadUnitID() =
+        if (BuildConfig.DEBUG) BuildConfig.AD_INTERSTITIAL_TEST else BuildConfig.AD_INTERSTITIAL
 
     private fun setupView() {
         textViewInfo.text = arguments.company.name.toUpperCaseWithLocale()
