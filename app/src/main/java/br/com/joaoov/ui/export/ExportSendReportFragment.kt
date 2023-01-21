@@ -1,9 +1,11 @@
 package br.com.joaoov.ui.export
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import br.com.joaoov.BuildConfig
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
@@ -16,6 +18,10 @@ import br.com.joaoov.ext.toUpperCaseWithLocale
 import br.com.joaoov.ui.component.ValidatorEditText
 import br.com.joaoov.ui.component.ValidatorEditTextBuilder
 import br.com.joaoov.ui.component.ValidatorEditTextType
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import kotlinx.android.synthetic.main.fragment_export_send_report.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -57,6 +63,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
                     buttonSend.startLoading()
                 }
                 is State.Success -> {
+                    showAdd()
                     showToast(R.string.message_send_success)
                     buttonSend.endLoading()
                     buttonSend.setText(R.string.action_send_again)
@@ -68,6 +75,24 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
                 }
             }
         }
+    }
+
+    private fun showAdd() {
+        val adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            requireContext(),
+            BuildConfig.AD_INTERSTITIAL,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    interstitialAd.show(requireActivity())
+                }
+            }
+        )
     }
 
     private fun setupView() {

@@ -15,6 +15,7 @@ import br.com.joaoov.data.SyncState
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.handle
 import br.com.joaoov.ext.show
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val componentViewModel: ComponentViewModel by viewModel()
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
     private var menu: Menu? = null
-
     private val adapterPath by lazy {
         MainPathAdapter()
     }
@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setupNavController()
         setupPath()
         handleObserve()
+        MobileAds.initialize(this) { }
     }
 
     private fun handleObserve() {
