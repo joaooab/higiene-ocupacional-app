@@ -8,6 +8,7 @@
     <application
         android:name=".AppAplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/icon_square"
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon_circle"
@@ -15,10 +16,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:exported="true">
+            android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,6 +37,6 @@
             android:value="${crashlyticsEnabled}" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="${AD_ID}"/>
+            android:value="${AD_ID}" />
     </application>
 </manifest>
