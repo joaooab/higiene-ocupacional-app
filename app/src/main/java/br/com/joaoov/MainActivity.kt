@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun observeComponents() {
-        componentViewModel.components.observe(this, {
+        componentViewModel.components.observe(this) {
             if (it.path) {
                 recyclerViewPath.show()
             } else {
@@ -89,11 +89,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
             menu?.findItem(R.id.action_export)?.isVisible = it.menu
             menu?.findItem(R.id.action_settings)?.isVisible = it.menu
-        })
+        }
     }
 
     private fun observePathState() {
-        componentViewModel.pathState.observe(this, { state ->
+        componentViewModel.pathState.observe(this) { state ->
             when (state) {
                 is PathState.Add -> {
                     adapterPath.add(state.path)
@@ -105,11 +105,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     adapterPath.clear()
                 }
             }
-        })
+        }
     }
 
     private fun observeSyncronizeState() {
-        syncViewModel.syncronizeState.observe(this, { state ->
+        syncViewModel.syncronizeState.observe(this) { state ->
             when (state) {
                 is SyncState.Running -> {
                     linearLayoutSync.show()
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     state.throwable.handle(this)
                 }
             }
-        })
+        }
     }
 
     private fun setupPath() {
@@ -147,5 +147,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp()
     }
-
 }
