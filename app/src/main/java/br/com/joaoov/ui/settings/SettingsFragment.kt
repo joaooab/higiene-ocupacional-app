@@ -11,12 +11,11 @@ import br.com.joaoov.*
 import br.com.joaoov.Constants.PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL
 import br.com.joaoov.data.remote.user.UserPlan
 import br.com.joaoov.data.remote.user.isLegalEntity
-import br.com.joaoov.ext.gone
-import br.com.joaoov.ext.sendSupportEmail
-import br.com.joaoov.ext.setVisible
-import br.com.joaoov.ext.show
+import br.com.joaoov.ext.*
 import br.com.joaoov.ui.billing.BillingViewModel
+import kotlinx.android.synthetic.main.fragment_departament_create.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings.layout
 import kotlinx.android.synthetic.main.item_payment.*
 import kotlinx.coroutines.flow.collect
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -31,6 +30,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentViewModel.withComponents = Components(menu = false, path = false)
+        requestAd(billingViewModel) { layout.addView(it) }
         setupView()
         handleObserver()
     }

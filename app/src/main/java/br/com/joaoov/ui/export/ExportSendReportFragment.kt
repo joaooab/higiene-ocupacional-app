@@ -9,13 +9,15 @@ import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.State
 import br.com.joaoov.data.local.report.Report
-import br.com.joaoov.ext.getString
-import br.com.joaoov.ext.handle
-import br.com.joaoov.ext.showToast
-import br.com.joaoov.ext.toUpperCaseWithLocale
+import br.com.joaoov.ext.*
+import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.component.ValidatorEditText
 import br.com.joaoov.ui.component.ValidatorEditTextBuilder
 import br.com.joaoov.ui.component.ValidatorEditTextType
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import kotlinx.android.synthetic.main.fragment_export_send_report.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -24,6 +26,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
 
     private val viewModel: ExportViewModel by viewModel()
     private val componentViewModel: ComponentViewModel by sharedViewModel()
+    private val billingViewModel: BillingViewModel by sharedViewModel()
     private val arguments by navArgs<ExportSendReportFragmentArgs>()
     private lateinit var validator: ValidatorEditText
     private val report = Report()
@@ -57,6 +60,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
                     buttonSend.startLoading()
                 }
                 is State.Success -> {
+                    showAdd()
                     showToast(R.string.message_send_success)
                     buttonSend.endLoading()
                     buttonSend.setText(R.string.action_send_again)
@@ -68,6 +72,25 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
                 }
             }
         }
+    }
+
+    private fun showAdd() {
+        if (billingViewModel.userPlan.value != null) return
+        val adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            requireContext(),
+            adInterstitialId(),
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    interstitialAd.show(requireActivity())
+                }
+            }
+        )
     }
 
     private fun setupView() {

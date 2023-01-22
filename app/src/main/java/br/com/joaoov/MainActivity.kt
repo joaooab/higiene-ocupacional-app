@@ -15,6 +15,7 @@ import br.com.joaoov.data.SyncState
 import br.com.joaoov.ext.gone
 import br.com.joaoov.ext.handle
 import br.com.joaoov.ext.show
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val componentViewModel: ComponentViewModel by viewModel()
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
     private var menu: Menu? = null
-
     private val adapterPath by lazy {
         MainPathAdapter()
     }
@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setupNavController()
         setupPath()
         handleObserve()
+        MobileAds.initialize(this) { }
     }
 
     private fun handleObserve() {
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun observeComponents() {
-        componentViewModel.components.observe(this, {
+        componentViewModel.components.observe(this) {
             if (it.path) {
                 recyclerViewPath.show()
             } else {
@@ -88,11 +89,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
             menu?.findItem(R.id.action_export)?.isVisible = it.menu
             menu?.findItem(R.id.action_settings)?.isVisible = it.menu
-        })
+        }
     }
 
     private fun observePathState() {
-        componentViewModel.pathState.observe(this, { state ->
+        componentViewModel.pathState.observe(this) { state ->
             when (state) {
                 is PathState.Add -> {
                     adapterPath.add(state.path)
@@ -104,11 +105,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     adapterPath.clear()
                 }
             }
-        })
+        }
     }
 
     private fun observeSyncronizeState() {
-        syncViewModel.syncronizeState.observe(this, { state ->
+        syncViewModel.syncronizeState.observe(this) { state ->
             when (state) {
                 is SyncState.Running -> {
                     linearLayoutSync.show()
@@ -126,7 +127,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     state.throwable.handle(this)
                 }
             }
-        })
+        }
     }
 
     private fun setupPath() {
@@ -146,5 +147,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp()
     }
-
 }

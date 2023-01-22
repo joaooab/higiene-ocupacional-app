@@ -125,9 +125,9 @@ class AmbientCreateFragment : Fragment(R.layout.fragment_ambient_create) {
     }
 
     private fun observeResource(category: ResourceAmbientCategory, inputLayout: TextInputLayout) {
-        viewModel.getResourceByCategory(category).observe(viewLifecycleOwner, { resources ->
+        viewModel.getResourceByCategory(category).observe(viewLifecycleOwner) { resources ->
             inputLayout.setupData(resources)
-        })
+        }
     }
 
     override fun onPause() {

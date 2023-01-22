@@ -17,7 +17,7 @@ android {
         applicationId "br.com.joaoov"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 6
+        versionCode 7
         versionName "2.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -65,8 +65,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'com.google.android.gms:play-services-ads:21.4.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     def room_version = "2.5.0"
@@ -93,7 +93,7 @@ dependencies {
 
     implementation("com.android.billingclient:billing-ktx:$billing_version")
 
-    implementation platform('com.google.firebase:firebase-bom:26.3.0')
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
