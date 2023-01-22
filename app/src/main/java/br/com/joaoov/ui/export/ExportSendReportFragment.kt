@@ -4,16 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import br.com.joaoov.BuildConfig
 import br.com.joaoov.ComponentViewModel
 import br.com.joaoov.Components
 import br.com.joaoov.R
 import br.com.joaoov.data.State
 import br.com.joaoov.data.local.report.Report
-import br.com.joaoov.ext.getString
-import br.com.joaoov.ext.handle
-import br.com.joaoov.ext.showToast
-import br.com.joaoov.ext.toUpperCaseWithLocale
+import br.com.joaoov.ext.*
 import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.component.ValidatorEditText
 import br.com.joaoov.ui.component.ValidatorEditTextBuilder
@@ -81,11 +77,10 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
     private fun showAdd() {
         if (billingViewModel.userPlan.value != null) return
         val adRequest = AdRequest.Builder().build()
-        val adUnitId = loadUnitID()
 
         InterstitialAd.load(
             requireContext(),
-            adUnitId,
+            adInterstitialId(),
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -97,9 +92,6 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
             }
         )
     }
-
-    private fun loadUnitID() =
-        if (BuildConfig.DEBUG) BuildConfig.AD_INTERSTITIAL_TEST else BuildConfig.AD_INTERSTITIAL
 
     private fun setupView() {
         textViewInfo.text = arguments.company.name.toUpperCaseWithLocale()
