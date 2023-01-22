@@ -17,7 +17,7 @@ fun adBannerId() =
     if (BuildConfig.DEBUG) BuildConfig.AD_BANNER_TEST else BuildConfig.AD_BANNER
 
 fun Fragment.requestAd(viewModel: BillingViewModel, onShow: (AdView) -> Unit) {
-    if (viewModel.userPlan.value != null) return
+    if (viewModel.shouldHideAd()) return
     val adView = createAd()
     onShow(adView)
 
