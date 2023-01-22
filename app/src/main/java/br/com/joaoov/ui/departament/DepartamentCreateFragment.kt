@@ -12,7 +12,10 @@ import br.com.joaoov.data.local.departament.Departament
 import br.com.joaoov.ext.format
 import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.hideKeyboard
+import br.com.joaoov.ext.requestAd
+import br.com.joaoov.ui.billing.BillingViewModel
 import kotlinx.android.synthetic.main.fragment_departament_create.*
+import kotlinx.android.synthetic.main.fragment_departament_create.buttonSave
 import kotlinx.android.synthetic.main.include_departament_form.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -22,11 +25,13 @@ class DepartamentCreateFragment : Fragment(R.layout.fragment_departament_create)
 
     private val arguments by navArgs<DepartamentCreateFragmentArgs>()
     private val viewModel: DepartamentViewModel by viewModel()
+    private val billingViewModel: BillingViewModel by sharedViewModel()
     private val componentViewModel: ComponentViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentViewModel.withComponents = Components(true)
+        requestAd(billingViewModel) { layout.addView(it, 0) }
         setupSaveButton()
     }
 
