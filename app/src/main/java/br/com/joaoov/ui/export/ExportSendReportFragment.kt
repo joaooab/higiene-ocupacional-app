@@ -75,7 +75,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
     }
 
     private fun showAdd() {
-        if (billingViewModel.userPlan.value != null) return
+        if (billingViewModel.shouldHideAd()) return
         val adRequest = AdRequest.Builder().build()
 
         InterstitialAd.load(

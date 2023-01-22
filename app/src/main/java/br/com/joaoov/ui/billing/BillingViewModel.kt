@@ -3,8 +3,10 @@ package br.com.joaoov.ui.billing
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import br.com.joaoov.Session
 import br.com.joaoov.data.State
 import br.com.joaoov.data.remote.user.UserPlan
+import br.com.joaoov.data.remote.user.isAdmin
 import br.com.joaoov.repository.BillingRepository
 import com.android.billingclient.api.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,6 +42,8 @@ class BillingViewModel(
             }
         }
     }
+
+    fun shouldHideAd() = (userPlan.value != null || Session.user.isAdmin())
 
     private fun fetchPlans() {
         viewModelScope.launch {
