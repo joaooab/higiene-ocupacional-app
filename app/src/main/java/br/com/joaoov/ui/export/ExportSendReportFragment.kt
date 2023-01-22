@@ -14,6 +14,7 @@ import br.com.joaoov.ext.getString
 import br.com.joaoov.ext.handle
 import br.com.joaoov.ext.showToast
 import br.com.joaoov.ext.toUpperCaseWithLocale
+import br.com.joaoov.ui.billing.BillingViewModel
 import br.com.joaoov.ui.component.ValidatorEditText
 import br.com.joaoov.ui.component.ValidatorEditTextBuilder
 import br.com.joaoov.ui.component.ValidatorEditTextType
@@ -29,6 +30,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
 
     private val viewModel: ExportViewModel by viewModel()
     private val componentViewModel: ComponentViewModel by sharedViewModel()
+    private val billingViewModel: BillingViewModel by sharedViewModel()
     private val arguments by navArgs<ExportSendReportFragmentArgs>()
     private lateinit var validator: ValidatorEditText
     private val report = Report()
@@ -77,6 +79,7 @@ class ExportSendReportFragment : Fragment(R.layout.fragment_export_send_report) 
     }
 
     private fun showAdd() {
+        if (billingViewModel.userPlan.value != null) return
         val adRequest = AdRequest.Builder().build()
         val adUnitId = loadUnitID()
 

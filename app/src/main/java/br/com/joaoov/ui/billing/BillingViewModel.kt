@@ -1,6 +1,5 @@
 package br.com.joaoov.ui.billing
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope

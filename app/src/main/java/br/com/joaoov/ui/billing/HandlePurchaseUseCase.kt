@@ -31,11 +31,6 @@ class HandlePurchaseUseCaseImpl : HandlePurchaseUseCase {
         this.client = client
         this.emit = emit
 
-        if (Session.user.isAdmin()) {
-            this.emit(UserPlan.Basic())
-            return
-        }
-        this.client = client
         handlePurchases(billingResult, purchases)
     }
 
